@@ -5,33 +5,33 @@ JeePlatform项目是一款以Activiti为工作流引擎，以Spring Framework为
 
 ## 开发团队(按加入顺序) ##
 
-Tornado
-Blog：http://blog.caiyuyu.net
-Github：https://github.com/yinyizhixian
+Tornado<br>
+Blog：http://blog.caiyuyu.net<br>
+Github：https://github.com/yinyizhixian<br><br>
 
-Wiatingpub
-Blog：http://www.jianshu.com/u/6c0bb349990c
-Github：https://github.com/wiatingpub
+Wiatingpub<br>
+Blog：http://www.jianshu.com/u/6c0bb349990c<br>
+Github：https://github.com/wiatingpub<br><br>
 
-Joryun
-Blog：http://www.jianshu.com/u/85656cc35708
-github：https://github.com/Joryun
+Joryun<br>
+Blog：http://www.jianshu.com/u/85656cc35708<br>
+github：https://github.com/Joryun<br><br>
 
-Serious
-Blog：http://my.csdn.net/serious_czt
-Github：https://github.com/CHEN0409
+Serious<br>
+Blog：http://my.csdn.net/serious_czt<br>
+Github：https://github.com/CHEN0409<br><br>
 
-Simba
-Blog：http://my.csdn.net/io277800
-Github：https://github.com/Simba9980
+Simba<br>
+Blog：http://my.csdn.net/io277800<br>
+Github：https://github.com/Simba9980<br><br>
 
-Nicky
-Blog：http://blog.ittrading.cn/
-Github：https://github.com/u014427391
+Nicky<br>
+Blog：http://blog.ittrading.cn/<br>
+Github：https://github.com/u014427391<br><br>
 
-Jasonsama
-Blog：https://jasonsama.github.io/
-Github：https://github.com/Jasonsama
+Jasonsama<br>
+Blog：https://jasonsama.github.io/<br>
+Github：https://github.com/Jasonsama<br><br>
 
 
 ## 业务方案 ##
