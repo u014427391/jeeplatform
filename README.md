@@ -3,6 +3,36 @@
 
 JeePlatform项目是一款以Activiti为工作流引擎，以Spring Framework为核心框架，集ORM框架Mybatis，Web层框架SpringMVC和多种开源组件框架而成的一款通用基础平台，基于本平台可以实现快速开发，实现企业信息管理的高效、高性能开发。系统追求安全、性能方面的有效实现。
 
+## 开发团队(按加入顺序) ##
+
+Tornado
+Blog：http://blog.caiyuyu.net
+Github：https://github.com/yinyizhixian
+
+Wiatingpub
+Blog：http://www.jianshu.com/u/6c0bb349990c
+Github：https://github.com/wiatingpub
+
+Joryun
+Blog：http://www.jianshu.com/u/85656cc35708
+github：https://github.com/Joryun
+
+Serious
+Blog：http://my.csdn.net/serious_czt
+Github：https://github.com/CHEN0409
+
+Simba
+Blog：http://my.csdn.net/io277800
+Github：https://github.com/Simba9980
+
+Nicky
+Blog：http://blog.ittrading.cn/
+Github：https://github.com/u014427391
+
+Jasonsama
+Blog：https://jasonsama.github.io/
+
+
 ## 业务方案 ##
 ### 系统管理通用功能 ####
 - 用户管理: 系统用户
