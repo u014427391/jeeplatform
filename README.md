@@ -80,7 +80,7 @@ Github：https://github.com/Jasonsama<br><br>
 
 ### 服务器 ####
 * 负载均衡：Nginx
-* 分布式：alibaba Dubbo
+* 微服务架构：Spring Cloud
 * 中间件：RocketMQ
 
 ### 项目测试 ###
