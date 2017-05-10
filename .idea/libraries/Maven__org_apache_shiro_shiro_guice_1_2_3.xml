@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.shiro:shiro-guice:1.2.3">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-guice/1.2.3/shiro-guice-1.2.3.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-guice/1.2.3/shiro-guice-1.2.3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-guice/1.2.3/shiro-guice-1.2.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
