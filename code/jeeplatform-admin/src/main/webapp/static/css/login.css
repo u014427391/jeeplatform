@@ -1,0 +1,31 @@
+@charset "utf-8";
+html,body{margin:0;padding:0;width:100%;}
+body{font-size:12px;font-family: "微软雅黑";color:#333;line-height:160%;background: url(../images/login-bg.jpg) center top repeat-x #FFF;height:100%;}
+p,ul,.name,.pwd,dd,h1,h2,h3,form,input,select,textarea{margin:0;padding:0;border:0;font-family:"微软雅黑";line-height:150%;}
+ul,li{list-style:none;}
+div,p{word-wrap: break-word;}
+img{border: none;}
+input,button,select,textarea{outline:none}
+
+/*login*/
+.login{padding:1px 0 0 0;background:url(../images/login-bg.jpg) center top no-repeat #FFF;padding:150px 0 0 0;}
+.login input.submit{border:none;font-weight:bold;color:#FFF;margin:25px 0 0 150px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;-webkit-box-shadow: #CCC 0px 0px 5px;-moz-box-shadow: #CCC 0px 0px 5px;box-shadow: #CCC 0px 0px 5px;background: #31b6e7;cursor: pointer;}
+.login input.submit:hover{background:#ff9229;}
+.login input.submit{padding:6px 20px;}
+.login .box{position:relative;z-index:100;margin:0 auto;width:700px;height:320px;background:url(../images/login.png) center top no-repeat;}
+.login .log{position:relative;width:370px;height:260px;margin:0 auto;padding:60px 0 0 20px;}
+.login label{display:inline-block;width:70px;text-align:right;padding-right:20px;vertical-align:middle;}
+.login .name{padding:10px 5px;font-size:14px;}
+.login .pwd{padding:10px 5px;font-size:14px;}
+.login .rcode{padding:10px;font-size:14px;}
+
+.login .alt{position:absolute;top:43px;left:260px;font-size:20px;}
+.login .text{filter:alpha(opacity=80);-moz-opacity:0.8;opacity:0.8;}
+.login .copyright{position:absolute;left:0;width:100%;bottom:-40px;text-align:center;color:#AAA;}
+.login .air-balloon{position:absolute;top:-100px;left:-100px;z-index:50;}
+.login .air-balloon.ab-1{width:43px;height:78px;background:url(../images/air-balloon-1.png) no-repeat;}
+.login .air-balloon.ab-2{width:24px;height:31px;background:url(../images/air-balloon-2.png) no-repeat;}
+.login .footer{position: fixed;left:0;bottom:0;z-index:-1;width:100%;height:198px;background:url(../images/login-foot.jpg) center bottom repeat-x;}
+.text{border:1px solid #CCC;padding:5px;background-color:#FCFCFC;line-height:14px;width:220px;font-size:12px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow: #CCC 0px 0px 5px;-moz-box-shadow: #CCC 0px 0px 5px;box-shadow: #CCC 0px 0px 5px;border:1px solid #CCC;font-size:12px;}
+.text:focus{border:1px solid #31b6e7;background-color:#FFF;-webkit-box-shadow: #CCC 0px 0px 5px;-moz-box-shadow: #CCC 0px 0px 5px;box-shadow: #0178a4 0px 0px 5px;}
+.text:hover{background-color:#FFF;}
