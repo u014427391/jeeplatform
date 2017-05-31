@@ -1,4 +1,4 @@
-package org.muses.jeeplatform.entity;
+package org.muses.jeeplatform.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;

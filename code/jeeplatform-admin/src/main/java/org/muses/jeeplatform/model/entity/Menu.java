@@ -1,4 +1,6 @@
-package org.muses.jeeplatform.entity;
+package org.muses.jeeplatform.model.entity;
+
+import org.muses.jeeplatform.model.dto.SysMenu;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,14 +18,11 @@ public class Menu implements Serializable {
 	/** 菜单Id**/
 	private int menuId;
 	
-	/** 标志**/
-	private String identity;
-	
 	/** 上级Id**/
 	private int parentId;
 	
 	/** 菜单名称**/
-	private String name;
+	private String menuName;
 	
 	/** 菜单图标**/
 	private String menuIcon;
@@ -36,16 +35,12 @@ public class Menu implements Serializable {
 	
 	/** 菜单排序**/
 	private String menuOrder;
-	
-	private String target;
-	
-	private Menu parentMenu;
-	
+
 	private List<Menu> subMenu;
-	
-	private boolean hasMenu = false;
-	
-	private static final long serialVersionUID = 1L;
+
+	private String target;
+
+	private boolean hasSubMenu = false;
 
 	public Menu() {
 		super();
@@ -59,15 +54,6 @@ public class Menu implements Serializable {
 
 	public void setMenuId(int menuId) {
 		this.menuId = menuId;
-	}   
-	
-	@Column(length=100)
-	public String getIdentity() {
-		return identity;
-	}
-
-	public void setIdentity(String identity) {
-		this.identity = identity;
 	}
 
 	@Column(length=100)
@@ -80,12 +66,12 @@ public class Menu implements Serializable {
 	}
 
 	@Column(length=100)
-	public String getName() {
-		return this.name;
+	public String getMenuName() {
+		return this.menuName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
 	}   
 	
 	@Column(length=30)
@@ -125,24 +111,6 @@ public class Menu implements Serializable {
 	}
 
 	@Transient
-	public String getTarget() {
-		return target;
-	}
-
-	public void setTarget(String target) {
-		this.target = target;
-	}
-
-	@Transient
-	public Menu getParentMenu() {
-		return parentMenu;
-	}
-
-	public void setParentMenu(Menu parentMenu) {
-		this.parentMenu = parentMenu;
-	}
-
-	@Transient
 	public List<Menu> getSubMenu() {
 		return subMenu;
 	}
@@ -151,13 +119,22 @@ public class Menu implements Serializable {
 		this.subMenu = subMenu;
 	}
 
-	@Transient
-	public boolean isHasMenu() {
-		return hasMenu;
+	public void setTarget(String target){
+		this.target = target;
 	}
 
-	public void setHasMenu(boolean hasMenu) {
-		this.hasMenu = hasMenu;
+	@Transient
+	public String getTarget(){
+		return target;
 	}
-   
+
+	public void setHasSubMenu(boolean hasSubMenu){
+		this.hasSubMenu = hasSubMenu;
+	}
+
+	@Transient
+	public boolean getHasSubMenu(){
+		return hasSubMenu;
+	}
+
 }

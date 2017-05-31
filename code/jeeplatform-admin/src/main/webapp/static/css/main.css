@@ -1,0 +1,149 @@
+/**
+ @Name: scclui
+ @Author: zx
+ @Site: http://www.xxx.com
+ */
+
+/** 初始化 **/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,input,button,textarea,p,blockquote,th,td,form,pre{margin: 0; padding: 0; -webkit-tap-highlight-color:rgba(0,0,0,0)}
+body{-webkit-font-feature-settings: 'kern' 1; -moz-font-feature-settings: 'kern' 1; -o-font-feature-settings: 'kern' 1; text-rendering: geometricPrecision;}
+a:active,a:hover{outline:0}
+img{display: inline-block; border: none; vertical-align: middle;}
+li{list-style:none;}
+table{border-collapse: collapse; border-spacing: 0;}
+h1,h2,h3{font-size: 14px; font-weight: 400;}
+h4, h5, h6{font-size: 100%; font-weight: 400;}
+button,input,select,textarea{font-size: 100%; }
+input,button,textarea,select,optgroup,option{font-family: inherit; font-size: inherit; font-style: inherit; font-weight: inherit; outline: 0;}
+pre{white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;}
+
+/** 滚动条 **/
+::-webkit-scrollbar{width: 5px; height: 10px;}
+::-webkit-scrollbar-button:vertical{display: none;}
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner{background-color: #e2e2e2;}
+::-webkit-scrollbar-thumb{border-radius: 0; background-color: rgba(0,0,0,.3);}
+::-webkit-scrollbar-thumb:vertical:hover{background-color: rgba(0,0,0,.35);}
+::-webkit-scrollbar-thumb:vertical:active{background-color: rgba(0,0,0,.38);}
+
+/** 图标字体 **/
+@font-face {font-family: 'icon-font';
+    src: url('../iconfont/1.0.1/iconfont.eot');
+    src: url('../iconfont/1.0.1/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('../iconfont/1.0.1/iconfont.woff') format('woff'),
+    url('../iconfont/1.0.1/iconfont.ttf') format('truetype'),
+    url('../iconfont/1.0.1/iconfont.svg#iconfont') format('svg');
+}
+
+.icon-font{
+    font-family:"icon-font" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/** 初始化全局标签 **/
+body{line-height: 24px;font: 14px Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif;}
+a{color: #333; text-decoration:none; }
+a:hover{color: #fff;}
+a cite{font-style: normal; *cursor:pointer;}
+
+
+
+/* 布局风格 */
+.layout-admin{margin: 0 auto;font-size: 14px;}
+.layout-header{position:relative; border-bottom: 0px solid #33AECC;height:45px;background-color:#33AECC;z-index:1000;}
+.layout-side{position: fixed;display: block;top: 45px;bottom:0px;left:0px; width: 200px;overflow-x: hidden;background-color: #393D49;color: #c2c2c2;z-index:999;}
+.layout-side::-webkit-scrollbar{width: 0px; height: 10px;}
+.layout-main{position: absolute;top:45px;right:0;bottom: 30px;left:200px;width:auto;overflow:hidden;overflow-y: auto;background-color: #fff;z-index:998;}
+.layout-main-tab{height: 39px;line-height: 39px;overflow: hidden;position: relative;background: #f2f2f2;border-bottom: solid 1px #0e9aef;}
+.layout-main-body{position: absolute;top: 40px;bottom: 0;left: 0;right: 0;overflow:auto;margin:0 0 0 10px;}
+.layout-footer{position: fixed; left: 200px; right: 0; bottom: 0; height: 30px;line-height:30px;background-color: #eee;border-top:1px solid #ccc;text-align:center;z-index:998;}
+
+/* 头部 */
+.header-logo{margin-left: 10px;color:#fff;line-height:45px;font-size:16px;}
+.header-bar{float:right;color:#fff;height: 45px;line-height:45px;margin-right: 10px;}
+.header-bar li{float:left;}
+.header-bar li a {margin:0 10px;color:#fff;}
+.header-bar li a i{font-size:14px;}
+.header-bar-nav .header-dropdown-menu{position:absolute;top:100%;display:none;background-color:#fff;border:solid 1px #ccc;border-top:none;z-index: 1000;}
+.header-bar-nav .header-dropdown-menu li{position: relative; float: none;display:block;margin: 0;}
+.header-bar-nav .header-dropdown-menu li a{display: block;clear: both;border-bottom:solid 1px #f2f2f2;margin:0;padding:5px 20px;text-align:left;line-height:1.5;font-weight: normal;white-space:nowrap;color:#333;}
+.header-bar-nav .header-dropdown-menu li:last-child a{ border-bottom:none}
+.header-bar-nav.open .header-dropdown-menu{display:block;}
+.header-bar-nav.open .header-dropdown-menu.right{right:10px!important;left:auto!important}
+.header-bar-nav:hover,.header-bar-nav:focus{background-color:rgba(255,255,255,0.3)}
+.header-bar-nav .header-dropdown-menu li a:hover,.header-bar-nav .header-dropdown-menu li a:focus{background-color:#fafafa}
+.header-menu-btn{display:none;float:right;color:#fff;width:40px;text-align:center;line-height:45px;font-size:14px;}
+.header-menu-btn:hover{background-color:rgba(255,255,255,0.3)}
+
+/* 左侧菜单 */
+.side-menu{list-style: none; margin: 0; padding: 0; background-color: #393D49;position: relative;font-size: 14px;}
+.side-menu .menu-item{position: relative; margin: 0; padding: 0;}
+.side-menu .menu-item a{padding: 12px 5px 12px 15px; display: block; border-left: 5px solid transparent; color: #c2c2c2;border-bottom: 1px solid #393D49;}
+.side-menu .menu-item a span{margin-left: 8px;}
+.side-menu .menu-item:hover > a, .side-menu .menu-item.active > a{color: #fff; background: #4E5465; border-left-color: #33AECC;transition: all .3s; -webkit-transition: all .3s;}
+.side-menu .menu-header{color: #fff; background: #2B2E37;height:39px;line-height:39px;padding-left:10px;border-bottom: 1px solid #2b2e37;}
+.side-menu .menu-item a .icon-right{width: auto; height: auto; padding: 0; margin-right: 10px; margin-top: 3px;float:right;}
+.side-menu .menu-item .label{display: inline;padding:.3em;font-size: 75%;font-weight: 700;line-height: 1;color: #fff;text-align: center;white-space: nowrap;vertical-align: baseline;background: #33AECC;border-radius: .25em;margin-right: 5px;float: right!important;}
+.side-menu .menu-item.active > .menu-item-child{display: block;}
+.side-menu .menu-item-child{display: none; list-style: none; padding: 0; margin: 0; padding-left: 10px;}
+.side-menu .menu-item-child li a{padding: 8px 5px 8px 15px; display: block;color: #c2c2c2;}
+.side-menu .menu-item-child li a span {margin-left: 10px;}
+.side-menu .menu-item-child li.active > a, .side-menu .menu-item-child li > a:hover{color: #fff;}
+.side-menu li.active > a .icon-right{transform: rotate(90deg);-ms-transform:rotate(90deg);/* IE 9 */-moz-transform:rotate(90deg); 	/* Firefox */-webkit-transform:rotate(90deg); /* Safari 和 Chrome */-o-transform:rotate(90deg); 	/* Opera */}
+
+/* 菜单收缩展开样式 */
+.layout-side-arrow{position: absolute;display:block;top: 45%;left: 200px;border:1px solid #ddd;background-color:#ccc;height: 50px;width:10px;z-index: 1000;line-height:50px;text-align:center;cursor:pointer;border-top-right-radius:3px;border-bottom-right-radius:3px;}
+.layout-side-arrow i{font-size:10px;color:#fff;margin-left:-1px;}
+.layout-side-arrow:hover{background-color:#33AECC;}
+.layout-side-arrow-icon.close{transform: rotate(180deg);}
+
+/* 点击菜单收缩后变更的样式 */
+.layout-side.close{left:-200px;}
+.layout-side-arrow.close{left:0px;}
+.layout-main.full-page{left:0px;}
+.layout-footer.full-page{left:0px;}
+
+/*菜单选项卡*/
+.tab-btn{position: absolute;width: 40px;height: 39px;text-align: center;color: #999;z-index: 2;top: 0;background: #f2f2f2;border: 0;outline: 0;cursor:pointer;}
+.tab-btn i{font-size:20px;}
+.tab-btn.btn-left{left: 0;border-right: solid 1px #ccc;}
+.tab-btn.btn-right{right: 0px;border-left: solid 1px #ccc;}
+.tab-nav{margin-left: 40px;width: 100000px;height: 40px;line-height: 40px;overflow: hidden;}
+.tab-nav-content{float: left;margin-left: 0px;}
+.tab-nav-content a{display:block;color: #999;cursor: auto;border-right: solid 1px #ddd;padding: 0 15px;float:left;}
+.tab-nav-content a:hover{color: #333;}
+.tab-nav-content a.active{color: #33AECC;background: #fff;}
+.tab-nav-content a i{color:#ccc;font-size:12px;vertical-align:top;}
+.tab-nav-content a i:hover{color:#FF5722;}
+.tab-nav-content a.active i:hover{color: #FF5722;}
+.tab-nav-content .content-tab{transition: all .3s ease-out 0s;-webkit-transition: all .3s ease-out 0s;}
+
+
+
+/** 动画 **/
+@-webkit-keyframes icon-rotate{ /* 旋转360 */
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+@keyframes icon-rotate{
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+.icon-anim-rotate{-webkit-animation-name: icon-rotate; animation-name: icon-rotate; -webkit-animation-duration: 1s; animation-duration: 1s;  -webkit-animation-timing-function: linear; animation-timing-function: linear;}
+
+/** 响应式**/
+@media (max-width: 750px) {
+    .layout-header .header-bar .header-bar-role{display:none;}
+    .layout-header .header-bar .header-bar-nav:last-child{display:none;}
+    .header-menu-btn{display:block;}
+    .layout-side{display:none;width:100%;}
+    .layout-main{left:0px;}
+    .layout-side-arrow{display:none;}
+    .layout-footer{left:0px;}
+}
+
+
+

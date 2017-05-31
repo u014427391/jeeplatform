@@ -2,7 +2,7 @@ package org.muses.jeeplatform.repository;
 
 import java.util.List;
 
-import org.muses.jeeplatform.entity.Menu;
+import org.muses.jeeplatform.model.entity.Menu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

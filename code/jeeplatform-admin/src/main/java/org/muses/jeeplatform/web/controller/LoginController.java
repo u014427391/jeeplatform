@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.shiro.SecurityUtils;
@@ -18,10 +19,10 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.muses.jeeplatform.core.Constants;
-import org.muses.jeeplatform.entity.Menu;
-import org.muses.jeeplatform.entity.Permission;
-import org.muses.jeeplatform.entity.Role;
-import org.muses.jeeplatform.entity.User;
+import org.muses.jeeplatform.model.entity.Menu;
+import org.muses.jeeplatform.model.entity.Permission;
+import org.muses.jeeplatform.model.entity.Role;
+import org.muses.jeeplatform.model.entity.User;
 import org.muses.jeeplatform.service.MenuService;
 import org.muses.jeeplatform.service.UserService;
 import org.muses.jeeplatform.utils.Tools;
@@ -173,13 +174,14 @@ public class LoginController extends BaseController {
 					//查询二级菜单
 					subMenu = menuService.findSubMenuById(m.getMenuId());
 					if(subMenu!=null&&subMenu.size()>0){
-						m.setHasMenu(Boolean.TRUE);
 						m.setSubMenu(subMenu);
 						menus.add(m);
 					}
 				}
 			}
-			mv.addObject("menus",menus);
+			JSONArray jsonMenus = JSONArray.fromObject(menus);
+			//System.out.println(jsonMenus.toString());
+			mv.addObject("menus",jsonMenus.toString());
 		}else{
 			//会话失效，返回登录界面
 			mv.setViewName("admin/frame/login");

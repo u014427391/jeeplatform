@@ -2,7 +2,7 @@ package org.muses.jeeplatform.service;
 
 import java.util.List;
 
-import org.muses.jeeplatform.entity.Menu;
+import org.muses.jeeplatform.model.entity.Menu;
 import org.muses.jeeplatform.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

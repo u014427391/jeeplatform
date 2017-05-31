@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.muses.jeeplatform.entity.Operation;
-import org.muses.jeeplatform.entity.Permission;
-import org.muses.jeeplatform.entity.Role;
-import org.muses.jeeplatform.entity.User;
+import org.muses.jeeplatform.model.entity.Operation;
+import org.muses.jeeplatform.model.entity.Permission;
+import org.muses.jeeplatform.model.entity.Role;
+import org.muses.jeeplatform.model.entity.User;
 import org.muses.jeeplatform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
