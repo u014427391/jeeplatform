@@ -36,6 +36,9 @@ public class Menu implements Serializable {
 	/** 菜单排序**/
 	private String menuOrder;
 
+	/**菜单状态**/
+	private String menuStatus;
+
 	private List<Menu> subMenu;
 
 	private String target;
@@ -108,6 +111,15 @@ public class Menu implements Serializable {
 
 	public void setMenuOrder(String menuOrder) {
 		this.menuOrder = menuOrder;
+	}
+
+	@Column(length=10)
+	public String getMenuStatus(){
+		return menuStatus;
+	}
+
+	public void setMenuStatus(String menuStatus){
+		this.menuStatus = menuStatus;
 	}
 
 	@Transient

@@ -1,91 +1,147 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<!-- zTree start-->
-<link rel="stylesheet" href="<%=basePath %>static/css/bootstrap.css" type="text/css">
-<link rel="stylesheet" href="<%=basePath %>plugins/zTree/3.5/css/demo.css" type="text/css">
-<link rel="stylesheet" href="<%=basePath %>plugins/zTree/3.5/css/zTreeStyle.css" type="text/css">
-<script type="text/javascript" src="<%=basePath %>plugins/zTree/3.5/js/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="<%=basePath %>plugins/zTree/3.5/js/jquery.ztree.core.js"></script>
-<SCRIPT type="text/javascript">
-    <!--
-    var setting = {
-        data: {
-            key: {
-                title:"name"
-            },
-            simpleData: {
-                enable: true
-            }
-        },
-        callback: {
-            beforeClick: beforeClick,
-            onClick: onClick
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<base href="<%=basePath %>">
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Insert title here</title>
+	<!-- bootstrap样式-->
+	<link type="text/css" rel="stylesheet"
+		  href="<%=basePath%>plugins/page/css/bootstrap-3.3.5.min.css" />
+	<!-- jquery.pagination所需CSS -->
+	<link type="text/css" rel="stylesheet" href="<%=basePath%>plugins/page/css/pagination.css" />
+	<script type="text/javascript" src="<%=basePath%>plugins/page/js/jquery.min.js"></script>
+	<!-- jquery.pagination所需JS 注意必须放在jquery.js后面 -->
+	<script type="text/javascript" src="<%=basePath%>plugins/page/js/jquery.pagination.js"></script>
+	<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
+	<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
+	<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
+	<script type="text/javascript">
+
+		var pageIndex = Number(${pageIndex});
+
+        var totalCount = Number(${totalCount});
+
+        $(document).ready(function () {
+            //加入分页的绑定
+            $("#Pagination").pagination(totalCount, {
+                callback : pageselectCallback,
+                prev_text : '< 上一页',
+                next_text: '下一页 >',
+                items_per_page : 6,
+                num_display_entries : 6,
+                current_page : pageIndex,
+                num_edge_entries : 1,
+                link_to: "menu/getMenus?pageIndex=__id__"  //分页的js中会自动把"__id__"替换为当前的数。0
+            });
+
+            var html = "";
+            var data = ${menus};
+            $.each(data,function(idx,obj){
+                console.log(obj.menuIcon);
+                var menuId = obj.menuId;
+                var menuName = obj.menuName;
+                var menuUrl = obj.menuUrl;
+                var menuType;
+                if(obj.menuType==1){
+                    menuType = "系统菜单";
+                }else if(obj.menuType ==2){
+                    menuType = "业务菜单";
+                }
+                var menuOrder = obj.menuOrder;
+                var menuStatus;
+                if(obj.menuStatus ==0){
+                    menuStatus ="隐藏";
+                }else if(obj.menuStatus == 1){
+                    menuStatus = "显示";
+                }
+                html += "<tr><td>"+menuId+"</td>"+
+                    "<td>"+menuName+"</td>"+
+                    "<td>"+menuUrl+"</td>"+
+                    "<td>"+menuType+"</td>"+
+                    "<td>"+menuOrder+"</td>"+
+                    "<td>"+menuStatus+"</td>"+
+                    "<td><a href='javascript:openEditDialog();' class='bounceIn'>编辑</a>"+
+                    "</tr>";
+
+            });
+            $("#content").append(html);
+
+            getSrceenWH();
+
+            //显示弹框
+            $('.bounceIn').click(function(){
+                className = $(this).attr('class');
+                $('#dialogBg').fadeIn(300);
+                $('#dialog').removeAttr('class').addClass('animated '+className+'').fadeIn();
+                alert('测试');
+            });
+
+        });
+
+        //这个事件是在翻页时候用的
+        function pageselectCallback(index, jq) {
+
         }
-    };
 
-    //*菜单json*/
-    var json = ${menus};
-    var zNodes = eval(json);
-
-    var log, className = "dark";
-    function beforeClick(treeId, treeNode, clickFlag) {
-        className = (className === "dark" ? "":"dark");
-        showLog("[ "+getTime()+" beforeClick ]&nbsp;&nbsp;" + treeNode.name );
-        return (treeNode.click != false);
-    }
-
-    function onClick(event, treeId, treeNode, clickFlag) {
-        showLog("[ "+getTime()+" onClick ]&nbsp;&nbsp;clickFlag = " + clickFlag + " (" + (clickFlag===1 ? "普通选中": (clickFlag===0 ? "<b>取消选中</b>" : "<b>追加选中</b>")) + ")");
-    }
-
-    function showLog(str) {
-        if (!log) log = $("#log");
-        log.append("<li class='"+className+"'>"+str+"</li>");
-        if(log.children("li").length > 8) {
-            log.get(0).removeChild(log.children("li")[0]);
+        function closdlg()
+        {
+            Dialog.close();
         }
-    }
 
-    function getTime() {
-        var now= new Date(),
-            h=now.getHours(),
-            m=now.getMinutes(),
-            s=now.getSeconds();
-        return (h+":"+m+":"+s);
-    }
+        function openEditDialog(){
+            var diag = new Dialog();
+            diag.Title = "编辑菜单信息";
+            diag.Width = 800;
+            diag.Height = 400;
+            diag.URL = "goEditM.do";
+            diag.show();
+        }
 
-    $(document).ready(function(){
-        $.fn.zTree.init($("#menuTree"), setting, zNodes);
-    });
-    //-->
-</SCRIPT>
-<!-- zTree end-->
+	</script>
+</head>
+<body>
 <br>
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<h3 class="panel-title">树形菜单</h3>
-	</div>
-	<div class="panel-body">
-		<ul id="menuTree" class="ztree"></ul>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<form class="form-inline">
+						<input type="text" class="form-control" id="id" placeholder="菜单id">
+						<input type="button" class="btn btn-default" value="search" onclick="find()"/>
+					</form>
+					<!-- demo  -->
+					<table class="table" id="mTable">
+						<thead>
+						<tr>
+							<th>菜单ID</th>
+							<th>菜单名称</th>
+							<th>菜单地址</th>
+							<th>菜单类型</th>
+							<th>菜单排序</th>
+							<th>菜单状态</th>
+							<th>操作</th>
+						</tr>
+						</thead>
+						<tbody id="content">
+
+						</tbody>
+					</table>
+					<div id="Pagination" class="pagination"></div>
+					<!-- demo  -->
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
-
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<h3 class="panel-title">数据列表</h3>
-	</div>
-	<div class="panel-body">
-		click log:<br/>
-		<ul id="log" class="log"></ul></p>
-	</div>
-</div>
-
-<script type="text/javascript">
-
-</script>
+</body>
+</html>

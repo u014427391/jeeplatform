@@ -10,6 +10,8 @@ import org.muses.jeeplatform.model.entity.Role;
 import org.muses.jeeplatform.model.entity.User;
 import org.muses.jeeplatform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,5 +79,21 @@ public class UserService {
 	public User doLoginCheck(String username,String password){
 		return userRepository.findByUsernameAndPassword(username,password);
 	}
+
+	/**
+	 * 构建PageRequest对象
+	 * @param num
+	 * @param size
+	 * @param asc
+	 * @param string
+	 * @return
+	 */
+	private PageRequest buildPageRequest(int num, int size, Sort.Direction asc,
+										 String string) {
+		return new PageRequest(num-1, size,null,string);
+	}
+
+	//@Transactional(readOnly = true)
+
 
 }

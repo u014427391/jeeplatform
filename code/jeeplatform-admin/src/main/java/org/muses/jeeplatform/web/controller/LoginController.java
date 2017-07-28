@@ -61,7 +61,7 @@ public class LoginController extends BaseController {
 	    }
 		map.put("username", username);
 		map.put("loginIp", ip);
-		userService.saveIP(map);
+		 userService.saveIP(map);
 	}  
 	
 	/**
@@ -104,6 +104,7 @@ public class LoginController extends BaseController {
 				if(Tools.isNotEmpty(codeSession) && codeSession.equalsIgnoreCase(code)){
 					//Shiro框架SHA加密
 					String passwordsha = new SimpleHash("SHA-1",username,password).toString();
+					System.out.println(passwordsha);
 					//检测用户名和密码是否正确
 					User user = userService.doLoginCheck(username,passwordsha);
 					if(user != null){

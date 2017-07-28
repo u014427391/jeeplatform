@@ -31,12 +31,12 @@
 		<span class="header-logo">企业信息化基础平台</span>
 		<a class="header-menu-btn" href="javascript:;"><i class="icon-font">&#xe600;</i></a>
 		<ul class="header-bar">
-			<li class="header-bar-role"><a href="javascript:;">超级管理员</a></li>
+			<li class="header-bar-role"><a href="javascript:;">${sessionUser.mark}</a></li>
 			<li class="header-bar-nav">
-				<a href="javascript:;">admin<i class="icon-font" style="margin-left:5px;">&#xe60c;</i></a>
+				<a href="javascript:;">${username}<i class="icon-font" style="margin-left:5px;">&#xe60c;</i></a>
 				<ul class="header-dropdown-menu">
 					<li><a href="javascript:;">个人信息</a></li>
-					<li><a href="javascript:;">切换账户</a></li>
+					<li><a href="logout">切换账户</a></li>
 					<li><a href="logout">退出</a></li>
 				</ul>
 			</li>
@@ -46,11 +46,11 @@
 					<li><a href="javascript:;" data-val="qingxin" title="清新">清新</a></li>
 					<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
 					<li><a href="javascript:;" data-val="molv" title="墨绿">墨绿</a></li>
-
 				</ul>
 			</li>
 		</ul>
 	</header>
+
 	<aside class="layout-side">
 		<ul class="side-menu">
 
@@ -73,7 +73,7 @@
 			<iframe class="body-iframe" name="iframe0" width="100%" height="99%" src="home.html" frameborder="0" data-id="home.html" seamless></iframe>
 		</div>
 	</section>
-	<div class="layout-footer">@2017 0.1 muses team</div>
+	<div class="layout-footer">@2017 V0.1 Muses Team</div>
 </div>
 <script type="text/javascript">
 	/*左侧菜单点击*/
@@ -139,6 +139,7 @@
                 isHas = true;
             }
         });
+
         if(isHas){
             $(".body-iframe").each(function() {
                 if ($(this).data("id") == h) {
