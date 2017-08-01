@@ -1,6 +1,7 @@
 package org.muses.jeeplatform.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import org.muses.jeeplatform.model.entity.Role;
 import org.muses.jeeplatform.model.entity.User;
 import org.muses.jeeplatform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -31,7 +33,7 @@ public class UserService {
 	 * @param map
 	 */
 	public void saveIP(Map<String, String> map) {
-		
+		//待开发...
 	}
 	
 	
@@ -69,15 +71,36 @@ public class UserService {
 		}
 		return permissionStrs;
 	}
-	
+
+	/**
+	 * 通过用户名查询用户信息
+	 * @param username
+	 * @return
+	 */
 	@Transactional(readOnly=true)
 	public User findByUsername(String username){
 		return userRepository.findByUsername(username);
 	}
-	
+
+	/**
+	 * 登录验证
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	@Transactional(readOnly=true)
 	public User doLoginCheck(String username,String password){
 		return userRepository.findByUsernameAndPassword(username,password);
+	}
+
+	/**
+	 * 根据用户序号查询用户信息
+	 * @param id
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public User findByUId(int id){
+		return userRepository.findById(id);
 	}
 
 	/**
@@ -93,7 +116,19 @@ public class UserService {
 		return new PageRequest(num-1, size,null,string);
 	}
 
-	//@Transactional(readOnly = true)
-
+	/**
+	 * 获取所有的菜单信息并分页显示
+	 * @param pageNo
+	 * 			当前页面数
+	 * @param pageSize
+	 * 			每一页面的页数
+	 * @return
+	 */
+	@Transactional
+	public Page<User> findAll(int pageNo, int pageSize, Sort.Direction dir, String str){
+		PageRequest request = buildPageRequest(pageNo, pageSize, dir, str);
+		Page<User> users = userRepository.findAll(request);
+		return users;
+	}
 
 }

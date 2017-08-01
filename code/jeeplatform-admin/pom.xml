@@ -63,13 +63,7 @@
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
-        <dependency>
-            <groupId>com.jsptags</groupId>
-            <artifactId>taglib</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/pager-taglib.jar</systemPath>
-        </dependency>
+
         <!-- jstl end -->
         <!-- log4j start-->
         <dependency>

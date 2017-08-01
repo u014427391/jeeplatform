@@ -41,8 +41,8 @@ public class MenuService {
 	@Transactional
 	public Page<Menu> findAll(int pageNo, int pageSize, Sort.Direction dir, String str){
 		PageRequest request = buildPageRequest(pageNo, pageSize, dir, str);
-		Page<Menu> articles = menuRepository.findAll(request);
-		return articles;
+		Page<Menu> menus = menuRepository.findAll(request);
+		return menus;
 	}
 	
 	/**

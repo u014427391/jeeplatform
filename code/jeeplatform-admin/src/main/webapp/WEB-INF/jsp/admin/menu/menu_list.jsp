@@ -69,7 +69,7 @@
                     "<td>"+menuType+"</td>"+
                     "<td>"+menuOrder+"</td>"+
                     "<td>"+menuStatus+"</td>"+
-                    "<td><a href='javascript:openEditDialog();' class='bounceIn'>编辑</a>"+
+                    "<td><a href='javascript:openEditDialog("+menuId+");' class='bounceIn'>编辑</a>"+
                     "</tr>";
 
             });
@@ -97,12 +97,12 @@
             Dialog.close();
         }
 
-        function openEditDialog(){
+        function openEditDialog(menuId){
             var diag = new Dialog();
             diag.Title = "编辑菜单信息";
-            diag.Width = 800;
-            diag.Height = 400;
-            diag.URL = "goEditM.do";
+            diag.Width = 400;
+            diag.Height = 300;
+            diag.URL = "goEditM.do?menuId="+menuId;
             diag.show();
         }
 

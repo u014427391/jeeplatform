@@ -108,6 +108,7 @@ public class MenuController extends BaseController {
             List<Menu> subMenu = menuService.findSubMenuById(Integer.parseInt(menuId));
             JSONArray arr = JSONArray.fromObject(subMenu);
             PrintWriter out;
+
             response.setCharacterEncoding("utf-8");
             out = response.getWriter();
             String json = arr.toString();
@@ -120,7 +121,11 @@ public class MenuController extends BaseController {
     }
 
     @RequestMapping(value="/goEditM",method = RequestMethod.GET)
-    public String goEditM(){
+    public String goEditM(HttpServletRequest request,Model model){
+        String menuIdStr = request.getParameter("menuId");
+        int menuId = Integer.parseInt(menuIdStr);
+        Menu menu = menuService.findMenuById(menuId);
+        model.addAttribute("menu",menu);
         return "admin/menu/menu_edit";
     }
 
