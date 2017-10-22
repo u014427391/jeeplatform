@@ -1,5 +1,6 @@
 package org.muses.jeeplatform.core;
 
+
 import com.sun.mail.util.MailSSLSocketFactory;
 
 import java.util.Date;

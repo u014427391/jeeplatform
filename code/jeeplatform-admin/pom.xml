@@ -351,9 +351,9 @@
         <!-- poi end-->
         <!-- email start-->
         <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4</version>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.5.6</version>
         </dependency>
         <!-- email end-->
     </dependencies>
