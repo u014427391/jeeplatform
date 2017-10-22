@@ -37,6 +37,7 @@
         .buttonStyle:hover{background:url(${basePath}plugins/zDialog/images/buticon.gif) no-repeat left -23px;}
 
     </style>
+    <script type="text/javascript" src="<%=basePath%>static/js/jquery-1.8.3.js"></script>
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
@@ -47,8 +48,36 @@
         }
         function doSave()
         {
-
-
+            var menuId = $("#menuId").val();
+            var parentId = ${menu.parentId};
+            var menuName = $("#menuName").val();
+            var menuUrl = $("#menuUrl").val();
+            var menuType = ${menu.menuType};
+            var menuOrder = ${menu.menuOrder};
+            var menuStatus = ${menu.menuStatus};
+            var params = menuId + "," + parentId + "," + menuName + ","+
+                menuUrl + "," + menuType + "," + menuOrder + "," +menuStatus;
+            $.ajax({
+                type: "POST",
+                url: 'menu/editM',
+                data: {KEYDATA:params,tm:new Date().getTime()},
+                dataType:'json',
+                cache: false,
+                success: function(data){
+                    if("success" == data.result){
+                        alert('修改成功!');
+                        parent.location.reload();
+                        doDialogClose();
+                    }else{
+                        $("#klClassifyName").tips({
+                            side : 1,
+                            msg : "修改失败!",
+                            bg : '#FF5080',
+                            time : 15
+                        });
+                    }
+                }
+            });
         }
 
     </script>
@@ -61,7 +90,7 @@
         </tr>
         <tr>
             <td width="150" align="right">菜单编号:</td>
-            <td><input type="text" id="menuId" value="${menu.menuId}" /></td>
+            <td><input type="text" id="menuId" disabled="disabled" value="${menu.menuId}" /></td>
         </tr>
         <tr>
             <td width="150" align="right">菜单名称:</td>
@@ -70,20 +99,6 @@
         <tr>
             <td align="right">菜单地址:</td>
             <td><input type="text" id="menuUrl" value="${menu.menuUrl}" /></td>
-        </tr>
-        <tr>
-            <td align="right">菜单类型:</td>
-            <td>
-                <input type="radio" name="menuType" id="menuType1" value="1" > 系统菜单
-                <input type="radio" name="menuType" id="menuType2" value="2" > 业务菜单
-            </td>
-        </tr>
-        <tr>
-            <td align="right">菜单状态:</td>
-            <td>
-                <input type="radio" name="menuStatus" id="menuStatus1" value="1" > 显示
-                <input type="radio" name="menuStatus" id="menuStatus2" value="0" > 隐藏
-            </td>
         </tr>
         <tr>
             <td colspan="2" align="left" style="padding-left:160px;">
