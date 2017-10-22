@@ -1,9 +1,6 @@
 package org.muses.jeeplatform.service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.muses.jeeplatform.model.entity.Operation;
 import org.muses.jeeplatform.model.entity.Permission;
@@ -14,8 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 
 /**
  * @description 用户信息管理的业务类
@@ -128,6 +129,27 @@ public class UserService {
 	public Page<User> findAll(int pageNo, int pageSize, Sort.Direction dir, String str){
 		PageRequest request = buildPageRequest(pageNo, pageSize, dir, str);
 		Page<User> users = userRepository.findAll(request);
+		return users;
+	}
+
+	/**
+	 * 根据关键字和日期查询
+	 * @param pageNo
+	 * 			当前页面数
+	 * @param pageSize
+	 * 			每一页面的页数
+	 * @param dir
+	 * @param str
+	 * @param keyword
+	 * 			关键字
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	@Transactional
+	public Page<User> searchU(int pageNo, int pageSize, Sort.Direction dir, String str,String keyword,Date startDate,Date endDate){
+		PageRequest request = buildPageRequest(pageNo, pageSize, dir, str);
+		Page<User> users = userRepository.searchU(startDate,endDate,request);
 		return users;
 	}
 

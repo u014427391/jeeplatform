@@ -50,7 +50,7 @@ public class User {
 	private String rank;
 	
 	/** 最后一次时间**/
-	private String lastLogin;
+	private Date lastLogin;
 	
 	/** 登录ip**/
 	private String loginIp;
@@ -141,12 +141,12 @@ public class User {
 		this.rank = rank;
 	}
 
-	@Column(length=100)
-	public String getLastLogin() {
+	@Temporal(TemporalType.DATE)
+	public Date getLastLogin() {
 		return lastLogin;
 	}
 
-	public void setLastLogin(String lastLogin) {
+	public void setLastLogin(Date lastLogin) {
 		this.lastLogin = lastLogin;
 	}
 

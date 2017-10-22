@@ -3,7 +3,9 @@ package org.muses.jeeplatform.web.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -97,6 +99,16 @@ public class MenuController extends BaseController {
          return "";
     }
 
+    @RequestMapping("/list")
+    public ModelAndView list(){
+        ModelAndView mv = new ModelAndView();
+        List<Menu> menus = menuService.findAllParentMenu();
+        JSONArray jsonObject = JSONArray.fromObject(menus);
+        mv.addObject("menus",jsonObject.toString());
+        mv.setViewName("admin/menu/menu_list");
+        return mv;
+    }
+
     /**
      * 获取当前菜单的所有子菜单
      * @param menuId
@@ -129,4 +141,45 @@ public class MenuController extends BaseController {
         return "admin/menu/menu_edit";
     }
 
+    /**
+     *
+     * @param response
+     * @param request
+     */
+    @RequestMapping(value = "/editM", method = RequestMethod.POST)
+    public void editM(HttpServletResponse response,HttpServletRequest request){
+        PrintWriter out = null;
+
+        response.setCharacterEncoding("utf-8");
+        try {
+            out = response.getWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String params[] = request.getParameter("KEYDATA").split(",");
+        String menuId = params[0];
+        String parentId = params[1];
+        String menuName = params[2];
+        String menuUrl = params[3];
+        String menuType = params[4];
+        String menuOrder = params[5];
+        String menuStatus = params[6];
+        Menu m = new Menu();
+        m.setMenuId(Integer.parseInt(menuId));
+        m.setParentId(Integer.parseInt(parentId));
+        m.setMenuName(menuName);
+        m.setMenuUrl(menuUrl);
+        m.setMenuType(menuType);
+        m.setMenuOrder(menuOrder);
+        m.setMenuIcon("&#xe610");
+        m.setMenuStatus(menuStatus);
+        menuService.editM(m);
+//        Map<String,String> map = new HashMap<String,String>();
+//        map.put("result","success");
+        JSONObject obj = new JSONObject();
+        obj.put("result","success");
+        out.write(obj.toString());
+        out.flush();
+        out.close();
+    }
 }

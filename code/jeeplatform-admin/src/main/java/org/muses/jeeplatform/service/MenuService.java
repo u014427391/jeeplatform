@@ -74,4 +74,12 @@ public class MenuService {
 		return menuRepository.findMenuByMenuId(id);
 	}
 
+	/**
+	 * 更新菜单信息
+	 * @param m
+	 */
+	public void editM(Menu m){
+		menuRepository.save(m);
+	}
+
 }

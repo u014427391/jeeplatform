@@ -64,7 +64,6 @@ public class ExcelViewRead extends AbstractExcelView{
                 cell.setCellStyle(contentStyle);
                 setText(cell,varstr);
             }
-
         }
 
     }

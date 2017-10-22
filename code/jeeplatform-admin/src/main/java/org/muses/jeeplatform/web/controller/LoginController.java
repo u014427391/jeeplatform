@@ -170,7 +170,7 @@ public class LoginController extends BaseController {
 			
 			/**为一级菜单添加二级菜单**/
 			for(Menu m : menuList){
-				if(m.getMenuType().equals("1")){
+				if(m.getMenuUrl().equals("#")){
 					List<Menu> subMenu = new ArrayList<Menu>();
 					//查询二级菜单
 					subMenu = menuService.findSubMenuById(m.getMenuId());
