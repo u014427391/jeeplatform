@@ -55,7 +55,6 @@
 	</build>
 	
 	<modules>
-		<module>jeeplatform-core</module>
 		<module>jeeplatform-admin</module>
 		<module>jeeplatform-common</module>
 		<module>jeeplatform-oss</module>

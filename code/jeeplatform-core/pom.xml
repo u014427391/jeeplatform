@@ -8,10 +8,17 @@
 	</parent>
 	<artifactId>jeeplatform-core</artifactId>
 	<version>${jeeplatform.core.version}</version>
-	<name>jeeplatform-core</name>
-	
+	<name>jeeplatform-核心通用模块</name>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<tk.mybatis.mapper.version>3.3.8</tk.mybatis.mapper.version>
+		<mybatis-spring-boot.version>1.1.1</mybatis-spring-boot.version>
+		<mysql-connector.version>5.1.39</mysql-connector.version>
+		<spring-boot.version>1.5.3.RELEASE</spring-boot.version>
+		<druid.version>1.1.2</druid.version>
+		<github.pagehelper.version>4.2.1</github.pagehelper.version>
+
 	</properties>
 	
 	<dependencies>
@@ -30,41 +37,66 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
+		<!-- Spring boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatis-spring-boot.version}</version>
+		</dependency>
+
+		<!-- druid -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
-			<artifactId>dubbo</artifactId>
-			<version>${dubbo.version}</version>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+
+		<!-- mybatis -->
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper</artifactId>
+			<version>${tk.mybatis.mapper.version}</version>
 			<exclusions>
 				<exclusion>
-					<groupId>org.jboss.netty</groupId>
-					<artifactId>netty</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring</artifactId>
+					<groupId>javax.persistence</groupId>
+					<artifactId>persistence-api</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.zookeeper</groupId>
-			<artifactId>zookeeper</artifactId>
-			<version>${zookeeper.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>jline</groupId>
-					<artifactId>jline</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>${github.pagehelper.version}</version>
 		</dependency>
+		<!-- mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector.version}</version>
+		</dependency>
+
+		<!-- TODO admin 和 common 的部分可移植到 core 的依赖 ， 如日志 -->
 	</dependencies>
 	
 </project>
