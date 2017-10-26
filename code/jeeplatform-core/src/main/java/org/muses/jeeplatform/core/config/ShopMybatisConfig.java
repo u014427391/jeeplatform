@@ -6,7 +6,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -22,7 +21,7 @@ import static org.muses.jeeplatform.core.config.ShopBaseConfig.*;
  * @author caiyuyu
  *
  */
-@Configuration
+//@Configuration
 @MapperScan(
 		basePackages = MAPPER_PACKAGES,
 		sqlSessionFactoryRef = SQL_SESSION_FACTORY)
