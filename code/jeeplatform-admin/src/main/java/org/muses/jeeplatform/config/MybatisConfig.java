@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
-import static org.muses.jeeplatform.config.ShopBaseConfig.*;
+import static org.muses.jeeplatform.config.BaseConfig.*;
 
 
 /**
@@ -27,7 +27,7 @@ import static org.muses.jeeplatform.config.ShopBaseConfig.*;
 		basePackages = MAPPER_PACKAGES,
 		sqlSessionFactoryRef = SQL_SESSION_FACTORY)
 @EnableTransactionManagement
-public class ShopMybatisConfig
+public class MybatisConfig
 {
     @Autowired
     @Qualifier(DATA_SOURCE_NAME)

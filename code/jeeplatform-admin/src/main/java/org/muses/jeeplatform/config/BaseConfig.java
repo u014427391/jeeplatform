@@ -3,7 +3,7 @@ package org.muses.jeeplatform.config;
 /**
  * @author caiyuyu
  */
-public class ShopBaseConfig {
+public class BaseConfig {
 
     /**
      * 设置主数据源名称

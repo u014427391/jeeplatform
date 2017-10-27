@@ -1,16 +1,16 @@
 <!--<?xml version="1.0" encoding="UTF-8"?>-->
 <!--<beans xmlns="http://www.springframework.org/schema/beans"-->
 	<!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-	<!--xmlns:aop="http://www.springframework.org/schema/aop" -->
+	<!--xmlns:aop="http://www.springframework.org/schema/aop"-->
 	<!--xmlns:context="http://www.springframework.org/schema/context"-->
 	<!--xmlns:tx="http://www.springframework.org/schema/tx"-->
-	<!--xsi:schemaLocation="http://www.springframework.org/schema/beans -->
+	<!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
 						<!--http://www.springframework.org/schema/beans/spring-beans.xsd-->
-						<!--http://www.springframework.org/schema/aop -->
+						<!--http://www.springframework.org/schema/aop-->
 						<!--http://www.springframework.org/schema/aop/spring-aop.xsd-->
-						<!--http://www.springframework.org/schema/context -->
+						<!--http://www.springframework.org/schema/context-->
 						<!--http://www.springframework.org/schema/context/spring-context.xsd-->
-						<!--http://www.springframework.org/schema/tx -->
+						<!--http://www.springframework.org/schema/tx-->
 						<!--http://www.springframework.org/schema/tx/spring-tx.xsd-->
 						<!--">-->
 	<!--&lt;!&ndash; Velocity视图解析器配置 start&ndash;&gt;-->
@@ -18,24 +18,24 @@
 	    <!--<property name="cache" value="true" />-->
 	    <!--<property name="prefix" value="/" />-->
 	    <!--<property name="suffix" value=".vm" />-->
-	    <!--<property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml"/> &lt;!&ndash;toolbox配置文件路径&ndash;&gt;   -->
-	    <!--<property name="layoutUrl" value="layout/layout.vm" /> -->
-        <!--<property name="contentType" value="text/html;charset=UTF-8" /> &lt;!&ndash;指定编码&ndash;&gt;  -->
-        <!--<property name="exposeSpringMacroHelpers" value="true" /> &lt;!&ndash;是否使用spring对宏定义的支持&ndash;&gt;  -->
-        <!--<property name="layoutKey" value="layout"></property>    -->
-        <!--<property name="screenContentKey" value="screen_content" />  -->
-        <!---->
-        <!--<property name="dateToolAttribute">  -->
-            <!--<value>dateTool</value> &lt;!&ndash;日期函数名称&ndash;&gt;  -->
-        <!--</property>  -->
-        <!--<property name="numberToolAttribute">  -->
-            <!--<value>numberTool</value> &lt;!&ndash;数字函数名称&ndash;&gt;  -->
-        <!--</property>  -->
-          <!---->
-        <!--<property name="allowRequestOverride" value="true" />  -->
-        <!--<property name="exposeRequestAttributes" value="true" /> &lt;!&ndash;是否开放request属性&ndash;&gt;  -->
-        <!--<property name="exposeSessionAttributes" value="true" /> &lt;!&ndash;是否开放session属性&ndash;&gt;  -->
-        <!--<property name="requestContextAttribute" value="rc"/> &lt;!&ndash;request属性引用名称&ndash;&gt; -->
+	    <!--<property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml"/> &lt;!&ndash;toolbox配置文件路径&ndash;&gt;-->
+	    <!--<property name="layoutUrl" value="layout/layout.vm" />-->
+        <!--<property name="contentType" value="text/html;charset=UTF-8" /> &lt;!&ndash;指定编码&ndash;&gt;-->
+        <!--<property name="exposeSpringMacroHelpers" value="true" /> &lt;!&ndash;是否使用spring对宏定义的支持&ndash;&gt;-->
+        <!--<property name="layoutKey" value="layout"></property>-->
+        <!--<property name="screenContentKey" value="screen_content" />-->
+
+        <!--<property name="dateToolAttribute">-->
+            <!--<value>dateTool</value> &lt;!&ndash;日期函数名称&ndash;&gt;-->
+        <!--</property>-->
+        <!--<property name="numberToolAttribute">-->
+            <!--<value>numberTool</value> &lt;!&ndash;数字函数名称&ndash;&gt;-->
+        <!--</property>-->
+
+        <!--<property name="allowRequestOverride" value="true" />-->
+        <!--<property name="exposeRequestAttributes" value="true" /> &lt;!&ndash;是否开放request属性&ndash;&gt;-->
+        <!--<property name="exposeSessionAttributes" value="true" /> &lt;!&ndash;是否开放session属性&ndash;&gt;-->
+        <!--<property name="requestContextAttribute" value="rc"/> &lt;!&ndash;request属性引用名称&ndash;&gt;-->
 	<!--</bean>-->
 	<!--&lt;!&ndash; Velocity视图解析器配置 end &ndash;&gt;-->
 
@@ -45,14 +45,14 @@
     	<!--<property name="configLocation" value="classpath:velocity.properties"/>-->
     	<!--&lt;!&ndash; velocity模板路径 &ndash;&gt;-->
     	<!--<property name="resourceLoaderPath" value="/WEB-INF/vm"/>-->
-    	<!--<property name="velocityProperties">  -->
-            <!--<props>  -->
-                <!--<prop key="directive.foreach.counter.name">loopCounter</prop>  -->
-                <!--<prop key="directive.foreach.counter.initial.value">0</prop>  -->
-                <!--<prop key="directive.foreach.iterator.name">loopHasNext</prop>  -->
-            <!--</props>  -->
-        <!--</property> -->
+    	<!--<property name="velocityProperties">-->
+            <!--<props>-->
+                <!--<prop key="directive.foreach.counter.name">loopCounter</prop>-->
+                <!--<prop key="directive.foreach.counter.initial.value">0</prop>-->
+                <!--<prop key="directive.foreach.iterator.name">loopHasNext</prop>-->
+            <!--</props>-->
+        <!--</property>-->
 	<!--</bean>-->
 	<!--&lt;!&ndash; Velocity环境配置 end &ndash;&gt;-->
-					<!---->
+
 <!--</beans>-->

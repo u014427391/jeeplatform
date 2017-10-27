@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
-import static org.muses.jeeplatform.config.ShopBaseConfig.*;
+import static org.muses.jeeplatform.config.BaseConfig.*;
 
 
 /**
@@ -30,7 +30,7 @@ import static org.muses.jeeplatform.config.ShopBaseConfig.*;
         entityManagerFactoryRef = ENTITY_MANAGER_FACTORY,
         transactionManagerRef = JPA_TRANSACTION_MANAGER,
         basePackages = {REPOSITORY_PACKAGES})
-public class ShopJpaConfig {
+public class JpaConfig {
 
     @Autowired
     @Qualifier(DATA_SOURCE_NAME)

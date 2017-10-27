@@ -37,10 +37,12 @@ spring:
       use-global-data-source-stat: true
   jpa:
     database: mysql
-    properties:
-      hibernate:
-        show_sql: false
-        format_sql: true
+    hibernate:
+      show_sql: true
+      format_sql: true
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   mvc:
     view:
       prefix: /WEB-INF/jsp/

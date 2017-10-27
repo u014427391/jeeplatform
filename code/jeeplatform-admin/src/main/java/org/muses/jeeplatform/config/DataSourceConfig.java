@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 
-import static org.muses.jeeplatform.config.ShopBaseConfig.*;
+import static org.muses.jeeplatform.config.BaseConfig.*;
 
 
 /**
@@ -17,7 +17,7 @@ import static org.muses.jeeplatform.config.ShopBaseConfig.*;
  * @author caiyuyu
  */
 @Configuration
-public class ShopDataSourceConfig {
+public class DataSourceConfig {
 
     @Primary
     @Bean(name = DATA_SOURCE_NAME)
