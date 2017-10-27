@@ -1,13 +1,9 @@
 package org.muses.jeeplatform.web.controller;
 
 import net.sf.json.JSONArray;
-import net.sf.json.JsonConfig;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.muses.jeeplatform.core.Constants;
-import org.muses.jeeplatform.model.entity.Role;
-import org.muses.jeeplatform.model.entity.User;
+import org.muses.jeeplatform.core.entity.admin.Role;
 import org.muses.jeeplatform.service.RoleService;
-import org.muses.jeeplatform.utils.DateJsonValueProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -19,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
 /**
  * Created by Nicky on 2017/7/30.

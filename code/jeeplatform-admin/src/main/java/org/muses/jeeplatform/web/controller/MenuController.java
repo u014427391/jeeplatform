@@ -2,18 +2,13 @@ package org.muses.jeeplatform.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.muses.jeeplatform.core.Constants;
-import org.muses.jeeplatform.model.entity.Menu;
-import org.muses.jeeplatform.repository.MenuTreeRepository;
+import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.muses.jeeplatform.service.MenuService;
-import org.muses.jeeplatform.service.MenuTreeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;

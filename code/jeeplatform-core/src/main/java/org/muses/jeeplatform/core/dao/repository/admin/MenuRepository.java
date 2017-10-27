@@ -1,12 +1,12 @@
-package org.muses.jeeplatform.repository;
+package org.muses.jeeplatform.core.dao.repository.admin;
 
-import java.util.List;
-
-import org.muses.jeeplatform.model.entity.Menu;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
+
+import java.util.List;
+
 
 public interface MenuRepository extends PagingAndSortingRepository<Menu, Integer> {
 

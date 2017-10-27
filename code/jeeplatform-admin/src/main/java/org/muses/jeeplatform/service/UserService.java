@@ -1,22 +1,21 @@
 package org.muses.jeeplatform.service;
 
-import java.util.*;
-
-import org.muses.jeeplatform.model.entity.Operation;
-import org.muses.jeeplatform.model.entity.Permission;
-import org.muses.jeeplatform.model.entity.Role;
-import org.muses.jeeplatform.model.entity.User;
-import org.muses.jeeplatform.repository.UserRepository;
+import org.muses.jeeplatform.core.dao.repository.admin.UserRepository;
+import org.muses.jeeplatform.core.entity.admin.Operation;
+import org.muses.jeeplatform.core.entity.admin.Permission;
+import org.muses.jeeplatform.core.entity.admin.Role;
+import org.muses.jeeplatform.core.entity.admin.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @description 用户信息管理的业务类
@@ -27,7 +26,7 @@ import javax.persistence.criteria.CriteriaQuery;
 public class UserService {
 
 	@Autowired
-    UserRepository userRepository;
+	UserRepository userRepository;
 	
 	/**
 	 * 存储登录时的ip

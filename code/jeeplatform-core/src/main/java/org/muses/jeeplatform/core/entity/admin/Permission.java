@@ -1,4 +1,4 @@
-package org.muses.jeeplatform.model.entity;
+package org.muses.jeeplatform.core.entity.admin;
 
 import java.io.Serializable;
 import java.util.HashSet;

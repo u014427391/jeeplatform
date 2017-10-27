@@ -1,36 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" 
-			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-			 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-	<persistence-unit name="jeeplatform" transaction-type="RESOURCE_LOCAL">
-	<!-- 配置Hibernate JPA作为JPA的实现ORM框架，若项目只有一个JPA实现产品，那么这个配置可以不写 -->
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-	<!-- 添加持久化类 -->
-		<class>org.muses.jeeplatform.model.entity.Menu</class>
-		<class>org.muses.jeeplatform.model.entity.Operation</class>
-		<class>org.muses.jeeplatform.model.entity.Permission</class>
-		<class>org.muses.jeeplatform.model.entity.Role</class>
-		<class>org.muses.jeeplatform.model.entity.User</class>
-	<!--
-		配置二级缓存的策略 
-		ALL：所有的实体类都被缓存
-		NONE：所有的实体类都不被缓存. 
-		ENABLE_SELECTIVE：标识 @Cacheable(true) 注解的实体类将被缓存
-		DISABLE_SELECTIVE：缓存除标识 @Cacheable(false) 以外的所有实体类
-		UNSPECIFIED：默认值，JPA 产品默认值将被使用
-		-->
-		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
-		
-		<properties>
-			<!-- 配置 JPA 实现产品的基本属性. 配置 hibernate 的基本属性 -->
-			<property name="hibernate.format_sql" value="true"/>
-			<property name="hibernate.show_sql" value="true"/>
-			<property name="hibernate.hbm2ddl.auto" value="update"/>
-			<!-- 二级缓存相关 -->
-			<property name="hibernate.cache.use_second_level_cache" value="true"/>
-			<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
-			<property name="hibernate.cache.use_query_cache" value="true"/>
-		</properties>
-	</persistence-unit>
-	
-</persistence>
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" -->
+			 <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" -->
+			 <!--xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">-->
+	<!--<persistence-unit name="jeeplatform" transaction-type="RESOURCE_LOCAL">-->
+	<!--&lt;!&ndash; 配置Hibernate JPA作为JPA的实现ORM框架，若项目只有一个JPA实现产品，那么这个配置可以不写 &ndash;&gt;-->
+		<!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
+	<!--&lt;!&ndash; 添加持久化类 &ndash;&gt;-->
+		<!--<class>org.muses.jeeplatform.core.entity.admin.Menu</class>-->
+		<!--<class>org.muses.jeeplatform.core.entity.admin.Operation</class>-->
+		<!--<class>org.muses.jeeplatform.core.entity.admin.Permission</class>-->
+		<!--<class>org.muses.jeeplatform.core.entity.admin.Role</class>-->
+		<!--<class>org.muses.jeeplatform.core.entity.admin.User</class>-->
+	<!--&lt;!&ndash;-->
+		<!--配置二级缓存的策略 -->
+		<!--ALL：所有的实体类都被缓存-->
+		<!--NONE：所有的实体类都不被缓存. -->
+		<!--ENABLE_SELECTIVE：标识 @Cacheable(true) 注解的实体类将被缓存-->
+		<!--DISABLE_SELECTIVE：缓存除标识 @Cacheable(false) 以外的所有实体类-->
+		<!--UNSPECIFIED：默认值，JPA 产品默认值将被使用-->
+		<!--&ndash;&gt;-->
+		<!--<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>-->
+		<!---->
+		<!--<properties>-->
+			<!--&lt;!&ndash; 配置 JPA 实现产品的基本属性. 配置 hibernate 的基本属性 &ndash;&gt;-->
+			<!--<property name="hibernate.format_sql" value="true"/>-->
+			<!--<property name="hibernate.show_sql" value="true"/>-->
+			<!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
+			<!--&lt;!&ndash; 二级缓存相关 &ndash;&gt;-->
+			<!--<property name="hibernate.cache.use_second_level_cache" value="true"/>-->
+			<!--<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>-->
+			<!--<property name="hibernate.cache.use_query_cache" value="true"/>-->
+		<!--</properties>-->
+	<!--</persistence-unit>-->
+	<!---->
+<!--</persistence>-->

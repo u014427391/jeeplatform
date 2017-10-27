@@ -1,6 +1,4 @@
-package org.muses.jeeplatform.model.entity;
-
-import org.muses.jeeplatform.model.dto.SysMenu;
+package org.muses.jeeplatform.core.entity.admin;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -6,7 +6,14 @@
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>muses</name>
-	
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.7.RELEASE</version>
+	</parent>
+
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
@@ -18,13 +25,16 @@
 		<jeeplatform-upms.version>1.0</jeeplatform-upms.version>
 
 		<!-- 外部依赖 -->
-		<dubbo.version>2.5.3</dubbo.version>
-		<zookeeper.version>3.4.9</zookeeper.version>
 		<log4j.version>1.2.17</log4j.version>
 		<mysql.version>5.1.27</mysql.version>
 		<oss.version>2.4.0</oss.version>
 		<cxf.version>2.7.18</cxf.version>
-
+		<tk.mybatis.mapper.version>3.3.8</tk.mybatis.mapper.version>
+		<mybatis-spring-boot.version>1.1.1</mybatis-spring-boot.version>
+		<mysql-connector.version>5.1.39</mysql-connector.version>
+		<spring-boot.version>1.5.7.RELEASE</spring-boot.version>
+		<druid.version>1.1.2</druid.version>
+		<github.pagehelper.version>4.2.1</github.pagehelper.version>
 	</properties>
 	
 	<build>
@@ -39,6 +49,7 @@
 					<target>1.8</target>
 					<compilerVersion>1.8</compilerVersion>
 					<encoding>UTF-8</encoding>
+					<skipMain></skipMain>
 				</configuration>
 			</plugin>
 
@@ -51,16 +62,87 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+
+
 		</plugins>
 	</build>
 	
 	<modules>
+		<module>jeeplatform-core</module>
 		<module>jeeplatform-admin</module>
 		<module>jeeplatform-common</module>
 		<module>jeeplatform-oss</module>
 		<module>jeeplatform-upms</module>
 	</modules>
 
+	<dependencies>
+		<!-- Spring boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatis-spring-boot.version}</version>
+		</dependency>
+
+		<!-- druid -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+
+		<!-- mybatis -->
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper</artifactId>
+			<version>${tk.mybatis.mapper.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.persistence</groupId>
+					<artifactId>persistence-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>${github.pagehelper.version}</version>
+		</dependency>
+
+		<!-- mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector.version}</version>
+		</dependency>
+
+		<!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+	</dependencies>
 	<!--  设定Maven主仓库为阿里私服 -->
 	<repositories>
 		<repository>

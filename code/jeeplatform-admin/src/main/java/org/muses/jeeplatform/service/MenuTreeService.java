@@ -1,7 +1,7 @@
 package org.muses.jeeplatform.service;
 
-import org.muses.jeeplatform.model.entity.Menu;
-import org.muses.jeeplatform.repository.MenuTreeRepository;
+import org.muses.jeeplatform.core.dao.repository.admin.MenuTreeRepository;
+import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

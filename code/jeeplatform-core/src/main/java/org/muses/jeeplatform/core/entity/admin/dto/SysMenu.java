@@ -1,10 +1,7 @@
-package org.muses.jeeplatform.model.dto;
+package org.muses.jeeplatform.core.entity.admin.dto;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 /**

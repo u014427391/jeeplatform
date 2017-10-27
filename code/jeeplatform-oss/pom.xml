@@ -6,20 +6,22 @@
         <artifactId>muses</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <artifactId>jeeplatform-oss</artifactId>
-    <version>${jeeplatform.oss.version}</version>
-    <name>jeeplatform-core</name>
+    <name>jeeplatform-oss</name>
+    <version>1.0</version>
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.muses</groupId>
-            <artifactId>jeeplatform-core</artifactId>
-            <version>${jeeplatform.core.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.muses</groupId>-->
+            <!--<artifactId>jeeplatform-core</artifactId>-->
+            <!--<version>${jeeplatform.core.version}</version>-->
+        <!--</dependency>-->
     </dependencies>
 
 </project>

@@ -1,15 +1,15 @@
 package org.muses.jeeplatform.service;
 
-import java.util.List;
-
-import org.muses.jeeplatform.model.entity.Menu;
-import org.muses.jeeplatform.repository.MenuRepository;
+import org.muses.jeeplatform.core.dao.repository.admin.MenuRepository;
+import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class MenuService {

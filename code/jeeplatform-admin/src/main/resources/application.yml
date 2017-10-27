@@ -1,9 +1,9 @@
 spring:
   datasource:
 
-    # 主数据源 
+    # 主数据源
     shop:
-      url: jdbc:mysql://127.0.0.1:3306/jeeplatform?autoReconnect=true&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      url: jdbc:mysql://127.0.0.1:3306/jeeplatform?autoReconnect=true&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false
       username: root
       password: root
 
@@ -41,10 +41,10 @@ spring:
       hibernate:
         show_sql: false
         format_sql: true
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
 
-# 端口
-server:
-  port: 8022
 
 
-#debug: true

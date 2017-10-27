@@ -1,4 +1,4 @@
-package org.muses.jeeplatform.core.config;
+package org.muses.jeeplatform.config;
 
 /**
  * @author caiyuyu
@@ -18,17 +18,17 @@ public class ShopBaseConfig {
     /**
      * repository 所在包
      */
-    public static final String REPOSITORY_PACKAGES = "com.muses.jeeplatform.core.dao.repository";
+    public static final String REPOSITORY_PACKAGES = "org.muses.jeeplatform.core.dao.repository.admin";
 
     /**
      * mapper 所在包
      */
-    public static final String MAPPER_PACKAGES = "com.com.muses.jeeplatform.core.dao.mapper";
+    public static final String MAPPER_PACKAGES = "org.muses.jeeplatform.core.dao.mapper.admin";
 
     /**
      * 实体类 所在包
      */
-    public static final String ENTITY_PACKAGES = "com.com.muses.jeeplatform.core.entity";
+    public static final String ENTITY_PACKAGES = "org.muses.jeeplatform.core.entity.admin";
 
     /**
      * JPA 实体管理器

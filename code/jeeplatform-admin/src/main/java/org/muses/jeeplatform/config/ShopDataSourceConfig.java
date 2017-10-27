@@ -1,14 +1,14 @@
-package org.muses.jeeplatform.core.config;
+package org.muses.jeeplatform.config;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 
-import static org.muses.jeeplatform.core.config.ShopBaseConfig.DATA_SOURCE_NAME;
-import static org.muses.jeeplatform.core.config.ShopBaseConfig.DATA_SOURCE_PROPERTIES;
+import static org.muses.jeeplatform.config.ShopBaseConfig.*;
 
 
 /**
@@ -16,7 +16,7 @@ import static org.muses.jeeplatform.core.config.ShopBaseConfig.DATA_SOURCE_PROPE
  *
  * @author caiyuyu
  */
-//@Configuration
+@Configuration
 public class ShopDataSourceConfig {
 
     @Primary

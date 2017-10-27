@@ -1,7 +1,7 @@
 package org.muses.jeeplatform.service;
 
-import org.muses.jeeplatform.model.entity.Role;
-import org.muses.jeeplatform.repository.RoleRepository;
+import org.muses.jeeplatform.core.dao.repository.admin.RoleRepository;
+import org.muses.jeeplatform.core.entity.admin.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

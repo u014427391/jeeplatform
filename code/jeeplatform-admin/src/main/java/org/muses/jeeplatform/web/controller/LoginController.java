@@ -1,17 +1,7 @@
 package org.muses.jeeplatform.web.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -19,10 +9,10 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.muses.jeeplatform.core.Constants;
-import org.muses.jeeplatform.model.entity.Menu;
-import org.muses.jeeplatform.model.entity.Permission;
-import org.muses.jeeplatform.model.entity.Role;
-import org.muses.jeeplatform.model.entity.User;
+import org.muses.jeeplatform.core.entity.admin.Menu;
+import org.muses.jeeplatform.core.entity.admin.Permission;
+import org.muses.jeeplatform.core.entity.admin.Role;
+import org.muses.jeeplatform.core.entity.admin.User;
 import org.muses.jeeplatform.service.MenuService;
 import org.muses.jeeplatform.service.UserService;
 import org.muses.jeeplatform.utils.Tools;
@@ -31,6 +21,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * @description 登录操作的控制类，使用Shiro框架，做好了登录的权限安全认证，

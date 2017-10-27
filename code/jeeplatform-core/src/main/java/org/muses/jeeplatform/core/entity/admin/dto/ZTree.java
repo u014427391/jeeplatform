@@ -1,4 +1,4 @@
-package org.muses.jeeplatform.model.dto;
+package org.muses.jeeplatform.core.entity.admin.dto;
 
 import java.io.Serializable;
 

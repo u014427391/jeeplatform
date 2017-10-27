@@ -4,7 +4,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.muses.jeeplatform.core.Constants;
-import org.muses.jeeplatform.model.entity.User;
+import org.muses.jeeplatform.core.entity.admin.User;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;

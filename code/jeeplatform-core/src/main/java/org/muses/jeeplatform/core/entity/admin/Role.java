@@ -1,4 +1,4 @@
-package org.muses.jeeplatform.model.entity;
+package org.muses.jeeplatform.core.entity.admin;
 
 import javax.persistence.*;
 import java.io.Serializable;

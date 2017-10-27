@@ -2,36 +2,36 @@
 <!--suppress ALL -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd
-						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop
 						http://www.springframework.org/schema/aop/spring-aop.xsd
-						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context
 						http://www.springframework.org/schema/context/spring-context.xsd
-						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx
 						http://www.springframework.org/schema/tx/spring-tx.xsd
 						">
 	<!--  Shiro start  -->
 		<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 			<property name="realm" ref="ShiroRealm" />
 		</bean>
-		
+
 		<!-- 项目自定义的Realm -->
 	    <bean id="ShiroRealm" class="org.muses.jeeplatform.core.security.shiro.ShiroRealm" ></bean>
-		
+
 		<!-- Shiro Filter -->
 		<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 			<property name="securityManager" ref="securityManager" />
-			
+
 			<property name="loginUrl" value="/login" />
-			
+
 			<property name="successUrl" value="/admin/index" />
-			
+
 			<property name="unauthorizedUrl" value="/login" />
-			
+
 			<property name="filterChainDefinitions">
 				<value>
 				/static/**					= anon
@@ -44,6 +44,6 @@
 				</value>
 			</property>
 		</bean>
-	<!--  Shiro end  -->				
-		
+	<!--  Shiro end  -->
+
 </beans>
