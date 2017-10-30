@@ -2,7 +2,8 @@
 SQLyog v10.2 
 MySQL - 5.1.32-community : Database - jeeplatform
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -166,7 +167,22 @@ CREATE TABLE `sys_user_role` (
 
 insert  into `sys_user_role`(`userId`,`roleId`) values (1,1),(2,2),(3,3),(3,4),(3,7);
 
+/*Table structure for table `sys_log` */
+
+DROP TABLE IF EXISTS `sys_log`;
+CREATE TABLE sys_log
+(
+  id INT PRIMARY KEY NOT NULL COMMENT 'id' AUTO_INCREMENT,
+  logType INT NOT NULL COMMENT '日志类型',
+  logOperation VARCHAR(30) NOT NULL COMMENT '操作名',
+  createdTime DATETIME NOT NULL COMMENT '创建时间',
+  updatedTime DATETIME NOT NULL COMMENT '修改时间',
+  interface VARCHAR(200) NOT NULL COMMENT '调用的接口',
+  param TEXT COMMENT '接口参数'
+);
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
