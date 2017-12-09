@@ -355,6 +355,7 @@
             <version>1.5.6</version>
         </dependency>
         <!-- email end-->
+
     </dependencies>
     <build>
         <finalName>jeeplatform-admin</finalName>

@@ -1,4 +1,4 @@
-package org.muses.jeeplatform.core.security.shiro;
+package org.muses.jeeplatform.core.shiro;
 
 import javax.annotation.Resource;
 
