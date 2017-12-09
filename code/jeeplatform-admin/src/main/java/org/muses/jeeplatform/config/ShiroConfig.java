@@ -3,7 +3,7 @@ package org.muses.jeeplatform.config;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.muses.jeeplatform.core.security.shiro.ShiroRealm;
+import org.muses.jeeplatform.core.shiro.ShiroRealm;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
