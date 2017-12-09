@@ -34,6 +34,28 @@ Blog：https://jasonsama.github.io/<br>
 Github：https://github.com/Jasonsama<br><br>
 
 
+## 系统设计
+### 管理系统(模块名称jeeplatform-admin)
+管理系统登录页面，采用Shiro登录验证
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统登录页面.png)
+管理系统主页，获取用户具有的权限，显示菜单
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统主页.png)
+角色进行授权，只有超级管理员才具有权限
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/角色授权.png)
+角色进行配置，可以学习一下RBAC(基于角色的权限控制)
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/角色配置.png)
+使用JavaEmail插件实现邮件发送，记得需要开启SSl验证
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/发送邮件.png)
+
+### 单点登录系统(模块名称jeeplatform-sso)
+> 项目采用CAS登录登录实现，单点登录集群搭建可以参考博客：
+> http://blog.csdn.net/u014427391/article/details/78653482
+> 项目单点登录：使用nginx作为负载均衡，使用redis存储tomcat session，来实现集群中tomcat session的共享，使用redis作为cas ticket的仓库，来实现集群中cas ticket的一致性。
+
+单点登录集群如图
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/单点登录集群.png)
+
+
 ## 业务方案 ##
 ### 系统管理通用功能 ####
 * 用户管理: 系统用户
