@@ -64,8 +64,10 @@ public class LoginController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/login",produces="text/html;charset=UTF-8")
-	public String toLogin()throws ClassNotFoundException{
-		return "admin/frame/login";
+	public ModelAndView toLogin()throws ClassNotFoundException{
+		ModelAndView mv = this.getModelAndView();
+		mv.setViewName("admin/frame/login");
+		return mv;
 	}
 	
 	/**
