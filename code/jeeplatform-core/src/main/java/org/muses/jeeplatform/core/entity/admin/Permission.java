@@ -25,39 +25,39 @@ import javax.persistence.Table;
 @Table(name="sys_permission")
 @Entity
 public class Permission implements Serializable {
-	
+
 	private int id;
-	private String desc;
+	private String pdesc;
 	private String name;
 	private static final long serialVersionUID = 1L;
-	
+
 	private Menu menu;
-	
+
 	private Set<Operation> operations = new HashSet<Operation>();
 
 	public Permission() {
 		super();
-	}   
-	
+	}
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	public int getId() {
 		return this.id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	@Column(length=100)
-	public String getDesc() {
-		return this.desc;
+	public String getPdesc() {
+		return this.pdesc;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}   
-	
+	public void setPdesc(String pdesc) {
+		this.pdesc = pdesc;
+	}
+
 	@Column(length=100)
 	public String getName() {
 		return this.name;

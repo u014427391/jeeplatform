@@ -182,7 +182,7 @@ public class User {
 		this.rights = rights;
 	}
 
-	//修改cascade策略为级联策略
+	//修改cascade策略为级联关系
 	@ManyToMany(targetEntity = Role.class, cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinTable(name = "sys_user_role", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId") )
 	public Set<Role> getRoles() {
@@ -192,7 +192,6 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
 
 
 

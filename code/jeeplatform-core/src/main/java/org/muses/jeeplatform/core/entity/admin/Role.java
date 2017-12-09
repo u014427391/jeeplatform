@@ -65,6 +65,7 @@ public class Role implements Serializable{
 		this.role = role;
 	}
 
+	//修改cascade策略为级联关系
 	@OneToMany(targetEntity=Permission.class,cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	@JoinTable(name="sys_role_permission", joinColumns=@JoinColumn(name="roleId",referencedColumnName="roleId"), inverseJoinColumns=@JoinColumn(name="permissionId",referencedColumnName="id",unique=true))
 	public Set<Permission> getPermissions() {
@@ -73,5 +74,17 @@ public class Role implements Serializable{
 
 	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Role) {
+			Role role = (Role) obj;
+			return this.roleId==(role.getRoleId())
+					&& this.roleName.equals(role.getRoleName())
+					&& this.roleDesc.equals(role.getRoleDesc())
+					&& this.role.equals(role.getRole());
+		}
+		return super.equals(obj);
 	}
 }
