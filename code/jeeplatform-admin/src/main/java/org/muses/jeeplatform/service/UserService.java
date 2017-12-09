@@ -152,4 +152,12 @@ public class UserService {
 		return users;
 	}
 
+	/**
+	 * 保存用户信息
+	 * @param user
+	 */
+	public void saveU(User user){
+		userRepository.save(user);
+	}
+
 }

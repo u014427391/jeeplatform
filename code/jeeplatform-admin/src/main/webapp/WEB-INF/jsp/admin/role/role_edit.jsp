@@ -45,25 +45,21 @@
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
     <script type="text/javascript">
+
         function doDialogClose()
         {
             parentDialog.close();
         }
-        function doSave()
-        {
-            var menuId = $("#menuId").val();
-            var parentId = ${menu.parentId};
-            var menuName = $("#menuName").val();
-            var menuUrl = $("#menuUrl").val();
-            var menuType = ${menu.menuType};
-            var menuOrder = ${menu.menuOrder};
-            var menuStatus = ${menu.menuStatus};
-            var params = menuId + "," + parentId + "," + menuName + ","+
-                menuUrl + "," + menuType + "," + menuOrder + "," +menuStatus;
+
+        function doSave() {
+            var roleId = $("#roleId").val();
+            var roleName = $("#rolename").val();
+            var roleDesc = $("#roledesc").val();
+            var params = roleId + ","+roleName +","+roleDesc;
             $.ajax({
                 type: "POST",
-                url: 'menu/editM',
-                data: {KEYDATA:params,tm:new Date().getTime()},
+                url: 'role/editR.do',
+                data: {params:params,tm:new Date().getTime()},
                 dataType:'json',
                 cache: false,
                 success: function(data){
@@ -72,7 +68,7 @@
                         parent.location.reload();
                         doDialogClose();
                     }else{
-                        $("#klClassifyName").tips({
+                        $("#rolename").tips({
                             side : 1,
                             msg : "修改失败!",
                             bg : '#FF5080',
@@ -89,19 +85,19 @@
 <div id="forlogin">
     <table width="100%" border="0" align="center" cellpadding="4" cellspacing="4" bordercolor="#666666">
         <tr>
-            <td colspan="2" bgcolor="#eeeeee">编辑管理系统菜单</td>
+            <td colspan="2" bgcolor="#eeeeee">编辑角色</td>
         </tr>
         <tr>
-            <td width="150" align="right">菜单编号:</td>
-            <td><input type="text" id="menuId" disabled="disabled" value="${menu.menuId}" /></td>
+            <td width="150" align="right">角色编号:</td>
+            <td><input type="text" id="roleId" disabled="disabled" value="${role.roleId}" /></td>
         </tr>
         <tr>
-            <td width="150" align="right">菜单名称:</td>
-            <td><input type="text" id="menuName"value="${menu.menuName}" /></td>
+            <td width="150" align="right">角色名称:</td>
+            <td><input type="text" id="rolename" value="${role.roleName}"  /></td>
         </tr>
         <tr>
-            <td align="right">菜单地址:</td>
-            <td><input type="text" id="menuUrl" value="${menu.menuUrl}" /></td>
+            <td align="right">角色描述:</td>
+            <td><input type="text" id="roledesc" value="${role.roleDesc}"  /></td>
         </tr>
         <tr>
             <td colspan="2" align="left" style="padding-left:160px;">

@@ -8,7 +8,9 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.entity.admin.Menu;
+import org.muses.jeeplatform.core.entity.admin.Permission;
 import org.muses.jeeplatform.service.MenuService;
+import org.muses.jeeplatform.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -32,8 +34,8 @@ public class MenuController extends BaseController {
 
     @Autowired
     MenuService menuService;
-//    @Autowired
-//    MenuTreeService menuTreeService;
+    @Autowired
+    PermissionService permissionService;
 
      @RequestMapping(value = "/getMenus", produces = "application/json;charset=UTF-8")
     @ResponseBody
@@ -87,13 +89,6 @@ public class MenuController extends BaseController {
 
     }
 
-    @RequestMapping(value="")
-    @ResponseBody
-    public String queryM(){
-
-         return "";
-    }
-
     @RequestMapping("/list")
     public ModelAndView list(){
         ModelAndView mv = new ModelAndView();
@@ -127,6 +122,12 @@ public class MenuController extends BaseController {
         }
     }
 
+    /**
+     * 跳转到编辑菜单页面
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping(value="/goEditM",method = RequestMethod.GET)
     public String goEditM(HttpServletRequest request,Model model){
         String menuIdStr = request.getParameter("menuId");
@@ -137,7 +138,7 @@ public class MenuController extends BaseController {
     }
 
     /**
-     *
+     * 编辑菜单信息
      * @param response
      * @param request
      */
@@ -169,12 +170,74 @@ public class MenuController extends BaseController {
         m.setMenuIcon("&#xe610");
         m.setMenuStatus(menuStatus);
         menuService.editM(m);
-//        Map<String,String> map = new HashMap<String,String>();
-//        map.put("result","success");
+
         JSONObject obj = new JSONObject();
         obj.put("result","success");
         out.write(obj.toString());
         out.flush();
         out.close();
     }
+
+    /**
+     * 跳转到新增菜单页面
+     * @return
+     */
+    @RequestMapping(value="/goAddM",method=RequestMethod.GET)
+    public String goAddM(Model model){
+        List<Menu> sjMenus = menuService.findAllParentMenu();
+        model.addAttribute("sjMenus",sjMenus);
+        return "admin/menu/menu_add";
+    }
+
+    /**
+     * 保存菜单信息
+     * @param request
+     * @param response
+     */
+    @RequestMapping(value = "/addM", method = RequestMethod.POST)
+    @ResponseBody
+    public void addM(HttpServletRequest request, HttpServletResponse response){
+        String[] params = request.getParameter("params").split(",");
+        String parentId = params[0];
+        String menuName = params[1];
+        String menuUrl = params[2];
+        String menuOrder = params[3];
+
+        Menu menu = new Menu();
+        menu.setParentId(Integer.parseInt(parentId));
+        menu.setMenuName(menuName);
+        menu.setMenuIcon("&#xe610");
+        menu.setMenuUrl(menuUrl);
+        menu.setMenuType("1");
+        menu.setMenuOrder(menuOrder);
+        menu.setMenuStatus("1");
+        PrintWriter out = null;
+
+        response.setCharacterEncoding("utf-8");
+
+        JSONObject obj = new JSONObject();
+
+        try {
+            out = response.getWriter();
+            Permission p = new Permission();
+            p.setMenu(menu);
+            permissionService.doSave(p);
+
+            menuService.saveM(menu);
+
+            obj.put("result","success");
+            out.write(obj.toString());
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            obj.put("result","error");
+            out.write(obj.toString());
+            out.flush();
+            out.close();
+        }
+    }
+
+
+
 }

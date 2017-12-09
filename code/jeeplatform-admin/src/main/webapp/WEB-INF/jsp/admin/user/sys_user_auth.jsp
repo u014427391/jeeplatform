@@ -37,47 +37,51 @@
         .buttonStyle:hover{background:url(${basePath}plugins/zDialog/images/buticon.gif) no-repeat left -23px;}
 
     </style>
-    <script type="text/javascript" src="<%=basePath%>static/js/jquery-1.8.3.js"></script>
-    <!-- 引入JQuery提示库 start-->
-    <script type="text/javascript" src="${basePath}static/js/jquery.tips.js"></script>
-    <!-- 引入JQuery提示库 end-->
+    <!-- 引入JQuery库 start -->
+    <script type="text/javascript" src="${basePath}static/js/jquery-1.8.3.js"></script>
+    <!-- 引入JQuery库 end -->
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
     <script type="text/javascript">
-        function doDialogClose()
+
+        function dialogClose()
         {
             parentDialog.close();
         }
-        function doSave()
-        {
-            var menuId = $("#menuId").val();
-            var parentId = ${menu.parentId};
-            var menuName = $("#menuName").val();
-            var menuUrl = $("#menuUrl").val();
-            var menuType = ${menu.menuType};
-            var menuOrder = ${menu.menuOrder};
-            var menuStatus = ${menu.menuStatus};
-            var params = menuId + "," + parentId + "," + menuName + ","+
-                menuUrl + "," + menuType + "," + menuOrder + "," +menuStatus;
+
+        function doSave() {
+            /*var  nodes = $("input[name='checkbox'][checked]");
+             Jquery1.3之后的版本已经不支持如上用法，应该改成 $("input[name='checkbox']:checked")
+             不然会出现，你即使重新选择了一组checkbox，还是获取原来的已选checkbox的Value，不会获取新的已选checkbox的value
+             */
+            var tmpNode;
+            var ids = "";
+            var  nodes = $("input[name='checkbox']:checked");
+            for(var i=0; i<nodes.length; i++){
+                tmpNode = nodes[i];
+                if(i!=nodes.length-1){
+                    ids += tmpNode.id+",";
+                }else{
+                    ids += tmpNode.id;
+                }
+            }
+            var userId = ${userId};
+            var params = userId +";"+ids;
+            //alert(ids);
             $.ajax({
                 type: "POST",
-                url: 'menu/editM',
-                data: {KEYDATA:params,tm:new Date().getTime()},
+                url: 'user/auth',
+                data: {params:params,tm:new Date().getTime()},
                 dataType:'json',
                 cache: false,
                 success: function(data){
                     if("success" == data.result){
-                        alert('修改成功!');
+                        alert('分配角色成功!请重新登录!');
                         parent.location.reload();
                         doDialogClose();
                     }else{
-                        $("#klClassifyName").tips({
-                            side : 1,
-                            msg : "修改失败!",
-                            bg : '#FF5080',
-                            time : 15
-                        });
+                        alert("分配角色失败!");
                     }
                 }
             });
@@ -86,30 +90,29 @@
     </script>
 </head>
 <body >
-<div id="forlogin">
-    <table width="100%" border="0" align="center" cellpadding="4" cellspacing="4" bordercolor="#666666">
-        <tr>
-            <td colspan="2" bgcolor="#eeeeee">编辑管理系统菜单</td>
-        </tr>
-        <tr>
-            <td width="150" align="right">菜单编号:</td>
-            <td><input type="text" id="menuId" disabled="disabled" value="${menu.menuId}" /></td>
-        </tr>
-        <tr>
-            <td width="150" align="right">菜单名称:</td>
-            <td><input type="text" id="menuName"value="${menu.menuName}" /></td>
-        </tr>
-        <tr>
-            <td align="right">菜单地址:</td>
-            <td><input type="text" id="menuUrl" value="${menu.menuUrl}" /></td>
-        </tr>
-        <tr>
-            <td colspan="2" align="left" style="padding-left:160px;">
-                <input type="button" onClick="doSave()" value="保存" class="buttonStyle" />
-                <input onClick="doDialogClose()" class="buttonStyle" type="button" value="关闭" />
-            </td>
-        </tr>
-    </table>
+<div class="content_wrap">
+    <c:choose>
+        <c:when test="${not empty roles}">
+            <c:forEach items="${roles}" var="role" varStatus="vs">
+                <c:choose>
+                    <c:when test='${role.checked}'>
+                        <input type="checkbox" name="checkbox" checked="checked"  id="${role.roleId}" value="${role.roleId}" />
+                        ${role.roleName}
+                    </c:when>
+                    <c:otherwise>
+                        <input type="checkbox" name="checkbox" id="${role.roleId}" value="${role.roleId}" />
+                        ${role.roleName}
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            数据加载中...
+        </c:otherwise>
+    </c:choose>
 </div>
+&nbsp;&nbsp;
+<input type="button" onClick="doSave()" value="保存" class="buttonStyle" />
+<input onClick="dialogClose();" class="buttonStyle" type="button" value="关闭" />
 </body>
 </html>

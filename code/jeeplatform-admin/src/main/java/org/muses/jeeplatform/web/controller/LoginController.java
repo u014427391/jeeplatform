@@ -15,6 +15,7 @@ import org.muses.jeeplatform.core.entity.admin.Role;
 import org.muses.jeeplatform.core.entity.admin.User;
 import org.muses.jeeplatform.service.MenuService;
 import org.muses.jeeplatform.service.UserService;
+import org.muses.jeeplatform.utils.MenuTreeUtil;
 import org.muses.jeeplatform.utils.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,10 +64,8 @@ public class LoginController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/login",produces="text/html;charset=UTF-8")
-	public ModelAndView toLogin()throws ClassNotFoundException{
-		ModelAndView mv = this.getModelAndView();
-		mv.setViewName("admin/frame/login");
-		return mv;
+	public String toLogin()throws ClassNotFoundException{
+		return "admin/frame/login";
 	}
 	
 	/**
@@ -158,24 +157,33 @@ public class LoginController extends BaseController {
 			for(Permission p : permissions){
 				menuList.add(p.getMenu());
 			}
-			
-			List<Menu> menus = new ArrayList<Menu>();
-			
-			/**为一级菜单添加二级菜单**/
-			for(Menu m : menuList){
-				if(m.getMenuUrl().equals("#")){
-					List<Menu> subMenu = new ArrayList<Menu>();
-					//查询二级菜单
-					subMenu = menuService.findSubMenuById(m.getMenuId());
-					if(subMenu!=null&&subMenu.size()>0){
-						m.setSubMenu(subMenu);
-						menus.add(m);
-					}
-				}
-			}
-			JSONArray jsonMenus = JSONArray.fromObject(menus);
-			//System.out.println(jsonMenus.toString());
-			mv.addObject("menus",jsonMenus.toString());
+
+//			List<Menu> menus = new ArrayList<Menu>();
+//			/**为一级菜单添加二级菜单**/
+//			for(Menu m : menuList){
+//				System.out.println(m.getMenuName());
+//				if(m.getParentId() == 0){
+//					List<Menu> subMenu = new ArrayList<Menu>();
+//					//查询二级菜单
+//					subMenu = menuService.findSubMenuById(m.getMenuId());
+//					if(subMenu!=null&&subMenu.size()>0){
+//						m.setHasSubMenu(true);
+//						m.setSubMenu(subMenu);
+//						menus.add(m);
+//					}
+//				}
+//			}
+			MenuTreeUtil treeUtil = new MenuTreeUtil();
+			List<Menu> treemenus= treeUtil.menuList(menuList);
+
+			JSONArray jsonArray = JSONArray.fromObject(treemenus);
+			String json = jsonArray.toString();
+
+//			json = json.replaceAll("menuId","id").replaceAll("parentId","pId").
+//					replaceAll("menuName","name").replaceAll("hasSubMenu","checked");
+
+			mv.addObject("menus",json);
+
 		}else{
 			//会话失效，返回登录界面
 			mv.setViewName("admin/frame/login");

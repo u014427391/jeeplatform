@@ -45,42 +45,82 @@
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
     <script type="text/javascript">
-        function doDialogClose()
+        function dialogClose()
         {
             parentDialog.close();
         }
-        function doSave()
-        {
-            var menuId = $("#menuId").val();
-            var parentId = ${menu.parentId};
+        function doCheck(){
             var menuName = $("#menuName").val();
             var menuUrl = $("#menuUrl").val();
-            var menuType = ${menu.menuType};
-            var menuOrder = ${menu.menuOrder};
-            var menuStatus = ${menu.menuStatus};
-            var params = menuId + "," + parentId + "," + menuName + ","+
-                menuUrl + "," + menuType + "," + menuOrder + "," +menuStatus;
-            $.ajax({
-                type: "POST",
-                url: 'menu/editM',
-                data: {KEYDATA:params,tm:new Date().getTime()},
-                dataType:'json',
-                cache: false,
-                success: function(data){
-                    if("success" == data.result){
-                        alert('修改成功!');
-                        parent.location.reload();
-                        doDialogClose();
-                    }else{
-                        $("#klClassifyName").tips({
-                            side : 1,
-                            msg : "修改失败!",
-                            bg : '#FF5080',
-                            time : 15
-                        });
+            var menuOrder = $("#menuOrder").val();
+            if($("#sjMenu").get(0).value==""){
+                $("#sjMenu").tips({
+                    side : 1,
+                    msg : "请选择上级菜单!",
+                    bg : '#FF5080',
+                    time : 15
+                });
+                return false;
+            }
+            if(menuName == ""){
+                $("#menuName").tips({
+                    side : 1,
+                    msg : "请填写菜单名称!",
+                    bg : '#FF5080',
+                    time : 15
+                });
+                return false;
+            }
+            if(menuUrl == ""){
+                $("#menuUrl").tips({
+                    side : 1,
+                    msg : "请填写菜单地址!",
+                    bg : '#FF5080',
+                    time : 15
+                });
+                return false;
+            }
+            if(menuOrder == ""){
+                $("#menuOrder").tips({
+                    side : 1,
+                    msg : "请填写菜单序号!",
+                    bg : '#FF5080',
+                    time : 15
+                });
+                return false;
+            }
+            return true;
+        }
+        function doSave()
+        {
+            if(doCheck()){
+                var parentId = $("#sjMenu").get(0).value;
+                var menuName = $("#menuName").val();
+                var menuUrl = $("#menuUrl").val();
+                var menuOrder = $("#menuOrder").val();
+                var params = parentId + "," + menuName + "," + menuUrl + "," +menuOrder;
+                $.ajax({
+                    type: "POST",
+                    url: 'menu/addM.do',
+                    data: {params:params,tm:new Date().getTime()},
+                    dataType:'json',
+                    cache: false,
+                    success: function(data){
+                        if("success" == data.result){
+                            alert('保存成功!');
+                            parent.location.reload();
+                            dialogClose();
+                        }else{
+                            $("#klClassifyName").tips({
+                                side : 1,
+                                msg : "保存失败!",
+                                bg : '#FF5080',
+                                time : 15
+                            });
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
     </script>
@@ -89,24 +129,42 @@
 <div id="forlogin">
     <table width="100%" border="0" align="center" cellpadding="4" cellspacing="4" bordercolor="#666666">
         <tr>
-            <td colspan="2" bgcolor="#eeeeee">编辑管理系统菜单</td>
+            <td colspan="2" bgcolor="#eeeeee">新增管理系统菜单</td>
         </tr>
         <tr>
-            <td width="150" align="right">菜单编号:</td>
-            <td><input type="text" id="menuId" disabled="disabled" value="${menu.menuId}" /></td>
+            <td width="150" align="right">上级菜单:</td>
+            <td>
+                <select id="sjMenu">
+                    <option value="">请选择上级菜单</option>
+                    <c:choose>
+                        <c:when test="${not empty sjMenus}">
+                            <c:forEach items="${sjMenus}" var="m" varStatus="ms">
+                                <option value="${m.menuId}">${m.menuName}</option>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <option>数据加载中...</option>
+                        </c:otherwise>
+                    </c:choose>
+                </select>
+            </td>
         </tr>
         <tr>
             <td width="150" align="right">菜单名称:</td>
-            <td><input type="text" id="menuName"value="${menu.menuName}" /></td>
+            <td><input type="text" id="menuName" /></td>
         </tr>
         <tr>
             <td align="right">菜单地址:</td>
-            <td><input type="text" id="menuUrl" value="${menu.menuUrl}" /></td>
+            <td><input type="text" id="menuUrl" /></td>
+        </tr>
+        <tr>
+            <td align="right">菜单序号:</td>
+            <td><input type="text" id="menuOrder" /></td>
         </tr>
         <tr>
             <td colspan="2" align="left" style="padding-left:160px;">
                 <input type="button" onClick="doSave()" value="保存" class="buttonStyle" />
-                <input onClick="doDialogClose()" class="buttonStyle" type="button" value="关闭" />
+                <input onClick="dialogClose();" class="buttonStyle" type="button" value="关闭" />
             </td>
         </tr>
     </table>

@@ -40,21 +40,18 @@
                 num_display_entries : 6,
                 current_page : pageIndex,
                 num_edge_entries : 1,
-                link_to: "role/queryAll.do?pageIndex=__id__"  //分页的js中会自动把"__id__"替换为当前的数。0
+                link_to: "permission/queryAll.do?pageIndex=__id__"  //分页的js中会自动把"__id__"替换为当前的数。0
             });
 
             var html = "";
-            var data = ${roles};
+            var data = ${permissions};
             $.each(data,function(idx,obj){
-                console.log(obj.menuIcon);
-                var roleId = obj.roleId;
-                var name = obj.roleName;
-                var desc = obj.roleDesc;
-                html += "<tr><td>"+roleId+"</td>"+
+                var id = obj.id;
+                var name = obj.name;
+                var desc = obj.pdesc;
+                html += "<tr><td>"+id+"</td>"+
                     "<td>"+name+"</td>"+
                     "<td>"+desc+"</td>"+
-                    "<td><a href='javascript:openAuthDialog("+roleId+");' class='bounceIn'>授权</a></td>"+
-                    "<td><a href='javascript:openEditDialog("+roleId+");' class='bounceIn'>编辑</a></td>"+
                     "</tr>";
 
             });
@@ -80,32 +77,6 @@
             Dialog.close();
         }
 
-        function openAuthDialog(roleId){
-            var diag = new Dialog();
-            diag.Title = "授权角色";
-            diag.Width = 400;
-            diag.Height = 300;
-            diag.URL = "goAuthorise.do?roleId="+roleId;
-            diag.show();
-        }
-
-        function openEditDialog(roleId){
-            var diag = new Dialog();
-            diag.Title = "编辑角色";
-            diag.Width = 400;
-            diag.Height = 300;
-            diag.URL = "goEditR.do?roleId="+roleId;
-            diag.show();
-        }
-
-        function  openAddDialog() {
-            var diag = new Dialog();
-            diag.Title = "新增角色";
-            diag.Width = 400;
-            diag.Height = 300;
-            diag.URL = "goAddR.do";
-            diag.show();
-        }
 
     </script>
 </head>
@@ -116,21 +87,16 @@
         <div class="col-xs-12 col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form class="form-inline">
-                        <input type="button" class="form-control" value="新增角色" onclick="openAddDialog();" />
-                    </form>
                     <!-- demo  -->
                     <table class="table" id="mTable">
                         <thead>
                         <tr>
-                            <th>角色序号</th>
-                            <th>角色名称</th>
-                            <th>角色描述</th>
-                            <th>操作</th>
+                            <th>权限序号</th>
+                            <th>权限名称</th>
+                            <th>权限描述</th>
                         </tr>
                         </thead>
                         <tbody id="content">
-
                         </tbody>
                     </table>
                     <div id="Pagination" class="pagination"></div>

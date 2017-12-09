@@ -106,6 +106,15 @@
             diag.show();
         }
 
+        function toAddDialog(){
+            var diag = new Dialog();
+            diag.Title = "新增菜单信息";
+            diag.Width = 400;
+            diag.Height = 300;
+            diag.URL = "goAddM.do";
+            diag.show();
+		}
+
 	</script>
 </head>
 <body>
@@ -116,8 +125,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-inline">
-						<input type="text" class="form-control" id="id" placeholder="菜单id">
-						<input type="button" class="btn btn-default" value="search" onclick="find()"/>
+						<input type="button" class="btn btn-default" value="新增" onclick="toAddDialog();"/>
 					</form>
 					<!-- demo  -->
 					<table class="table" id="mTable">
