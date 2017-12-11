@@ -28,7 +28,7 @@ import java.util.*;
 
 /**
  * @description 登录操作的控制类，使用Shiro框架，做好了登录的权限安全认证，
- * getRemortIP()方法获取用户登录时的ip并保存到数据库
+ * getRemortIP()方法获取用户登录时的ip并保存到数据库，使用Redi是实现缓存
  * @author Nicky
  * @date 2017年3月15日
  */
