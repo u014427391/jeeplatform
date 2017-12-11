@@ -35,7 +35,7 @@ Github：https://github.com/Jasonsama<br><br>
 
 
 ## 系统设计
-### 管理系统(模块名称jeeplatform-admin)
+### 系统管理(模块名称jeeplatform-admin)
 管理系统登录页面，采用Shiro登录验证
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统登录页面.png)
 管理系统主页，获取用户具有的权限，显示菜单
@@ -46,6 +46,10 @@ Github：https://github.com/Jasonsama<br><br>
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/角色配置.png)
 使用JavaEmail插件实现邮件发送，记得需要开启SSl验证
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/发送邮件.png)
+
+### OA管理系统
+
+### CMS管理系统
 
 ### 单点登录系统(模块名称jeeplatform-sso)
 > 项目采用CAS登录登录实现，单点登录集群搭建可以参考博客：
@@ -58,19 +62,19 @@ Github：https://github.com/Jasonsama<br><br>
 
 ## 业务方案 ##
 ### 系统管理通用功能 ####
-* 用户管理: 系统用户
-* 角色管理: 按照企业系统职能进行角色分配，每个角色具有不同的系统操作权限
+* 用户管理: 系统用户	OK
+* 角色管理: 按照企业系统职能进行角色分配，每个角色具有不同的系统操作权限	OK
 * 权限管理: 权限管理细分到系统按钮权限，菜单权限，管理员可以对权限进行细分控制
 * 在线管理：管理在线用户，可以强制下线
-* 菜单管理：系统可以配置系统菜单，并分配不同的权限
+* 菜单管理：系统可以配置系统菜单，并分配不同的权限	OK
 * 报表统计：数据报表、用户分析
 * 系统监控：数据监控、系统日志(用户登录记录)
 * 通用接口：SMS(短信)、系统邮件、Excel表导出导入操作...
-### OA系统通用功能 ###
+### OA系统通用功能(待开发) ###
 * 考勤管理：请假流程
 * 人事管理：机构管理、部门管理、员工管理
 
-### CMS系统通用功能 ###
+### CMS系统通用功能(待开发) ###
 * 信息管理：文章管理、文章审核
 ...
 
