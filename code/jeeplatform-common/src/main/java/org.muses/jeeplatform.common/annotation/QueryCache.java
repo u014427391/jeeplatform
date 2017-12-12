@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.CacheNamespace;
 import java.lang.annotation.*;
 
 /**
- * 申明接口在JVM使用
+ * 元注解申明查询缓存的接口，设置Retention在JVM里
  */
 @Documented
 @Target(ElementType.METHOD)
