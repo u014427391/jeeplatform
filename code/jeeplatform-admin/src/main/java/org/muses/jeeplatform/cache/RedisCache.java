@@ -1,12 +1,16 @@
 package org.muses.jeeplatform.cache;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import javax.annotation.Resource;
+@Component("redisCache")
 public class RedisCache {
 	
-	@Autowired
+	//@Resource
 	private JedisPool jedisPool;
 	
 	private JedisPool getJedisPool(){
