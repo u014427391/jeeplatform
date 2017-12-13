@@ -2,9 +2,9 @@ package org.muses.jeeplatform.service;
 
 import java.util.List;
 
+import org.muses.jeeplatform.annotation.RedisCache;
+import org.muses.jeeplatform.annotation.RedisCacheKey;
 import org.muses.jeeplatform.common.RedisCacheNamespace;
-import org.muses.jeeplatform.common.annotation.RedisCache;
-import org.muses.jeeplatform.common.annotation.RedisCacheKey;
 import org.muses.jeeplatform.core.dao.repository.admin.MenuRepository;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
