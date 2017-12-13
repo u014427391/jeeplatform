@@ -1,6 +1,7 @@
 package org.muses.jeeplatform.core.entity.admin;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name="sys_user")
-public class User {
+public class User implements Serializable{
 
 	/** 用户Id**/
 	private int id;
