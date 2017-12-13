@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 @Component("redisCache")
 public class RedisCache {
 	
-	//@Resource
+	@Autowired
 	private JedisPool jedisPool;
 	
 	private JedisPool getJedisPool(){
