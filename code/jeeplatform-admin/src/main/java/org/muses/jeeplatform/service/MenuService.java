@@ -2,6 +2,9 @@ package org.muses.jeeplatform.service;
 
 import java.util.List;
 
+import org.muses.jeeplatform.common.RedisCacheNamespace;
+import org.muses.jeeplatform.common.annotation.RedisCache;
+import org.muses.jeeplatform.common.annotation.RedisCacheKey;
 import org.muses.jeeplatform.core.dao.repository.admin.MenuRepository;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,7 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
+	//@RedisCache(nameSpace = RedisCacheNamespace.SSO_USER)
 	public Page<Menu> findAll(int pageNo, int pageSize, Sort.Direction dir, String str){
 		PageRequest request = buildPageRequest(pageNo, pageSize, dir, str);
 		Page<Menu> menus = menuRepository.findAll(request);
@@ -70,7 +74,8 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
-	public Menu findMenuById(int id){
+	@RedisCache(nameSpace = RedisCacheNamespace.SSO_USER)
+	public Menu findMenuById(@RedisCacheKey int id){
 		return menuRepository.findMenuByMenuId(id);
 	}
 
