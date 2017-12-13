@@ -42,7 +42,7 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
-	//@RedisCache(nameSpace = RedisCacheNamespace.SSO_USER)
+//	@RedisCache(nameSpace = RedisCacheNamespace.SYS_MENU)
 	public Page<Menu> findAll(int pageNo, int pageSize, Sort.Direction dir, String str){
 		PageRequest request = buildPageRequest(pageNo, pageSize, dir, str);
 		Page<Menu> menus = menuRepository.findAll(request);
@@ -54,6 +54,7 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
+	@RedisCache(nameSpace = RedisCacheNamespace.SYS_MENU)
 	public List<Menu> findAllParentMenu(){
 		return menuRepository.findAllParentMenu();
 	}
@@ -64,6 +65,7 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
+	@RedisCache(nameSpace = RedisCacheNamespace.SYS_MENU)
 	public List<Menu> findSubMenuById(int id){
 		return menuRepository.findSubMenuByParentId(id);
 	}
@@ -74,7 +76,7 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
-	@RedisCache(nameSpace = RedisCacheNamespace.SSO_USER)
+	@RedisCache(nameSpace = RedisCacheNamespace.SYS_MENU)
 	public Menu findMenuById(@RedisCacheKey int id){
 		return menuRepository.findMenuByMenuId(id);
 	}
