@@ -117,15 +117,22 @@ public class RedisAspect {
 	public Object around(ProceedingJoinPoint joinPoint){
 
 		//前置：从Redis里获取缓存
-		String appId = null;
-
 		//先获取目标方法参数
+		String applId = null;
 		Object[] args = joinPoint.getArgs();
-		if(args!=null && args.length>0){
-			appId=String.valueOf(args[0]);
+		if (args != null && args.length > 0) {
+			applId = String.valueOf(args[0]);
 		}
-		//redis中ke的key
-		String redisKey = appId;
+
+		//获取目标方法所在类
+		String target = joinPoint.getTarget().toString();
+		String className = target.split("@")[0];
+
+		//获取目标方法的方法名称
+		String methodName = joinPoint.getSignature().getName();
+
+		//redis中key格式：    applId:方法名称
+		String redisKey = applId + ":" + className + "." + methodName;
 
 		Object obj = redisCache.getDataFromRedis(redisKey);
 
