@@ -1,4 +1,4 @@
-package org.muses.jeeplatform.common.annotation;
+package org.muses.jeeplatform.annotation;
 
 import org.muses.jeeplatform.common.RedisCacheNamespace;
 
