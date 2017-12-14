@@ -1,5 +1,8 @@
 package org.muses.jeeplatform.service;
 
+import org.muses.jeeplatform.annotation.RedisCache;
+import org.muses.jeeplatform.annotation.RedisCacheKey;
+import org.muses.jeeplatform.common.RedisCacheNamespace;
 import org.muses.jeeplatform.core.dao.repository.admin.UserRepository;
 import org.muses.jeeplatform.core.entity.admin.Operation;
 import org.muses.jeeplatform.core.entity.admin.Permission;
@@ -78,6 +81,7 @@ public class UserService {
 	 * @return
 	 */
 	@Transactional(readOnly=true)
+	//@RedisCache(nameSpace = RedisCacheNamespace.SYS_USER)
 	public User findByUsername(String username){
 		return userRepository.findByUsername(username);
 	}
@@ -89,6 +93,8 @@ public class UserService {
 	 * @return
 	 */
 	@Transactional(readOnly=true)
+	//@RedisCache(nameSpace = RedisCacheNamespace.SYS_USER)
+	@RedisCache
 	public User doLoginCheck(String username,String password){
 		return userRepository.findByUsernameAndPassword(username,password);
 	}
@@ -99,6 +105,7 @@ public class UserService {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
+	//@RedisCache(nameSpace = RedisCacheNamespace.SYS_USER)
 	public User findByUId(int id){
 		return userRepository.findById(id);
 	}
@@ -117,7 +124,7 @@ public class UserService {
 	}
 
 	/**
-	 * 获取所有的菜单信息并分页显示
+	 * 获取所有的用户信息并分页显示
 	 * @param pageNo
 	 * 			当前页面数
 	 * @param pageSize

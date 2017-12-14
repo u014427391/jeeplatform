@@ -1,6 +1,8 @@
 package org.muses.jeeplatform.service;
 
 
+import org.muses.jeeplatform.annotation.RedisCache;
+import org.muses.jeeplatform.common.RedisCacheNamespace;
 import org.muses.jeeplatform.core.dao.repository.admin.PermissionRepository;
 import org.muses.jeeplatform.core.entity.admin.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ public class PermissionService {
         permissionRepository.save(permission);
     }
 
+    @RedisCache
     public Set<Permission> findAllP(){
         List<Permission> list= permissionRepository.findAll();
         Set<Permission> set = new HashSet<Permission>() ;
