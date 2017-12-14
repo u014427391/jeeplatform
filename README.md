@@ -7,17 +7,24 @@ JeePlatform项目是一款以Activiti为工作流引擎，以Spring Framework为
 ### 系统管理(模块名称jeeplatform-admin)
 管理系统登录页面，采用Shiro登录验证
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统登录页面.png)
+
 管理系统主页前端，可以适配移动端页面
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/适配移动端.png)
+
 管理系统主页采用开源前端模板，具有换肤功能
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/系统主页墨绿主题.png)
-![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/系统主页清新主题.png.png)
+
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/系统主页清新主题.png)
+
 管理系统主页，获取用户具有的权限，显示菜单
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统主页.png)
+
 角色进行授权，只有超级管理员才具有权限
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/角色授权.png)
+
 角色进行配置，可以学习一下RBAC(基于角色的权限控制)
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/角色配置.png)
+
 使用JavaEmail插件实现邮件发送，记得需要开启SSl验证
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/发送邮件.png)
 
