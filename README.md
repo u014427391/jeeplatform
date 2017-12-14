@@ -3,41 +3,15 @@
 
 JeePlatform项目是一款以Activiti为工作流引擎，以Spring Framework为核心框架，集ORM框架Mybatis，Web层框架SpringMVC和多种开源组件框架而成的一款通用基础平台，基于本平台可以实现快速开发，实现企业信息管理的高效、高性能开发。系统追求安全、性能方面的有效实现。
 
-## 开发团队(按加入顺序) ##
-
-Tornado<br>
-Blog：http://blog.caiyuyu.net<br>
-Github：https://github.com/yinyizhixian<br><br>
-
-Wiatingpub<br>
-Blog：http://www.jianshu.com/u/6c0bb349990c<br>
-Github：https://github.com/wiatingpub<br><br>
-
-Joryun<br>
-Blog：http://www.jianshu.com/u/85656cc35708<br>
-github：https://github.com/Joryun<br><br>
-
-Serious<br>
-Blog：http://my.csdn.net/serious_czt<br>
-Github：https://github.com/CHEN0409<br><br>
-
-Simba<br>
-Blog：http://my.csdn.net/io277800<br>
-Github：https://github.com/Simba9980<br><br>
-
-Nicky<br>
-Blog：http://blog.ittrading.cn/<br>
-Github：https://github.com/u014427391<br><br>
-
-Jasonsama<br>
-Blog：https://jasonsama.github.io/<br>
-Github：https://github.com/Jasonsama<br><br>
-
-
 ## 系统设计
 ### 系统管理(模块名称jeeplatform-admin)
 管理系统登录页面，采用Shiro登录验证
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统登录页面.png)
+管理系统主页前端，可以适配移动端页面
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/适配移动端.png)
+管理系统主页采用开源前端模板，具有换肤功能
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/系统主页墨绿主题.png)
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/系统主页清新主题.png.png)
 管理系统主页，获取用户具有的权限，显示菜单
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统主页.png)
 角色进行授权，只有超级管理员才具有权限
@@ -47,11 +21,12 @@ Github：https://github.com/Jasonsama<br><br>
 使用JavaEmail插件实现邮件发送，记得需要开启SSl验证
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/发送邮件.png)
 
-### OA管理系统
+### OA管理系统(待开发)
 
-### CMS管理系统
+### CMS管理系统(待开发)
 
-### 单点登录系统(模块名称jeeplatform-sso)
+## 系统升级
+### 单点登录基础(模块名称jeeplatform-sso)(开发中)
 > 项目采用CAS登录登录实现，单点登录集群搭建可以参考博客：
 > http://blog.csdn.net/u014427391/article/details/78653482
 > 项目单点登录：使用nginx作为负载均衡，使用redis存储tomcat session，来实现集群中tomcat session的共享，使用redis作为cas ticket的仓库，来实现集群中cas ticket的一致性。
@@ -59,6 +34,106 @@ Github：https://github.com/Jasonsama<br><br>
 单点登录集群如图
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/单点登录集群.png)
 
+### SpringBoot集成Redis缓存处理(Spring AOP实现)
+先从Redis里获取缓存,查询不到，就查询MySQL数据库，然后再保存到Redis缓存里，下次查询时直接调用Redis缓存
+
+```
+package org.muses.jeeplatform.cache;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+/**
+ * AOP实现Redis缓存处理
+ */
+@Component
+@Aspect
+public class RedisAspect {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(RedisAspect.class);
+
+	@Autowired
+    @Qualifier("redisCache")
+	private RedisCache redisCache;
+
+	/**
+	 * 拦截所有元注解RedisCache注解的方法
+	 */
+	@Pointcut("@annotation(org.muses.jeeplatform.annotation.RedisCache)")
+	public void pointcutMethod(){
+
+	}
+
+	/**
+	 * 环绕处理，先从Redis里获取缓存,查询不到，就查询MySQL数据库，
+	 * 然后再保存到Redis缓存里
+	 * @param joinPoint
+	 * @return
+	 */
+	@Around("pointcutMethod()")
+	public Object around(ProceedingJoinPoint joinPoint){
+		//前置：从Redis里获取缓存
+		//先获取目标方法参数
+		long startTime = System.currentTimeMillis();
+		String applId = null;
+		Object[] args = joinPoint.getArgs();
+		if (args != null && args.length > 0) {
+			applId = String.valueOf(args[0]);
+		}
+
+		//获取目标方法所在类
+		String target = joinPoint.getTarget().toString();
+		String className = target.split("@")[0];
+
+		//获取目标方法的方法名称
+		String methodName = joinPoint.getSignature().getName();
+
+		//redis中key格式：    applId:方法名称
+		String redisKey = applId + ":" + className + "." + methodName;
+
+		Object obj = redisCache.getDataFromRedis(redisKey);
+
+		if(obj!=null){
+			LOGGER.info("**********从Redis中查到了数据**********");
+			LOGGER.info("Redis的KEY值:"+redisKey);
+			LOGGER.info("REDIS的VALUE值:"+obj.toString());
+			return obj;
+		}
+		long endTime = System.currentTimeMillis();
+		LOGGER.info("Redis缓存AOP处理所用时间:"+(endTime-startTime));
+		LOGGER.info("**********没有从Redis查到数据**********");
+		try{
+			obj = joinPoint.proceed();
+		}catch(Throwable e){
+			e.printStackTrace();
+		}
+		LOGGER.info("**********开始从MySQL查询数据**********");
+		//后置：将数据库查到的数据保存到Redis
+		String code = redisCache.saveDataToRedis(redisKey,obj);
+		if(code.equals("OK")){
+			LOGGER.info("**********数据成功保存到Redis缓存!!!**********");
+			LOGGER.info("Redis的KEY值:"+redisKey);
+			LOGGER.info("REDIS的VALUE值:"+obj.toString());
+		}
+		return obj;
+	}
+
+
+}
+
+```
+![这里写图片描述](http://img.blog.csdn.net/20171214104250995?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDQyNzM5MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+可以看到Redis里保存到了缓存
+
+![这里写图片描述](http://img.blog.csdn.net/20171214104303308?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDQyNzM5MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
 ## 业务方案 ##
 ### 系统管理通用功能 ####
