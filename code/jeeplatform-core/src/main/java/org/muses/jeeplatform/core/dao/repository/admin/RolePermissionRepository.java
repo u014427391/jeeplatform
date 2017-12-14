@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface RolePermissionRepository extends JpaRepository<RolePermission,String> {
 
-    @Query("from RolePermission where roleId=:id")
+    @Query(value = "select rp from RolePermission rp where rp.roleId=:id")
     public List<RolePermission> findByRoleId(@Param("id") int id);
 
 }
