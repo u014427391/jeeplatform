@@ -23,7 +23,7 @@ public class RoleService {
      * @param ids
      * @return
      */
-    @RedisCache
+    //@RedisCache
     public List<Role> findAll(List<Integer> ids){
         return roleRepository.findAll(ids);
     }

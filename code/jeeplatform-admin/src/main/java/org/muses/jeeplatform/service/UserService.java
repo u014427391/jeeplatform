@@ -33,10 +33,9 @@ public class UserService {
 	
 	/**
 	 * 存储登录时的ip
-	 * @param map
 	 */
-	public void saveIP(Map<String, String> map) {
-		//待开发...
+	public void saveIP(String loginIp,int id) {
+		int code = userRepository.updateLoginIpById(loginIp,id);
 	}
 	
 	

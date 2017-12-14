@@ -24,7 +24,7 @@ public class MenuTreeService {
      * @return
      */
     @Transactional
-    @RedisCache
+    //@RedisCache
     public List<Menu> findAll(){
         return menuTreeRepository.findAll();
     }

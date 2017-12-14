@@ -54,7 +54,7 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
-	@RedisCache
+	//@RedisCache
 	public List<Menu> findAllParentMenu(){
 		return menuRepository.findAllParentMenu();
 	}
@@ -65,7 +65,7 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
-	@RedisCache
+	//@RedisCache
 	public List<Menu> findSubMenuById(int id){
 		return menuRepository.findSubMenuByParentId(id);
 	}
@@ -76,7 +76,7 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
-	@RedisCache
+	//@RedisCache
 	public Menu findMenuById(@RedisCacheKey int id){
 		return menuRepository.findMenuByMenuId(id);
 	}

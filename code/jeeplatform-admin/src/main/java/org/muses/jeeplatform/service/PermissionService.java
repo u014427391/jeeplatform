@@ -29,7 +29,7 @@ public class PermissionService {
         permissionRepository.save(permission);
     }
 
-    @RedisCache
+    //@RedisCache
     public Set<Permission> findAllP(){
         List<Permission> list= permissionRepository.findAll();
         Set<Permission> set = new HashSet<Permission>() ;
