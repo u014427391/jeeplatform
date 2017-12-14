@@ -40,7 +40,7 @@ public class RedisCache {
 	 * 保存数据到Redis
 	 * @param redisKey
 	 */
-	public void saveDataToRedis(String redisKey,Object obj){
+	public String saveDataToRedis(String redisKey,Object obj){
 		
 		byte[] bytes = SerializeUtil.serialize(obj);
 		
@@ -48,9 +48,7 @@ public class RedisCache {
 		
 		String code = jedis.set(redisKey.getBytes(), bytes);
 		
-		if(code.equals("OK")){
-			System.out.println("成功保存到数据库!");
-		}
+		return code;
 	}
 	
 
