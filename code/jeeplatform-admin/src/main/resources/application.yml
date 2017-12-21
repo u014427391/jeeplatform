@@ -5,7 +5,7 @@ spring:
     shop:
       url: jdbc:mysql://127.0.0.1:3306/jeeplatform?autoReconnect=true&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false
       username: root
-      password: u014427391
+      password: root
 
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
