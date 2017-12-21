@@ -5,7 +5,7 @@ spring:
     shop:
       url: jdbc:mysql://127.0.0.1:3306/jeeplatform?autoReconnect=true&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false
       username: root
-      password: root
+      password: u014427391
 
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
@@ -47,12 +47,21 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+  #添加Thymeleaf配置
+#  thymeleaf:
+#    cache: false
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    mode: HTML5
+#    encoding: UTF-8
+#    content-type: text/html
+
   #Jedis配置
   jedis :
     pool :
       host : 127.0.0.1
       port : 6379
-      password : password
+      password : redispassword
       timeout : 0
       config :
         maxTotal : 100
