@@ -59,4 +59,14 @@ public class BaseConfig {
      * Mybatis 事务管理器
      */
     public static final String MYBATIS_TRANSACTION_MANAGER = "shopMybatisTransactionManager";
+
+    /**
+     * Jedis连接池
+     */
+    public static final String JEDIS_POOL = "jedisPool";
+
+    /**
+     * Jedis连接池配置
+     */
+    public static final String JEDIS_POOL_CONFIG = "jedisPoolConfig";
 }
