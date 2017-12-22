@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Insert title here</title>
     <!-- bootstrap样式-->
     <link type="text/css" rel="stylesheet"
@@ -18,11 +16,14 @@
     <script type="text/javascript" th:src="@{/plugins/zDialog/zDialog.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/zDialog/zDrag.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/zDialog/zProgress.js}"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var pageIndex = Number([[${pageIndex}]]);
 
-        var pageIndex = Number(${pageIndex});
+        var totalCount = Number([[${totalCount}]]);
 
-        var totalCount = Number(${totalCount});
+        /*]]>*/
+
         /*<![CDATA[*/
         $(document).ready(function () {
             //加入分页的绑定
@@ -39,8 +40,9 @@
 
             var html = "";
             /*<![CDATA[*/
-            var data = /*[[${menus}]]*/ 'Sebastian';
+            var data = [[${menus}]];
             /*]]>*/
+            /*<![CDATA[*/
             $.each(data,function(idx,obj){
                 console.log(obj.menuIcon);
                 var menuId = obj.menuId;
@@ -69,6 +71,7 @@
                     "</tr>";
 
             });
+            /*]]>*/
             $("#content").append(html);
 
             getSrceenWH();

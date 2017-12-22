@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>_</title>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Insert title here</title>
     <style>
         body { background: #ffffff; color: #444;font-size:12px; }
@@ -27,8 +27,8 @@
         hr { clear:both; margin:7px 0; +margin: 0;
             border:0 none; font-size: 1px; line-height:1px; color: #069; background-color:#069; height: 1px; }
         .infobar { background:#fff9e3; border:1px solid #fadc80; color:#743e04; }
-        .buttonStyle{width:64px;height:22px;line-height:22px;color:#369;text-align:center;background:url(/plugins/zDialog/images/buticon.gif) no-repeat left top;border:0;font-size:12px;}
-        .buttonStyle:hover{background:url(/plugins/zDialog/images/buticon.gif) no-repeat left -23px;}
+        .buttonStyle{width:64px;height:22px;line-height:22px;color:#369;text-align:center;background:url(//plugins/zDialog/images/buticon.gif) no-repeat left top;border:0;font-size:12px;}
+        .buttonStyle:hover{background:url(//plugins/zDialog/images/buticon.gif) no-repeat left -23px;}
 
     </style>
     <script type="text/javascript" th:src="@{/static/js/jquery-1.8.3.js}"></script>
@@ -38,7 +38,7 @@
     <script type="text/javascript" th:src="@{/plugins/zDialog/zDialog.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/zDialog/zDrag.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/zDialog/zProgress.js}"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" th:inline="javascript">
         function doDialogClose()
         {
             parentDialog.close();
@@ -47,14 +47,14 @@
         {
             var menuId = $("#menuId").val();
             /*<![CDATA[*/
-            var parentId = /*[[${menu.parentId}]]*/ 'Sebastian';
+            var parentId = [[${menu.parentId}]];
             /*]]>*/
             var menuName = $("#menuName").val();
             var menuUrl = $("#menuUrl").val();
             /*<![CDATA[*/
-            var menuType = /*[[${menu.menuType}]]*/ 'Sebastian';
-            var menuOrder = /*[[${menu.menuOrder}]]*/ 'Sebastian';
-            var menuStatus = /*[[${menu.menuStatus}]]*/ 'Sebastian';
+            var menuType = [[${menu.menuType}]];
+            var menuOrder = [[${menu.menuOrder}]];
+            var menuStatus = [[${menu.menuStatus}]];
             /*]]>*/
             var params = menuId + "," + parentId + "," + menuName + ","+
                 menuUrl + "," + menuType + "," + menuOrder + "," +menuStatus;
