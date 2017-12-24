@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:fragment="header">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -19,14 +19,16 @@
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
         var pageIndex = Number([[${pageIndex}]]);
-
-        var totalCount = Number([[${totalCount}]]);
-
         /*]]>*/
 
         /*<![CDATA[*/
+        var totalCount = Number([[${totalCount}]]);
+        /*]]>*/
+
+
         $(document).ready(function () {
             //加入分页的绑定
+            /*<![CDATA[*/
             $("#Pagination").pagination(totalCount, {
                 callback : pageselectCallback,
                 prev_text : '< 上一页',
@@ -37,13 +39,14 @@
                 num_edge_entries : 1,
                 link_to: "menu/getMenus?pageIndex=__id__"  //分页的js中会自动把"__id__"替换为当前的数。0
             });
-
+            /*]]>*/
             var html = "";
             /*<![CDATA[*/
             var data = [[${menus}]];
             /*]]>*/
-            /*<![CDATA[*/
+
             $.each(data,function(idx,obj){
+                /*<![CDATA[*/
                 console.log(obj.menuIcon);
                 var menuId = obj.menuId;
                 var menuName = obj.menuName;
@@ -69,12 +72,10 @@
                     "<td>"+menuStatus+"</td>"+
                     "<td><a href='javascript:openEditDialog("+menuId+");' class='bounceIn'>编辑</a>"+
                     "</tr>";
-
+                /*]]>*/
             });
-            /*]]>*/
-            $("#content").append(html);
 
-            getSrceenWH();
+            $("#content").append(html);
 
             //显示弹框
             $('.bounceIn').click(function(){
@@ -85,7 +86,7 @@
             });
 
         });
-        /*]]>*/
+
         //这个事件是在翻页时候用的
         function pageselectCallback(index, jq) {
 
@@ -117,7 +118,6 @@
     </script>
 </head>
 <body>
-<br>
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 col-md-12">
@@ -150,6 +150,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

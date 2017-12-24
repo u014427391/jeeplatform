@@ -16,14 +16,16 @@
     <script type="text/javascript" th:src="@{/plugins/zDialog/zDialog.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/zDialog/zDrag.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/zDialog/zProgress.js}"></script>
-    <script type="text/javascript">
-
-        var pageIndex = Number(${pageIndex});
-
-        var totalCount = Number(${totalCount});
-
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var pageIndex = Number([[${pageIndex}]]);
+        /*]]>*/
+        /*<![CDATA[*/
+        var totalCount = Number([[${totalCount}]]);
+        /*]]>*/
         $(document).ready(function () {
             //加入分页的绑定
+            /*<![CDATA[*/
             $("#Pagination").pagination(totalCount, {
                 callback : pageselectCallback,
                 prev_text : '< 上一页',
@@ -34,12 +36,13 @@
                 num_edge_entries : 1,
                 link_to: "permission/queryAll.do?pageIndex=__id__"  //分页的js中会自动把"__id__"替换为当前的数。0
             });
-
+            /*]]>*/
             var html = "";
             /*<![CDATA[*/
-            var data = /*[[${permissions}]]*/ 'Sebastian';
+            var data = [[${permissions}]];
             /*]]>*/
             $.each(data,function(idx,obj){
+                /*<![CDATA[*/
                 var id = obj.id;
                 var name = obj.name;
                 var desc = obj.pdesc;
@@ -47,7 +50,7 @@
                     "<td>"+name+"</td>"+
                     "<td>"+desc+"</td>"+
                     "</tr>";
-
+                /*]]>*/
             });
             $("#content").append(html);
 
@@ -75,7 +78,6 @@
     </script>
 </head>
 <body>
-<br>
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 col-md-12">

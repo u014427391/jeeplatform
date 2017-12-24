@@ -95,7 +95,7 @@ public class LoginController extends BaseController {
 			}else{
 				String username = logindata[0];
 				String password = logindata[1];
-				if(Tools.isNotEmpty(codeSession) && codeSession.equalsIgnoreCase(code)){
+				if(Tools.isNotEmpty(codeSession)&&code.equalsIgnoreCase(codeSession)){
 					//Shiro框架SHA加密
 					String passwordsha = new SimpleHash("SHA-1",username,password).toString();
 					System.out.println(passwordsha);
@@ -139,7 +139,7 @@ public class LoginController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/admin/index")
+	@RequestMapping(value="/index")
 	public ModelAndView toMain() throws AuthenticationException{
 		ModelAndView mv = this.getModelAndView();
 		/**获取Shiro管理的Session**/
@@ -192,6 +192,11 @@ public class LoginController extends BaseController {
 		}
 		mv.setViewName("admin/frame/index");
 		return mv;
+	}
+
+	@RequestMapping(value = "/tip")
+	public String sysTip(){
+		return "admin/common/sys_tip";
 	}
 	
 	/**

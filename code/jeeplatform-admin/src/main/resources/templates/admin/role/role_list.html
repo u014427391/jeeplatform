@@ -24,6 +24,7 @@
 
         $(document).ready(function () {
             //加入分页的绑定
+            /*<![CDATA[*/
             $("#Pagination").pagination(totalCount, {
                 callback : pageselectCallback,
                 prev_text : '< 上一页',
@@ -34,10 +35,10 @@
                 num_edge_entries : 1,
                 link_to: "role/queryAll.do?pageIndex=__id__"  //分页的js中会自动把"__id__"替换为当前的数。0
             });
-
+            /*]]>*/
             var html = "";
             /*<![CDATA[*/
-            var data = /*[[${roles}]]*/ 'Sebastian';
+            var data = [[${roles}]];
             /*]]>*/
             $.each(data,function(idx,obj){
                 console.log(obj.menuIcon);
@@ -104,7 +105,6 @@
     </script>
 </head>
 <body>
-<br>
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 col-md-12">
