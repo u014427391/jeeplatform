@@ -210,9 +210,13 @@ public class RedisAspect {
 
 [基于RBAC模型的权限系统设计(Github开源项目)](http://blog.csdn.net/u014427391/article/details/78889378)
 
+[ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
+
 [基于RBAC模型的权限系统设计(Github开源项目)](http://blog.csdn.net/u014427391/article/details/78881316)
 
 [基于权限安全框架Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
+
+[SpringBoot集成Redis实现缓存处理(Spring AOP技术)](http://blog.csdn.net/u014427391/article/details/78799623)
 
 [Spring Data Jpa+SpringMVC+Jquery.pagination.js实现分页](http://blog.csdn.net/u014427391/article/details/77434664)
 
