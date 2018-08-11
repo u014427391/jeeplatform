@@ -211,9 +211,11 @@ public class RedisAspect {
 
 [基于RBAC模型的权限系统设计(Github开源项目)](http://blog.csdn.net/u014427391/article/details/78889378)
 
+[SpringMVC+ZTree实现树形菜单权限配置](https://blog.csdn.net/u014427391/article/details/78889378)
+
 [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
 
-[基于RBAC模型的权限系统设计(Github开源项目)](http://blog.csdn.net/u014427391/article/details/78881316)
+[Github开源项目(企业信息化基础平台)](https://blog.csdn.net/u014427391/article/details/78867439)
 
 [基于权限安全框架Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
 
