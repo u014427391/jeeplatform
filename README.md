@@ -213,6 +213,8 @@ public class RedisAspect {
 
 [SpringMVC+ZTree实现树形菜单权限配置](https://blog.csdn.net/u014427391/article/details/78889378)
 
+[Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
+
 [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
 
 [Github开源项目(企业信息化基础平台)](https://blog.csdn.net/u014427391/article/details/78867439)
