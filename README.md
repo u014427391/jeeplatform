@@ -209,11 +209,12 @@ public class RedisAspect {
 ## 项目技术博客介绍 ##
 为了帮助学习者更好地理解代码，下面给出自己写的一些博客链接
 
+### Java框架
 [基于RBAC模型的权限系统设计(Github开源项目)](http://blog.csdn.net/u014427391/article/details/78889378)
 
-[SpringMVC+ZTree实现树形菜单权限配置](https://blog.csdn.net/u014427391/article/details/78889378)
+[Spring Data Jpa+SpringMVC+Jquery.pagination.js实现分页](http://blog.csdn.net/u014427391/article/details/77434664)
 
-[Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
+[SpringMVC+ZTree实现树形菜单权限配置](https://blog.csdn.net/u014427391/article/details/78889378)
 
 [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
 
@@ -221,10 +222,16 @@ public class RedisAspect {
 
 [基于权限安全框架Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
 
+### 缓存
+[Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
+
 [SpringBoot集成Redis实现缓存处理(Spring AOP技术)](http://blog.csdn.net/u014427391/article/details/78799623)
 
-[Spring Data Jpa+SpringMVC+Jquery.pagination.js实现分页](http://blog.csdn.net/u014427391/article/details/77434664)
 
+### Oracle
+[Oracle笔记之锁表和解锁](https://blog.csdn.net/u014427391/article/details/83046148)
+
+[Oracle笔记之修改表字段类型](https://blog.csdn.net/u014427391/article/details/83046006)
 
 
 
