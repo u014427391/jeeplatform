@@ -228,7 +228,9 @@ public class RedisAspect {
 [SpringBoot集成Redis实现缓存处理(Spring AOP技术)](http://blog.csdn.net/u014427391/article/details/78799623)
 
 
-### Oracle
+### Oracle知识
+[Oracle知识整理笔录](https://blog.csdn.net/u014427391/article/details/82317376)
+
 [Oracle笔记之锁表和解锁](https://blog.csdn.net/u014427391/article/details/83046148)
 
 [Oracle笔记之修改表字段类型](https://blog.csdn.net/u014427391/article/details/83046006)
