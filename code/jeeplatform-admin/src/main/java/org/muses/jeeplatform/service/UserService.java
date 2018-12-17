@@ -96,7 +96,7 @@ public class UserService {
 	 */
 	@Transactional(readOnly=true)
 	//@RedisCache(nameSpace = RedisCacheNamespace.SYS_USER)
-	@RedisCache
+	//@RedisCache
 	public User doLoginCheck(String username,String password){
 		return userRepository.findByUsernameAndPassword(username,password);
 	}
