@@ -208,6 +208,8 @@ public class RedisAspect {
 * UML建模：ArgoUML
 * Eclipse测试插件：EclEmma
 * 程序质量检查插件：Jdepend4eclipse(Eclipse平台)
+## 常见问题 ##
+运行jeeplatform打开页面404，如果是用idea的，就可以edit configurations->configuration->edit working directory设置为：$MODULE_DIR$
 ## 项目技术博客介绍 ##
 为了帮助学习者更好地理解代码，下面给出自己写的一些博客链接
 
