@@ -214,30 +214,24 @@ public class RedisAspect {
 为了帮助学习者更好地理解代码，下面给出自己写的一些博客链接
 
 ### Java框架
-[基于RBAC模型的权限系统设计(Github开源项目)](http://blog.csdn.net/u014427391/article/details/78889378)
+* [基于RBAC模型的权限系统设计(Github开源项目)](http://blog.csdn.net/u014427391/article/details/78889378)
+* [Spring Data Jpa+SpringMVC+Jquery.pagination.js实现分页](http://blog.csdn.net/u014427391/article/details/77434664)
+* [SpringMVC+ZTree实现树形菜单权限配置](https://blog.csdn.net/u014427391/article/details/78889378)
+* [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
+* [Github开源项目(企业信息化基础平台)](https://blog.csdn.net/u014427391/article/details/78867439)
+* [基于权限安全框架Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
 
-[Spring Data Jpa+SpringMVC+Jquery.pagination.js实现分页](http://blog.csdn.net/u014427391/article/details/77434664)
-
-[SpringMVC+ZTree实现树形菜单权限配置](https://blog.csdn.net/u014427391/article/details/78889378)
-
-[ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
-
-[Github开源项目(企业信息化基础平台)](https://blog.csdn.net/u014427391/article/details/78867439)
-
-[基于权限安全框架Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
-
-### 缓存
-[Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
-
-[SpringBoot集成Redis实现缓存处理(Spring AOP技术)](http://blog.csdn.net/u014427391/article/details/78799623)
-
+### Redis知识
+* [Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
+* [SpringBoot集成Redis实现缓存处理(Spring AOP技术)](http://blog.csdn.net/u014427391/article/details/78799623)
+* [Redis学习笔记之位图](https://blog.csdn.net/u014427391/article/details/87923407)
+* [Redis学习笔记之延时队列](https://blog.csdn.net/u014427391/article/details/87905450)
+* [Redis学习笔记之分布式锁](https://blog.csdn.net/u014427391/article/details/84934045)
 
 ### Oracle知识
-[Oracle知识整理笔录](https://blog.csdn.net/u014427391/article/details/82317376)
-
-[Oracle笔记之锁表和解锁](https://blog.csdn.net/u014427391/article/details/83046148)
-
-[Oracle笔记之修改表字段类型](https://blog.csdn.net/u014427391/article/details/83046006)
+* [Oracle知识整理笔录](https://blog.csdn.net/u014427391/article/details/82317376)
+* [Oracle笔记之锁表和解锁](https://blog.csdn.net/u014427391/article/details/83046148)
+* [Oracle笔记之修改表字段类型](https://blog.csdn.net/u014427391/article/details/83046006)
 
 
 
