@@ -1,13 +1,7 @@
 package org.muses.jeeplatform.core.entity.admin;
 
+import javax.persistence.*;
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * Entity implementation class for Entity: Operation
@@ -19,7 +13,7 @@ public class Operation implements Serializable {
 
 	
 	private int id;
-	private String desc;
+	private String odesc;//修改，不能为desc命名，和数据库关键字命名一样
 	private String name;
 	private String operation;
 	private static final long serialVersionUID = 1L;
@@ -34,16 +28,18 @@ public class Operation implements Serializable {
 		return this.id;
 	}
 
+	public String getOdesc() {
+		return odesc;
+	}
+
+	public void setOdesc(String odesc) {
+		this.odesc = odesc;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}   
-	public String getDesc() {
-		return this.desc;
-	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}   
 	public String getName() {
 		return this.name;
 	}

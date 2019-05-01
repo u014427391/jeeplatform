@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS `sys_operation`;
 
 CREATE TABLE `sys_operation` (
   `id` int(11) NOT NULL COMMENT '操作Id，主键',
-  `desc` varchar(100) DEFAULT NULL COMMENT '操作描述',
+  `odesc` varchar(100) DEFAULT NULL COMMENT '操作描述',
   `name` varchar(100) DEFAULT NULL COMMENT '操作名称',
   `operation` varchar(100) DEFAULT NULL COMMENT '操作标志',
   PRIMARY KEY (`id`),
@@ -51,7 +51,7 @@ CREATE TABLE `sys_operation` (
 
 /*Data for the table `sys_operation` */
 
-insert  into `sys_operation`(`id`,`desc`,`name`,`operation`) values (1,'创建操作','创建','create'),(2,'编辑权限','编辑','edit'),(3,'删除权限','删除','delete'),(4,'浏览权限','浏览','view');
+insert  into `sys_operation`(`id`,`odesc`,`name`,`operation`) values (1,'创建操作','创建','create'),(2,'编辑权限','编辑','edit'),(3,'删除权限','删除','delete'),(4,'浏览权限','浏览','view');
 
 /*Table structure for table `sys_permission` */
 
@@ -102,7 +102,7 @@ CREATE TABLE `sys_role` (
 
 /*Data for the table `sys_role` */
 
-insert  into `sys_role`(`roleId`,`roleName`,`roleDesc`,`role`) values (1,'超级管理员','超级管理员拥有所有权限','role'),(2,'用户管理员','用户管理权限','role'),(3,'角色管理员','角色管理权限','role'),(4,'资源管理员','资源管理权限','role'),(6,'操作权限管理员','操作权限管理','role'),(7,'查看员','查看系统权限','role'),(9,'用户','可以查看','role');
+insert  into `sys_role`(`roleId`,`roleName`,`roleDesc`,`role`) values (1,'超级管理员','超级管理员拥有所有权限','admin'),(2,'用户管理员','用户管理权限','user'),(3,'角色管理员','角色管理权限','role'),(4,'资源管理员','资源管理权限','role'),(6,'操作权限管理员','操作权限管理','role'),(7,'查看员','查看系统权限','role'),(9,'用户','可以查看','role');
 
 /*Table structure for table `sys_role_permission` */
 
@@ -148,7 +148,7 @@ CREATE TABLE `sys_user` (
 
 /*Data for the table `sys_user` */
 
-insert  into `sys_user`(`id`,`username`,`password`,`phone`,`sex`,`email`,`mark`,`rank`,`lastLogin`,`loginIp`,`imageUrl`,`regTime`,`locked`,`rights`) values (1,'admin','28dca2a7b33b7413ad3bce1d58c26dd679c799f1','1552323312','男','313222@foxmail.com','超级管理员','admin','2017-08-12','127.0.0.1','/static/images/','2017-03-15',0,NULL),(2,'sys','e68feeafe796b666a2e21089eb7aae9c678bf82d','1552323312','男','313222@foxmail.com','系统管理员','sys','2017-08-25','127.0.0.1','/static/images/','2017-03-15',0,NULL),(3,'user','adf8e0d0828bde6e90c2bab72e7a2a763d88a0de','1552323312','男','313222@foxmail.com','用户','user','2017-08-18','127.0.0.1','/static/images/','2017-03-15',0,NULL),(9,'test','123','12332233212','保密','2312@qq.com','没有备注','user','2017-11-25','127.0.0.1',NULL,'2017-11-25',0,NULL);
+insert  into `sys_user`(`id`,`username`,`password`,`phone`,`sex`,`email`,`mark`,`rank`,`lastLogin`,`loginIp`,`imageUrl`,`regTime`,`locked`,`rights`) values (1,'admin','28dca2a7b33b7413ad3bce1d58c26dd679c799f1','1552323312','男','313222@foxmail.com','超级管理员','admin','2017-08-12','0:0:0:0:0:0:0:1','/static/images/','2017-03-15',0,NULL),(2,'sys','e68feeafe796b666a2e21089eb7aae9c678bf82d','1552323312','男','313222@foxmail.com','系统管理员','sys','2017-08-25','127.0.0.1','/static/images/','2017-03-15',0,NULL),(3,'user','adf8e0d0828bde6e90c2bab72e7a2a763d88a0de','1552323312','男','313222@foxmail.com','用户','user','2017-08-18','127.0.0.1','/static/images/','2017-03-15',0,NULL),(9,'test','123','12332233212','保密','2312@qq.com','没有备注','user','2017-11-25','127.0.0.1',NULL,'2017-11-25',0,NULL);
 
 /*Table structure for table `sys_user_role` */
 
