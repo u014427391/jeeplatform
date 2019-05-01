@@ -232,8 +232,14 @@ public class RedisAspect {
 * [Oracle知识整理笔录](https://blog.csdn.net/u014427391/article/details/82317376)
 * [Oracle笔记之锁表和解锁](https://blog.csdn.net/u014427391/article/details/83046148)
 * [Oracle笔记之修改表字段类型](https://blog.csdn.net/u014427391/article/details/83046006)
+* [Oracle merge合并更新函数](https://blog.csdn.net/u014427391/article/details/87898729)
+* [oracle select in超过1000条报错解决方法](https://blog.csdn.net/u014427391/article/details/87922878)
 
 
+
+### SQL调优知识
+* [Oracle优化器基础知识](https://blog.csdn.net/u014427391/article/details/88650696)
+* [Oracle sql共享池$sqlarea分析SQL资源使用情况](https://blog.csdn.net/u014427391/article/details/86562755)
 
 
 
