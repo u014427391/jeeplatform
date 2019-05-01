@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>企业信息化基础平台</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 页面logo设置 start-->
+    <link  rel="icon" type="text/plain" th:href="@{/static/favicon.ico}" />
+    <!-- 页面logo设置 end -->
+    <!-- 页面样式设置，使用bootstrap前端框架 start-->
+    <link th:href="@{/static/css/login.css}" rel="stylesheet" />
+    <!-- 页面样式设置，使用bootstrap前端框架 end-->
+    <!-- 引入JQuery库 start -->
+    <script type="text/javascript" th:src="@{/static/js/jquery-1.8.3.js}"></script>
+    <!-- 引入JQuery库 end -->
+    <script type="text/javascript" th:src="@{/static/js/fun.base.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/login.js}"></script>
+    <!-- 引入JQuery提示库 start-->
+    <script type="text/javascript" th:src="@{/static/js/jquery.tips.js}"></script>
+    <!-- 引入JQuery提示库 end-->
+    <!-- 引入Cookie库 start-->
+    <script type="text/javascript" th:src="@{/static/js/jquery.cookie.js}"></script>
+    <!-- 引入Cookie库 end -->
+</head>
+<body>
+<div class="login">
+    <div class="box png">
+        <div class="input">
+            <div class="log">
+                <div class="name">
+                    <label>用户名</label><input type="text" class="text" value="admin" id="username" placeholder="用户名" />
+                </div>
+                <div class="pwd">
+                    <label>密　码</label><input type="password" class="text" value="123" id="password" placeholder="密码" />
+                </div>
+                <div class="rcode">
+                    <label><img style="height:22px;" id="codeImg" alt="点击更换"
+                                title="点击更换" src="" /></label>
+                    <input type="text" class="text" name="code" id="code"  placeholder="验证码" />
+                </div>
+                <input type="button" class="submit" onclick="loginCheck();" value="登录" />
+            </div>
+        </div>
+    </div>
+    <div class="air-balloon ab-1 png"></div>
+    <div class="air-balloon ab-2 png"></div>
+    <div class="footer"></div>
+</div>
+
+<script type="text/javascript">
+
+    /**加载页面时获取验证码**/
+    $(document).ready(function() {
+        changeCode();
+        $("#codeImg").bind("click", changeCode);
+    });
+
+    /**按回车键触发登录按钮事件**/
+    $(document).keyup(function(event) {
+        if (event.keyCode == 13) {
+            $(".submit").trigger("click");
+        }
+    });
+
+    /**获取时间戳**/
+    function genTimestamp() {
+        var time = new Date();
+        return time.getTime();
+    }
+
+    /**刷新验证码的脚本处理**/
+    function changeCode() {
+        $("#codeImg").attr("src", "code?t=" + genTimestamp());
+    }
+
+    /**客户端校验**/
+    function checkValidity() {
+
+        if ($("#username").val() == "") {
+
+            $("#username").tips({
+                side : 2,
+                msg : '用户名不得为空',
+                bg : '#AE81FF',
+                time : 3
+            });
+
+            $("#username").focus();
+            return false;
+        }
+
+        if ($("#password").val() == "") {
+            $("#password").tips({
+                side : 2,
+                msg : '密码不得为空',
+                bg : '#AE81FF',
+                time : 3
+            });
+
+            $("#password").focus();
+            return false;
+        }
+        if ($("#code").val() == "") {
+
+            $("#code").tips({
+                side : 1,
+                msg : '验证码不得为空',
+                bg : '#AE81FF',
+                time : 3
+            });
+
+            $("#code").focus();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**服务器校验**/
+    function loginCheck(){
+        if(checkValidity()){
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var code = username+","+password+","+$("#code").val();
+            $.ajax({
+                type: "POST",//请求方式为POST
+                url: 'logincheck',//检验url
+                data: {LOGINDATA:code,tm:new Date().getTime()},//请求数据
+                dataType:'json',//数据类型为JSON类型
+                cache: false,//关闭缓存
+                success: function(data){//响应成功
+                    if("success" == data.result){
+                        $("#login").tips({
+                            side : 1,
+                            msg : '正在登录 , 请稍后 ...',
+                            bg : '#68B500',
+                            time : 10
+                        });
+                        window.location.href="index";
+                    }else if("uerror" == data.result){
+                        $("#username").tips({
+                            side : 1,
+                            msg : "用户名或密码有误",
+                            bg : '#FF5080',
+                            time : 15
+                        });
+                        $("#username").focus();
+                    }else if("codeerror" == data.result){
+                        $("#code").tips({
+                            side : 1,
+                            msg : "验证码输入有误",
+                            bg : '#FF5080',
+                            time : 15
+                        });
+                        $("#code").focus();
+                    }else if("locked" == data.result){
+                        alert('您的账号被锁定了，呜呜');
+                    }else{
+                        $("#username").tips({
+                            side : 1,
+                            msg : "缺少参数",
+                            bg : '#FF5080',
+                            time : 15
+                        });
+                        $("#username").focus();
+                    }
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>

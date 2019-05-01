@@ -146,7 +146,7 @@
                             bg : '#68B500',
                             time : 10
                         });
-                        window.location.href="admin/index";
+                        window.location.href="index";
                     }else if("uerror" == data.result){
                         $("#username").tips({
                             side : 1,

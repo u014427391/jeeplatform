@@ -15,6 +15,7 @@ import org.muses.jeeplatform.core.entity.admin.Role;
 import org.muses.jeeplatform.core.entity.admin.User;
 import org.muses.jeeplatform.service.MenuService;
 import org.muses.jeeplatform.service.UserService;
+import org.muses.jeeplatform.utils.MenuTreeUtil;
 import org.muses.jeeplatform.utils.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,7 @@ import java.util.*;
 
 /**
  * @description 登录操作的控制类，使用Shiro框架，做好了登录的权限安全认证，
- * getRemortIP()方法获取用户登录时的ip并保存到数据库
+ * getRemortIP()方法获取用户登录时的ip并保存到数据库，使用Redis实现缓存
  * @author Nicky
  * @date 2017年3月15日
  */
@@ -94,7 +95,7 @@ public class LoginController extends BaseController {
 			}else{
 				String username = logindata[0];
 				String password = logindata[1];
-				if(Tools.isNotEmpty(codeSession) && codeSession.equalsIgnoreCase(code)){
+				if(Tools.isNotEmpty(codeSession)&&code.equalsIgnoreCase(codeSession)){
 					//Shiro框架SHA加密
 					String passwordsha = new SimpleHash("SHA-1",username,password).toString();
 					System.out.println(passwordsha);
@@ -138,7 +139,7 @@ public class LoginController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/admin/index")
+	@RequestMapping(value="/index")
 	public ModelAndView toMain() throws AuthenticationException{
 		ModelAndView mv = this.getModelAndView();
 		/**获取Shiro管理的Session**/
@@ -158,30 +159,44 @@ public class LoginController extends BaseController {
 			for(Permission p : permissions){
 				menuList.add(p.getMenu());
 			}
-			
-			List<Menu> menus = new ArrayList<Menu>();
-			
-			/**为一级菜单添加二级菜单**/
-			for(Menu m : menuList){
-				if(m.getMenuUrl().equals("#")){
-					List<Menu> subMenu = new ArrayList<Menu>();
-					//查询二级菜单
-					subMenu = menuService.findSubMenuById(m.getMenuId());
-					if(subMenu!=null&&subMenu.size()>0){
-						m.setSubMenu(subMenu);
-						menus.add(m);
-					}
-				}
-			}
-			JSONArray jsonMenus = JSONArray.fromObject(menus);
-			//System.out.println(jsonMenus.toString());
-			mv.addObject("menus",jsonMenus.toString());
+
+//			List<Menu> menus = new ArrayList<Menu>();
+//			/**为一级菜单添加二级菜单**/
+//			for(Menu m : menuList){
+//				System.out.println(m.getMenuName());
+//				if(m.getParentId() == 0){
+//					List<Menu> subMenu = new ArrayList<Menu>();
+//					//查询二级菜单
+//					subMenu = menuService.findSubMenuById(m.getMenuId());
+//					if(subMenu!=null&&subMenu.size()>0){
+//						m.setHasSubMenu(true);
+//						m.setSubMenu(subMenu);
+//						menus.add(m);
+//					}
+//				}
+//			}
+			MenuTreeUtil treeUtil = new MenuTreeUtil();
+			List<Menu> treemenus= treeUtil.menuList(menuList);
+
+			JSONArray jsonArray = JSONArray.fromObject(treemenus);
+			String json = jsonArray.toString();
+
+//			json = json.replaceAll("menuId","id").replaceAll("parentId","pId").
+//					replaceAll("menuName","name").replaceAll("hasSubMenu","checked");
+
+			mv.addObject("menus",json);
+
 		}else{
 			//会话失效，返回登录界面
 			mv.setViewName("admin/frame/login");
 		}
 		mv.setViewName("admin/frame/index");
 		return mv;
+	}
+
+	@RequestMapping(value = "/tip")
+	public String sysTip(){
+		return "admin/common/sys_tip";
 	}
 	
 	/**

@@ -1,5 +1,8 @@
 package org.muses.jeeplatform.service;
 
+import org.muses.jeeplatform.annotation.RedisCache;
+import org.muses.jeeplatform.annotation.RedisCacheKey;
+import org.muses.jeeplatform.common.RedisCacheNamespace;
 import org.muses.jeeplatform.core.dao.repository.admin.UserRepository;
 import org.muses.jeeplatform.core.entity.admin.Operation;
 import org.muses.jeeplatform.core.entity.admin.Permission;
@@ -30,10 +33,12 @@ public class UserService {
 	
 	/**
 	 * 存储登录时的ip
-	 * @param map
 	 */
-	public void saveIP(Map<String, String> map) {
-		//待开发...
+	public int saveIP(Map<String,String> map) {
+		String loginIp = map.get("loginIp");
+		String username = map.get("username");
+		int code = userRepository.updateLoginIpById(loginIp,username);
+		return code;
 	}
 	
 	
@@ -78,6 +83,7 @@ public class UserService {
 	 * @return
 	 */
 	@Transactional(readOnly=true)
+	//@RedisCache(nameSpace = RedisCacheNamespace.SYS_USER)
 	public User findByUsername(String username){
 		return userRepository.findByUsername(username);
 	}
@@ -89,6 +95,8 @@ public class UserService {
 	 * @return
 	 */
 	@Transactional(readOnly=true)
+	//@RedisCache(nameSpace = RedisCacheNamespace.SYS_USER)
+	//@RedisCache
 	public User doLoginCheck(String username,String password){
 		return userRepository.findByUsernameAndPassword(username,password);
 	}
@@ -99,6 +107,7 @@ public class UserService {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
+	//@RedisCache(nameSpace = RedisCacheNamespace.SYS_USER)
 	public User findByUId(int id){
 		return userRepository.findById(id);
 	}
@@ -117,7 +126,7 @@ public class UserService {
 	}
 
 	/**
-	 * 获取所有的菜单信息并分页显示
+	 * 获取所有的用户信息并分页显示
 	 * @param pageNo
 	 * 			当前页面数
 	 * @param pageSize
@@ -150,6 +159,14 @@ public class UserService {
 		PageRequest request = buildPageRequest(pageNo, pageSize, dir, str);
 		Page<User> users = userRepository.searchU(startDate,endDate,request);
 		return users;
+	}
+
+	/**
+	 * 保存用户信息
+	 * @param user
+	 */
+	public void saveU(User user){
+		userRepository.save(user);
 	}
 
 }

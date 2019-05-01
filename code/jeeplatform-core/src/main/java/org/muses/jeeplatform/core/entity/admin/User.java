@@ -1,6 +1,7 @@
 package org.muses.jeeplatform.core.entity.admin;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -10,52 +11,52 @@ import java.util.Set;
  */
 @Entity
 @Table(name="sys_user")
-public class User {
+public class User implements Serializable{
 
 	/** 用户Id**/
 	private int id;
-	
+
 	/** 用户名**/
 	private String username;
-	
+
 	/** 用户密码**/
 	private String password;
-	
+
 	/** 手机号**/
-	private int phone;
-	
+	private String phone;
+
 	/** 性别**/
 	private String sex;
-	
+
 	/** 邮件**/
 	private String email;
-	
+
 	/** 备注**/
 	private String mark;
-	
+
 	/** 用户级别**/
 	private String rank;
-	
+
 	/** 最后一次时间**/
 	private Date lastLogin;
-	
+
 	/** 登录ip**/
 	private String loginIp;
-	
+
 	/** 图片路径**/
 	private String imageUrl;
-	
+
 	/** 注册时间**/
 	private Date regTime;
-	
+
 	/** 账号是否被锁定**/
 	private Boolean locked = Boolean.FALSE;
-	
+
 	/** 权限**/
 	private String rights;
-	
-	private Set<Role> roles;		
-	
+
+	private Set<Role> roles;
+
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
 	public int getId() {
@@ -84,11 +85,12 @@ public class User {
 		this.password = password;
 	}
 
-	public int getPhone() {
+	@Column(length = 11)
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -110,7 +112,7 @@ public class User {
 		this.email = email;
 	}
 
-	@Column(length=30)
+	@Column(length=100)
 	public String getMark() {
 		return mark;
 	}
@@ -165,7 +167,7 @@ public class User {
 		this.regTime = regTime;
 	}
 
-	 public Boolean getLocked() {
+	public Boolean getLocked() {
 		return locked;
 	}
 
@@ -181,8 +183,9 @@ public class User {
 		this.rights = rights;
 	}
 
-	@ManyToMany(targetEntity = Role.class, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(name = "sys_user_role", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId") )
+	//修改cascade策略为级联关系
+	@ManyToMany(targetEntity = Role.class, cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@JoinTable(name = "sys_user_role", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId") )
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -191,6 +194,6 @@ public class User {
 		this.roles = roles;
 	}
 
-	
-	
+
+
 }

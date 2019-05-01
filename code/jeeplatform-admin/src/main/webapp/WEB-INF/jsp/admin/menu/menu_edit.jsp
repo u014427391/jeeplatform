@@ -38,6 +38,9 @@
 
     </style>
     <script type="text/javascript" src="<%=basePath%>static/js/jquery-1.8.3.js"></script>
+    <!-- 引入JQuery提示库 start-->
+    <script type="text/javascript" src="${basePath}static/js/jquery.tips.js"></script>
+    <!-- 引入JQuery提示库 end-->
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
     <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>

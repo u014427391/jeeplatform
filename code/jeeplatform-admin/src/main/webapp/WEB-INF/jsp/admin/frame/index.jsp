@@ -24,6 +24,7 @@
 	<!-- 页面logo设置 end -->
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>static/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>static/skin/blue/skin.css" id="layout-skin"/>
+
 </head>
 <body>
 <div>
@@ -439,17 +440,17 @@
             var item = menu[i];
             var str = "";
             try{
-                    item.menuIcon == "" ? item.menuIcon = "&#xe610" : item.menuIcon = item.menuIcon;
-                    if(item.subMenu == ""){
-                        str = "<li><a href='"+item.menuUrl+"'><i class='icon-font'>"+item.menuIcon+"</i><span>"+item.menuName+"</span></a></li>";
-                        $(parent).append(str);
-                    }else{
-                        str = "<li><a href='"+item.menuUrl+"'><i class='icon-font '>"+item.menuIcon+"</i><span>"+item.menuName+"</span><i class='icon-font icon-right'>&#xe60b;</i></a>";
-                        str +="<ul class='menu-item-child' id='menu-child-"+item.menuId+"'></ul></li>";
-                        $(parent).append(str);
-                        var childParent = $("#menu-child-"+item.menuId);
-                        initMenu(item.subMenu,childParent);
-                    }
+                item.menuIcon == "" ? item.menuIcon = "&#xe610" : item.menuIcon = item.menuIcon;
+                if(item.subMenu == ""){
+                    str = "<li><a href='"+item.menuUrl+"'><i class='icon-font'>"+item.menuIcon+"</i><span>"+item.menuName+"</span></a></li>";
+                    $(parent).append(str);
+                }else{
+                    str = "<li><a href='"+item.menuUrl+"'><i class='icon-font '>"+item.menuIcon+"</i><span>"+item.menuName+"</span><i class='icon-font icon-right'>&#xe60b;</i></a>";
+                    str +="<ul class='menu-item-child' id='menu-child-"+item.menuId+"'></ul></li>";
+                    $(parent).append(str);
+                    var childParent = $("#menu-child-"+item.menuId);
+                    initMenu(item.subMenu,childParent);
+                }
             }catch(e){
 
             }

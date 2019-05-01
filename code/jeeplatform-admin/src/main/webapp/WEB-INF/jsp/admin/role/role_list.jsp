@@ -40,7 +40,7 @@
                 num_display_entries : 6,
                 current_page : pageIndex,
                 num_edge_entries : 1,
-                link_to: "menu/getMenus?pageIndex=__id__"  //分页的js中会自动把"__id__"替换为当前的数。0
+                link_to: "role/queryAll.do?pageIndex=__id__"  //分页的js中会自动把"__id__"替换为当前的数。0
             });
 
             var html = "";
@@ -48,18 +48,17 @@
             $.each(data,function(idx,obj){
                 console.log(obj.menuIcon);
                 var roleId = obj.roleId;
-                var name = obj.name;
-                var desc = obj.desc;
+                var name = obj.roleName;
+                var desc = obj.roleDesc;
                 html += "<tr><td>"+roleId+"</td>"+
                     "<td>"+name+"</td>"+
                     "<td>"+desc+"</td>"+
-                    "<td><a href='javascript:openEditDialog("+roleId+");' class='bounceIn'>编辑</a>"+
+                    "<td><a href='javascript:openAuthDialog("+roleId+");' class='bounceIn'>授权</a></td>"+
+                    "<td><a href='javascript:openEditDialog("+roleId+");' class='bounceIn'>编辑</a></td>"+
                     "</tr>";
 
             });
             $("#content").append(html);
-
-            getSrceenWH();
 
             //显示弹框
             $('.bounceIn').click(function(){
@@ -81,12 +80,30 @@
             Dialog.close();
         }
 
+        function openAuthDialog(roleId){
+            var diag = new Dialog();
+            diag.Title = "授权角色";
+            diag.Width = 400;
+            diag.Height = 300;
+            diag.URL = "goAuthorise.do?roleId="+roleId;
+            diag.show();
+        }
+
         function openEditDialog(roleId){
             var diag = new Dialog();
-            diag.Title = "编辑角色信息";
+            diag.Title = "编辑角色";
             diag.Width = 400;
             diag.Height = 300;
             diag.URL = "goEditR.do?roleId="+roleId;
+            diag.show();
+        }
+
+        function  openAddDialog() {
+            var diag = new Dialog();
+            diag.Title = "新增角色";
+            diag.Width = 400;
+            diag.Height = 300;
+            diag.URL = "goAddR.do";
             diag.show();
         }
 
@@ -100,8 +117,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <form class="form-inline">
-                        <input type="text" class="form-control" id="id" placeholder="角色id">
-                        <input type="button" class="btn btn-default" value="search" onclick="find()"/>
+                        <input type="button" class="form-control" value="新增角色" onclick="openAddDialog();" />
                     </form>
                     <!-- demo  -->
                     <table class="table" id="mTable">

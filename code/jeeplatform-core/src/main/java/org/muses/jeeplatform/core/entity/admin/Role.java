@@ -16,16 +16,16 @@ public class Role implements Serializable{
 
 	/** 角色Id**/
 	private int roleId;
-	
+
 	/** 角色描述**/
-	private String desc;
-	 
+	private String roleDesc;
+
 	/** 角色名称**/
-	private String name;
-	
+	private String roleName;
+
 	/** 角色标志**/
 	private String role;
-	
+
 	private Set<Permission> permissions = new HashSet<Permission>();
 
 	@Id
@@ -39,21 +39,21 @@ public class Role implements Serializable{
 	}
 
 	@Column(length=100)
-	public String getDesc() {
-		return desc;
+	public String getRoleDesc() {
+		return roleDesc;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setRoleDesc(String roleDesc) {
+		this.roleDesc = roleDesc;
 	}
 
 	@Column(length=100)
-	public String getName() {
-		return name;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 	@Column(length=100)
@@ -65,6 +65,7 @@ public class Role implements Serializable{
 		this.role = role;
 	}
 
+	//修改cascade策略为级联关系
 	@OneToMany(targetEntity=Permission.class,cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	@JoinTable(name="sys_role_permission", joinColumns=@JoinColumn(name="roleId",referencedColumnName="roleId"), inverseJoinColumns=@JoinColumn(name="permissionId",referencedColumnName="id",unique=true))
 	public Set<Permission> getPermissions() {
@@ -74,5 +75,16 @@ public class Role implements Serializable{
 	public void setPermissions(Set<Permission> permissions) {
 		this.permissions = permissions;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Role) {
+			Role role = (Role) obj;
+			return this.roleId==(role.getRoleId())
+					&& this.roleName.equals(role.getRoleName())
+					&& this.roleDesc.equals(role.getRoleDesc())
+					&& this.role.equals(role.getRole());
+		}
+		return super.equals(obj);
+	}
 }

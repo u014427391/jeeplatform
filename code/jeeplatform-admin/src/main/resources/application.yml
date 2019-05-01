@@ -47,6 +47,26 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+  #添加Thymeleaf配置
+#  thymeleaf:
+#    cache: false
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    mode: HTML5
+#    encoding: UTF-8
+#    content-type: text/html
+
+  #Jedis配置
+  jedis :
+    pool :
+      host : 127.0.0.1
+      port : 6379
+      password : redispassword
+      timeout : 0
+      config :
+        maxTotal : 100
+        maxIdle : 10
+        maxWaitMillis : 100000
 
 
 

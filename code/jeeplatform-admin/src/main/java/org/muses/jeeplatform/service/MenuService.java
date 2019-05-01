@@ -1,5 +1,10 @@
 package org.muses.jeeplatform.service;
 
+import java.util.List;
+
+import org.muses.jeeplatform.annotation.RedisCache;
+import org.muses.jeeplatform.annotation.RedisCacheKey;
+import org.muses.jeeplatform.common.RedisCacheNamespace;
 import org.muses.jeeplatform.core.dao.repository.admin.MenuRepository;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class MenuService {
@@ -39,6 +42,7 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
+//	@RedisCache(nameSpace = RedisCacheNamespace.SYS_MENU)
 	public Page<Menu> findAll(int pageNo, int pageSize, Sort.Direction dir, String str){
 		PageRequest request = buildPageRequest(pageNo, pageSize, dir, str);
 		Page<Menu> menus = menuRepository.findAll(request);
@@ -50,6 +54,7 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
+	//@RedisCache
 	public List<Menu> findAllParentMenu(){
 		return menuRepository.findAllParentMenu();
 	}
@@ -60,6 +65,7 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
+	//@RedisCache
 	public List<Menu> findSubMenuById(int id){
 		return menuRepository.findSubMenuByParentId(id);
 	}
@@ -70,7 +76,8 @@ public class MenuService {
 	 * @return
 	 */
 	@Transactional
-	public Menu findMenuById(int id){
+	//@RedisCache
+	public Menu findMenuById(@RedisCacheKey int id){
 		return menuRepository.findMenuByMenuId(id);
 	}
 
@@ -79,6 +86,14 @@ public class MenuService {
 	 * @param m
 	 */
 	public void editM(Menu m){
+		menuRepository.save(m);
+	}
+
+	/**
+	 * 保存菜单信息
+	 * @param m
+	 */
+	public void saveM(Menu m){
 		menuRepository.save(m);
 	}
 

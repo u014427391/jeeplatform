@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.muses</groupId>
-	<artifactId>muses</artifactId>
+	<artifactId>jeeplatform</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>muses</name>
+	<name>jeeplatform</name>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -35,6 +35,7 @@
 		<spring-boot.version>1.5.7.RELEASE</spring-boot.version>
 		<druid.version>1.1.2</druid.version>
 		<github.pagehelper.version>4.2.1</github.pagehelper.version>
+		<fastjson.version>1.2.7</fastjson.version>
 	</properties>
 	
 	<build>
@@ -97,7 +98,11 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>${mybatis-spring-boot.version}</version>
 		</dependency>
-
+		<!-- Thymeleaf-->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+		<!--</dependency>-->
 		<!-- druid -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -142,6 +147,12 @@
 			<version>${log4j.version}</version>
 		</dependency>
 
+		<!-- fatsjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
 	</dependencies>
 	<!--  设定Maven主仓库为阿里私服 -->
 	<repositories>

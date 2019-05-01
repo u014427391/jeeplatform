@@ -1,55 +1,166 @@
-# JEEPlatform
+
+## 项目简介 ##
 一款企业信息化开发基础平台，可以用于快速构建企业后台管理系统，集成了OA(办公自动化)、SCM(供应链系统)、ERP(企业资源管理系统)、CMS(内容管理系统)、CRM(客户关系管理系统)等企业系统的通用业务功能
 
-JeePlatform项目是一款以Activiti为工作流引擎，以Spring Framework为核心框架，集ORM框架Mybatis，Web层框架SpringMVC和多种开源组件框架而成的一款通用基础平台，基于本平台可以实现快速开发，实现企业信息管理的高效、高性能开发。系统追求安全、性能方面的有效实现。
+JeePlatform项目是一款以Activiti为工作流引擎，以Spring Framework为核心框架，集ORM框架Mybatis，Web层框架SpringMVC和多种开源组件框架而成的一款通用基础平台，基于本平台可以实现快速开发，实现企业信息管理的高效开发。
 
-## 开发团队(按加入顺序) ##
+代码已经捐赠给开源中国社区：https://www.oschina.net/p/jeeplatform
 
-Tornado<br>
-Blog：http://blog.caiyuyu.net<br>
-Github：https://github.com/yinyizhixian<br><br>
+## 系统设计 ##
+### 系统管理(模块名称jeeplatform-admin) ###
+管理系统登录页面，采用Shiro登录验证
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统登录页面.png)
 
-Wiatingpub<br>
-Blog：http://www.jianshu.com/u/6c0bb349990c<br>
-Github：https://github.com/wiatingpub<br><br>
+管理系统主页前端，可以适配移动端页面
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/适配移动端.png)
 
-Joryun<br>
-Blog：http://www.jianshu.com/u/85656cc35708<br>
-github：https://github.com/Joryun<br><br>
+管理系统主页采用开源前端模板，具有换肤功能
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/系统主页墨绿主题.png)
 
-Serious<br>
-Blog：http://my.csdn.net/serious_czt<br>
-Github：https://github.com/CHEN0409<br><br>
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/系统主页清新主题.png)
 
-Simba<br>
-Blog：http://my.csdn.net/io277800<br>
-Github：https://github.com/Simba9980<br><br>
+管理系统主页，获取用户具有的权限，显示菜单
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统主页.png)
 
-Nicky<br>
-Blog：http://blog.ittrading.cn/<br>
-Github：https://github.com/u014427391<br><br>
+角色进行授权，只有超级管理员才具有权限
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/角色授权.png)
 
-Jasonsama<br>
-Blog：https://jasonsama.github.io/<br>
-Github：https://github.com/Jasonsama<br><br>
+角色进行配置，可以学习一下RBAC(基于角色的权限控制)
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/角色配置.png)
 
+使用JavaEmail插件实现邮件发送，记得需要开启SSl验证
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/发送邮件.png)
+
+### OA管理系统(待开发)
+
+### CMS管理系统(待开发)
+
+## 系统升级
+### 单点登录基础(模块名称jeeplatform-sso)(开发中)
+> 项目采用CAS登录登录实现，单点登录集群搭建可以参考博客：
+> http://blog.csdn.net/u014427391/article/details/78653482
+> 项目单点登录：使用nginx作为负载均衡，使用redis存储tomcat session，来实现集群中tomcat session的共享，使用redis作为cas ticket的仓库，来实现集群中cas ticket的一致性。
+
+单点登录集群如图
+![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/单点登录集群.png)
+
+### SpringBoot集成Redis缓存处理(Spring AOP实现)
+先从Redis里获取缓存,查询不到，就查询MySQL数据库，然后再保存到Redis缓存里，下次查询时直接调用Redis缓存
+
+```
+package org.muses.jeeplatform.cache;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+/**
+ * AOP实现Redis缓存处理
+ */
+@Component
+@Aspect
+public class RedisAspect {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(RedisAspect.class);
+
+	@Autowired
+    @Qualifier("redisCache")
+	private RedisCache redisCache;
+
+	/**
+	 * 拦截所有元注解RedisCache注解的方法
+	 */
+	@Pointcut("@annotation(org.muses.jeeplatform.annotation.RedisCache)")
+	public void pointcutMethod(){
+
+	}
+
+	/**
+	 * 环绕处理，先从Redis里获取缓存,查询不到，就查询MySQL数据库，
+	 * 然后再保存到Redis缓存里
+	 * @param joinPoint
+	 * @return
+	 */
+	@Around("pointcutMethod()")
+	public Object around(ProceedingJoinPoint joinPoint){
+		//前置：从Redis里获取缓存
+		//先获取目标方法参数
+		long startTime = System.currentTimeMillis();
+		String applId = null;
+		Object[] args = joinPoint.getArgs();
+		if (args != null && args.length > 0) {
+			applId = String.valueOf(args[0]);
+		}
+
+		//获取目标方法所在类
+		String target = joinPoint.getTarget().toString();
+		String className = target.split("@")[0];
+
+		//获取目标方法的方法名称
+		String methodName = joinPoint.getSignature().getName();
+
+		//redis中key格式：    applId:方法名称
+		String redisKey = applId + ":" + className + "." + methodName;
+
+		Object obj = redisCache.getDataFromRedis(redisKey);
+
+		if(obj!=null){
+			LOGGER.info("**********从Redis中查到了数据**********");
+			LOGGER.info("Redis的KEY值:"+redisKey);
+			LOGGER.info("REDIS的VALUE值:"+obj.toString());
+			return obj;
+		}
+		long endTime = System.currentTimeMillis();
+		LOGGER.info("Redis缓存AOP处理所用时间:"+(endTime-startTime));
+		LOGGER.info("**********没有从Redis查到数据**********");
+		try{
+			obj = joinPoint.proceed();
+		}catch(Throwable e){
+			e.printStackTrace();
+		}
+		LOGGER.info("**********开始从MySQL查询数据**********");
+		//后置：将数据库查到的数据保存到Redis
+		String code = redisCache.saveDataToRedis(redisKey,obj);
+		if(code.equals("OK")){
+			LOGGER.info("**********数据成功保存到Redis缓存!!!**********");
+			LOGGER.info("Redis的KEY值:"+redisKey);
+			LOGGER.info("REDIS的VALUE值:"+obj.toString());
+		}
+		return obj;
+	}
+
+
+}
+
+```
+![这里写图片描述](http://img.blog.csdn.net/20171214104250995?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDQyNzM5MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+可以看到Redis里保存到了缓存
+
+![这里写图片描述](http://img.blog.csdn.net/20171214104303308?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDQyNzM5MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
 ## 业务方案 ##
 ### 系统管理通用功能 ####
-* 用户管理: 系统用户
-* 角色管理: 按照企业系统职能进行角色分配，每个角色具有不同的系统操作权限
-* 权限管理: 权限管理细分到系统按钮权限，菜单权限，管理员可以对权限进行细分控制
-* 在线管理：管理在线用户，可以强制下线
-* 菜单管理：系统可以配置系统菜单，并分配不同的权限
-* 报表统计：数据报表、用户分析
-* 系统监控：数据监控、系统日志(用户登录记录)
-* 通用接口：SMS(短信)、系统邮件、Excel表导出导入操作...
-### OA系统通用功能 ###
-* 考勤管理：请假流程
-* 人事管理：机构管理、部门管理、员工管理
+- [x] 用户管理: 系统用户	
+- [x] 角色管理: 按照企业系统职能进行角色分配，每个角色具有不同的系统操作权限	OK
+- [x] 权限管理: 权限管理细分到系统按钮权限，菜单权限，管理员可以对权限进行细分控制
+- [ ] 在线管理：管理在线用户，可以强制下线
+- [x] 菜单管理：系统可以配置系统菜单，并分配不同的权限	OK
+- [ ] 报表统计：数据报表、用户分析
+- [ ] 系统监控：数据监控、系统日志(用户登录记录)
+- [ ] 通用接口：SMS(短信)、系统邮件、Excel表导出导入操作...
+### OA系统通用功能(待开发) ###
+- [ ] 考勤管理：请假流程
+- [ ] 人事管理：机构管理、部门管理、员工管理
 
-### CMS系统通用功能 ###
-* 信息管理：文章管理、文章审核
+### CMS系统通用功能(待开发) ###
+- [ ] 信息管理：文章管理、文章审核
 ...
 
 ## 技术方案 ##
@@ -97,6 +208,32 @@ Github：https://github.com/Jasonsama<br><br>
 * UML建模：ArgoUML
 * Eclipse测试插件：EclEmma
 * 程序质量检查插件：Jdepend4eclipse(Eclipse平台)
+## 常见问题 ##
+运行jeeplatform打开页面404，如果是用idea的，就可以edit configurations->configuration->edit working directory设置为：$MODULE_DIR$
+## 项目技术博客介绍 ##
+为了帮助学习者更好地理解代码，下面给出自己写的一些博客链接
+
+### Java框架
+* [基于RBAC模型的权限系统设计(Github开源项目)](http://blog.csdn.net/u014427391/article/details/78889378)
+* [Spring Data Jpa+SpringMVC+Jquery.pagination.js实现分页](http://blog.csdn.net/u014427391/article/details/77434664)
+* [SpringMVC+ZTree实现树形菜单权限配置](https://blog.csdn.net/u014427391/article/details/78889378)
+* [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
+* [Github开源项目(企业信息化基础平台)](https://blog.csdn.net/u014427391/article/details/78867439)
+* [基于权限安全框架Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
+
+### Redis知识
+* [Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
+* [SpringBoot集成Redis实现缓存处理(Spring AOP技术)](http://blog.csdn.net/u014427391/article/details/78799623)
+* [Redis学习笔记之位图](https://blog.csdn.net/u014427391/article/details/87923407)
+* [Redis学习笔记之延时队列](https://blog.csdn.net/u014427391/article/details/87905450)
+* [Redis学习笔记之分布式锁](https://blog.csdn.net/u014427391/article/details/84934045)
+
+### Oracle知识
+* [Oracle知识整理笔录](https://blog.csdn.net/u014427391/article/details/82317376)
+* [Oracle笔记之锁表和解锁](https://blog.csdn.net/u014427391/article/details/83046148)
+* [Oracle笔记之修改表字段类型](https://blog.csdn.net/u014427391/article/details/83046006)
+
+
 
 
 

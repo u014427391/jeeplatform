@@ -60,10 +60,10 @@
                     "<td>"+username+"</td>"+
                     "<td>"+mark+"</td>"+
                     "<td>"+phone+"</td>"+
-                    "<td>"+email+"</td>"+
+                    "<td><input type='text' id='toEmail' disabled='disabled' style= 'border:0px;background:rgba(0, 0, 0, 0);' name='toEmail' value="+email+" />" +"</td>"+
                     "<td>"+lastLogin+"</td>"+
                     "<td>"+loginIp+"</td>"+
-                    "<td><a href='javascript:openEditDialog("+id+");' class='bounceIn'>编辑</a>"+
+                    "<td><a href='javascript:openAuthDialog("+id+");' class='bounceIn'>分配角色</a>"+
                     "</tr>";
             });
             $("#content").append(html);
@@ -73,7 +73,6 @@
                 className = $(this).attr('class');
                 $('#dialogBg').fadeIn(300);
                 $('#dialog').removeAttr('class').addClass('animated '+className+'').fadeIn();
-                alert('测试');
             });
         });
 
@@ -98,7 +97,6 @@
             }
         }
 
-
         //checkbox的全选/反选
         function exportExcel(){
             var str = '';
@@ -117,17 +115,64 @@
             }
         }
 
+        function sendEmail(){
+            var str = '';
+            for(var i=0;i<document.getElementsByName('id').length;i++){
+                if(document.getElementsByName('id')[i].checked){
+                    if(str=='') str += document.getElementsByName('toEmail')[i].value;
+                    else str += ';' + document.getElementsByName('toEmail')[i].value;
+                }
+            }
+            if(str==''){
+                alert('请选择你要发送的!');
+                return;
+            }else{
+                var diag = new Dialog();
+                diag.Title = "发送邮件";
+                diag.Width = 800;
+                diag.Height = 800;
+                diag.URL = "goSendEmail.do?toEmails="+str;
+                diag.show();
+            }
+        }
+
+        function doSearch() {
+            var keyword = $("#keywork").val();
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            alert('test');
+            window.location.href="user/searchU.do?pageIndex="+0+"&keywork="+keyword+"&startDate="+startDate+"&endDate="+endDate;
+        }
+
         function closdlg()
         {
             Dialog.close();
         }
 
-        function openEditDialog(id){
+        function openAddDialog(){
             var diag = new Dialog();
-            diag.Title = "编辑菜单信息";
+            diag.Title = "新增管理员";
             diag.Width = 400;
             diag.Height = 300;
-            diag.URL = "goEditM.do?menuId="+id;
+            diag.URL = "goAddU.do";
+            diag.show();
+        }
+
+        function openEditDialog(id){
+            var diag = new Dialog();
+            diag.Title = "编辑管理员信息";
+            diag.Width = 400;
+            diag.Height = 300;
+            diag.URL = "goEditU.do?userId="+id;
+            diag.show();
+        }
+
+        function openAuthDialog(id){
+            var diag = new Dialog();
+            diag.Title = "用户角色设置";
+            diag.Width = 400;
+            diag.Height = 300;
+            diag.URL = "goAuthU.do?userId="+id;
             diag.show();
         }
 
@@ -141,16 +186,15 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <form class="form-inline">
+                        <input type="button"  class="btn btn-default" value="添加管理员" onclick="openAddDialog();" />
                         <input type="button" class="btn btn-default" value="发送邮件" onclick="sendEmail();" />
-                        <input type="button" class="btn btn-default" value="发送短信" onclick="sendSms();" />
                         <input type="button" class="btn btn-default" value="导出Excel表" onclick="exportExcel();" />
                         <br><br>
-                        <input type="text" class="form-control" id="id" placeholder="请输入关键词">
+                        <!--<input type="text" class="form-control" id="keywork" placeholder="请输入关键词">
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        日期从<input class="form-control" placeholder="请选择开始日期" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})">
-                        到<input class="form-control" placeholder="请选择结束日期" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})">&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="button" class="btn btn-default" value="Search" onclick="find()"/>
-
+                        日期从<input class="form-control" id="startDate" placeholder="请选择开始日期" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                        到<input class="form-control" id="endDate" placeholder="请选择结束日期" type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})">&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="button" class="btn btn-default" value="Search" onclick="doSearch()"/>-->
                     </form>
                     <table class="table" id="mTable">
                         <thead>
