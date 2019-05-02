@@ -46,7 +46,7 @@
             var html = "";
             var data = ${roles};
             $.each(data,function(idx,obj){
-                console.log(obj.menuIcon);
+                //console.log(obj.menuIcon);
                 var roleId = obj.roleId;
                 var name = obj.roleName;
                 var desc = obj.roleDesc;
