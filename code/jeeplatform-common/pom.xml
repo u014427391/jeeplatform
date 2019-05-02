@@ -10,7 +10,8 @@
 
     <artifactId>jeeplatform-common</artifactId>
     <name>jeeplatform-common</name>
-    <version>1.0</version>
+    <version>${jeeplatform-common.version}</version>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

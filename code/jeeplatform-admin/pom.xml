@@ -27,17 +27,17 @@
         <dependency>
             <groupId>org.muses.jeeplatform</groupId>
             <artifactId>jeeplatform-common</artifactId>
-            <version>1.0</version>
+            <version>${jeeplatform-common.version}</version>
         </dependency>
         <dependency>
             <groupId>org.muses.jeeplatform</groupId>
             <artifactId>jeeplatform-core</artifactId>
-            <version>1.0</version>
+            <version>${jeeplatform-core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.muses.jeeplatform</groupId>
             <artifactId>jeeplatform-sso</artifactId>
-            <version>1.0</version>
+            <version>${jeeplatform-sso.version}</version>
         </dependency>
 
         <!-- moudle end-->

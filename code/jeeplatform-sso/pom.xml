@@ -9,7 +9,8 @@
 
     <artifactId>jeeplatform-sso</artifactId>
     <name>jeeplatform-sso</name>
-    <version>1.0</version>
+    <version>${jeeplatform-sso.version}</version>
+    <packaging>war</packaging>
 
 
     <properties>
