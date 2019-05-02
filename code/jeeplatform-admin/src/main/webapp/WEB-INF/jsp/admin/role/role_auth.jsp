@@ -78,6 +78,7 @@
         var code;
 
         function setCheck() {
+            debugger;
             var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
                 py = $("#py").attr("checked")? "p":"",
                 sy = $("#sy").attr("checked")? "s":"",
