@@ -36,7 +36,7 @@
 				<div class="rcode">
 					<label><img style="height:22px;" id="codeImg" alt="点击更换"
 								title="点击更换" src="" /></label>
-					<input type="text" class="text" name="code" id="code"  placeholder="验证码" value="#" />
+					<input type="text" class="text" name="code" id="code"  placeholder="验证码" value="CODE" />
 				</div>
 				<input type="button" class="submit" onclick="loginCheck();" value="登录">
 			</div>
