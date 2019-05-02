@@ -37,48 +37,7 @@
         .buttonStyle:hover{background:url(${basePath}plugins/zDialog/images/buticon.gif) no-repeat left -23px;}
 
     </style>
-    <script type="text/javascript" src="<%=basePath%>static/js/jquery-1.8.3.js"></script>
-    <!-- 引入JQuery提示库 start-->
-    <script type="text/javascript" src="${basePath}static/js/jquery.tips.js"></script>
-    <!-- 引入JQuery提示库 end-->
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
-    <script type="text/javascript">
 
-        function dialogClose()
-        {
-            parentDialog.close();
-        }
-
-        function doSave() {
-            var roleName = $("#rolename").val();
-            var roleDesc = $("#roledesc").val();
-            var params = roleName +","+roleDesc;
-            $.ajax({
-                type: "POST",
-                url: 'role/addR',
-                data: {params:params,tm:new Date().getTime()},
-                dataType:'json',
-                cache: false,
-                success: function(data){
-                    if("success" == data.result){
-                        alert('新增成功!');
-                        parent.location.reload();
-                        doDialogClose();
-                    }else{
-                        $("#rolename").tips({
-                            side : 1,
-                            msg : "新增失败!",
-                            bg : '#FF5080',
-                            time : 15
-                        });
-                    }
-                }
-            });
-        }
-
-    </script>
 </head>
 <body >
 <div id="forlogin">
@@ -102,5 +61,47 @@
         </tr>
     </table>
 </div>
+<script type="text/javascript" src="<%=basePath%>static/js/jquery-1.8.3.js"></script>
+<!-- 引入JQuery提示库 start-->
+<script type="text/javascript" src="${basePath}static/js/jquery.tips.js"></script>
+<!-- 引入JQuery提示库 end-->
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
+<script type="text/javascript">
+
+    function dialogClose()
+    {
+        parentDialog.close();
+    }
+
+    function doSave() {
+        var roleName = $("#rolename").val();
+        var roleDesc = $("#roledesc").val();
+        var params = roleName +","+roleDesc;
+        $.ajax({
+            type: "POST",
+            url: 'role/addR',
+            data: {params:params,tm:new Date().getTime()},
+            dataType:'json',
+            cache: false,
+            success: function(data){
+                if("success" == data.result){
+                    alert('新增成功!');
+                    parent.location.reload();
+                    doDialogClose();
+                }else{
+                    $("#rolename").tips({
+                        side : 1,
+                        msg : "新增失败!",
+                        bg : '#FF5080',
+                        time : 15
+                    });
+                }
+            }
+        });
+    }
+
+</script>
 </body>
 </html>
