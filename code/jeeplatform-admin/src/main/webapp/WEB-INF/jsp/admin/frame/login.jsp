@@ -18,17 +18,7 @@
 	<!-- 页面样式设置，使用bootstrap前端框架 start-->
 	<link href="static/css/login.css" rel="stylesheet" />
 	<!-- 页面样式设置，使用bootstrap前端框架 end-->
-	<!-- 引入JQuery库 start -->
-	<script type="text/javascript" src="${basePath}static/js/jquery-1.8.3.js"></script>
-	<!-- 引入JQuery库 end -->
-	<script type="text/javascript" src="${basePath}static/js/fun.base.js"></script>
-	<script type="text/javascript" src="${basePath}static/js/login.js"></script>
-	<!-- 引入JQuery提示库 start-->
-	<script type="text/javascript" src="${basePath}static/js/jquery.tips.js"></script>
-	<!-- 引入JQuery提示库 end-->
-	<!-- 引入Cookie库 start-->
-	<script type="text/javascript" src="${basePath}static/js/jquery.cookie.js"></script>
-	<!-- 引入Cookie库 end -->
+
 </head>
 
 <body>
@@ -38,15 +28,15 @@
 		<div class="input">
 			<div class="log">
 				<div class="name">
-					<label>用户名</label><input type="text" class="text" id="username" placeholder="用户名" />
+					<label>用户名</label><input type="text" class="text" id="username" placeholder="用户名" value="admin" />
 				</div>
 				<div class="pwd">
-					<label>密　码</label><input type="password" class="text" id="password" placeholder="密码" />
+					<label>密　码</label><input type="password" class="text" id="password" placeholder="密码" value="123" />
 				</div>
 				<div class="rcode">
 					<label><img style="height:22px;" id="codeImg" alt="点击更换"
 								title="点击更换" src="" /></label>
-					<input type="text" class="text" name="code" id="code"  placeholder="验证码" />
+					<input type="text" class="text" name="code" id="code"  placeholder="验证码" value="#" />
 				</div>
 				<input type="button" class="submit" onclick="loginCheck();" value="登录">
 			</div>
@@ -56,7 +46,17 @@
 	<div class="air-balloon ab-2 png"></div>
 	<div class="footer"></div>
 </div>
-
+<!-- 引入JQuery库 start -->
+<script type="text/javascript" src="${basePath}static/js/jquery-1.8.3.js"></script>
+<!-- 引入JQuery库 end -->
+<script type="text/javascript" src="${basePath}static/js/fun.base.js"></script>
+<script type="text/javascript" src="${basePath}static/js/login.js"></script>
+<!-- 引入JQuery提示库 start-->
+<script type="text/javascript" src="${basePath}static/js/jquery.tips.js"></script>
+<!-- 引入JQuery提示库 end-->
+<!-- 引入Cookie库 start-->
+<script type="text/javascript" src="${basePath}static/js/jquery.cookie.js"></script>
+<!-- 引入Cookie库 end -->
 <script type="text/javascript">
 
     /**加载页面时获取验证码**/
