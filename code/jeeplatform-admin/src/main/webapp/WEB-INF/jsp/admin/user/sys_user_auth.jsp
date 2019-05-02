@@ -37,57 +37,7 @@
         .buttonStyle:hover{background:url(${basePath}plugins/zDialog/images/buticon.gif) no-repeat left -23px;}
 
     </style>
-    <!-- 引入JQuery库 start -->
-    <script type="text/javascript" src="${basePath}static/js/jquery-1.8.3.js"></script>
-    <!-- 引入JQuery库 end -->
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
-    <script type="text/javascript">
 
-        function dialogClose()
-        {
-            parentDialog.close();
-        }
-
-        function doSave() {
-            /*var  nodes = $("input[name='checkbox'][checked]");
-             Jquery1.3之后的版本已经不支持如上用法，应该改成 $("input[name='checkbox']:checked")
-             不然会出现，你即使重新选择了一组checkbox，还是获取原来的已选checkbox的Value，不会获取新的已选checkbox的value
-             */
-            var tmpNode;
-            var ids = "";
-            var  nodes = $("input[name='checkbox']:checked");
-            for(var i=0; i<nodes.length; i++){
-                tmpNode = nodes[i];
-                if(i!=nodes.length-1){
-                    ids += tmpNode.id+",";
-                }else{
-                    ids += tmpNode.id;
-                }
-            }
-            var userId = ${userId};
-            var params = userId +";"+ids;
-            //alert(ids);
-            $.ajax({
-                type: "POST",
-                url: 'user/auth',
-                data: {params:params,tm:new Date().getTime()},
-                dataType:'json',
-                cache: false,
-                success: function(data){
-                    if("success" == data.result){
-                        alert('分配角色成功!请重新登录!');
-                        parent.location.reload();
-                        doDialogClose();
-                    }else{
-                        alert("分配角色失败!");
-                    }
-                }
-            });
-        }
-
-    </script>
 </head>
 <body >
 <div class="content_wrap">
@@ -114,5 +64,56 @@
 &nbsp;&nbsp;
 <input type="button" onClick="doSave()" value="保存" class="buttonStyle" />
 <input onClick="dialogClose();" class="buttonStyle" type="button" value="关闭" />
+<!-- 引入JQuery库 start -->
+<script type="text/javascript" src="${basePath}static/js/jquery-1.8.3.js"></script>
+<!-- 引入JQuery库 end -->
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
+<script type="text/javascript">
+
+    function dialogClose()
+    {
+        parentDialog.close();
+    }
+
+    function doSave() {
+        /*var  nodes = $("input[name='checkbox'][checked]");
+         Jquery1.3之后的版本已经不支持如上用法，应该改成 $("input[name='checkbox']:checked")
+         不然会出现，你即使重新选择了一组checkbox，还是获取原来的已选checkbox的Value，不会获取新的已选checkbox的value
+         */
+        var tmpNode;
+        var ids = "";
+        var  nodes = $("input[name='checkbox']:checked");
+        for(var i=0; i<nodes.length; i++){
+            tmpNode = nodes[i];
+            if(i!=nodes.length-1){
+                ids += tmpNode.id+",";
+            }else{
+                ids += tmpNode.id;
+            }
+        }
+        var userId = ${userId};
+        var params = userId +";"+ids;
+        //alert(ids);
+        $.ajax({
+            type: "POST",
+            url: 'user/auth',
+            data: {params:params,tm:new Date().getTime()},
+            dataType:'json',
+            cache: false,
+            success: function(data){
+                if("success" == data.result){
+                    alert('分配角色成功!请重新登录!');
+                    parent.location.reload();
+                    doDialogClose();
+                }else{
+                    alert("分配角色失败!");
+                }
+            }
+        });
+    }
+
+</script>
 </body>
 </html>

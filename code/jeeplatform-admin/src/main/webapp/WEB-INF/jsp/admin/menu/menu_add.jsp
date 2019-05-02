@@ -37,93 +37,7 @@
         .buttonStyle:hover{background:url(${basePath}plugins/zDialog/images/buticon.gif) no-repeat left -23px;}
 
     </style>
-    <script type="text/javascript" src="<%=basePath%>static/js/jquery-1.8.3.js"></script>
-    <!-- 引入JQuery提示库 start-->
-    <script type="text/javascript" src="${basePath}static/js/jquery.tips.js"></script>
-    <!-- 引入JQuery提示库 end-->
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
-    <script type="text/javascript">
-        function dialogClose()
-        {
-            parentDialog.close();
-        }
-        function doCheck(){
-            var menuName = $("#menuName").val();
-            var menuUrl = $("#menuUrl").val();
-            var menuOrder = $("#menuOrder").val();
-            if($("#sjMenu").get(0).value==""){
-                $("#sjMenu").tips({
-                    side : 1,
-                    msg : "请选择上级菜单!",
-                    bg : '#FF5080',
-                    time : 15
-                });
-                return false;
-            }
-            if(menuName == ""){
-                $("#menuName").tips({
-                    side : 1,
-                    msg : "请填写菜单名称!",
-                    bg : '#FF5080',
-                    time : 15
-                });
-                return false;
-            }
-            if(menuUrl == ""){
-                $("#menuUrl").tips({
-                    side : 1,
-                    msg : "请填写菜单地址!",
-                    bg : '#FF5080',
-                    time : 15
-                });
-                return false;
-            }
-            if(menuOrder == ""){
-                $("#menuOrder").tips({
-                    side : 1,
-                    msg : "请填写菜单序号!",
-                    bg : '#FF5080',
-                    time : 15
-                });
-                return false;
-            }
-            return true;
-        }
-        function doSave()
-        {
-            if(doCheck()){
-                var parentId = $("#sjMenu").get(0).value;
-                var menuName = $("#menuName").val();
-                var menuUrl = $("#menuUrl").val();
-                var menuOrder = $("#menuOrder").val();
-                var params = parentId + "," + menuName + "," + menuUrl + "," +menuOrder;
-                $.ajax({
-                    type: "POST",
-                    url: 'menu/addM.do',
-                    data: {params:params,tm:new Date().getTime()},
-                    dataType:'json',
-                    cache: false,
-                    success: function(data){
-                        if("success" == data.result){
-                            alert('保存成功!');
-                            parent.location.reload();
-                            dialogClose();
-                        }else{
-                            $("#klClassifyName").tips({
-                                side : 1,
-                                msg : "保存失败!",
-                                bg : '#FF5080',
-                                time : 15
-                            });
-                        }
-                    }
-                });
-            }
-        }
 
-    </script>
 </head>
 <body >
 <div id="forlogin">
@@ -169,5 +83,92 @@
         </tr>
     </table>
 </div>
+<script type="text/javascript" src="<%=basePath%>static/js/jquery-1.8.3.js"></script>
+<!-- 引入JQuery提示库 start-->
+<script type="text/javascript" src="${basePath}static/js/jquery.tips.js"></script>
+<!-- 引入JQuery提示库 end-->
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
+<script type="text/javascript">
+    function dialogClose()
+    {
+        parentDialog.close();
+    }
+    function doCheck(){
+        var menuName = $("#menuName").val();
+        var menuUrl = $("#menuUrl").val();
+        var menuOrder = $("#menuOrder").val();
+        if($("#sjMenu").get(0).value==""){
+            $("#sjMenu").tips({
+                side : 1,
+                msg : "请选择上级菜单!",
+                bg : '#FF5080',
+                time : 15
+            });
+            return false;
+        }
+        if(menuName == ""){
+            $("#menuName").tips({
+                side : 1,
+                msg : "请填写菜单名称!",
+                bg : '#FF5080',
+                time : 15
+            });
+            return false;
+        }
+        if(menuUrl == ""){
+            $("#menuUrl").tips({
+                side : 1,
+                msg : "请填写菜单地址!",
+                bg : '#FF5080',
+                time : 15
+            });
+            return false;
+        }
+        if(menuOrder == ""){
+            $("#menuOrder").tips({
+                side : 1,
+                msg : "请填写菜单序号!",
+                bg : '#FF5080',
+                time : 15
+            });
+            return false;
+        }
+        return true;
+    }
+    function doSave()
+    {
+        if(doCheck()){
+            var parentId = $("#sjMenu").get(0).value;
+            var menuName = $("#menuName").val();
+            var menuUrl = $("#menuUrl").val();
+            var menuOrder = $("#menuOrder").val();
+            var params = parentId + "," + menuName + "," + menuUrl + "," +menuOrder;
+            $.ajax({
+                type: "POST",
+                url: 'menu/addM.do',
+                data: {params:params,tm:new Date().getTime()},
+                dataType:'json',
+                cache: false,
+                success: function(data){
+                    if("success" == data.result){
+                        alert('保存成功!');
+                        parent.location.reload();
+                        dialogClose();
+                    }else{
+                        $("#klClassifyName").tips({
+                            side : 1,
+                            msg : "保存失败!",
+                            bg : '#FF5080',
+                            time : 15
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+</script>
 </body>
 </html>

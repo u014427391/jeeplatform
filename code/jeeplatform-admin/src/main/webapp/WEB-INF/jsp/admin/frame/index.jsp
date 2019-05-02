@@ -71,10 +71,10 @@
 			<button class="tab-btn btn-right"><i class="icon-font">&#xe60f;</i></button>
 		</div>
 		<div class="layout-main-body">
-			<iframe class="body-iframe" name="iframe0" width="100%" height="99%" src="home.html" frameborder="0" data-id="home.html" seamless></iframe>
+			<iframe class="body-iframe" name="iframe0" width="100%" height="99%" src="#" frameborder="0" data-id="#" seamless></iframe>
 		</div>
 	</section>
-	<div class="layout-footer">@2017 V0.1 Muses Team</div>
+	<div class="layout-footer">@2017 V.1.0 Muses Team </div>
 </div>
 <script type="text/javascript">
 	/*左侧菜单点击*/

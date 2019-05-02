@@ -37,140 +37,7 @@
         .buttonStyle:hover{background:url(${basePath}plugins/zDialog/images/buticon.gif) no-repeat left -23px;}
 
     </style>
-    <script type="text/javascript" src="<%=basePath%>static/js/jquery-1.8.3.js"></script>
-    <!-- 引入JQuery提示库 start-->
-    <script type="text/javascript" src="${basePath}static/js/jquery.tips.js"></script>
-    <!-- 引入JQuery提示库 end-->
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
-    <script type="text/javascript">
 
-        function dialogClose()
-        {
-            parentDialog.close();
-        }
-
-        function doCheck(){
-            var username = $("#username").val();
-            var password = $("#password").val();
-            var phone = $("#phone").val();
-            var email = $("#email").val();
-            var rpassword = $("#rpassword").val();
-            if(username == ""){
-                $("#username").tips({
-                    side : 1,
-                    msg : "请填写用户名!",
-                    bg : '#FF5080',
-                    time : 15
-                });
-                return false;
-            }
-            if(password == ""){
-                $("#password").tips({
-                    side : 1,
-                    msg : "密码不可以为空!",
-                    bg : '#FF5080',
-                    time : 15
-                });
-                return false;
-            }
-            if(password != rpassword){
-                $("#password").tips({
-                    side : 1,
-                    msg : "两次密码不一致!",
-                    bg : '#FF5080',
-                    time : 15
-                });
-                return false;
-            }
-            if(password ==""){
-                $("#password").tips({
-                    side : 1,
-                    msg : "请填写密码!",
-                    bg : '#FF5080',
-                    time : 15
-                });
-                return false;
-            }
-            if(phone == ""){
-                $("#phone").tips({
-                    side : 1,
-                    msg : "请填写手机号!",
-                    bg : '#FF5080',
-                    time : 15
-                });
-                return false;
-            }
-            if(email == ""){
-                $("#email").tips({
-                    side : 1,
-                    msg : "请填写邮箱!",
-                    bg : '#FF5080',
-                    time : 15
-                });
-                return false;
-            }
-
-            var phoneRe = /^1\d{10}$/;
-            if(!phoneRe.test(phone)){
-                $("#phone").tips({
-                    side : 1,
-                    msg : "手机号码格式不正确!",
-                    bg : '#FF5080',
-                    time : 15
-                });
-                return false;
-            }
-
-            var emailRe = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
-            if(!emailRe.test(email)){
-                $("#email").tips({
-                    side : 1,
-                    msg : "邮箱格式不正确!",
-                    bg : '#FF5080',
-                    time : 15
-                });
-                return false;
-            }
-
-            return true;
-        }
-
-        function doSave() {
-            var username = $("#username").val();
-            var password = $("#password").val();
-            var phone = $("#phone").val();
-            var sex = $("#sex").val()!=""?$("#sex").val():"保密";
-            var email = $("#email").val();
-            var mark = $("#mark").val()!=""?$("#mark").val():"没有备注";
-            var params = username+","+password +","+phone +","+sex+","+email
-                +","+mark;
-            if(doCheck()){
-                $.ajax({
-                    type: "POST",
-                    url: 'user/addU',
-                    data: {params:params,tm:new Date().getTime()},
-                    dataType:'json',
-                    cache: false,
-                    success: function(data){
-                        if("success" == data.result){
-                            alert('新增成功!');
-                            parent.location.reload();
-                            dialogClose();
-                        }else{
-                            $("#username").tips({
-                                side : 1,
-                                msg : "新增失败!",
-                                bg : '#FF5080',
-                                time : 15
-                            });
-                        }
-                    }
-                });
-            }
-        }
-    </script>
 </head>
 <body >
 <div id="forlogin">
@@ -211,5 +78,139 @@
         </tr>
     </table>
 </div>
+<script type="text/javascript" src="<%=basePath%>static/js/jquery-1.8.3.js"></script>
+<!-- 引入JQuery提示库 start-->
+<script type="text/javascript" src="${basePath}static/js/jquery.tips.js"></script>
+<!-- 引入JQuery提示库 end-->
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
+<script type="text/javascript">
+
+    function dialogClose()
+    {
+        parentDialog.close();
+    }
+
+    function doCheck(){
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var phone = $("#phone").val();
+        var email = $("#email").val();
+        var rpassword = $("#rpassword").val();
+        if(username == ""){
+            $("#username").tips({
+                side : 1,
+                msg : "请填写用户名!",
+                bg : '#FF5080',
+                time : 15
+            });
+            return false;
+        }
+        if(password == ""){
+            $("#password").tips({
+                side : 1,
+                msg : "密码不可以为空!",
+                bg : '#FF5080',
+                time : 15
+            });
+            return false;
+        }
+        if(password != rpassword){
+            $("#password").tips({
+                side : 1,
+                msg : "两次密码不一致!",
+                bg : '#FF5080',
+                time : 15
+            });
+            return false;
+        }
+        if(password ==""){
+            $("#password").tips({
+                side : 1,
+                msg : "请填写密码!",
+                bg : '#FF5080',
+                time : 15
+            });
+            return false;
+        }
+        if(phone == ""){
+            $("#phone").tips({
+                side : 1,
+                msg : "请填写手机号!",
+                bg : '#FF5080',
+                time : 15
+            });
+            return false;
+        }
+        if(email == ""){
+            $("#email").tips({
+                side : 1,
+                msg : "请填写邮箱!",
+                bg : '#FF5080',
+                time : 15
+            });
+            return false;
+        }
+
+        var phoneRe = /^1\d{10}$/;
+        if(!phoneRe.test(phone)){
+            $("#phone").tips({
+                side : 1,
+                msg : "手机号码格式不正确!",
+                bg : '#FF5080',
+                time : 15
+            });
+            return false;
+        }
+
+        var emailRe = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+        if(!emailRe.test(email)){
+            $("#email").tips({
+                side : 1,
+                msg : "邮箱格式不正确!",
+                bg : '#FF5080',
+                time : 15
+            });
+            return false;
+        }
+
+        return true;
+    }
+
+    function doSave() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var phone = $("#phone").val();
+        var sex = $("#sex").val()!=""?$("#sex").val():"保密";
+        var email = $("#email").val();
+        var mark = $("#mark").val()!=""?$("#mark").val():"没有备注";
+        var params = username+","+password +","+phone +","+sex+","+email
+            +","+mark;
+        if(doCheck()){
+            $.ajax({
+                type: "POST",
+                url: 'user/addU',
+                data: {params:params,tm:new Date().getTime()},
+                dataType:'json',
+                cache: false,
+                success: function(data){
+                    if("success" == data.result){
+                        alert('新增成功!');
+                        parent.location.reload();
+                        dialogClose();
+                    }else{
+                        $("#username").tips({
+                            side : 1,
+                            msg : "新增失败!",
+                            bg : '#FF5080',
+                            time : 15
+                        });
+                    }
+                }
+            });
+        }
+    }
+</script>
 </body>
 </html>

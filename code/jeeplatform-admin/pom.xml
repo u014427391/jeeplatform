@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.muses</groupId>
-        <artifactId>muses</artifactId>
+        <groupId>org.muses.jeeplatform</groupId>
+        <artifactId>jeeplatform</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
@@ -25,25 +25,21 @@
     <dependencies>
         <!-- module start -->
         <dependency>
-            <groupId>org.muses</groupId>
+            <groupId>org.muses.jeeplatform</groupId>
             <artifactId>jeeplatform-common</artifactId>
-            <version>1.0</version>
+            <version>${jeeplatform-common.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.muses</groupId>
+            <groupId>org.muses.jeeplatform</groupId>
             <artifactId>jeeplatform-core</artifactId>
-            <version>1.0</version>
+            <version>${jeeplatform-core.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.muses</groupId>
-            <artifactId>jeeplatform-oss</artifactId>
-            <version>1.0</version>
+            <groupId>org.muses.jeeplatform</groupId>
+            <artifactId>jeeplatform-sso</artifactId>
+            <version>${jeeplatform-sso.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.muses</groupId>
-            <artifactId>jeeplatform-upms</artifactId>
-            <version>1.0</version>
-        </dependency>
+
         <!-- moudle end-->
         <!-- servlet start-->
         <!--<dependency>-->

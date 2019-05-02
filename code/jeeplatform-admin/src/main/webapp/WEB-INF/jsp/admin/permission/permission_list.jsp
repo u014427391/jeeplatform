@@ -18,67 +18,7 @@
           href="<%=basePath%>plugins/page/css/bootstrap-3.3.5.min.css" />
     <!-- jquery.pagination所需CSS -->
     <link type="text/css" rel="stylesheet" href="<%=basePath%>plugins/page/css/pagination.css" />
-    <script type="text/javascript" src="<%=basePath%>plugins/page/js/jquery.min.js"></script>
-    <!-- jquery.pagination所需JS 注意必须放在jquery.js后面 -->
-    <script type="text/javascript" src="<%=basePath%>plugins/page/js/jquery.pagination.js"></script>
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
-    <script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
-    <script type="text/javascript">
 
-        var pageIndex = Number(${pageIndex});
-
-        var totalCount = Number(${totalCount});
-
-        $(document).ready(function () {
-            //加入分页的绑定
-            $("#Pagination").pagination(totalCount, {
-                callback : pageselectCallback,
-                prev_text : '< 上一页',
-                next_text: '下一页 >',
-                items_per_page : 6,
-                num_display_entries : 6,
-                current_page : pageIndex,
-                num_edge_entries : 1,
-                link_to: "permission/queryAll.do?pageIndex=__id__"  //分页的js中会自动把"__id__"替换为当前的数。0
-            });
-
-            var html = "";
-            var data = ${permissions};
-            $.each(data,function(idx,obj){
-                var id = obj.id;
-                var name = obj.name;
-                var desc = obj.pdesc;
-                html += "<tr><td>"+id+"</td>"+
-                    "<td>"+name+"</td>"+
-                    "<td>"+desc+"</td>"+
-                    "</tr>";
-
-            });
-            $("#content").append(html);
-
-            //显示弹框
-            $('.bounceIn').click(function(){
-                className = $(this).attr('class');
-                $('#dialogBg').fadeIn(300);
-                $('#dialog').removeAttr('class').addClass('animated '+className+'').fadeIn();
-               // alert('测试');
-            });
-
-        });
-
-        //这个事件是在翻页时候用的
-        function pageselectCallback(index, jq) {
-
-        }
-
-        function closdlg()
-        {
-            Dialog.close();
-        }
-
-
-    </script>
 </head>
 <body>
 <br>
@@ -106,5 +46,66 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="<%=basePath%>plugins/page/js/jquery.min.js"></script>
+<!-- jquery.pagination所需JS 注意必须放在jquery.js后面 -->
+<script type="text/javascript" src="<%=basePath%>plugins/page/js/jquery.pagination.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
+<script type="text/javascript">
+
+    var pageIndex = Number(${pageIndex});
+
+    var totalCount = Number(${totalCount});
+
+    $(document).ready(function () {
+        //加入分页的绑定
+        $("#Pagination").pagination(totalCount, {
+            callback : pageselectCallback,
+            prev_text : '< 上一页',
+            next_text: '下一页 >',
+            items_per_page : 6,
+            num_display_entries : 6,
+            current_page : pageIndex,
+            num_edge_entries : 1,
+            link_to: "permission/queryAll.do?pageIndex=__id__"  //分页的js中会自动把"__id__"替换为当前的数。0
+        });
+
+        var html = "";
+        var data = ${permissions};
+        $.each(data,function(idx,obj){
+            var id = obj.id;
+            var name = obj.name;
+            var desc = obj.pdesc;
+            html += "<tr><td>"+id+"</td>"+
+                "<td>"+name+"</td>"+
+                "<td>"+desc+"</td>"+
+                "</tr>";
+
+        });
+        $("#content").append(html);
+
+        //显示弹框
+        $('.bounceIn').click(function(){
+            className = $(this).attr('class');
+            $('#dialogBg').fadeIn(300);
+            $('#dialog').removeAttr('class').addClass('animated '+className+'').fadeIn();
+            // alert('测试');
+        });
+
+    });
+
+    //这个事件是在翻页时候用的
+    function pageselectCallback(index, jq) {
+
+    }
+
+    function closdlg()
+    {
+        Dialog.close();
+    }
+
+
+</script>
 </body>
 </html>
