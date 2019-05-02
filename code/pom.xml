@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.muses</groupId>
+	<groupId>org.muses.jeeplatform</groupId>
 	<artifactId>jeeplatform</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -21,8 +21,7 @@
 		<jeeplatform-core.version>1.0</jeeplatform-core.version>
 		<jeeplatform-admin.version>1.0</jeeplatform-admin.version>
 		<jeeplatform-common.version>1.0</jeeplatform-common.version>
-		<jeeplatform-oss.version>1.0</jeeplatform-oss.version>
-		<jeeplatform-upms.version>1.0</jeeplatform-upms.version>
+		<jeeplatform-sso.version>1.0</jeeplatform-sso.version>
 
 		<!-- 外部依赖 -->
 		<log4j.version>1.2.17</log4j.version>
@@ -72,8 +71,7 @@
 		<module>jeeplatform-core</module>
 		<module>jeeplatform-admin</module>
 		<module>jeeplatform-common</module>
-		<module>jeeplatform-oss</module>
-		<module>jeeplatform-upms</module>
+		<module>jeeplatform-sso</module>
 	</modules>
 
 	<dependencies>
