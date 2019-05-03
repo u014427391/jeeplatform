@@ -44,15 +44,19 @@ public class LoginController extends BaseController {
 	 * 获取登录用户的IP
 	 * @throws Exception 
 	 */
-	public void getRemortIP(String username)  {  
+	private void getRemortIP(String username)  {
 		HttpServletRequest request = this.getRequest();
 		Map<String,String> map = new HashMap<String,String>();
-		String ip = "";
-		if (request.getHeader("x-forwarded-for") == null) {  
-			ip = request.getRemoteAddr();  
-	    }else{
-	    	ip = request.getHeader("x-forwarded-for");  
-	    }
+		String ip = request.getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
 		map.put("username", username);
 		map.put("loginIp", ip);
 		 userService.saveIP(map);
@@ -111,7 +115,7 @@ public class LoginController extends BaseController {
 							//删除验证码Session
 							session.removeAttribute(Constants.SESSION_SECURITY_CODE);
 							//保存登录IP
-							getRemortIP(username);
+							this.getRemortIP(username);
 							/**Shiro加入身份验证**/
 							Subject sub = SecurityUtils.getSubject();
 							UsernamePasswordToken token = new UsernamePasswordToken(username,password);

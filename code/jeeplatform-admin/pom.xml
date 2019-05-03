@@ -13,10 +13,6 @@
     <packaging>war</packaging>
 
     <properties>
-        <!--<spring.version>4.1.5.RELEASE</spring.version>-->
-        <!--<spring-data-jpa.version>1.4.2.RELEASE</spring-data-jpa.version>-->
-        <!--<spring-data-commons.version>1.6.2.RELEASE</spring-data-commons.version>-->
-        <!--<hibernate.version>4.3.8.Final</hibernate.version>-->
         <shiro.version>1.2.3</shiro.version>
         <lucene.version>4.7.2</lucene.version>
         <poi.version>3.7</poi.version>
@@ -39,16 +35,7 @@
             <artifactId>jeeplatform-sso</artifactId>
             <version>${jeeplatform-sso.version}</version>
         </dependency>
-
         <!-- moudle end-->
-        <!-- servlet start-->
-        <!--<dependency>-->
-            <!--<groupId>javax.servlet</groupId>-->
-            <!--<artifactId>servlet-api</artifactId>-->
-            <!--<version>2.5</version>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
-        <!-- servlet end -->
 
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
@@ -61,54 +48,8 @@
             <artifactId>jstl</artifactId>
         </dependency>
 
-        <!-- jstl start-->
-        <!--<dependency>-->
-            <!--<groupId>jstl</groupId>-->
-            <!--<artifactId>jstl</artifactId>-->
-            <!--<version>1.2</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>taglibs</groupId>-->
-            <!--<artifactId>standard</artifactId>-->
-            <!--<version>1.1.2</version>-->
-        <!--</dependency>-->
 
-        <!-- jstl end -->
-        <!-- json解析需要的jar start-->
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.8.3</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>3.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.ezmorph</groupId>
-            <artifactId>ezmorph</artifactId>
-            <version>1.0.6</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.5</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.json-lib</groupId>
-            <artifactId>json-lib</artifactId>
-            <version>2.4</version>
-            <type>jar</type>
-            <classifier>jdk15</classifier>
-            <scope>compile</scope>
-        </dependency>
-        <!-- json解析需要的jar end -->
+
         <!-- commons -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -121,103 +62,7 @@
             <version>1.2.2</version>
         </dependency>
         <!-- commons -->
-        <!-- spring framework start-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-core</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-beans</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-context</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-context-support</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-jdbc</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-tx</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-test</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-web</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!-- spring framework end -->
-        <!-- spring aop start-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-aop</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.aspectj</groupId>-->
-            <!--<artifactId>aspectjweaver</artifactId>-->
-            <!--<version>1.6.10</version>-->
-        <!--</dependency>-->
-        <!-- spring aop end -->
-        <!-- springMVC start-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-webmvc</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!-- springMVC end -->
-        <!-- spring data start-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-orm</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.data</groupId>-->
-            <!--<artifactId>spring-data-jpa</artifactId>-->
-            <!--<version>${spring-data-jpa.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.data</groupId>-->
-            <!--<artifactId>spring-data-commons</artifactId>-->
-            <!--<version>${spring-data-commons.version}</version>-->
-        <!--</dependency>-->
-        <!-- spring data end -->
-        <!-- hibernate jpa start-->
-        <!--<dependency>-->
-            <!--<groupId>org.hibernate.javax.persistence</groupId>-->
-            <!--<artifactId>hibernate-jpa-2.1-api</artifactId>-->
-            <!--<version>1.0.0.Final</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.hibernate</groupId>-->
-            <!--<artifactId>hibernate-core</artifactId>-->
-            <!--<version>${hibernate.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.hibernate</groupId>-->
-            <!--<artifactId>hibernate-entitymanager</artifactId>-->
-            <!--<version>${hibernate.version}</version>-->
-        <!--</dependency>-->
-        <!-- hibernate jpa end -->
-        <!-- hibernate echache start-->
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -228,19 +73,7 @@
             <artifactId>ehcache-core</artifactId>
             <version>2.5.0</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.hibernate</groupId>-->
-            <!--<artifactId>hibernate-ehcache</artifactId>-->
-            <!--<version>${hibernate.version}</version>-->
-        <!--</dependency>-->
-        <!-- hibernate echache end -->
-        <!-- 阿里的连接池druid start-->
-        <!--<dependency>-->
-            <!--<groupId>com.alibaba</groupId>-->
-            <!--<artifactId>druid</artifactId>-->
-            <!--<version>${druid.version}</version>-->
-        <!--</dependency>-->
-        <!-- 阿里的连接池druid end-->
+
         <!--shiro start-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -248,6 +81,7 @@
             <version>${shiro.version}</version>
         </dependency>
         <!-- shiro end-->
+
         <!-- velocity start-->
         <dependency>
             <groupId>org.apache.velocity</groupId>
@@ -260,6 +94,7 @@
             <version>2.0</version>
         </dependency>
         <!-- velocity end-->
+
         <!-- lucene全文搜素引擎 start-->
         <dependency>
             <groupId>org.apache.lucene</groupId>
@@ -295,6 +130,7 @@
             <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/IKAnalyzer2012FF_u1.jar</systemPath>
         </dependency>
         <!-- lucene全文搜素引擎 end -->
+
         <!-- log4j start-->
         <dependency>
             <groupId>log4j</groupId>
@@ -302,6 +138,7 @@
             <version>${log4j.version}</version>
         </dependency>
         <!-- log4j end-->
+
         <!-- json解析需要的jar start-->
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -337,6 +174,7 @@
             <scope>compile</scope>
         </dependency>
         <!-- json解析需要的jar end -->
+
         <!-- poi start-->
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -344,6 +182,7 @@
             <version>${poi.version}</version>
         </dependency>
         <!-- poi end-->
+
         <!-- email start-->
         <dependency>
             <groupId>com.sun.mail</groupId>
