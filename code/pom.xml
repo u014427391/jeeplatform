@@ -36,6 +36,40 @@
 		<github.pagehelper.version>4.2.1</github.pagehelper.version>
 		<fastjson.version>1.2.7</fastjson.version>
 	</properties>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<activatedProperties>dev</activatedProperties>
+				<project.packaging>jar</project.packaging>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<activatedProperties>test</activatedProperties>
+				<project.packaging>jar</project.packaging>
+			</properties>
+		</profile>
+		<profile>
+			<id>uat</id>
+			<properties>
+				<activatedProperties>uat</activatedProperties>
+				<project.packaging>jar</project.packaging>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<activatedProperties>prod</activatedProperties>
+				<project.packaging>jar</project.packaging>
+			</properties>
+		</profile>
+	</profiles>
 	
 	<build>
 		<plugins>
@@ -63,14 +97,23 @@
 				</configuration>
 			</plugin>
 
-			<!-- 开启热部署-->
+			<!-- 开启热部署
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot.version}</version>
 				<configuration>
 					<fork>true</fork>
+                    <mainClass>org.muses.jeeplatform.Application</mainClass>
 				</configuration>
-			</plugin>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>-->
 
 		</plugins>
 	</build>

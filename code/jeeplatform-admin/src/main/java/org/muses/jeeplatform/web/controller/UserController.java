@@ -401,11 +401,9 @@ public class UserController extends BaseController {
 
     /**
      * 导出管理员信息到Excel表
-     *
-     * @param idstr
-     * @return
+     * @since 1.0.0
      */
-    @RequestMapping(value = "/exportExcel", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
     public ModelAndView exportExcel(@RequestParam("ids") String idstr) {
         Map<String, Object> dataMap = new HashMap<String, Object>();
         List<String> titles = new ArrayList<String>();
