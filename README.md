@@ -1,10 +1,8 @@
 
 ## 项目简介 ##
-一款企业信息化开发基础平台，可以用于快速构建企业后台管理系统，集成了OA(办公自动化)、SCM(供应链系统)、ERP(企业资源管理系统)、CMS(内容管理系统)、CRM(客户关系管理系统)等企业系统的通用业务功能
+一款企业信息化开发基础平台，拟集成了OA(办公自动化)、SCM(供应链系统)、ERP(企业资源管理系统)、CMS(内容管理系统)、CRM(客户关系管理系统)等企业系统的通用业务功能
 
-JeePlatform项目是一款以Activiti为工作流引擎，以Spring Framework为核心框架，集ORM框架Mybatis，Web层框架SpringMVC和多种开源组件框架而成的一款通用基础平台，基于本平台可以实现快速开发，实现企业信息管理的高效开发。
-
-代码已经捐赠给开源中国社区：https://www.oschina.net/p/jeeplatform
+JeePlatform项目是一款以Spring Framework为核心框架，集ORM框架Mybatis，Web层框架SpringMVC和多种开源组件框架而成的一款通用基础平台，代码已经捐赠给开源中国社区：https://www.oschina.net/p/jeeplatform
 
 ## 系统设计 ##
 ### 系统管理(模块名称jeeplatform-admin) ###
@@ -217,9 +215,12 @@ public class RedisAspect {
 * [基于RBAC模型的权限系统设计(Github开源项目)](http://blog.csdn.net/u014427391/article/details/78889378)
 * [Spring Data Jpa+SpringMVC+Jquery.pagination.js实现分页](http://blog.csdn.net/u014427391/article/details/77434664)
 * [SpringMVC+ZTree实现树形菜单权限配置](https://blog.csdn.net/u014427391/article/details/78889378)
-* [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
 * [Github开源项目(企业信息化基础平台)](https://blog.csdn.net/u014427391/article/details/78867439)
 * [基于权限安全框架Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
+
+SpringBoot
+* [SpringBoot热部署配置](https://smilenicky.blog.csdn.net/article/details/89765909)
+* [SpringBoot profles配置多环境](https://smilenicky.blog.csdn.net/article/details/89792248)
 
 ### Redis知识
 * [Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
@@ -235,10 +236,15 @@ public class RedisAspect {
 * [Oracle merge合并更新函数](https://blog.csdn.net/u014427391/article/details/87898729)
 * [oracle select in超过1000条报错解决方法](https://blog.csdn.net/u014427391/article/details/87922878)
 
+### 单点登录
+* [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
 
 
 ### SQL调优知识
 * [Oracle优化器基础知识](https://blog.csdn.net/u014427391/article/details/88650696)
+* [Oracle性能调优之虚拟索引用法简介](https://smilenicky.blog.csdn.net/article/details/89761234)
+* [Oracle性能调优之物化视图用法简介](https://smilenicky.blog.csdn.net/article/details/89762680)
+* [Orace执行计划学习笔记](https://smilenicky.blog.csdn.net/article/details/89604262)
 * [Oracle sql共享池$sqlarea分析SQL资源使用情况](https://blog.csdn.net/u014427391/article/details/86562755)
 
 
