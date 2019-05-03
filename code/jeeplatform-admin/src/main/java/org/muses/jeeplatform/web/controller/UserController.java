@@ -401,8 +401,6 @@ public class UserController extends BaseController {
 
     /**
      * 导出管理员信息到Excel表
-     *
-     * @param idstr
      * @since 1.0.0
      */
     @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
