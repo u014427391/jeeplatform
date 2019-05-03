@@ -217,9 +217,12 @@ public class RedisAspect {
 * [基于RBAC模型的权限系统设计(Github开源项目)](http://blog.csdn.net/u014427391/article/details/78889378)
 * [Spring Data Jpa+SpringMVC+Jquery.pagination.js实现分页](http://blog.csdn.net/u014427391/article/details/77434664)
 * [SpringMVC+ZTree实现树形菜单权限配置](https://blog.csdn.net/u014427391/article/details/78889378)
-* [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
 * [Github开源项目(企业信息化基础平台)](https://blog.csdn.net/u014427391/article/details/78867439)
 * [基于权限安全框架Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
+
+SpringBoot
+* [SpringBoot热部署配置](https://smilenicky.blog.csdn.net/article/details/89765909)
+* [SpringBoot profles配置多环境](https://smilenicky.blog.csdn.net/article/details/89792248)
 
 ### Redis知识
 * [Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
@@ -235,10 +238,15 @@ public class RedisAspect {
 * [Oracle merge合并更新函数](https://blog.csdn.net/u014427391/article/details/87898729)
 * [oracle select in超过1000条报错解决方法](https://blog.csdn.net/u014427391/article/details/87922878)
 
+### 单点登录
+* [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
 
 
 ### SQL调优知识
 * [Oracle优化器基础知识](https://blog.csdn.net/u014427391/article/details/88650696)
+* [Oracle性能调优之虚拟索引用法简介](https://smilenicky.blog.csdn.net/article/details/89761234)
+* [Oracle性能调优之物化视图用法简介](https://smilenicky.blog.csdn.net/article/details/89762680)
+* [Orace执行计划学习笔记](https://smilenicky.blog.csdn.net/article/details/89604262)
 * [Oracle sql共享池$sqlarea分析SQL资源使用情况](https://blog.csdn.net/u014427391/article/details/86562755)
 
 
