@@ -16,9 +16,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
 	<title>企业信息化基础平台</title>
-	<!-- 引入JQuery库 start -->
-	<script type="text/javascript" src="${basePath}static/js/jquery-1.8.3.js"></script>
-	<!-- 引入JQuery库 end -->
 	<!-- 页面logo设置 start-->
 	<link rel="icon" type="image/png" href="static/favicon.ico">
 	<!-- 页面logo设置 end -->
@@ -76,6 +73,9 @@
 	</section>
 	<div class="layout-footer">@2017 V.1.0 Muses Team </div>
 </div>
+<!-- 引入JQuery库 start -->
+<script type="text/javascript" src="${basePath}static/js/jquery-1.8.3.js"></script>
+<!-- 引入JQuery库 end -->
 <script type="text/javascript">
 	/*左侧菜单点击*/
     $(".side-menu").on('click', 'li a', function(e) {
