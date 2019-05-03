@@ -6,4 +6,8 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: @activatedProperties@
+  application:
+    name: @project.name@_${spring.profiles.active}
+
+
