@@ -7,6 +7,7 @@ JeePlatform项目是一款以Spring Framework为核心框架，集ORM框架Mybat
 ## 系统设计 ##
 ### 系统管理(模块名称jeeplatform-admin) ###
 管理系统登录页面，采用Shiro登录验证
+ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统登录页面.png)
 
 管理系统主页前端，可以适配移动端页面
