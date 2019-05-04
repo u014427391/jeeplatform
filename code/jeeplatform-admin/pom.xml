@@ -19,7 +19,6 @@
     </properties>
 
     <dependencies>
-        <!-- module start -->
         <dependency>
             <groupId>org.muses.jeeplatform</groupId>
             <artifactId>jeeplatform-common</artifactId>
@@ -30,7 +29,6 @@
             <artifactId>jeeplatform-core</artifactId>
             <version>${jeeplatform-core.version}</version>
         </dependency>
-        <!-- moudle end-->
 
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
@@ -42,50 +40,28 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
-
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-
-        <!--shiro start-->
+        
+        <!-- Shiro -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-all</artifactId>
             <version>${shiro.version}</version>
         </dependency>
-        <!-- shiro end-->
 
-        <!-- velocity start-->
-        <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
-            <version>1.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity-tools</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <!-- velocity end-->
-
-        <!-- poi start-->
+        <!-- Apache POI -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>${poi.version}</version>
         </dependency>
-        <!-- poi end-->
 
-        <!-- email start-->
+        <!-- email -->
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.5.6</version>
         </dependency>
-        <!-- email end-->
+
     </dependencies>
 
 
