@@ -1,6 +1,6 @@
 package org.muses.jeeplatform.web.controller;
 
-import net.sf.json.JSONArray;
+import com.alibaba.fastjson.JSON;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.entity.admin.Permission;
 import org.muses.jeeplatform.service.PermissionPageService;
@@ -52,9 +52,9 @@ public class PermissionController extends BaseController {
         mv.addObject("totalCount",permissionPage.getTotalElements());
         mv.addObject("pageIndex",pageIndex);
 
-        JSONArray jsonArray = JSONArray.fromObject(permissionPage.getContent());
+        String json = JSON.toJSONString(permissionPage.getContent());
 
-        mv.addObject("permissions",jsonArray.toString());
+        mv.addObject("permissions",json);
         mv.setViewName("admin/permission/permission_list");
         return mv;
     }
