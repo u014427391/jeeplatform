@@ -62,7 +62,7 @@
 			<button class="tab-btn btn-left"><i class="icon-font">&#xe60e;</i></button>
 			<nav class="tab-nav">
 				<div class="tab-nav-content">
-					<a href="javascript:;" class="content-tab active" data-id="home.html">首页</a>
+					<a href="javascript:;" class="content-tab active" data-id="druid/index.html">首页</a>
 				</div>
 			</nav>
 			<button class="tab-btn btn-right"><i class="icon-font">&#xe60f;</i></button>
