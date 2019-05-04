@@ -1,7 +1,7 @@
 package org.muses.jeeplatform.web.controller;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.muses.jeeplatform.core.entity.admin.Permission;
@@ -24,7 +24,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 /**
  * Created by Nicky on 2017/7/30.
  */
@@ -69,9 +71,9 @@ public class RoleController extends BaseController {
         mv.addObject("totalCount",rolePage.getTotalElements());
         mv.addObject("pageIndex",pageIndex);
 
-        JSONArray jsonArray = JSONArray.fromObject(rolePage.getContent());
+       String json = JSON.toJSONString(rolePage.getContent());
 
-        mv.addObject("roles",jsonArray.toString());
+        mv.addObject("roles",json);
         mv.setViewName("admin/role/role_list");
         return mv;
     }
@@ -205,8 +207,7 @@ public class RoleController extends BaseController {
 
         model.addAttribute("roleId" , roleId);
 
-        JSONArray jsonArray = JSONArray.fromObject(menuList);
-        String json = jsonArray.toString();
+        String json = JSON.toJSONString(menuList);
 
         json = json.replaceAll("menuId","id").replaceAll("parentId","pId").
                 replaceAll("menuName","name").replaceAll("hasSubMenu","checked");

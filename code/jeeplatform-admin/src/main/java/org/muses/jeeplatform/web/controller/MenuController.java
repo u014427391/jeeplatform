@@ -1,11 +1,7 @@
 package org.muses.jeeplatform.web.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.muses.jeeplatform.core.entity.admin.Permission;
@@ -24,6 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * Created by op.43027 on 2017/5/27 0027.
@@ -55,8 +54,8 @@ public class MenuController extends BaseController {
          menuPage = menuService.findAll(pageIndex+1, pageSize, Sort.Direction.ASC,"menuId");
          mv.addObject("totalCount",menuPage.getTotalElements());
          mv.addObject("pageIndex",pageIndex);
-         JSONArray jsonData = JSONArray.fromObject(menuPage.getContent());
-         mv.addObject("menus",jsonData.toString());
+         String json = JSON.toJSONString(menuPage.getContent());
+         mv.addObject("menus",json);
 
          mv.setViewName("admin/menu/menu_list");
          return mv;
@@ -77,13 +76,13 @@ public class MenuController extends BaseController {
 
         int pageSize = Constants.PAGE_SIZE;
         Page<Menu> menuPage = menuService.findAll(pageIndex, pageSize, Sort.Direction.ASC,"menuId");
-        JSONArray jsonData = JSONArray.fromObject(menuPage.getContent());
+        String json = JSON.toJSONString(menuPage.getContent());
 
         PrintWriter out;
 
         response.setCharacterEncoding("utf-8");
         out = response.getWriter();
-        out.write(jsonData.toString());
+        out.write(json);
         out.flush();
         out.close();
 
@@ -93,8 +92,8 @@ public class MenuController extends BaseController {
     public ModelAndView list(){
         ModelAndView mv = new ModelAndView();
         List<Menu> menus = menuService.findAllParentMenu();
-        JSONArray jsonObject = JSONArray.fromObject(menus);
-        mv.addObject("menus",jsonObject.toString());
+        String json = JSON.toJSONString(menus);
+        mv.addObject("menus",json);
         mv.setViewName("admin/menu/menu_list");
         return mv;
     }
@@ -108,12 +107,11 @@ public class MenuController extends BaseController {
     public void getSub(@RequestParam String menuId, HttpServletResponse response)throws Exception{
         try {
             List<Menu> subMenu = menuService.findSubMenuById(Integer.parseInt(menuId));
-            JSONArray arr = JSONArray.fromObject(subMenu);
             PrintWriter out;
 
             response.setCharacterEncoding("utf-8");
             out = response.getWriter();
-            String json = arr.toString();
+            String json = JSON.toJSONString(subMenu);
             out.write(json);
             out.flush();
             out.close();

@@ -148,10 +148,10 @@
 			<version>${mybatis-spring-boot.version}</version>
 		</dependency>
 		<!-- Thymeleaf-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 		<!-- 热部署-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

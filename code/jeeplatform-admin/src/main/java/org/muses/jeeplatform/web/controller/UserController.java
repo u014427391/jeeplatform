@@ -1,8 +1,7 @@
 package org.muses.jeeplatform.web.controller;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.email.JavaEmailSender;
@@ -13,7 +12,6 @@ import org.muses.jeeplatform.core.excel.ExcelViewWrite;
 import org.muses.jeeplatform.service.RolePageService;
 import org.muses.jeeplatform.service.RoleService;
 import org.muses.jeeplatform.service.UserService;
-import org.muses.jeeplatform.utils.DateJsonValueProcessor;
 import org.muses.jeeplatform.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -76,12 +74,12 @@ public class UserController extends BaseController {
         mv.addObject("pageIndex", pageIndex);
 //        JsonConfig cfg = new JsonConfig();
 //        cfg.setExcludes(new String[]{"handler","hibernateLazyInitializer"});
-        JsonConfig jcg = new JsonConfig();
+        /*JsonConfig jcg = new JsonConfig();
         jcg.registerJsonValueProcessor(Date.class,
-                new DateJsonValueProcessor("yyyy-MM-dd"));
-        JSONArray jsonArray = JSONArray.fromObject(userPage.getContent(), jcg);
+                new DateJsonValueProcessor("yyyy-MM-dd"));*/
+        String json = JSON.toJSONString(userPage.getContent());
         //System.out.println(jsonArray.toString());
-        mv.addObject("users", jsonArray.toString());
+        mv.addObject("users", json);
         mv.setViewName("admin/user/sys_user_list");
         return mv;
     }
@@ -123,12 +121,9 @@ public class UserController extends BaseController {
         mv.addObject("pageIndex", pageIndex);
 //        JsonConfig cfg = new JsonConfig();
 //        cfg.setExcludes(new String[]{"handler","hibernateLazyInitializer"});
-        JsonConfig jcg = new JsonConfig();
-        jcg.registerJsonValueProcessor(Date.class,
-                new DateJsonValueProcessor("yyyy-MM-dd"));
-        JSONArray jsonArray = JSONArray.fromObject(userPage.getContent(), jcg);
+        String json = JSON.toJSONString(userPage.getContent());
 
-        mv.addObject("users", jsonArray.toString());
+        mv.addObject("users", json);
         mv.setViewName("admin/user/sys_user_list");
         return mv;
     }
