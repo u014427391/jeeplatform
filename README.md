@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/crossoverJie/JCSprout.svg?branch=master)](https://travis-ci.org/crossoverJie/jeeplatform)
 
 ## 项目简介 ##
 一款企业信息化开发基础平台，拟集成OA(办公自动化)、SCM(供应链系统)、ERP(企业资源管理系统)、CMS(内容管理系统)、CRM(客户关系管理系统)等企业系统的通用业务功能
@@ -7,6 +8,7 @@ JeePlatform项目是一款以Spring Framework为核心框架，集ORM框架Mybat
 ## 系统设计 ##
 ### 系统管理(模块名称jeeplatform-admin) ###
 管理系统登录页面，采用Shiro登录验证
+ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统登录页面.png)
 
 管理系统主页前端，可以适配移动端页面
