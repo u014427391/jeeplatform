@@ -39,6 +39,7 @@ public class LogAspect {
         HttpServletRequest request = sra.getRequest();
 
         Object result = null;
+        // FIXME 切面环绕异常，返回ResponseEntity对象，影响系统功能
         //try {
             LOGGER.info("=====前置通知开始=====");
             LOGGER.info("请求接口:" + request.getMethod() + "[" + request.getRequestURL() + "]");
