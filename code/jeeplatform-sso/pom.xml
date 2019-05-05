@@ -17,12 +17,5 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>org.muses</groupId>-->
-            <!--<artifactId>jeeplatform-core</artifactId>-->
-            <!--<version>${jeeplatform.core.version}</version>-->
-        <!--</dependency>-->
-    </dependencies>
 
 </project>

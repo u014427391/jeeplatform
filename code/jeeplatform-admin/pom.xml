@@ -19,7 +19,6 @@
     </properties>
 
     <dependencies>
-        <!-- module start -->
         <dependency>
             <groupId>org.muses.jeeplatform</groupId>
             <artifactId>jeeplatform-common</artifactId>
@@ -31,108 +30,36 @@
             <version>${jeeplatform-core.version}</version>
         </dependency>
 
-        <!-- moudle end-->
-
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
             <!--<scope>provided</scope>-->
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
-
-        <!-- commons -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-        <!-- commons -->
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-core</artifactId>
-            <version>2.5.0</version>
-        </dependency>
-
-        <!--shiro start-->
+        
+        <!-- Shiro -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-all</artifactId>
             <version>${shiro.version}</version>
         </dependency>
-        <!-- shiro end-->
 
-        <!-- velocity start-->
+        <!-- Apache POI -->
         <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
-            <version>1.6</version>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity-tools</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <!-- velocity end-->
 
-        <!-- lucene全文搜素引擎 start-->
+        <!-- email -->
         <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-core</artifactId>
-            <version>${lucene.version}</version>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.5.6</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-analyzers-common</artifactId>
-            <version>${lucene.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-queryparser</artifactId>
-            <version>${lucene.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-memory</artifactId>
-            <version>${lucene.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-highlighter</artifactId>
-            <version>${lucene.version}</version>
-        </dependency>
-        <!-- 注意IKAnalyzer没有maven坐标,请自行添加到本地仓库 -->
-        <dependency>
-            <groupId>org.wltea.analyzer</groupId>
-            <artifactId>IKAnalyzer</artifactId>
-            <version>2012FF_u1</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/IKAnalyzer2012FF_u1.jar</systemPath>
-        </dependency>
-        <!-- lucene全文搜素引擎 end -->
-
-        <!-- log4j start-->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
-        <!-- log4j end-->
 
         <!-- json解析需要的jar start-->
         <dependency>
@@ -170,21 +97,6 @@
         </dependency>
         <!-- json解析需要的jar end -->
 
-        <!-- poi start-->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
-        <!-- poi end-->
-
-        <!-- email start-->
-        <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>javax.mail</artifactId>
-            <version>1.5.6</version>
-        </dependency>
-        <!-- email end-->
     </dependencies>
 
 
