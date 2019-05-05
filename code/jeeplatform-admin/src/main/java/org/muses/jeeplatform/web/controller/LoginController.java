@@ -143,7 +143,7 @@ public class LoginController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/index")
+	@RequestMapping(value="/index",produces="text/html;charset=UTF-8")
 	public ModelAndView toMain() throws AuthenticationException{
 		ModelAndView mv = this.getModelAndView();
 		/**获取Shiro管理的Session**/
@@ -206,7 +206,7 @@ public class LoginController extends BaseController {
 	 * 注销登录
 	 * @return
 	 */
-	@RequestMapping(value="/logout")
+	@RequestMapping(value="/logout",produces="text/html;charset=UTF-8")
 	public ModelAndView logout(){
 		ModelAndView mv = this.getModelAndView();
 		/**Shiro管理Session**/
