@@ -209,7 +209,7 @@ public class RoleController extends BaseController {
         String json = jsonArray.toString();
 
         json = json.replaceAll("menuId","id").replaceAll("parentId","pId").
-                replaceAll("menuName","name").replaceAll("hasSubMenu","checked");
+                                                                                  replaceAll("menuName","name").replaceAll("hasSubMenu","checked");
 
         model.addAttribute("menus",json);
 

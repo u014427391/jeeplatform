@@ -1,9 +1,5 @@
 package org.muses.jeeplatform.web.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.muses.jeeplatform.core.Constants;
@@ -24,6 +20,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 /**
  * Created by op.43027 on 2017/5/27 0027.
@@ -37,29 +36,29 @@ public class MenuController extends BaseController {
     @Autowired
     PermissionService permissionService;
 
-     @RequestMapping(value = "/getMenus", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/getMenus", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public ModelAndView toMenuList(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-         String pageIndexStr = request.getParameter("pageIndex");
+        String pageIndexStr = request.getParameter("pageIndex");
 
-         int pageSize = Constants.PAGE_SIZE;
-         ModelAndView mv = this.getModelAndView();
-         Page<Menu> menuPage;
+        int pageSize = Constants.PAGE_SIZE;
+        ModelAndView mv = this.getModelAndView();
+        Page<Menu> menuPage;
 
-         if(pageIndexStr==null||"".equals(pageIndexStr)){
+        if(pageIndexStr==null||"".equals(pageIndexStr)){
             pageIndexStr = "0";
-         }
+        }
 
-         int pageIndex = Integer.parseInt(pageIndexStr);
+        int pageIndex = Integer.parseInt(pageIndexStr);
 
-         menuPage = menuService.findAll(pageIndex+1, pageSize, Sort.Direction.ASC,"menuId");
-         mv.addObject("totalCount",menuPage.getTotalElements());
-         mv.addObject("pageIndex",pageIndex);
-         JSONArray jsonData = JSONArray.fromObject(menuPage.getContent());
-         mv.addObject("menus",jsonData.toString());
+        menuPage = menuService.findAll(pageIndex+1, pageSize, Sort.Direction.ASC,"menuId");
+        mv.addObject("totalCount",menuPage.getTotalElements());
+        mv.addObject("pageIndex",pageIndex);
+        JSONArray jsonData = JSONArray.fromObject(menuPage.getContent());
+        mv.addObject("menus",jsonData.toString());
 
-         mv.setViewName("admin/menu/menu_list");
-         return mv;
+        mv.setViewName("admin/menu/menu_list");
+        return mv;
     }
 
     @RequestMapping(value = "/loadMenus", produces = "application/json;charset=UTF-8")
