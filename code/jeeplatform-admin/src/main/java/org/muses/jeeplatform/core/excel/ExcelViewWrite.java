@@ -1,13 +1,11 @@
 package org.muses.jeeplatform.core.excel;
 
 import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.muses.jeeplatform.utils.DateUtils;
-import org.springframework.web.servlet.view.document.AbstractXlsxView;
+import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,10 +13,10 @@ import java.util.Map;
 /**
  * Created by Nicky on 2017/8/1 0001.
  */
-public class ExcelViewWrite extends AbstractXlsxView {
+public class ExcelViewWrite extends AbstractExcelView {
 
-    //@Override
-    /*protected void buildExcelDocument(Map<String, Object> model,
+    @Override
+    protected void buildExcelDocument(Map<String, Object> model,
                                       HSSFWorkbook workbook, HttpServletRequest request,
                                       HttpServletResponse response) throws Exception {
         Date date = new Date();
@@ -56,14 +54,14 @@ public class ExcelViewWrite extends AbstractXlsxView {
             HashMap<String,Object> vpd = varList.get(i);
             for(int j=0;j<len;j++){
                 String varstr = vpd.get("var"+(j+1)) != null ? vpd.get("var"+(j+1)).toString() : "";
-                cell = getC(sheet, i+1, j);
+                cell = getCell(sheet, i+1, j);
                 cell.setCellStyle(contentStyle);
                 setText(cell,varstr);
             }
         }
-    }*/
+    }
 
-    @Override
+   /* @Override
     protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Date date = new Date();
         String filename = DateUtils.formatDate(date, "yyyyMMddHHmmss");
@@ -116,5 +114,5 @@ public class ExcelViewWrite extends AbstractXlsxView {
         hssfWorkbook.write(outputStream);
         outputStream.flush();
         outputStream.close();
-    }
+    }*/
 }
