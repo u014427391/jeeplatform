@@ -1,7 +1,7 @@
 package org.muses.jeeplatform.web.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.muses.jeeplatform.core.entity.admin.Permission;
@@ -36,29 +36,29 @@ public class MenuController extends BaseController {
     @Autowired
     PermissionService permissionService;
 
-     @RequestMapping(value = "/getMenus", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/getMenus", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public ModelAndView toMenuList(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-         String pageIndexStr = request.getParameter("pageIndex");
+        String pageIndexStr = request.getParameter("pageIndex");
 
-         int pageSize = Constants.PAGE_SIZE;
-         ModelAndView mv = this.getModelAndView();
-         Page<Menu> menuPage;
+        int pageSize = Constants.PAGE_SIZE;
+        ModelAndView mv = this.getModelAndView();
+        Page<Menu> menuPage;
 
-         if(pageIndexStr==null||"".equals(pageIndexStr)){
+        if(pageIndexStr==null||"".equals(pageIndexStr)){
             pageIndexStr = "0";
-         }
+        }
 
-         int pageIndex = Integer.parseInt(pageIndexStr);
+        int pageIndex = Integer.parseInt(pageIndexStr);
 
-         menuPage = menuService.findAll(pageIndex+1, pageSize, Sort.Direction.ASC,"menuId");
-         mv.addObject("totalCount",menuPage.getTotalElements());
-         mv.addObject("pageIndex",pageIndex);
-         String json = JSON.toJSONString(menuPage.getContent());
-         mv.addObject("menus",json);
+        menuPage = menuService.findAll(pageIndex+1, pageSize, Sort.Direction.ASC,"menuId");
+        mv.addObject("totalCount",menuPage.getTotalElements());
+        mv.addObject("pageIndex",pageIndex);
+        JSONArray jsonData = JSONArray.fromObject(menuPage.getContent());
+        mv.addObject("menus",jsonData.toString());
 
-         mv.setViewName("admin/menu/menu_list");
-         return mv;
+        mv.setViewName("admin/menu/menu_list");
+        return mv;
     }
 
     @RequestMapping(value = "/loadMenus", produces = "application/json;charset=UTF-8")
@@ -76,13 +76,13 @@ public class MenuController extends BaseController {
 
         int pageSize = Constants.PAGE_SIZE;
         Page<Menu> menuPage = menuService.findAll(pageIndex, pageSize, Sort.Direction.ASC,"menuId");
-        String json = JSON.toJSONString(menuPage.getContent());
+        JSONArray jsonData = JSONArray.fromObject(menuPage.getContent());
 
         PrintWriter out;
 
         response.setCharacterEncoding("utf-8");
         out = response.getWriter();
-        out.write(json);
+        out.write(jsonData.toString());
         out.flush();
         out.close();
 
@@ -92,8 +92,8 @@ public class MenuController extends BaseController {
     public ModelAndView list(){
         ModelAndView mv = new ModelAndView();
         List<Menu> menus = menuService.findAllParentMenu();
-        String json = JSON.toJSONString(menus);
-        mv.addObject("menus",json);
+        JSONArray jsonObject = JSONArray.fromObject(menus);
+        mv.addObject("menus",jsonObject.toString());
         mv.setViewName("admin/menu/menu_list");
         return mv;
     }
@@ -107,11 +107,12 @@ public class MenuController extends BaseController {
     public void getSub(@RequestParam String menuId, HttpServletResponse response)throws Exception{
         try {
             List<Menu> subMenu = menuService.findSubMenuById(Integer.parseInt(menuId));
+            JSONArray arr = JSONArray.fromObject(subMenu);
             PrintWriter out;
 
             response.setCharacterEncoding("utf-8");
             out = response.getWriter();
-            String json = JSON.toJSONString(subMenu);
+            String json = arr.toString();
             out.write(json);
             out.flush();
             out.close();
