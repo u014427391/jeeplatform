@@ -2,6 +2,7 @@ package org.muses.jeeplatform.web.controller;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringUtils;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.muses.jeeplatform.core.entity.admin.Permission;
@@ -24,7 +25,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 /**
  * Created by Nicky on 2017/7/30.
  */
@@ -93,10 +96,12 @@ public class RoleController extends BaseController {
     @RequestMapping(value = "/addR" , method = RequestMethod.POST)
     @ResponseBody
     public void addR(@RequestParam("params")String params, HttpServletResponse response){
-        String[] strs = params.split(",");
-        String roleName = strs[0];
-        String roleDesc = strs[1];
-        System.out.println(roleName+","+roleDesc);
+
+        String roleName="", roleDesc="";
+        String[] strs = StringUtils.split(params, ",");
+        roleName = strs[0];
+        roleDesc = strs[1];
+        //log.info("角色名称:{},角色描述:{}",roleName,roleDesc);
         Role role = new Role();
         role.setRoleName(roleName);
         role.setRoleDesc(roleDesc);

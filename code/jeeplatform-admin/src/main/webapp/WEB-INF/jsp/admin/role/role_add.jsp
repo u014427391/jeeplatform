@@ -78,6 +78,16 @@
     function doSave() {
         var roleName = $("#rolename").val();
         var roleDesc = $("#roledesc").val();
+        if ($.trim(roleName) == '') {
+            alert("请填写角色名称!");
+            return;
+        }
+
+        if( $.trim(roleDesc) == '' ) {
+            alert("请填写角色描述!");
+            return;
+        }
+
         var params = roleName +","+roleDesc;
         $.ajax({
             type: "POST",
