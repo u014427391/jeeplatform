@@ -1,9 +1,8 @@
-/*
+﻿/*
 SQLyog v10.2 
 MySQL - 5.1.32-community : Database - jeeplatform
 *********************************************************************
-*/
-
+*/
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
@@ -65,7 +64,7 @@ CREATE TABLE `sys_permission` (
   PRIMARY KEY (`id`),
   KEY `p_fk_1` (`menuId`),
   CONSTRAINT `p_fk_1` FOREIGN KEY (`menuId`) REFERENCES `sys_menu` (`menuId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_permission` */
 
