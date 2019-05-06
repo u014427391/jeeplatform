@@ -3,14 +3,13 @@ package org.muses.jeeplatform.core.email;
 
 import com.sun.mail.util.MailSSLSocketFactory;
 
-import java.util.Date;
-import java.util.Properties;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.util.Date;
+import java.util.Properties;
 
 
 public class JavaEmailSender {
@@ -110,10 +109,10 @@ public class JavaEmailSender {
                 builder.append("\n" + emailContent);
                 builder.append("\n时间 " + new Date());
                 msg.setText(builder.toString());
-                msg.setFrom(new InternetAddress("362330721@qq.com"));
+                msg.setFrom(new InternetAddress("123@qq.com"));
 
                 Transport transport = session.getTransport();
-                transport.connect("smtp.qq.com", "362330721@qq.com", "lqzpeberkfyabjjg");
+                transport.connect("smtp.qq.com", "123@qq.com", "xoguhfiomzenbged");
 
                 transport.sendMessage(msg, new Address[]{new InternetAddress(toEmailAddress)});
                 transport.close();
