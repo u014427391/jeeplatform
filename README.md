@@ -222,11 +222,11 @@ public class RedisAspect {
 
 SpringBoot
 * [SpringBoot热部署配置](https://smilenicky.blog.csdn.net/article/details/89765909)
+* [SpringBoot集成Redis实现缓存处理](http://blog.csdn.net/u014427391/article/details/78799623)
 * [SpringBoot profles配置多环境](https://smilenicky.blog.csdn.net/article/details/89792248)
 
 ### Redis知识
 * [Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
-* [SpringBoot集成Redis实现缓存处理(Spring AOP技术)](http://blog.csdn.net/u014427391/article/details/78799623)
 * [Redis学习笔记之位图](https://blog.csdn.net/u014427391/article/details/87923407)
 * [Redis学习笔记之延时队列](https://blog.csdn.net/u014427391/article/details/87905450)
 * [Redis学习笔记之分布式锁](https://blog.csdn.net/u014427391/article/details/84934045)
@@ -234,9 +234,10 @@ SpringBoot
 ### Oracle知识
 * [Oracle知识整理笔录](https://blog.csdn.net/u014427391/article/details/82317376)
 * [Oracle笔记之锁表和解锁](https://blog.csdn.net/u014427391/article/details/83046148)
+* [select in超过1000条报错解决方法](https://blog.csdn.net/u014427391/article/details/87922878)
 * [Oracle笔记之修改表字段类型](https://blog.csdn.net/u014427391/article/details/83046006)
 * [Oracle merge合并更新函数](https://blog.csdn.net/u014427391/article/details/87898729)
-* [oracle select in超过1000条报错解决方法](https://blog.csdn.net/u014427391/article/details/87922878)
+
 
 ### 单点登录
 * [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
