@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/crossoverJie/JCSprout.svg?branch=master)](https://travis-ci.org/crossoverJie/jeeplatform)
+[![Build Status](https://travis-ci.org/crossoverJie/JCSprout.svg?branch=master)](https://travis-ci.org/crossoverJie/jeeplatform) [![Join the chat at https://gitter.im/jeeplatform/community](https://badges.gitter.im/jeeplatform/community.svg)](https://gitter.im/jeeplatform/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## 项目简介 ##
 一款企业信息化开发基础平台，拟集成OA(办公自动化)、SCM(供应链系统)、ERP(企业资源管理系统)、CMS(内容管理系统)、CRM(客户关系管理系统)等企业系统的通用业务功能
@@ -222,11 +222,11 @@ public class RedisAspect {
 
 SpringBoot
 * [SpringBoot热部署配置](https://smilenicky.blog.csdn.net/article/details/89765909)
+* [SpringBoot集成Redis实现缓存处理](http://blog.csdn.net/u014427391/article/details/78799623)
 * [SpringBoot profles配置多环境](https://smilenicky.blog.csdn.net/article/details/89792248)
 
 ### Redis知识
 * [Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
-* [SpringBoot集成Redis实现缓存处理(Spring AOP技术)](http://blog.csdn.net/u014427391/article/details/78799623)
 * [Redis学习笔记之位图](https://blog.csdn.net/u014427391/article/details/87923407)
 * [Redis学习笔记之延时队列](https://blog.csdn.net/u014427391/article/details/87905450)
 * [Redis学习笔记之分布式锁](https://blog.csdn.net/u014427391/article/details/84934045)
@@ -234,9 +234,10 @@ SpringBoot
 ### Oracle知识
 * [Oracle知识整理笔录](https://blog.csdn.net/u014427391/article/details/82317376)
 * [Oracle笔记之锁表和解锁](https://blog.csdn.net/u014427391/article/details/83046148)
+* [select in超过1000条报错解决方法](https://blog.csdn.net/u014427391/article/details/87922878)
 * [Oracle笔记之修改表字段类型](https://blog.csdn.net/u014427391/article/details/83046006)
 * [Oracle merge合并更新函数](https://blog.csdn.net/u014427391/article/details/87898729)
-* [oracle select in超过1000条报错解决方法](https://blog.csdn.net/u014427391/article/details/87922878)
+
 
 ### 单点登录
 * [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
@@ -247,7 +248,7 @@ SpringBoot
 * [Oracle性能调优之虚拟索引用法简介](https://smilenicky.blog.csdn.net/article/details/89761234)
 * [Oracle性能调优之物化视图用法简介](https://smilenicky.blog.csdn.net/article/details/89762680)
 * [Orace执行计划学习笔记](https://smilenicky.blog.csdn.net/article/details/89604262)
-* [Oracle sql共享池$sqlarea分析SQL资源使用情况](https://blog.csdn.net/u014427391/article/details/86562755)
+* [Oracle共享池分析SQL资源使用情况](https://blog.csdn.net/u014427391/article/details/86562755)
 
 
 
