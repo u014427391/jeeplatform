@@ -15,6 +15,7 @@ import org.muses.jeeplatform.core.entity.admin.Role;
 import org.muses.jeeplatform.core.entity.admin.User;
 import org.muses.jeeplatform.service.MenuService;
 import org.muses.jeeplatform.service.UserService;
+import org.muses.jeeplatform.util.ListSortUtils;
 import org.muses.jeeplatform.util.MenuTreeUtils;
 import org.muses.jeeplatform.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -163,6 +164,8 @@ public class LoginController extends BaseController {
             for(Permission p : permissions){
                 menuList.add(p.getMenu());
             }
+
+            menuList = (List<Menu>)ListSortUtils.sortByDesc(menuList, "menuOrder");
 
 //			List<Menu> menus = new ArrayList<Menu>();
 //			/**为一级菜单添加二级菜单**/
