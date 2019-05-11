@@ -461,7 +461,7 @@ public class UserController extends BaseController {
     public Map<String,String> updatePwd(@PathVariable("username")String username,@PathVariable("password")String password){
         Map<String,String> map = new HashMap<String,String>();
         password = new SimpleHash("SHA-1",username,password).toString();
-        //log.info("账号:{},密码:{}", username, password);
+        log.info("账号:{},密码:{}", username, password);
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
