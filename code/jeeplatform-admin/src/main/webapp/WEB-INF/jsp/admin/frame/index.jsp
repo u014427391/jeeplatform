@@ -33,7 +33,7 @@
 			<li class="header-bar-nav">
 				<a href="javascript:;">${username}<i class="icon-font" style="margin-left:5px;">&#xe60c;</i></a>
 				<ul class="header-dropdown-menu">
-					<li><a href="javascript:;">个人信息</a></li>
+					<li><a href="javascript:;">修改密码</a></li>
 					<li><a href="logout">切换账户</a></li>
 					<li><a href="logout">退出</a></li>
 				</ul>

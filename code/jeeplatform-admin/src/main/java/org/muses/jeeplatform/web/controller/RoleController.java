@@ -9,7 +9,7 @@ import org.muses.jeeplatform.core.entity.admin.Permission;
 import org.muses.jeeplatform.core.entity.admin.Role;
 import org.muses.jeeplatform.core.entity.admin.RolePermission;
 import org.muses.jeeplatform.service.*;
-import org.muses.jeeplatform.utils.UUIDUtil;
+import org.muses.jeeplatform.util.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -253,7 +253,7 @@ public class RoleController extends BaseController {
             for (int i=0;i<menuIds.length;i++){
                 //重新写入数据
                 RolePermission rop = new RolePermission();
-                rop.setRpId(UUIDUtil.getRandomNum());
+                rop.setRpId(UUIDGenerator.getRandomNum());
                 rop.setRoleId(Integer.parseInt(roleId));
                 rop.setPermissionId(Integer.parseInt(menuIds[i]));
                 rolePermissionService.doSave(rop);
