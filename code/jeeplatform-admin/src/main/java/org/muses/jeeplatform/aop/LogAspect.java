@@ -41,19 +41,19 @@ public class LogAspect {
         Object result = null;
         // FIXME 切面环绕异常，返回ResponseEntity对象，影响系统功能
         //try {
-            LOGGER.info("=====前置通知开始=====");
+            LOGGER.info("****前置通知开始****");
             LOGGER.info("请求接口:" + request.getMethod() + "[" + request.getRequestURL() + "]");
             LOGGER.info("请求参数:" + request.getQueryString());
 
             result = joinPoint.proceed();
 
-            LOGGER.info("=====后置通知开始=====");
+            LOGGER.info("**** 后置通知开始****");
             LOGGER.info("接口返回:" + JSON.toJSONString(result));
 
 
 //        }catch (Exception e){
 //            LOGGER.error("异常信息:{}", e.getMessage());
-//            LOGGER.info("=====全局异常处理=====");
+//            LOGGER.info("****全局异常处理****");
 //
 //            Map<String, Object> map = new HashMap<>(16);
 //            map.put("error", e.getClass().getName());
@@ -78,15 +78,15 @@ public class LogAspect {
             }
         }
         try {
-              /*========控制台输出=========*/
-            LOGGER.info("=====异常通知开始=====");
+              /** 控制台输出 **/
+            LOGGER.info("****异常通知开始****");
             LOGGER.info("异常代码:" + e.getClass().getName());
             LOGGER.info("异常方法:" + (joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()"));
             LOGGER.info("请求IP:" + ip);
             LOGGER.info("请求参数:" + params);
         }catch (Exception ex) {
             //记录本地异常日志
-            LOGGER.error("==异常通知异常==");
+            LOGGER.error("****异常通知异常****");
             LOGGER.error("异常信息:{}", ex.getMessage());
         }
     }
