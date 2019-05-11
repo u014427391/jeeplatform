@@ -33,7 +33,7 @@
 			<li class="header-bar-nav">
 				<a href="javascript:;">${username}<i class="icon-font" style="margin-left:5px;">&#xe60c;</i></a>
 				<ul class="header-dropdown-menu">
-					<li><a href="javascript:;">修改密码</a></li>
+					<li><a href="javascript:toUpdatePwdDialog();">修改密码</a></li>
 					<li><a href="logout">切换账户</a></li>
 					<li><a href="logout">退出</a></li>
 				</ul>
@@ -76,6 +76,9 @@
 <!-- 引入JQuery库 start -->
 <script type="text/javascript" src="${basePath}static/js/jquery-1.8.3.js"></script>
 <!-- 引入JQuery库 end -->
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDialog.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zDrag.js"></script>
+<script type="text/javascript" src="<%=basePath%>plugins/zDialog/zProgress.js"></script>
 <script type="text/javascript">
 	/*左侧菜单点击*/
     $(".side-menu").on('click', 'li a', function(e) {
@@ -456,6 +459,15 @@
             }
         }
     }
+
+    function toUpdatePwdDialog(){
+        var diag = new Dialog();
+        diag.Title = "修改密码";
+        diag.Width = 400;
+        diag.Height = 300;
+        diag.URL = '<%=basePath %>user/toUpdatePwd/${username}';
+        diag.show();
+	}
 
 
 	/*

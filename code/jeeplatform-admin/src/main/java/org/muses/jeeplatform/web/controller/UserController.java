@@ -20,10 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -440,6 +437,43 @@ public class UserController extends BaseController {
         ModelAndView mv = new ModelAndView(ev, dataMap);
 
         return mv;
+    }
+
+    /**
+     * 跳转到修改密码页面
+     * @return
+     */
+    @GetMapping(value = "/toUpdatePwd/{username}")
+    public ModelAndView toUpdatePwd(@PathVariable("username")String username){
+        ModelAndView mv = this.getModelAndView();
+        mv.addObject("username",username);
+        mv.setViewName("admin/frame/pwd_update");
+        return mv;
+    }
+
+    /**
+     * 修改密码接口，RESTFUL风格，给页面调用
+     * @param username
+     * @param password
+     */
+    @PostMapping(value = "/updatePwd/{username}/{password}")
+    @ResponseBody
+    public Map<String,String> updatePwd(@PathVariable("username")String username,@PathVariable("password")String password){
+        Map<String,String> map = new HashMap<String,String>();
+        password = new SimpleHash("SHA-1",username,password).toString();
+        //log.info("账号:{},密码:{}", username, password);
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        try{
+            this.userService.updateU(user);
+            map.put("result","success");
+            return map;
+        }catch (Exception e) {
+            log.error("异常：{}"+e);
+            map.put("result","error");
+            return map;
+        }
     }
 
 }
