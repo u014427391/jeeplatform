@@ -107,12 +107,13 @@
     }
 
     function openEditDialog(id){
-        var diag = new Dialog();
+        /*var diag = new Dialog();
         diag.Title = "编辑权限";
         diag.Width = 400;
         diag.Height = 300;
         diag.URL = "goEditP.do?pId="+id;
-        diag.show();
+        diag.show();*/
+        alert("功能待完善");
     }
 
 
