@@ -106,7 +106,8 @@ public class LoginController extends BaseController {
                 if(Tools.isNotEmpty(codeSession)/*&&code.equalsIgnoreCase(codeSession)*/){
                     //Shiro框架SHA加密
                     String passwordsha = new SimpleHash("SHA-1",username,password).toString();
-                    System.out.println(passwordsha);
+                    log.info("SHA加密密码：{}",passwordsha);
+                    //System.out.println(passwordsha);
                     //检测用户名和密码是否正确
                     User user = userService.doLoginCheck(username,passwordsha);
                     if(user != null){
@@ -138,8 +139,6 @@ public class LoginController extends BaseController {
                 }
             }
         }
-        Map<String,String> result = new HashMap<String,String>();
-        result.put("result", errInfo);
         return ResultVO.successful("result",null);
     }
 
