@@ -1,8 +1,9 @@
-﻿/*
+/*
 SQLyog v10.2 
 MySQL - 5.1.32-community : Database - jeeplatform
 *********************************************************************
-*/
+*/
+
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
@@ -29,11 +30,11 @@ CREATE TABLE `sys_menu` (
   `menuOrder` varchar(10) DEFAULT NULL COMMENT '菜单排序',
   `menuStatus` varchar(10) DEFAULT NULL COMMENT '菜单状态',
   PRIMARY KEY (`menuId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_menu` */
 
-insert  into `sys_menu`(`menuId`,`parentId`,`menuName`,`menuIcon`,`menuUrl`,`menuType`,`menuOrder`,`menuStatus`) values (1,0,'用户管理','&#xe610','#','1','1','1'),(2,1,'管理员管理','&#xe604','user/queryAll.do','2','2','1'),(3,1,'用户统计','&#xe604','test','2','3','1'),(4,0,'在线管理','&#xe610','#','1','4','1'),(5,4,'在线情况','&#xe604',NULL,'2','5','1'),(6,4,'在线聊天','&#xe604','article/list.do','2','6','1'),(7,0,'系统管理','&#xe610','#','1','7','1'),(8,7,'角色管理','&#xe604','role/queryAll.do','2','8','1'),(9,7,'权限管理','&#xe604','permission/queryAll.do','2','9','1'),(10,7,'菜单管理','&#xe604','menu/getMenus.do','2','10','1'),(11,0,'平台资料','&#xe610','#','1','11','1');
+insert  into `sys_menu`(`menuId`,`parentId`,`menuName`,`menuIcon`,`menuUrl`,`menuType`,`menuOrder`,`menuStatus`) values (1,0,'用户管理','&#xe610','#','1','1','1'),(2,1,'用户管理','&#xe604','user/queryAll.do','2','2','1'),(3,1,'用户统计','&#xe604','#','2','3','1'),(4,0,'在线管理','&#xe610','#','1','4','1'),(5,4,'在线情况','&#xe604','#','2','5','1'),(6,4,'在线聊天','&#xe604','article/list.do','2','6','1'),(7,0,'系统管理','&#xe610','#','1','7','1'),(8,7,'角色管理','&#xe604','role/queryAll.do','2','8','1'),(9,7,'权限管理','&#xe604','permission/queryAll.do','2','9','1'),(10,7,'菜单管理','&#xe604','menu/getMenus.do','2','10','1'),(11,0,'系统监控','&#xe610','druid/index.html','1','11','1'),(12,11,'Druid监控','&#xe610','druid/index.html','1','12','1'),(13,11,'SwaggerUI','&#xe610','swagger-ui.html','1','13','1'),(14,1,'个人信息','&#xe610','#','1','14','1');
 
 /*Table structure for table `sys_operation` */
 
@@ -57,18 +58,18 @@ insert  into `sys_operation`(`id`,`odesc`,`name`,`operation`) values (1,'创建�
 DROP TABLE IF EXISTS `sys_permission`;
 
 CREATE TABLE `sys_permission` (
-  `id` int(11) NOT NULL COMMENT '权限Id',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '权限Id',
   `pdesc` varchar(100) DEFAULT NULL COMMENT '权限描述',
   `name` varchar(100) DEFAULT NULL COMMENT '权限名称',
   `menuId` int(11) DEFAULT NULL COMMENT '菜单Id',
   PRIMARY KEY (`id`),
   KEY `p_fk_1` (`menuId`),
   CONSTRAINT `p_fk_1` FOREIGN KEY (`menuId`) REFERENCES `sys_menu` (`menuId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_permission` */
 
-insert  into `sys_permission`(`id`,`pdesc`,`name`,`menuId`) values (1,'用户管理的权限','用户管理',1),(2,'管理员管理的权限','管理员管理',2),(3,'用户统计的权限','用户统计',3),(4,'在线管理的权限','在线管理',4),(5,'在线情况的权限','在线情况',5),(6,'在线聊天的权限','在线聊天',6),(7,'系统管理的权限','系统管理',7),(8,'角色管理的权限','角色管理',8),(9,'权限管理的权限','权限管理',9),(10,'菜单管理的权限','菜单管理',10),(11,'平台资料的权限','平台资料',11);
+insert  into `sys_permission`(`id`,`pdesc`,`name`,`menuId`) values (1,'用户管理的权限','用户管理',1),(2,'管理员管理的权限','管理员管理',2),(3,'用户统计的权限','用户统计',3),(4,'在线管理的权限','在线管理',4),(5,'在线情况的权限','在线情况',5),(6,'在线聊天的权限','在线聊天',6),(7,'系统管理的权限','系统管理',7),(8,'角色管理的权限','角色管理',8),(9,'权限管理的权限','权限管理',9),(10,'菜单管理的权限','菜单管理',10),(11,'平台资料的权限','平台资料',11),(12,'Druid监控的权限','Druid监控的权限',12),(13,'SwaggerUI','SwaggerUI',13),(14,'个人信息的权限','个人信息的权限',14);
 
 /*Table structure for table `sys_permission_operation` */
 
@@ -85,7 +86,7 @@ CREATE TABLE `sys_permission_operation` (
 
 /*Data for the table `sys_permission_operation` */
 
-insert  into `sys_permission_operation`(`permissionId`,`operationId`) values (1,1),(2,2),(3,3);
+insert  into `sys_permission_operation`(`permissionId`,`operationId`) values (2,2),(3,3);
 
 /*Table structure for table `sys_role` */
 
@@ -120,7 +121,7 @@ CREATE TABLE `sys_role_permission` (
 
 /*Data for the table `sys_role_permission` */
 
-insert  into `sys_role_permission`(`rpId`,`roleId`,`permissionId`) values ('02a97146f6f4',2,1),('0bc217ced57a',1,1),('1623edee1d80',1,2),('2897c5ff0aa8',1,3),('421ddf008a05',1,4),('4b76f155fd74',9,1),('4dcadb89531b',1,7),('55eb164457e2',9,2),('59084a9f6914',2,2),('5a2b34b2f1a7',1,10),('63a5d5a8dae6',1,9),('9ad0b2c3be28',1,8),('9fa9725142c1',2,3),('ba83ae853640',1,6),('d5aec431edf6',1,5);
+insert  into `sys_role_permission`(`rpId`,`roleId`,`permissionId`) values ('02a97146f6f4',2,1),('346def9fe9d6',1,12),('3bdce30473ca',1,10),('47c998f93395',1,6),('4a1834ad6e17',1,7),('4b76f155fd74',9,1),('4ccc2dda4892',1,8),('547008dd157a',1,2),('55eb164457e2',9,2),('59084a9f6914',2,2),('5eb035bc97b2',1,11),('69171de938a6',1,5),('6a93a8e6e94d',1,3),('6dde43386281',1,4),('8adc5d180670',1,13),('9fa9725142c1',2,3),('b1729374cea8',1,9),('ccb535546f97',1,1);
 
 /*Table structure for table `sys_user` */
 
@@ -143,11 +144,11 @@ CREATE TABLE `sys_user` (
   `rights` varchar(100) DEFAULT NULL COMMENT '权限（没有使用）',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_u_1` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `sys_user` */
 
-insert  into `sys_user`(`id`,`username`,`password`,`phone`,`sex`,`email`,`mark`,`rank`,`lastLogin`,`loginIp`,`imageUrl`,`regTime`,`locked`,`rights`) values (1,'admin','28dca2a7b33b7413ad3bce1d58c26dd679c799f1','1552323312','男','313222@foxmail.com','超级管理员','admin','2017-08-12','0:0:0:0:0:0:0:1','/static/images/','2017-03-15',0,NULL),(2,'sys','e68feeafe796b666a2e21089eb7aae9c678bf82d','1552323312','男','313222@foxmail.com','系统管理员','sys','2017-08-25','127.0.0.1','/static/images/','2017-03-15',0,NULL),(3,'user','adf8e0d0828bde6e90c2bab72e7a2a763d88a0de','1552323312','男','313222@foxmail.com','用户','user','2017-08-18','127.0.0.1','/static/images/','2017-03-15',0,NULL),(9,'test','123','12332233212','保密','2312@qq.com','没有备注','user','2017-11-25','127.0.0.1',NULL,'2017-11-25',0,NULL);
+insert  into `sys_user`(`id`,`username`,`password`,`phone`,`sex`,`email`,`mark`,`rank`,`lastLogin`,`loginIp`,`imageUrl`,`regTime`,`locked`,`rights`) values (1,'admin','28dca2a7b33b7413ad3bce1d58c26dd679c799f1','1552323312','男','313222@foxmail.com','超级管理员','admin','2017-08-12','0:0:0:0:0:0:0:1','/static/images/','2017-03-15',0,NULL),(2,'sys','e68feeafe796b666a2e21089eb7aae9c678bf82d','1552323312','男','313222@foxmail.com','系统管理员','sys','2017-08-25','127.0.0.1','/static/images/','2017-03-15',0,NULL),(3,'user','adf8e0d0828bde6e90c2bab72e7a2a763d88a0de','1552323312','男','313222@foxmail.com','用户','user','2017-08-18','127.0.0.1','/static/images/','2017-03-15',0,NULL),(4,'test','123','12332233212','保密','2312@qq.com','没有备注','user','2017-11-25','127.0.0.1',NULL,'2017-11-25',0,NULL);
 
 /*Table structure for table `sys_user_role` */
 
@@ -164,7 +165,7 @@ CREATE TABLE `sys_user_role` (
 
 /*Data for the table `sys_user_role` */
 
-insert  into `sys_user_role`(`userId`,`roleId`) values (1,1),(1,2),(2,2),(1,3),(2,3),(3,3),(1,4),(3,4),(1,6),(1,7),(3,7),(9,9);
+insert  into `sys_user_role`(`userId`,`roleId`) values (1,1),(1,2),(2,2),(1,3),(2,3),(3,3),(1,4),(3,4),(1,6),(1,7),(3,7),(1,9),(9,9);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
