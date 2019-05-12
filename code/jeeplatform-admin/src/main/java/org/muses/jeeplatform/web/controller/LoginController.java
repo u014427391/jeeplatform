@@ -1,6 +1,7 @@
 package org.muses.jeeplatform.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -68,6 +69,7 @@ public class LoginController extends BaseController {
      * @throws Exception
      */
     @RequestMapping(value="/login",produces="text/html;charset=UTF-8")
+    @ApiOperation(value = "跳转到登录页面",notes = "")
     public ModelAndView toLogin()throws ClassNotFoundException{
         ModelAndView mv = this.getModelAndView();
         mv.setViewName("admin/frame/login");
@@ -84,6 +86,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value="/logincheck", produces="application/json;charset=UTF-8")
     @ResponseBody
     //@LogController
+    @ApiOperation(value = "登录验证接口",notes = "根据用户名、密码、验证码进行验证")
     public Map<String,String> loginCheck(HttpServletRequest request)throws AuthenticationException{
         String errInfo = "";//错误信息
         String logindata[] = request.getParameter("LOGINDATA").split(",");
