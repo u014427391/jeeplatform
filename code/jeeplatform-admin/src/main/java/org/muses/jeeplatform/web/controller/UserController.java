@@ -1,8 +1,6 @@
 package org.muses.jeeplatform.web.controller;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
+import com.alibaba.fastjson.JSON;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.email.JavaEmailSender;
@@ -13,7 +11,6 @@ import org.muses.jeeplatform.core.excel.ExcelViewWrite;
 import org.muses.jeeplatform.service.RolePageService;
 import org.muses.jeeplatform.service.RoleService;
 import org.muses.jeeplatform.service.UserService;
-import org.muses.jeeplatform.util.DateJsonValueProcessor;
 import org.muses.jeeplatform.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,8 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
 
 
@@ -54,7 +49,6 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/queryAll", produces = "application/json;charset=UTF-8")
-    @ResponseBody
     public ModelAndView findAll(HttpServletRequest request, HttpServletResponse response, Model model) {
         String pageIndexStr = request.getParameter("pageIndex");
 
@@ -73,12 +67,13 @@ public class UserController extends BaseController {
         mv.addObject("pageIndex", pageIndex);
 //        JsonConfig cfg = new JsonConfig();
 //        cfg.setExcludes(new String[]{"handler","hibernateLazyInitializer"});
-        JsonConfig jcg = new JsonConfig();
-        jcg.registerJsonValueProcessor(Date.class,
-                new DateJsonValueProcessor("yyyy-MM-dd"));
-        JSONArray jsonArray = JSONArray.fromObject(userPage.getContent(), jcg);
+//        JsonConfig jcg = new JsonConfig();
+//        jcg.registerJsonValueProcessor(Date.class,
+//                new DateJsonValueProcessor("yyyy-MM-dd"));
+//        JSONArray jsonArray = JSONArray.fromObject(userPage.getContent(), jcg);
         //System.out.println(jsonArray.toString());
-        mv.addObject("users", jsonArray.toString());
+        String json = JSON.toJSONString(userPage.getContent());
+        mv.addObject("users", json);
         mv.setViewName("admin/user/sys_user_list");
         return mv;
     }
@@ -93,7 +88,6 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/searchU", produces = "application/json;charset=UTf-8")
-    @ResponseBody
     public ModelAndView doSearch(@RequestParam(value = "pageIndex",required = false) String pageIndexStr, @RequestParam(value = "keyword",required = false) String keyword,
                                  @RequestParam(value = "startDate",required = false) String startDateStr, @RequestParam(value = "endDate",required = false) String endDateStr) {
         int pageSize = Constants.PAGE_SIZE;
@@ -120,12 +114,13 @@ public class UserController extends BaseController {
         mv.addObject("pageIndex", pageIndex);
 //        JsonConfig cfg = new JsonConfig();
 //        cfg.setExcludes(new String[]{"handler","hibernateLazyInitializer"});
-        JsonConfig jcg = new JsonConfig();
-        jcg.registerJsonValueProcessor(Date.class,
-                new DateJsonValueProcessor("yyyy-MM-dd"));
-        JSONArray jsonArray = JSONArray.fromObject(userPage.getContent(), jcg);
+//        JsonConfig jcg = new JsonConfig();
+//        jcg.registerJsonValueProcessor(Date.class,
+//                new DateJsonValueProcessor("yyyy-MM-dd"));
+//        JSONArray jsonArray = JSONArray.fromObject(userPage.getContent(), jcg);
 
-        mv.addObject("users", jsonArray.toString());
+        String json = JSON.toJSONString(userPage.getContent());
+        mv.addObject("users", json);
         mv.setViewName("admin/user/sys_user_list");
         return mv;
     }
@@ -135,7 +130,7 @@ public class UserController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/goAddU", method = RequestMethod.GET)
+    @GetMapping(value = "/goAddU")
     public String goAddU() {
         return "admin/user/sys_user_add";
     }
@@ -144,11 +139,10 @@ public class UserController extends BaseController {
      * 新增管理员
      *
      * @param params
-     * @param response
      */
-    @RequestMapping(value = "/addU", method = RequestMethod.POST)
+    @PostMapping(value = "/addU")
     @ResponseBody
-    public void addU(@RequestParam("params") String params, HttpServletResponse response) {
+    public Map<String,String> addU(@RequestParam("params") String params) {
         String[] arrs = params.split(",");
 
         String username = arrs[0];
@@ -176,39 +170,29 @@ public class UserController extends BaseController {
         user.setLoginIp("127.0.0.1");
         user.setLastLogin(new Date());
 
-        PrintWriter out = null;
-
-        response.setCharacterEncoding("utf-8");
-
-        JSONObject obj = new JSONObject();
+        Map<String,String> result = new HashMap<String,String>();
 
         try {
-            out = response.getWriter();
             userService.saveU(user);
-            obj.put("result", "success");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
+            result.put("result", "success");
+            result.put("status","200");
         } catch (Exception e) {
             e.printStackTrace();
-            obj.put("result", "error");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
+            result.put("result", "error");
         }
-
+        return result;
     }
 
-    @RequestMapping(value = "/goEditU", method = RequestMethod.GET)
+    @GetMapping(value = "/goEditU")
     public String goEditU(@RequestParam("userId")String userId, Model model) {
         User user = userService.findByUId(Integer.parseInt(userId));
         model.addAttribute("user",user);
         return "admin/user/sys_user_edit";
     }
 
-    @RequestMapping(value = "/editU", method = RequestMethod.POST)
+    @PostMapping(value = "/editU")
     @ResponseBody
-    public void editU(@RequestParam("params")String params, HttpServletResponse response) {
+    public Map<String,String> editU(@RequestParam("params")String params) {
         String[] arrs = params.split(",");
 
         String userid = arrs[0];
@@ -237,26 +221,15 @@ public class UserController extends BaseController {
         user.setLoginIp(loginIp);
         user.setLastLogin(DateUtils.parse("yyyy-MM-dd",lastLogin));
 
-        PrintWriter out = null;
-
-        response.setCharacterEncoding("utf-8");
-
-        JSONObject obj = new JSONObject();
-
+        Map<String,String> result = new HashMap<String,String>();
         try {
-            out = response.getWriter();
             userService.saveU(user);
-            obj.put("result", "success");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
+            result.put("result","success");
         } catch (Exception e) {
             e.printStackTrace();
-            obj.put("result", "error");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
+            result.put("result", "error");
         }
+        return result;
     }
 
     /**
@@ -265,7 +238,7 @@ public class UserController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/goAuthU")
+    @GetMapping(value = "/goAuthU")
     public String goAuthorise(@RequestParam("userId")String userId, Model model){
 
         User user = userService.findByUId(Integer.parseInt(userId));
@@ -305,9 +278,9 @@ public class UserController extends BaseController {
         return "admin/user/sys_user_auth";
     }
 
-    @RequestMapping(value = "/auth",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
+    @PostMapping(value = "/auth",produces = "application/json;charset=utf-8")
     @ResponseBody
-    public void doAuth(@RequestParam("params")String params , HttpServletResponse response){
+    public Map<String,String> doAuth(@RequestParam("params")String params ){
 
         String[] strs = params.split(";");
         String userId = strs[0];
@@ -323,14 +296,8 @@ public class UserController extends BaseController {
             }
         }
 
-        PrintWriter out = null;
-
-        response.setCharacterEncoding("utf-8");
-
-        JSONObject obj = new JSONObject();
-
+        Map<String,String> result = new HashMap<String,String>();
         try {
-            out = response.getWriter();
             User user = userService.findByUId(Integer.parseInt(userId));
             List<Role> roles = roleService.findAll(roleIds);
             Set<Role> preRoles = user.getRoles();
@@ -340,18 +307,12 @@ public class UserController extends BaseController {
                 user.getRoles().add(r);
             }
             userService.saveU(user);
-            obj.put("result", "success");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
-        }catch (IOException e){
+            result.put("result", "success");
+        }catch (Exception e){
             e.printStackTrace();
-            obj.put("result", "error");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
+            result.put("result", "error");
         }
-
+        return result;
     }
 
     /**
@@ -359,7 +320,7 @@ public class UserController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/goSendEmail")
+    @GetMapping(value = "/goSendEmail")
     public ModelAndView goSendEmailPage(@RequestParam("toEmails") String toEmails) {
         ModelAndView mv = this.getModelAndView();
         mv.addObject("toEmails", toEmails);
@@ -376,31 +337,27 @@ public class UserController extends BaseController {
      * @param response
      * @throws Exception
      */
-    @RequestMapping(value = "/sendEmail", produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/sendEmail", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public void sendEmail(@RequestParam("toEmail") String toEmail, @RequestParam("title") String title,
+    public Map<String,String> sendEmail(@RequestParam("toEmail") String toEmail, @RequestParam("title") String title,
                           @RequestParam("content") String content, HttpServletResponse response) throws Exception {
-
-        JavaEmailSender.sendEmail(toEmail, title, content);
-
-        JSONObject obj = new JSONObject();
-        obj.put("msg", "ok");
-        PrintWriter out;
-
-        response.setCharacterEncoding("utf-8");
-        out = response.getWriter();
-        out.write(obj.toString());
-
-        out.flush();
-        out.close();
-
+        Map<String,String> result =new HashMap<String,String>();
+        try {
+            JavaEmailSender.sendEmail(toEmail, title, content);
+            result.put("msg", "ok");
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error("异常:{}"+e);
+            result.put("msg","error");
+        }
+        return result;
     }
 
     /**
      * 导出管理员信息到Excel表
      * @since 1.0.0
      */
-    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
+    @GetMapping(value = "/exportExcel")
     public ModelAndView exportExcel(@RequestParam("ids") String idstr) {
         Map<String, Object> dataMap = new HashMap<String, Object>();
         List<String> titles = new ArrayList<String>();

@@ -109,10 +109,10 @@ public class JavaEmailSender {
                 builder.append("\n" + emailContent);
                 builder.append("\n时间 " + new Date());
                 msg.setText(builder.toString());
-                msg.setFrom(new InternetAddress("123@qq.com"));
+                msg.setFrom(new InternetAddress("nickypm@foxmail.com"));
 
                 Transport transport = session.getTransport();
-                transport.connect("smtp.qq.com", "123@qq.com", "xoguhfiomzenbged");
+                transport.connect("smtp.qq.com", "nickypm@foxmail.com", "xoguhfiomzenbged");
 
                 transport.sendMessage(msg, new Address[]{new InternetAddress(toEmailAddress)});
                 transport.close();

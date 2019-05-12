@@ -1,7 +1,6 @@
 package org.muses.jeeplatform.web.controller;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSON;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -84,8 +83,8 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value="/logincheck", produces="application/json;charset=UTF-8")
     @ResponseBody
-    public String loginCheck(HttpServletRequest request)throws AuthenticationException{
-        JSONObject obj = new JSONObject();
+    //@LogController
+    public Map<String,String> loginCheck(HttpServletRequest request)throws AuthenticationException{
         String errInfo = "";//错误信息
         String logindata[] = request.getParameter("LOGINDATA").split(",");
         if(logindata != null && logindata.length == 3){
@@ -135,8 +134,9 @@ public class LoginController extends BaseController {
                 }
             }
         }
-        obj.put("result", errInfo);
-        return obj.toString();
+        Map<String,String> result = new HashMap<String,String>();
+        result.put("result", errInfo);
+        return result;
     }
 
     /**
@@ -185,8 +185,7 @@ public class LoginController extends BaseController {
             MenuTreeUtils treeUtil = new MenuTreeUtils();
             List<Menu> treemenus= treeUtil.menuList(menuList);
 
-            JSONArray jsonArray = JSONArray.fromObject(treemenus);
-            String json = jsonArray.toString();
+            String json = JSON.toJSONString(treemenus);
 
 //			json = json.replaceAll("menuId","id").replaceAll("parentId","pId").
 //					replaceAll("menuName","name").replaceAll("hasSubMenu","checked");

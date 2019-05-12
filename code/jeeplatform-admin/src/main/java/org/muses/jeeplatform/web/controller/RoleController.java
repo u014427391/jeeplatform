@@ -1,7 +1,6 @@
 package org.muses.jeeplatform.web.controller;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang.StringUtils;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.entity.admin.Menu;
@@ -15,19 +14,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 /**
  * Created by Nicky on 2017/7/30.
  */
@@ -72,9 +65,8 @@ public class RoleController extends BaseController {
         mv.addObject("totalCount",rolePage.getTotalElements());
         mv.addObject("pageIndex",pageIndex);
 
-        JSONArray jsonArray = JSONArray.fromObject(rolePage.getContent());
-
-        mv.addObject("roles",jsonArray.toString());
+        String json = JSON.toJSONString(rolePage.getContent());
+        mv.addObject("roles",json);
         mv.setViewName("admin/role/role_list");
         return mv;
     }
@@ -95,7 +87,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/addR" , method = RequestMethod.POST)
     @ResponseBody
-    public void addR(@RequestParam("params")String params, HttpServletResponse response){
+    public Map<String,String> addR(@RequestParam("params")String params, HttpServletResponse response){
 
         String roleName="", roleDesc="";
         String[] strs = StringUtils.split(params, ",");
@@ -107,26 +99,15 @@ public class RoleController extends BaseController {
         role.setRoleDesc(roleDesc);
         role.setRole("role");
 
-        PrintWriter out = null;
-
-        response.setCharacterEncoding("utf-8");
-
-        JSONObject obj = new JSONObject();
-
+        Map<String,String> result = new HashMap<String,String>();
         try {
-            out = response.getWriter();
             roleService.doSave(role);
-            obj.put("result","success");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
-        } catch (IOException e) {
+            result.put("result","success");
+        } catch (Exception e) {
             e.printStackTrace();
-            obj.put("result","error");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
+            result.put("result","error");
         }
+        return result;
     }
 
     /**
@@ -146,9 +127,9 @@ public class RoleController extends BaseController {
      * 编辑角色信息
      * @param params
      */
-    @RequestMapping(value = "/editR", method = RequestMethod.POST)
+    @PostMapping(value = "/editR")
     @ResponseBody
-    public void editR(@RequestParam("params")String params, HttpServletResponse response){
+    public Map<String,String> editR(@RequestParam("params")String params){
         String strs[]=params.split(",");
         String roleId = strs[0];
         String roleName = strs[1];
@@ -158,27 +139,16 @@ public class RoleController extends BaseController {
         role.setRoleName(roleName);
         role.setRoleDesc(roleDesc);
         role.setRole("role");
-        PrintWriter out = null;
 
-        response.setCharacterEncoding("utf-8");
-
-        JSONObject obj = new JSONObject();
-
+        Map<String,String> result = new HashMap<String,String>();
         try {
-            out = response.getWriter();
             roleService.doSave(role);
-            obj.put("result","success");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
-        } catch (IOException e) {
+            result.put("result","success");
+        } catch (Exception e) {
             e.printStackTrace();
-            obj.put("result","error");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
+            result.put("result","error");
         }
-
+        return result;
     }
 
     /**
@@ -210,11 +180,9 @@ public class RoleController extends BaseController {
 
         model.addAttribute("roleId" , roleId);
 
-        JSONArray jsonArray = JSONArray.fromObject(menuList);
-        String json = jsonArray.toString();
+        String json = JSON.toJSONString(menuList);
 
-        json = json.replaceAll("menuId","id").replaceAll("parentId","pId").
-                                                                                  replaceAll("menuName","name").replaceAll("hasSubMenu","checked");
+        json = json.replaceAll("menuId","id").replaceAll("parentId","pId").replaceAll("menuName","name").replaceAll("hasSubMenu","checked");
 
         model.addAttribute("menus",json);
 
@@ -223,11 +191,10 @@ public class RoleController extends BaseController {
 
     /**
      * 角色授权
-     * @param response
      */
-    @RequestMapping(value = "/authorise", produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/authorise", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public void authorise(@RequestParam("params")String params, HttpServletResponse response){
+    public Map<String,String> authorise(@RequestParam("params")String params){
 
         String[] strs = params.split(";");
 
@@ -235,14 +202,8 @@ public class RoleController extends BaseController {
         String menuIdarr = strs[1];
         String[] menuIds = menuIdarr.split(",");
 
-        PrintWriter out = null;
-
-        response.setCharacterEncoding("utf-8");
-
-        JSONObject obj = new JSONObject();
-
+        Map<String,String> result = new HashMap<String,String>();
         try {
-            out = response.getWriter();
             List<RolePermission> rplist = new ArrayList<RolePermission>();
             rplist = rolePermissionService.findById(Integer.parseInt(roleId));
             //先删除数据
@@ -272,22 +233,13 @@ public class RoleController extends BaseController {
 //
 //            roleService.doSave(role);
 
-            obj.put("result","success");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
-        } catch (IOException e) {
+            result.put("result","success");
+        } catch (Exception e) {
             e.printStackTrace();
-            obj.put("result","error");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
+            result.put("result","error");
         }
-
+        return result;
     }
 
-//    public void delR(List<RolePermission> rplist){
-//
-//    }
 
 }
