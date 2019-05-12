@@ -35,6 +35,7 @@
 		<druid.version>1.1.2</druid.version>
 		<github.pagehelper.version>4.2.1</github.pagehelper.version>
 		<fastjson.version>1.2.7</fastjson.version>
+		<lombok.version>1.16.10</lombok.version>
 	</properties>
 
 	<profiles>
@@ -84,6 +85,13 @@
 					<compilerVersion>1.8</compilerVersion>
 					<encoding>UTF-8</encoding>
 					<skipMain></skipMain>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
 
@@ -203,7 +211,16 @@
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
 		</dependency>
+
+		<!-- lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+
 	</dependencies>
+
 	<!--  设定Maven主仓库为阿里私服 -->
 	<repositories>
 		<repository>
