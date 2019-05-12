@@ -1,8 +1,5 @@
 package org.muses.jeeplatform.service;
 
-import org.muses.jeeplatform.annotation.RedisCache;
-import org.muses.jeeplatform.annotation.RedisCacheKey;
-import org.muses.jeeplatform.common.RedisCacheNamespace;
 import org.muses.jeeplatform.core.dao.repository.admin.UserRepository;
 import org.muses.jeeplatform.core.entity.admin.Operation;
 import org.muses.jeeplatform.core.entity.admin.Permission;
@@ -167,6 +164,14 @@ public class UserService {
 	 */
 	public void saveU(User user){
 		userRepository.save(user);
+	}
+
+	/**
+	 * 更新用户信息
+	 * @param user
+	 */
+	public int updateU(User user) {
+		return userRepository.updatePasswordById(user.getPassword(),user.getUsername());
 	}
 
 }

@@ -13,7 +13,7 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.muses.jeeplatform.utils.DateUtils;
+import org.muses.jeeplatform.util.DateUtils;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 /**
  * Created by Nicky on 2017/8/1 0001.

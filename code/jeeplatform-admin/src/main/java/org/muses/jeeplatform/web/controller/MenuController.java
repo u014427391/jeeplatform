@@ -1,7 +1,7 @@
 package org.muses.jeeplatform.web.controller;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSON;
+import org.muses.jeeplatform.annotation.LogController;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.muses.jeeplatform.core.entity.admin.Permission;
@@ -12,17 +12,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by op.43027 on 2017/5/27 0027.
@@ -37,7 +35,7 @@ public class MenuController extends BaseController {
     PermissionService permissionService;
 
     @RequestMapping(value = "/getMenus", produces = "application/json;charset=UTF-8")
-    @ResponseBody
+    @LogController
     public ModelAndView toMenuList(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         String pageIndexStr = request.getParameter("pageIndex");
 
@@ -54,16 +52,16 @@ public class MenuController extends BaseController {
         menuPage = menuService.findAll(pageIndex+1, pageSize, Sort.Direction.ASC,"menuId");
         mv.addObject("totalCount",menuPage.getTotalElements());
         mv.addObject("pageIndex",pageIndex);
-        JSONArray jsonData = JSONArray.fromObject(menuPage.getContent());
-        mv.addObject("menus",jsonData.toString());
-
+        String json = JSON.toJSONString(menuPage.getContent());
+        mv.addObject("menus",json);
         mv.setViewName("admin/menu/menu_list");
         return mv;
     }
 
     @RequestMapping(value = "/loadMenus", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public void doLoadData(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+    //@LogController
+    public String doLoadData(HttpServletRequest request, Model model) throws IOException {
         String pageIndexStr = request.getParameter("pageIndex");
         if(pageIndexStr==null||"".equals(pageIndexStr)){
             pageIndexStr = "1";
@@ -76,24 +74,16 @@ public class MenuController extends BaseController {
 
         int pageSize = Constants.PAGE_SIZE;
         Page<Menu> menuPage = menuService.findAll(pageIndex, pageSize, Sort.Direction.ASC,"menuId");
-        JSONArray jsonData = JSONArray.fromObject(menuPage.getContent());
-
-        PrintWriter out;
-
-        response.setCharacterEncoding("utf-8");
-        out = response.getWriter();
-        out.write(jsonData.toString());
-        out.flush();
-        out.close();
-
+        String json = JSON.toJSONString(menuPage.getContent());
+        return json;
     }
 
     @RequestMapping("/list")
     public ModelAndView list(){
         ModelAndView mv = new ModelAndView();
         List<Menu> menus = menuService.findAllParentMenu();
-        JSONArray jsonObject = JSONArray.fromObject(menus);
-        mv.addObject("menus",jsonObject.toString());
+        String json = JSON.toJSONString(menus);
+        mv.addObject("menus",json);
         mv.setViewName("admin/menu/menu_list");
         return mv;
     }
@@ -101,24 +91,18 @@ public class MenuController extends BaseController {
     /**
      * 获取当前菜单的所有子菜单
      * @param menuId
-     * @param response
-     */
+    */
     @RequestMapping(value="/sub")
-    public void getSub(@RequestParam String menuId, HttpServletResponse response)throws Exception{
+    @ResponseBody
+    public String getSub(@RequestParam String menuId)throws Exception{
+        String json="";
         try {
             List<Menu> subMenu = menuService.findSubMenuById(Integer.parseInt(menuId));
-            JSONArray arr = JSONArray.fromObject(subMenu);
-            PrintWriter out;
-
-            response.setCharacterEncoding("utf-8");
-            out = response.getWriter();
-            String json = arr.toString();
-            out.write(json);
-            out.flush();
-            out.close();
+            json = JSON.toJSONString(subMenu);
         } catch (Exception e) {
             log.error(e.toString(), e);
         }
+        return json;
     }
 
     /**
@@ -127,7 +111,7 @@ public class MenuController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value="/goEditM",method = RequestMethod.GET)
+    @GetMapping(value="/goEditM")
     public String goEditM(HttpServletRequest request,Model model){
         String menuIdStr = request.getParameter("menuId");
         int menuId = Integer.parseInt(menuIdStr);
@@ -138,19 +122,11 @@ public class MenuController extends BaseController {
 
     /**
      * 编辑菜单信息
-     * @param response
      * @param request
      */
-    @RequestMapping(value = "/editM", method = RequestMethod.POST)
-    public void editM(HttpServletResponse response,HttpServletRequest request){
-        PrintWriter out = null;
-
-        response.setCharacterEncoding("utf-8");
-        try {
-            out = response.getWriter();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @PostMapping(value = "/editM")
+    @ResponseBody
+    public Map<String,String> editM(HttpServletRequest request){
         String params[] = request.getParameter("KEYDATA").split(",");
         String menuId = params[0];
         String parentId = params[1];
@@ -168,20 +144,21 @@ public class MenuController extends BaseController {
         m.setMenuOrder(menuOrder);
         m.setMenuIcon("&#xe610");
         m.setMenuStatus(menuStatus);
-        menuService.editM(m);
-
-        JSONObject obj = new JSONObject();
-        obj.put("result","success");
-        out.write(obj.toString());
-        out.flush();
-        out.close();
+        Map<String,String> result = new HashMap<String,String>();
+        try{
+            menuService.editM(m);
+            result.put("result","success");
+        }catch (Exception e){
+            result.put("result","error");
+        }
+        return result;
     }
 
     /**
      * 跳转到新增菜单页面
      * @return
      */
-    @RequestMapping(value="/goAddM",method=RequestMethod.GET)
+    @GetMapping(value="/goAddM")
     public String goAddM(Model model){
         List<Menu> sjMenus = menuService.findAllParentMenu();
         model.addAttribute("sjMenus",sjMenus);
@@ -191,11 +168,10 @@ public class MenuController extends BaseController {
     /**
      * 保存菜单信息
      * @param request
-     * @param response
      */
-    @RequestMapping(value = "/addM", method = RequestMethod.POST)
+    @PostMapping(value = "/addM")
     @ResponseBody
-    public void addM(HttpServletRequest request, HttpServletResponse response){
+    public Map<String,String> addM(HttpServletRequest request){
         String[] params = request.getParameter("params").split(",");
         String parentId = params[0];
         String menuName = params[1];
@@ -210,31 +186,21 @@ public class MenuController extends BaseController {
         menu.setMenuType("1");
         menu.setMenuOrder(menuOrder);
         menu.setMenuStatus("1");
-        PrintWriter out = null;
 
-        response.setCharacterEncoding("utf-8");
-
-        JSONObject obj = new JSONObject();
-
+        Map<String,String> result = new HashMap<String,String>();
         try {
-            out = response.getWriter();
             Permission p = new Permission();
             p.setMenu(menu);
             permissionService.doSave(p);
 
             menuService.saveM(menu);
 
-            obj.put("result","success");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
-        } catch (IOException e) {
+            result.put("result","success");
+        } catch (Exception e) {
             e.printStackTrace();
-            obj.put("result","error");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
+            result.put("result","error");
         }
+        return result;
     }
 
 

@@ -1,7 +1,6 @@
 package org.muses.jeeplatform.service;
 
-import org.muses.jeeplatform.annotation.RedisCache;
-import org.muses.jeeplatform.common.RedisCacheNamespace;
+import org.muses.jeeplatform.annotation.LogService;
 import org.muses.jeeplatform.core.dao.repository.admin.MenuTreeRepository;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,7 @@ public class MenuTreeService {
      */
     @Transactional
     //@RedisCache
+    @LogService
     public List<Menu> findAll(){
         return menuTreeRepository.findAll();
     }
