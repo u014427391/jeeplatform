@@ -139,7 +139,7 @@
                 dataType:'json',//数据类型为JSON类型
                 cache: false,//关闭缓存
                 success: function(data){//响应成功
-                    if("success" == data.result){
+                    if(1 == data.status){
                         $("#login").tips({
                             side : 1,
                             msg : '正在登录 , 请稍后 ...',
