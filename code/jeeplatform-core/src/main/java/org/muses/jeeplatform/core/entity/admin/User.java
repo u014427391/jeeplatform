@@ -1,5 +1,7 @@
 package org.muses.jeeplatform.core.entity.admin;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -131,6 +133,7 @@ public class User implements Serializable{
 	}
 
 	@Temporal(TemporalType.DATE)
+    @JSONField(format ="yyyy-MM-dd HH:mm:ss")
 	public Date getLastLogin() {
 		return lastLogin;
 	}
@@ -159,6 +162,7 @@ public class User implements Serializable{
 
 	@Temporal(TemporalType.DATE)
 	@Column(nullable=false)
+    @JSONField(format ="yyyy-MM-dd HH:mm:ss")
 	public Date getRegTime() {
 		return regTime;
 	}
