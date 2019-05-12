@@ -1,11 +1,11 @@
-package org.muses.jeeplatform.utils;
+package org.muses.jeeplatform.util;
 
 import java.util.UUID;
 
 /**
  * Created by Nicky on 2017/11/19.
  */
-public class UUIDUtil {
+public class UUIDGenerator {
 
     public static String getRandomNum(){
         String s = UUID.randomUUID().toString();

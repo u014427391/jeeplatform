@@ -1,16 +1,20 @@
 package org.muses.jeeplatform.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-public class BaseController {
+import javax.servlet.http.HttpServletRequest;
+
+public abstract class BaseController {
 
 	Logger log = null;
+
+	public BaseController(){
+		this.log = getInstance();
+	}
 
 	/**
 	 * 获取日志对象
@@ -21,6 +25,14 @@ public class BaseController {
 			log = LoggerFactory.getLogger(BaseController.class);
 		}
 		return log;
+	}
+
+	public void debug(String message){
+		log.debug(message);
+	}
+
+	public void info(String message){
+		log.info(message);
 	}
 
 	/**

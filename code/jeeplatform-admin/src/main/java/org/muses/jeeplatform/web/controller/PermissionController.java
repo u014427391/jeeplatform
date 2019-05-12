@@ -1,7 +1,7 @@
 package org.muses.jeeplatform.web.controller;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSON;
+import org.muses.jeeplatform.annotation.LogController;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.entity.admin.Permission;
 import org.muses.jeeplatform.service.PermissionPageService;
@@ -11,16 +11,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Nicky on 2017/12/3.
@@ -41,7 +38,7 @@ public class PermissionController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/queryAll", produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "/queryAll", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public ModelAndView queryAll(HttpServletRequest request, HttpServletResponse response, Model model){
         String pageIndexStr = request.getParameter("pageIndex");
@@ -60,9 +57,9 @@ public class PermissionController extends BaseController {
         mv.addObject("totalCount",permissionPage.getTotalElements());
         mv.addObject("pageIndex",pageIndex);
 
-        JSONArray jsonArray = JSONArray.fromObject(permissionPage.getContent());
-
-        mv.addObject("permissions",jsonArray.toString());
+        //JSONArray jsonArray = JSONArray.fromObject(permissionPage.getContent());
+        String json = JSON.toJSONString(permissionPage.getContent());
+        mv.addObject("permissions",json);
         mv.setViewName("admin/permission/permission_list");
         return mv;
     }
@@ -83,9 +80,10 @@ public class PermissionController extends BaseController {
      * 编辑权限信息
      * @param params
      */
-    @RequestMapping(value = "/editP", method = RequestMethod.POST)
+    @PostMapping(value = "/editP")
     @ResponseBody
-    public void editR(@RequestParam("params")String params, HttpServletResponse response){
+    @LogController
+    public Map<String,String> editR(@RequestParam("params")String params){
         String strs[]=params.split(",");
         String id = strs[0];
         String name = strs[1];
@@ -95,27 +93,15 @@ public class PermissionController extends BaseController {
         permission.setName(name);
         permission.setPdesc(pdesc);
 
-        PrintWriter out = null;
-
-        response.setCharacterEncoding("utf-8");
-
-        JSONObject obj = new JSONObject();
-
+        Map<String,String> result = new HashMap<String,String>();
         try {
-            out = response.getWriter();
             permissionService.doSave(permission);
-            obj.put("result","success");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
-        } catch (IOException e) {
+            result.put("result","success");
+        } catch (Exception e) {
             e.printStackTrace();
-            obj.put("result","error");
-            out.write(obj.toString());
-            out.flush();
-            out.close();
+            result.put("result","error");
         }
-
+        return result;
     }
 
 }

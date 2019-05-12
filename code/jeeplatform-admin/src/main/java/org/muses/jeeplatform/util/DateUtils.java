@@ -1,4 +1,4 @@
-package org.muses.jeeplatform.utils;
+package org.muses.jeeplatform.util;
 
 
 

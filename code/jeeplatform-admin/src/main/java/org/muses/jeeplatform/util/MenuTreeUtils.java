@@ -1,14 +1,12 @@
-package org.muses.jeeplatform.utils;
+package org.muses.jeeplatform.util;
 
 
 import org.muses.jeeplatform.core.entity.admin.Menu;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
-public class MenuTreeUtil {
+public class MenuTreeUtils {
 
     public List<Menu> menuCommon;
     public List<Menu> list = new ArrayList<Menu>();
