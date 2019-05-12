@@ -1,6 +1,7 @@
 package org.muses.jeeplatform.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import org.muses.jeeplatform.annotation.LogController;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.entity.admin.Permission;
 import org.muses.jeeplatform.service.PermissionPageService;
@@ -81,6 +82,7 @@ public class PermissionController extends BaseController {
      */
     @PostMapping(value = "/editP")
     @ResponseBody
+    @LogController
     public Map<String,String> editR(@RequestParam("params")String params){
         String strs[]=params.split(",");
         String id = strs[0];
