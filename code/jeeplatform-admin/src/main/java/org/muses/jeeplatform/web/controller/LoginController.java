@@ -9,6 +9,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.muses.jeeplatform.core.Constants;
+import org.muses.jeeplatform.core.ResultVO;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.muses.jeeplatform.core.entity.admin.Permission;
 import org.muses.jeeplatform.core.entity.admin.Role;
@@ -87,7 +88,7 @@ public class LoginController extends BaseController {
     @ResponseBody
     //@LogController
     @ApiOperation(value = "登录验证接口",notes = "根据用户名、密码、验证码进行验证")
-    public Map<String,String> loginCheck(HttpServletRequest request)throws AuthenticationException{
+    public ResultVO loginCheck(HttpServletRequest request)throws AuthenticationException{
         String errInfo = "";//错误信息
         String logindata[] = request.getParameter("LOGINDATA").split(",");
         if(logindata != null && logindata.length == 3){
@@ -139,7 +140,7 @@ public class LoginController extends BaseController {
         }
         Map<String,String> result = new HashMap<String,String>();
         result.put("result", errInfo);
-        return result;
+        return ResultVO.successful("result",null);
     }
 
     /**
