@@ -1,11 +1,12 @@
 <jsp:directive.include file="includes/top.jsp" />
 
-<c:if test="${not pageContext.request.secure}">
+<!-- 支持Http方式登录-->
+<%--<c:if test="${not pageContext.request.secure}">
     <div id="msg" class="errors">
         <h2><spring:message code="screen.nonsecure.title" /></h2>
         <p><spring:message code="screen.nonsecure.message" /></p>
     </div>
-</c:if>
+</c:if>--%>
 
 <div id="cookiesDisabled" class="errors" style="display:none;">
     <h2><spring:message code="screen.cookies.disabled.title" /></h2>
