@@ -5,6 +5,7 @@
          version="3.0">
     <display-name>Central Authentication System (CAS)</display-name>
 
+<!--
     <context-param>
         <param-name>isLog4jAutoInitializationDisabled</param-name>
         <param-value>true</param-value>
@@ -12,6 +13,7 @@
     <listener>
         <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
     </listener>
+-->
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
