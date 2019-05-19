@@ -15,7 +15,6 @@
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-<!--
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="url" value="${platform.jdbc.jdbcUrl}"/>
         <property name="username" value="${platform.jdbc.username}"/>
@@ -24,29 +23,37 @@
         <property name="minIdle" value="${platform.jdbc.minIdle}"/>
         <property name="maxActive" value="${platform.jdbc.maxActive}"/>
         <property name="maxWait" value="60000"/>
-        &lt;!&ndash; 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 &ndash;&gt;
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
         <property name="timeBetweenEvictionRunsMillis" value="60000"/>
-        &lt;!&ndash; 配置一个连接在池中最小生存的时间，单位是毫秒 &ndash;&gt;
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
         <property name="minEvictableIdleTimeMillis" value="300000"/>
         <property name="validationQuery" value="SELECT 1"/>
         <property name="testWhileIdle" value="true"/>
         <property name="testOnBorrow" value="false"/>
         <property name="testOnReturn" value="false"/>
-        &lt;!&ndash; 打开removeAbandoned功能 &ndash;&gt;
+        <!-- 打开removeAbandoned功能 -->
         <property name="removeAbandoned" value="true"/>
         <property name="removeAbandonedTimeout" value="1800"/>
-        &lt;!&ndash; 1800秒，也就是30分钟 &ndash;&gt;
+        <!-- 1800秒，也就是30分钟 -->
         <property name="logAbandoned" value="true"/>
-        &lt;!&ndash; 打开PSCache，并且指定每个连接上PSCache的大小,mysql 不使用 &ndash;&gt;
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小,mysql 不使用 -->
         <property name="poolPreparedStatements" value="false"/>
         <property name="filters" value="config" />
-        <property name="connectionProperties" value="config.decrypt=true;config.decrypt.key=${platform.jdbc.publickey};druid.stat.slowSqlMillis=200;druid.stat.logSlowSql=true"/>
+        <!--<property name="connectionProperties" value="config.decrypt=true;config.decrypt.key=${platform.jdbc.publickey};druid.stat.slowSqlMillis=200;druid.stat.logSlowSql=true"/>-->
     </bean>
--->
+
+    <!-- 认证控制器 -->
+    <bean id="queryDatabaseAuthenticationHandler" name="primaryAuthenticationHandler" class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler">
+        <!--<property name="passwordEncoder" ref="passwordEncoder" />-->
+        <property name="dataSource" ref="dataSource" />
+        <!-- 通过用户名查询密码的SQL -->
+        <property name="sql" value="select password from sys_user where username =?" />
+    </bean>
 
     <util:map id="authenticationHandlersResolvers">
         <entry key-ref="proxyAuthenticationHandler" value-ref="proxyPrincipalResolver" />
-        <entry key-ref="primaryAuthenticationHandler" value-ref="primaryPrincipalResolver" />
+        <!--<entry key-ref="primaryAuthenticationHandler" value-ref="primaryPrincipalResolver" />-->
+        <entry key-ref="queryDatabaseAuthenticationHandler" value-ref="primaryPrincipalResolver" />
         <!--<entry key-ref="costomUsernamePasswordAuthentication" value-ref="primaryPrincipalResolver" />-->
     </util:map>
 
