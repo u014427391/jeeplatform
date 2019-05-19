@@ -16,6 +16,7 @@
         <shiro.version>1.2.3</shiro.version>
         <lucene.version>4.7.2</lucene.version>
         <poi.version>3.7</poi.version>
+        <cas.version>3.2.0</cas.version>
     </properties>
 
     <dependencies>
@@ -79,6 +80,12 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jasig.cas.client</groupId>
+            <artifactId>cas-client-core</artifactId>
+            <version>${cas.version}</version>
         </dependency>
 
     </dependencies>
