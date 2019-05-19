@@ -24,7 +24,6 @@ public class ExcelViewRead extends AbstractExcelView{
     protected void buildExcelDocument(Map<String, Object> model,
                                       HSSFWorkbook workbook, HttpServletRequest request,
                                       HttpServletResponse response) throws Exception {
-        // TODO Auto-generated method stub
         Date date = new Date();
         String filename = DateUtils.formatDate(date, "yyyyMMddHHmmss");
         HSSFSheet sheet;
