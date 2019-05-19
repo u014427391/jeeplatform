@@ -15,6 +15,7 @@
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
+<!--
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="url" value="${platform.jdbc.jdbcUrl}"/>
         <property name="username" value="${platform.jdbc.username}"/>
@@ -23,24 +24,25 @@
         <property name="minIdle" value="${platform.jdbc.minIdle}"/>
         <property name="maxActive" value="${platform.jdbc.maxActive}"/>
         <property name="maxWait" value="60000"/>
-        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        &lt;!&ndash; 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 &ndash;&gt;
         <property name="timeBetweenEvictionRunsMillis" value="60000"/>
-        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        &lt;!&ndash; 配置一个连接在池中最小生存的时间，单位是毫秒 &ndash;&gt;
         <property name="minEvictableIdleTimeMillis" value="300000"/>
         <property name="validationQuery" value="SELECT 1"/>
         <property name="testWhileIdle" value="true"/>
         <property name="testOnBorrow" value="false"/>
         <property name="testOnReturn" value="false"/>
-        <!-- 打开removeAbandoned功能 -->
+        &lt;!&ndash; 打开removeAbandoned功能 &ndash;&gt;
         <property name="removeAbandoned" value="true"/>
         <property name="removeAbandonedTimeout" value="1800"/>
-        <!-- 1800秒，也就是30分钟 -->
+        &lt;!&ndash; 1800秒，也就是30分钟 &ndash;&gt;
         <property name="logAbandoned" value="true"/>
-        <!-- 打开PSCache，并且指定每个连接上PSCache的大小,mysql 不使用 -->
+        &lt;!&ndash; 打开PSCache，并且指定每个连接上PSCache的大小,mysql 不使用 &ndash;&gt;
         <property name="poolPreparedStatements" value="false"/>
         <property name="filters" value="config" />
         <property name="connectionProperties" value="config.decrypt=true;config.decrypt.key=${platform.jdbc.publickey};druid.stat.slowSqlMillis=200;druid.stat.logSlowSql=true"/>
     </bean>
+-->
 
     <util:map id="authenticationHandlersResolvers">
         <entry key-ref="proxyAuthenticationHandler" value-ref="proxyPrincipalResolver" />
