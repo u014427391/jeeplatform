@@ -15,6 +15,12 @@
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
+    <!-- 对密码进行加密 -->
+   <!-- <bean id="passwordEncoder" class="org.jasig.cas.authentication.handler.DefaultPasswordEncoder">
+        <constructor-arg value="MD5"></constructor-arg>
+        <property name="characterEncoding" value="UTF-8"></property>
+    </bean>-->
+
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="url" value="${platform.jdbc.jdbcUrl}"/>
         <property name="username" value="${platform.jdbc.username}"/>
