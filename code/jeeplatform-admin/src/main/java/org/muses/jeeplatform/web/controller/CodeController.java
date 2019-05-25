@@ -3,7 +3,7 @@ package org.muses.jeeplatform.web.controller;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.muses.jeeplatform.core.Constants;
+import org.muses.jeeplatform.core.CommonConsts;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,7 +30,7 @@ public class CodeController {
 		
 		Subject currentUser = SecurityUtils.getSubject();  
 		Session session = currentUser.getSession();
-		session.setAttribute(Constants.SESSION_SECURITY_CODE, code);
+		session.setAttribute(CommonConsts.SESSION_SECURITY_CODE, code);
 		
 		try {
 			ServletOutputStream out = response.getOutputStream();

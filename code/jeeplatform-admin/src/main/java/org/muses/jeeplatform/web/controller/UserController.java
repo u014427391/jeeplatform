@@ -2,7 +2,7 @@ package org.muses.jeeplatform.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.muses.jeeplatform.core.Constants;
+import org.muses.jeeplatform.core.CommonConsts;
 import org.muses.jeeplatform.core.email.JavaEmailSender;
 import org.muses.jeeplatform.core.entity.admin.Role;
 import org.muses.jeeplatform.core.entity.admin.User;
@@ -52,7 +52,7 @@ public class UserController extends BaseController {
     public ModelAndView findAll(HttpServletRequest request, HttpServletResponse response, Model model) {
         String pageIndexStr = request.getParameter("pageIndex");
 
-        int pageSize = Constants.PAGE_SIZE;
+        int pageSize = CommonConsts.PAGE_SIZE;
         ModelAndView mv = this.getModelAndView();
         Page<User> userPage;
 
@@ -90,7 +90,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/searchU", produces = "application/json;charset=UTf-8")
     public ModelAndView doSearch(@RequestParam(value = "pageIndex",required = false) String pageIndexStr, @RequestParam(value = "keyword",required = false) String keyword,
                                  @RequestParam(value = "startDate",required = false) String startDateStr, @RequestParam(value = "endDate",required = false) String endDateStr) {
-        int pageSize = Constants.PAGE_SIZE;
+        int pageSize = CommonConsts.PAGE_SIZE;
         ModelAndView mv = this.getModelAndView();
         Page<User> userPage;
 
