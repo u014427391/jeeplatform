@@ -56,7 +56,7 @@ public class ShiroConfig {
         bean.setEnabled(true);
         return bean;
     }
-    
+
 
     /**
      * CAS过滤器
@@ -68,6 +68,7 @@ public class ShiroConfig {
         casFilter.setName("casFilter");
         casFilter.setEnabled(true);
         casFilter.setFailureUrl(CAS_CLIENT_LOGIN_URL);
+        casFilter.setSuccessUrl(LOGIN_SUCCESS_URL);
         return casFilter;
     }
 
@@ -106,7 +107,7 @@ public class ShiroConfig {
 
         shiroFilterFactoryBean.setLoginUrl(CAS_CLIENT_LOGIN_URL);
         shiroFilterFactoryBean.setSuccessUrl(LOGIN_SUCCESS_URL);
-        shiroFilterFactoryBean.setUnauthorizedUrl(CAS_CLIENT_LOGIN_URL);
+        shiroFilterFactoryBean.setUnauthorizedUrl(LOGIN_UNAUTHORIZED_URL);
 
         //添加CasFilter到ShiroFilter
         Map<String,Filter> filters = new HashMap<String,Filter>();
@@ -122,9 +123,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/upload/**", "anon");
         filterChainDefinitionMap.put("/plugins/**", "anon");
         filterChainDefinitionMap.put("/code", "anon");
-        filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/logincheck", "anon");
-        filterChainDefinitionMap.put("/logout","anon");
+        //filterChainDefinitionMap.put("/login", "anon");
+        //filterChainDefinitionMap.put("/logincheck", "anon");
+        //filterChainDefinitionMap.put("/logout","anon");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 

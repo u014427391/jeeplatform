@@ -228,5 +228,11 @@ public class LoginController extends BaseController {
         return mv;
     }
 
+    @RequestMapping("/403")
+    public ModelAndView to403PAge(){
+        ModelAndView mv = this.getModelAndView();
+        mv.setViewName("admin/frame/403");
+        return mv;
+    }
 
 }

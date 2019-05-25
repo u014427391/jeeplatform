@@ -130,7 +130,7 @@
         <init-param>
             &lt;!&ndash; CAS登录页面,当SessionId无法匹配Session时,跳转到CAS登录页面 &ndash;&gt;
             <param-name>casServerLoginUrl</param-name>
-            <param-value>http://localhost:8080/jeeplatform-sso/login</param-value>
+            <param-value>http://localhost:8080/cas/login</param-value>
         </init-param>
         <init-param>
             <param-name>serverName</param-name>
@@ -148,7 +148,7 @@
         <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
         <init-param>
             <param-name>casServerUrlPrefix</param-name>
-            <param-value>http://localhost:8080/jeeplatform-sso</param-value>
+            <param-value>http://localhost:8080/cas</param-value>
         </init-param>
         <init-param>
             <param-name>serverName</param-name>
