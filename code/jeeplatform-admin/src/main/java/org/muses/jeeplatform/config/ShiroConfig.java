@@ -1,28 +1,122 @@
 package org.muses.jeeplatform.config;
 
+import org.apache.shiro.cas.CasFilter;
+import org.apache.shiro.cas.CasSubjectFactory;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.jasig.cas.client.session.SingleSignOutFilter;
+import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
 import org.muses.jeeplatform.core.shiro.ShiroRealm;
 import org.muses.jeeplatform.web.filter.SysAccessControllerFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static org.muses.jeeplatform.core.CASConsts.*;
 
 /**
  * @author caiyuyu
  */
 @Configuration
 public class ShiroConfig {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ShiroConfig.class);
+
+    /**
+     *  单点登出监听器
+     * @return
+     */
     @Bean
-    public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
+    public ServletListenerRegistrationBean singleSignOutHttpSeessionListener(){
+        ServletListenerRegistrationBean bean = new ServletListenerRegistrationBean();
+        bean.setListener(new SingleSignOutHttpSessionListener());
+        bean.setEnabled(true);
+        return bean;
+    }
+
+    /**
+     * 注册单点登出的过滤器
+     * @return
+     */
+    @Bean
+    public FilterRegistrationBean singleSignOutFilter(){
+        FilterRegistrationBean bean = new FilterRegistrationBean();
+        bean.setName("singleSignOutFilter");
+        bean.setFilter(new SingleSignOutFilter());
+        bean.addUrlPatterns("/*");
+        bean.setEnabled(true);
+        return bean;
+    }
+    
+
+    /**
+     * CAS过滤器
+     * @return
+     */
+    @Bean
+    public CasFilter getCasFilter(){
+        CasFilter casFilter = new CasFilter();
+        casFilter.setName("casFilter");
+        casFilter.setEnabled(true);
+        casFilter.setFailureUrl(CAS_CLIENT_LOGIN_URL);
+        return casFilter;
+    }
+
+    /**
+     * 定义ShrioRealm
+     * @return
+     */
+    @Bean
+    public ShiroRealm myShiroRealm(){
+        ShiroRealm myShiroRealm = new ShiroRealm();
+        return myShiroRealm;
+    }
+
+    /**
+     * Shiro Security Manager
+     * @return
+     */
+    @Bean
+    public SecurityManager securityManager(){
+        DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
+        securityManager.setRealm(myShiroRealm());
+        securityManager.setSubjectFactory(new CasSubjectFactory());
+        return securityManager;
+    }
+
+    /**
+     * ShiroFilterFactoryBean
+     * @param securityManager
+     * @return
+     */
+    @Bean
+    public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager,CasFilter casFilter) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        //注册Shrio Security Manager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
+
+        shiroFilterFactoryBean.setLoginUrl(CAS_CLIENT_LOGIN_URL);
+        shiroFilterFactoryBean.setSuccessUrl(LOGIN_SUCCESS_URL);
+        shiroFilterFactoryBean.setUnauthorizedUrl(CAS_CLIENT_LOGIN_URL);
+
+        //添加CasFilter到ShiroFilter
+        Map<String,Filter> filters = new HashMap<String,Filter>();
+        filters.put("casFilter",casFilter);
+        shiroFilterFactoryBean.setFilters(filters);
 
         //拦截器.
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<>();
+        //Shiro集成CAS后需要添加该规则
+        filterChainDefinitionMap.put(CAS_FILTER_URL_PATTERN,"casFilter");
         // 配置不会被拦截的链接 顺序判断
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/upload/**", "anon");
@@ -30,27 +124,11 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/code", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/logincheck", "anon");
+        filterChainDefinitionMap.put("/logout","anon");
         filterChainDefinitionMap.put("/**", "authc");
-
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setSuccessUrl("/index");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/login");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+
         return shiroFilterFactoryBean;
-    }
-
-    @Bean
-    public ShiroRealm myShiroRealm(){
-        ShiroRealm myShiroRealm = new ShiroRealm();
-        return myShiroRealm;
-    }
-
-
-    @Bean
-    public SecurityManager securityManager(){
-        DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
-        securityManager.setRealm(myShiroRealm());
-        return securityManager;
     }
 
     /**

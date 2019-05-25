@@ -2,9 +2,9 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>Archetype Created Web Application</display-name>
 
-  <welcome-file-list>
+  <!--<welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
+  </welcome-file-list>-->
 
   <!--<context-param>
     <param-name>contextConfigLocation</param-name>
@@ -108,12 +108,12 @@
     <session-timeout>600</session-timeout>
   </session-config>-->
 
-    <!-- 单点退出Listener -->
+    <!--!&#45;&#45; 单点退出Listener &ndash;&gt;
     <listener>
         <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
     </listener>
 
-    <!-- 单点退出Filter -->
+    &lt;!&ndash; 单点退出Filter &ndash;&gt;
     <filter>
         <filter-name>CAS Single Sign Out Filter</filter-name>
         <filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
@@ -123,12 +123,12 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!-- CAS认证Filter -->
+    &lt;!&ndash; CAS认证Filter &ndash;&gt;
     <filter>
         <filter-name>CASFilter</filter-name>
         <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
         <init-param>
-            <!-- CAS登录页面,当SessionId无法匹配Session时,跳转到CAS登录页面 -->
+            &lt;!&ndash; CAS登录页面,当SessionId无法匹配Session时,跳转到CAS登录页面 &ndash;&gt;
             <param-name>casServerLoginUrl</param-name>
             <param-value>http://localhost:8080/jeeplatform-sso/login</param-value>
         </init-param>
@@ -142,7 +142,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!-- CAS Ticket校验Filter -->
+    &lt;!&ndash; CAS Ticket校验Filter &ndash;&gt;
     <filter>
         <filter-name>CAS Validation Filter</filter-name>
         <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
@@ -160,7 +160,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!-- 使客户端支持通过AssertionHolder来获取用户的登录名 -->
+    &lt;!&ndash; 使客户端支持通过AssertionHolder来获取用户的登录名 &ndash;&gt;
     <filter>
         <filter-name>CAS Assertion Thread Local Filter</filter-name>
         <filter-class>org.jasig.cas.client.util.AssertionThreadLocalFilter</filter-class>
@@ -168,6 +168,6 @@
     <filter-mapping>
         <filter-name>CAS Assertion Thread Local Filter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
 </web-app>

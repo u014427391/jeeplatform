@@ -1,30 +1,41 @@
 package org.muses.jeeplatform.core.shiro;
 
-import javax.annotation.Resource;
-
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cas.CasRealm;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.muses.jeeplatform.core.entity.admin.User;
 import org.muses.jeeplatform.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+
+import static org.muses.jeeplatform.core.CASConsts.CAS_FILTER_URL_PATTERN;
+import static org.muses.jeeplatform.core.CASConsts.CAS_SERVER_URL_PREFIX;
 
 /**
  * @description 基于Shiro框架的权限安全认证和授权
  * @author Nicky
  * @date 2017年3月12日
  */
-public class ShiroRealm extends AuthorizingRealm {
+public class ShiroRealm extends CasRealm {
+
+	Logger LOG = LoggerFactory.getLogger(ShiroRealm.class);
 
 	/**注解引入业务类**/
 	@Resource
 	UserService userService;
+
+	@PostConstruct
+	public void initProperty(){
+		setCasServerUrlPrefix(CAS_SERVER_URL_PREFIX);
+		//客户端回调地址
+		setCasService(CAS_SERVER_URL_PREFIX + CAS_FILTER_URL_PATTERN);
+	}
 	
 	/**
 	 * 登录信息和用户验证信息验证(non-Javadoc)
@@ -33,26 +44,30 @@ public class ShiroRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
-		 String username = (String)token.getPrincipal();  				//得到用户名 
-	     String password = new String((char[])token.getCredentials()); 	//得到密码
-	     
-	     User user = userService.findByUsername(username);
+		if(LOG.isInfoEnabled()) {
+			LOG.info("=>执行Shiro权限认证");
+		}
 
-	     /**检测是否有此用户 **/
-	     if(user == null){
-	    	 throw new UnknownAccountException();//没有找到账号异常
-	     }
-	     /**检验账号是否被锁定 **/
-	     if(Boolean.TRUE.equals(user.getLocked())){
-	    	 throw new LockedAccountException();//抛出账号锁定异常
-	     }
-	     /**AuthenticatingRealm使用CredentialsMatcher进行密码匹配**/
-	     if(null != username && null != password){
-	    	 return new SimpleAuthenticationInfo(username, password, getName());
-	     }else{
-	    	 return null;
-	     }
+		String username = (String)token.getPrincipal();  				//得到用户名
+		String password = new String((char[])token.getCredentials()); 	//得到密码
 	     
+		User user = userService.findByUsername(username);
+
+		/* 检测是否有此用户 */
+		if(user == null){
+			throw new UnknownAccountException();//没有找到账号异常
+		}
+		/* 检验账号是否被锁定 */
+		if(Boolean.TRUE.equals(user.getLocked())){
+			throw new LockedAccountException();//抛出账号锁定异常
+		}
+		/* AuthenticatingRealm使用CredentialsMatcher进行密码匹配*/
+		if(null != username && null != password){
+			return new SimpleAuthenticationInfo(username, password, getName());
+		}else{
+	    	 return null;
+		}
+
 	}
 	
 	/**
@@ -61,11 +76,13 @@ public class ShiroRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection pc) {
+		if(LOG.isInfoEnabled()) {
+			LOG.info("=>执行Shiro授权");
+		}
 		String username = (String)pc.getPrimaryPrincipal();
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 	    authorizationInfo.setRoles(userService.getRoles(username));
 	    authorizationInfo.setStringPermissions(userService.getPermissions(username));
-		System.out.println("Shiro授权");
 	    return authorizationInfo;
 	}
 	
