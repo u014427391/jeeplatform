@@ -124,8 +124,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/plugins/**", "anon");
         filterChainDefinitionMap.put("/code", "anon");
         //filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/403", "anon");
         //filterChainDefinitionMap.put("/logincheck", "anon");
-        //filterChainDefinitionMap.put("/logout","anon");
+        filterChainDefinitionMap.put("/logout","anon");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
