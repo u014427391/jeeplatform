@@ -5,8 +5,11 @@ import org.apache.shiro.cas.CasSubjectFactory;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.jasig.cas.client.authentication.AuthenticationFilter;
 import org.jasig.cas.client.session.SingleSignOutFilter;
 import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
+import org.jasig.cas.client.util.HttpServletRequestWrapperFilter;
+import org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter;
 import org.muses.jeeplatform.core.shiro.ShiroRealm;
 import org.muses.jeeplatform.web.filter.SysAccessControllerFilter;
 import org.slf4j.Logger;
@@ -57,6 +60,45 @@ public class ShiroConfig {
         return bean;
     }
 
+    /**
+     * 单点登录校验
+     * @return
+     */
+    @Bean
+    public FilterRegistrationBean validationFilter(){
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+        registrationBean.setFilter(new Cas20ProxyReceivingTicketValidationFilter());
+        registrationBean.addUrlPatterns("/*");
+        registrationBean.setName("CAS Validation Filter");
+        registrationBean.addInitParameter("casServerUrlPrefix", CAS_SERVER_URL_PREFIX );
+        registrationBean.addInitParameter("serverName", SERVER_URL_PREFIX );
+        registrationBean.addInitParameter("useSession", "true");
+        return registrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean authenticationFilter(){
+        FilterRegistrationBean bean = new FilterRegistrationBean();
+        bean.setFilter(new AuthenticationFilter());
+        bean.addUrlPatterns("/*");
+        bean.setName("CAS AuthenticationFilter");
+        bean.addInitParameter("casServerLoginUrl",CAS_SERVER_URL_PREFIX+"/login");
+        bean.addInitParameter("serverName",SERVER_URL_PREFIX);
+        return bean;
+    }
+
+    /**
+     * 该过滤器对HttpServletRequest请求包装， 可通过HttpServletRequest的getRemoteUser()方法获得登录用户的登录名
+     *
+     */
+    @Bean
+    public FilterRegistrationBean httpServletRequestWrapperFilter() {
+        FilterRegistrationBean filterRegistration = new FilterRegistrationBean();
+        filterRegistration.setFilter(new HttpServletRequestWrapperFilter());
+        filterRegistration.setEnabled(true);
+        filterRegistration.addUrlPatterns("/*");
+        return filterRegistration;
+    }
 
     /**
      * CAS过滤器
@@ -89,7 +131,7 @@ public class ShiroConfig {
     @Bean
     public SecurityManager securityManager(){
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
-        securityManager.setRealm(myShiroRealm());
+        //securityManager.setRealm(myShiroRealm());
         securityManager.setSubjectFactory(new CasSubjectFactory());
         return securityManager;
     }
