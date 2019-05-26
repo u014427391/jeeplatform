@@ -2,10 +2,10 @@ package org.muses.jeeplatform.core;
 
 /**
  * <pre>
- *
+ *  CAS配置环境类
  * </pre>
  *
- * @author nicky
+ * @author nicky.ma
  * <pre>
  * 修改记录
  *    修改后版本:     修改人：  修改日期: 2019年05月25日  修改内容:
