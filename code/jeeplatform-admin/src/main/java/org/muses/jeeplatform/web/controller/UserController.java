@@ -1,6 +1,10 @@
 package org.muses.jeeplatform.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.muses.jeeplatform.core.Constants;
 import org.muses.jeeplatform.core.email.JavaEmailSender;
@@ -28,6 +32,7 @@ import java.util.*;
 /**
  * Created by Nicky on 2017/7/29.
  */
+@Api(value="用户操作接口",tags={"用户操作接口"})
 @RequestMapping("/user")
 @Controller
 public class UserController extends BaseController {
@@ -48,6 +53,7 @@ public class UserController extends BaseController {
      * @param model
      * @return
      */
+    @ApiOperation(value="用户信息列表", notes="用户信息列表")
     @RequestMapping(value = "/queryAll", produces = "application/json;charset=UTF-8")
     public ModelAndView findAll(HttpServletRequest request, HttpServletResponse response, Model model) {
         String pageIndexStr = request.getParameter("pageIndex");
@@ -87,8 +93,9 @@ public class UserController extends BaseController {
      * @param endDateStr
      * @return
      */
+    @ApiOperation(value = "查询用户信息", notes = "查询用户信息")
     @RequestMapping(value = "/searchU", produces = "application/json;charset=UTf-8")
-    public ModelAndView doSearch(@RequestParam(value = "pageIndex",required = false) String pageIndexStr, @RequestParam(value = "keyword",required = false) String keyword,
+    public ModelAndView doSearch(@RequestParam(value = "pageIndex",required = true) String pageIndexStr, @RequestParam(value = "keyword",required = false) String keyword,
                                  @RequestParam(value = "startDate",required = false) String startDateStr, @RequestParam(value = "endDate",required = false) String endDateStr) {
         int pageSize = Constants.PAGE_SIZE;
         ModelAndView mv = this.getModelAndView();
@@ -140,6 +147,10 @@ public class UserController extends BaseController {
      *
      * @param params
      */
+    @ApiOperation(value = "新增用户",notes = "新增用户")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="params",value = "json参数",paramType = "query",dataType = "String")
+    })
     @PostMapping(value = "/addU")
     @ResponseBody
     public Map<String,String> addU(@RequestParam("params") String params) {
@@ -183,6 +194,10 @@ public class UserController extends BaseController {
         return result;
     }
 
+    @ApiOperation(value = "跳转到编辑用户信息页面",notes = "编辑用户信息页面")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",paramType = "query",dataType = "String")
+    })
     @GetMapping(value = "/goEditU")
     public String goEditU(@RequestParam("userId")String userId, Model model) {
         User user = userService.findByUId(Integer.parseInt(userId));
@@ -278,6 +293,7 @@ public class UserController extends BaseController {
         return "admin/user/sys_user_auth";
     }
 
+    @ApiOperation(value="修改用户", notes="修改用户")
     @PostMapping(value = "/auth",produces = "application/json;charset=utf-8")
     @ResponseBody
     public Map<String,String> doAuth(@RequestParam("params")String params ){
