@@ -15,13 +15,13 @@ public class CASConsts {
 
     /* CAS单点登录配置 */
     //Cas server地址
-    public static final String CAS_SERVER_URL_PREFIX = "http://localhost:8080/cas";
+    public static final String CAS_SERVER_URL_PREFIX = "http://127.0.0.1:8080/cas";
     //Cas单点登录地址
     public static final String CAS_LOGIN_URL = CAS_SERVER_URL_PREFIX +"/login";
     //CAS单点登出地址
     public static final String CAS_LOGOUT_URL = CAS_SERVER_URL_PREFIX + "/logout";
     //对外提供的服务地址
-    public static final String SERVER_URL_PREFIX = "http://localhost:8081";
+    public static final String SERVER_URL_PREFIX = "http://127.0.0.1:8081";
     //Cas过滤器的urlPattern
     public static final String CAS_FILTER_URL_PATTERN = "/jeeplatform";
     //CAS客户端单点登录跳转地址

@@ -91,7 +91,7 @@
 
         <!-- 保存Ticket到redis-->
         <dependency>
-            <groupId>ren.boot</groupId>
+            <groupId>com.github.izerui</groupId>
             <artifactId>cas-server-integration-redis</artifactId>
             <version>${cas.integration.redis.version}</version>
         </dependency>
