@@ -1,7 +1,8 @@
 package org.muses.jeeplatform.cas.model;
 
 import java.util.Map;
- 
+
+//@Data
 public class ResponseBean {
     //返回状态 1 成功 2 失败
     public String status;
@@ -9,7 +10,7 @@ public class ResponseBean {
     public Map data;
     //返回信息
     public String msg;
-     
+
     public String getStatus() {
         return status;
     }

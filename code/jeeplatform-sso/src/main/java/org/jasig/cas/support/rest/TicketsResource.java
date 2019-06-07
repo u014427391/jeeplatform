@@ -4,15 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jasig.cas.CasProtocolConstants;
 import org.jasig.cas.CentralAuthenticationService;
-import org.jasig.cas.authentication.AuthenticationContext;
-import org.jasig.cas.authentication.AuthenticationContextBuilder;
-import org.jasig.cas.authentication.AuthenticationSystemSupport;
-import org.jasig.cas.authentication.AuthenticationException;
-import org.jasig.cas.authentication.AuthenticationTransaction;
-import org.jasig.cas.authentication.Credential;
-import org.jasig.cas.authentication.DefaultAuthenticationContextBuilder;
-import org.jasig.cas.authentication.DefaultAuthenticationSystemSupport;
-import org.jasig.cas.authentication.UsernamePasswordCredential;
+import org.jasig.cas.authentication.*;
 import org.jasig.cas.authentication.principal.Service;
 import org.jasig.cas.authentication.principal.ServiceFactory;
 import org.jasig.cas.ticket.InvalidTicketException;
@@ -20,25 +12,21 @@ import org.jasig.cas.ticket.ServiceTicket;
 import org.jasig.cas.ticket.TicketGrantingTicket;
 import org.jasig.cas.ticket.registry.DefaultTicketRegistrySupport;
 import org.jasig.cas.ticket.registry.TicketRegistrySupport;
+import org.muses.jeeplatform.cas.model.ResponseBean;
+import org.muses.jeeplatform.cas.model.ResponseCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.net.URI;
-import java.util.Formatter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -95,9 +83,10 @@ public class TicketsResource {
      * @throws JsonProcessingException in case of JSON parsing failure
      */
     @RequestMapping(value = "/v1/tickets", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public final ResponseEntity<String> createTicketGrantingTicket(@RequestBody final MultiValueMap<String, String> requestBody,
-                                                                   final HttpServletRequest request) throws JsonProcessingException {
-        try (Formatter fmt = new Formatter()) {
+    public final ResponseBean createTicketGrantingTicket(@RequestBody final MultiValueMap<String, String> requestBody,
+                                                         final HttpServletRequest request) throws JsonProcessingException {
+        ResponseBean responseBean = new ResponseBean();
+        try {
 
             final Credential credential = this.credentialFactory.fromRequestBody(requestBody);
 
@@ -110,7 +99,7 @@ public class TicketsResource {
 
             final TicketGrantingTicket tgtId = this.centralAuthenticationService.createTicketGrantingTicket(authenticationContext);
             final URI ticketReference = new URI(request.getRequestURL().toString() + '/' + tgtId.getId());
-            final HttpHeaders headers = new HttpHeaders();
+            /*final HttpHeaders headers = new HttpHeaders();
             headers.setLocation(ticketReference);
             headers.setContentType(MediaType.TEXT_HTML);
             fmt.format("<!DOCTYPE HTML PUBLIC \\\"-//IETF//DTD HTML 2.0//EN\\\"><html><head><title>");
@@ -118,8 +107,12 @@ public class TicketsResource {
                     .format("</title></head><body><h1>TGT Created</h1><form action=\"%s", ticketReference.toString())
                     .format("\" method=\"POST\">Service:<input type=\"text\" name=\"service\" value=\"\">")
                     .format("<br><input type=\"submit\" value=\"Submit\"></form></body></html>");
-            return new ResponseEntity<>(fmt.toString(), headers, HttpStatus.CREATED);
-
+            return new ResponseEntity<>(fmt.toString(), headers, HttpStatus.CREATED);*/
+            final Map<String, String> dataMap = new HashMap<>();
+            dataMap.put("action", ticketReference.toString());
+            responseBean.setData(dataMap);
+            responseBean.setStatus(ResponseCode.SUCCESS.name());
+            return responseBean;
         }
         catch(final AuthenticationException e) {
             final List<String> authnExceptions = new LinkedList<>();
@@ -130,16 +123,23 @@ public class TicketsResource {
             errorsMap.put("authentication_exceptions", authnExceptions);
             LOGGER.error(e.getMessage(), e);
             LOGGER.error(String.format("Caused by: %s", authnExceptions));
-            return new ResponseEntity<>(this.jacksonObjectMapper
+            /*return new ResponseEntity<>(this.jacksonObjectMapper
                     .writer()
                     .withDefaultPrettyPrinter()
-                    .writeValueAsString(errorsMap), HttpStatus.UNAUTHORIZED);
+                    .writeValueAsString(errorsMap), HttpStatus.UNAUTHORIZED);*/
+            responseBean.setMsg(errorsMap.toString());
+            responseBean.setStatus(HttpStatus.UNAUTHORIZED.name());
+            return responseBean;
         } catch (final BadRequestException e) {
             LOGGER.error(e.getMessage(), e);
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            //return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            responseBean.setStatus( HttpStatus.BAD_REQUEST.name());
+            return responseBean;
         } catch (final Throwable e) {
             LOGGER.error(e.getMessage(), e);
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            responseBean.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.name());
+            //return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return responseBean;
         }
     }
 
