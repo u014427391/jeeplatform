@@ -49,6 +49,7 @@
             <version>${cas.version}</version>
         </dependency>
 
+
         <dependency>
             <groupId>org.jasig.cas</groupId>
             <artifactId>cas-server-support-jdbc</artifactId>
@@ -122,6 +123,14 @@
             <scope>test</scope>
         </dependency>-->
         <!--pac4j test end-->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.0</version>
+        </dependency>
+
 
     </dependencies>
 

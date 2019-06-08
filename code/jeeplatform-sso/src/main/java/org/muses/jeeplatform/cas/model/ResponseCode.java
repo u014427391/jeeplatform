@@ -30,4 +30,11 @@ public enum ResponseCode {
         this.msg=msg;
     }
 
+    public int getCode(){
+        return this.code;
+    }
+
+    public String getMessage() {
+        return this.msg;
+    }
 }
