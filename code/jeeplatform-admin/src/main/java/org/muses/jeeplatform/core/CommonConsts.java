@@ -7,7 +7,7 @@ import java.util.Locale;
  * @author Nicky
  * @date 2017年3月6日
  */
-public class Constants {
+public class CommonConsts {
 
 	//定义统一Locale.CHINA,程序中所有和Locale相关操作均默认使用此Locale
 	public static final Locale LOCALE_CHINA = Locale.CHINA;

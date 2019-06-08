@@ -8,7 +8,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.muses.jeeplatform.core.Constants;
+import org.muses.jeeplatform.core.CommonConsts;
 import org.muses.jeeplatform.core.ResultVO;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.muses.jeeplatform.core.entity.admin.Permission;
@@ -95,7 +95,7 @@ public class LoginController extends BaseController {
             //获取Shiro管理的Session
             Subject subject = SecurityUtils.getSubject();
             Session session = subject.getSession();
-            String codeSession = (String)session.getAttribute(Constants.SESSION_SECURITY_CODE);
+            String codeSession = (String)session.getAttribute(CommonConsts.SESSION_SECURITY_CODE);
             String code = logindata[2];
             /**检测页面验证码是否为空，调用工具类检测**/
             if(Tools.isEmpty(code)){
@@ -116,9 +116,9 @@ public class LoginController extends BaseController {
                         }else{
                             //Shiro添加会话
                             session.setAttribute("username", username);
-                            session.setAttribute(Constants.SESSION_USER, user);
+                            session.setAttribute(CommonConsts.SESSION_USER, user);
                             //删除验证码Session
-                            session.removeAttribute(Constants.SESSION_SECURITY_CODE);
+                            session.removeAttribute(CommonConsts.SESSION_SECURITY_CODE);
                             //保存登录IP
                             this.getRemortIP(username);
                             /**Shiro加入身份验证**/
@@ -153,7 +153,7 @@ public class LoginController extends BaseController {
         /**获取Shiro管理的Session**/
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
-        User user = (User)session.getAttribute(Constants.SESSION_USER);
+        User user = (User)session.getAttribute(CommonConsts.SESSION_USER);
 
         if(user != null){
             Set<Role> roles = user.getRoles();
@@ -218,8 +218,8 @@ public class LoginController extends BaseController {
         /**Shiro管理Session**/
         Subject sub = SecurityUtils.getSubject();
         Session session = sub.getSession();
-        session.removeAttribute(Constants.SESSION_USER);
-        session.removeAttribute(Constants.SESSION_SECURITY_CODE);
+        session.removeAttribute(CommonConsts.SESSION_USER);
+        session.removeAttribute(CommonConsts.SESSION_SECURITY_CODE);
         /**Shiro销毁登录**/
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
@@ -228,5 +228,11 @@ public class LoginController extends BaseController {
         return mv;
     }
 
+    @RequestMapping("/403")
+    public ModelAndView to403PAge(){
+        ModelAndView mv = this.getModelAndView();
+        mv.setViewName("admin/frame/403");
+        return mv;
+    }
 
 }
