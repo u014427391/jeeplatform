@@ -2,7 +2,7 @@ package org.muses.jeeplatform.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import org.muses.jeeplatform.annotation.LogController;
-import org.muses.jeeplatform.core.Constants;
+import org.muses.jeeplatform.core.CommonConsts;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.muses.jeeplatform.core.entity.admin.Permission;
 import org.muses.jeeplatform.service.MenuService;
@@ -39,7 +39,7 @@ public class MenuController extends BaseController {
     public ModelAndView toMenuList(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         String pageIndexStr = request.getParameter("pageIndex");
 
-        int pageSize = Constants.PAGE_SIZE;
+        int pageSize = CommonConsts.PAGE_SIZE;
         ModelAndView mv = this.getModelAndView();
         Page<Menu> menuPage;
 
@@ -72,7 +72,7 @@ public class MenuController extends BaseController {
             pageIndex = 1;
         }
 
-        int pageSize = Constants.PAGE_SIZE;
+        int pageSize = CommonConsts.PAGE_SIZE;
         Page<Menu> menuPage = menuService.findAll(pageIndex, pageSize, Sort.Direction.ASC,"menuId");
         String json = JSON.toJSONString(menuPage.getContent());
         return json;

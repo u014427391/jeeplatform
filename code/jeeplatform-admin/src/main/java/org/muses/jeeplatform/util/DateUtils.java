@@ -2,7 +2,7 @@ package org.muses.jeeplatform.util;
 
 
 
-import org.muses.jeeplatform.core.Constants;
+import org.muses.jeeplatform.core.CommonConsts;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,7 +40,7 @@ public class DateUtils {
 	   * @return
 	   */
 	  public static Date parse(String pattern, String date){
-	    return parse(pattern, date, Constants.LOCALE_CHINA);
+	    return parse(pattern, date, CommonConsts.LOCALE_CHINA);
 	  }
 
 	  /**
