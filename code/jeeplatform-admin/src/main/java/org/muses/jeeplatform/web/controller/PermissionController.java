@@ -2,7 +2,7 @@ package org.muses.jeeplatform.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import org.muses.jeeplatform.annotation.LogController;
-import org.muses.jeeplatform.core.Constants;
+import org.muses.jeeplatform.core.CommonConsts;
 import org.muses.jeeplatform.core.entity.admin.Permission;
 import org.muses.jeeplatform.service.PermissionPageService;
 import org.muses.jeeplatform.service.PermissionService;
@@ -43,7 +43,7 @@ public class PermissionController extends BaseController {
     public ModelAndView queryAll(HttpServletRequest request, HttpServletResponse response, Model model){
         String pageIndexStr = request.getParameter("pageIndex");
 
-        int pageSize = Constants.PAGE_SIZE;
+        int pageSize = CommonConsts.PAGE_SIZE;
         ModelAndView mv = this.getModelAndView();
         Page<Permission> permissionPage;
 
