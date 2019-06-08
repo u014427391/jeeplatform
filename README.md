@@ -214,11 +214,11 @@ public class RedisAspect {
 为了帮助学习者更好地理解代码，下面给出自己写的一些博客链接
 
 ### Java框架
-* [基于RBAC模型的权限系统设计(Github开源项目)](http://blog.csdn.net/u014427391/article/details/78889378)
-* [Spring Data Jpa+SpringMVC+Jquery.pagination.js实现分页](http://blog.csdn.net/u014427391/article/details/77434664)
+* [基于RBAC模型的权限系统设计](http://blog.csdn.net/u014427391/article/details/78889378)
+* [Spring Data Jpa实现分页](http://blog.csdn.net/u014427391/article/details/77434664)
 * [SpringMVC+ZTree实现树形菜单权限配置](https://blog.csdn.net/u014427391/article/details/78889378)
-* [Github开源项目(企业信息化基础平台)](https://blog.csdn.net/u014427391/article/details/78867439)
-* [基于权限安全框架Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
+* [企业信息化基础平台项目介绍](https://blog.csdn.net/u014427391/article/details/78867439)
+* [基于Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
 
 SpringBoot
 * [SpringBoot热部署配置](https://smilenicky.blog.csdn.net/article/details/89765909)
