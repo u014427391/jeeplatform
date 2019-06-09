@@ -1,11 +1,11 @@
 [![Build Status](https://travis-ci.org/crossoverJie/JCSprout.svg?branch=master)](https://travis-ci.org/crossoverJie/jeeplatform) [![Join the chat at https://gitter.im/jeeplatform/community](https://badges.gitter.im/jeeplatform/community.svg)](https://gitter.im/jeeplatform/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## 项目简介 ##
+## 一、项目简介 ##
 一款企业信息化开发基础平台，拟集成OA(办公自动化)、SCM(供应链系统)、ERP(企业资源管理系统)、CMS(内容管理系统)、CRM(客户关系管理系统)等企业系统的通用业务功能
 
 JeePlatform项目是一款以Spring Framework为核心框架，集ORM框架Mybatis，Web层框架SpringMVC和多种开源组件框架而成的一款通用基础平台，代码已经捐赠给开源中国社区：https://www.oschina.net/p/jeeplatform
 
-## 系统设计 ##
+## 二、系统设计 ##
 ### 系统管理(模块名称jeeplatform-admin) ###
 管理系统登录页面，采用Shiro登录验证
 ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
@@ -35,7 +35,7 @@ ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 
 ### CMS管理系统(待开发)
 
-## 系统升级
+## 三、关键技术
 ### 单点登录基础(模块名称jeeplatform-sso)(开发中)
 > 项目采用CAS登录登录实现，单点登录集群搭建可以参考博客：
 > http://blog.csdn.net/u014427391/article/details/78653482
@@ -145,7 +145,7 @@ public class RedisAspect {
 
 ![这里写图片描述](http://img.blog.csdn.net/20171214104303308?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDQyNzM5MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-## 业务方案 ##
+## 三、业务方案 ##
 ### 系统管理通用功能 ####
 - [x] 用户管理: 系统用户	
 - [x] 角色管理: 按照企业系统职能进行角色分配，每个角色具有不同的系统操作权限	OK
@@ -163,7 +163,7 @@ public class RedisAspect {
 - [ ] 信息管理：文章管理、文章审核
 ...
 
-## 技术方案 ##
+## 四、技术方案 ##
 ### 后台技术 ###
 * 工作流引擎：Activiti5
 * ORM框架：Mybatis/Hibernate JPA
@@ -208,9 +208,9 @@ public class RedisAspect {
 * UML建模：ArgoUML
 * Eclipse测试插件：EclEmma
 * 程序质量检查插件：Jdepend4eclipse(Eclipse平台)
-## 常见问题 ##
+## 五、常见问题 ##
 运行jeeplatform打开页面404，如果是用idea的，就可以edit configurations->configuration->edit working directory设置为：$MODULE_DIR$
-## 项目技术博客介绍 ##
+## 六、项目技术博客介绍 ##
 为了帮助学习者更好地理解代码，下面给出自己写的一些博客链接
 
 ### Java框架
