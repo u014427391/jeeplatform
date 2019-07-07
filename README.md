@@ -1,12 +1,12 @@
 [![Build Status](https://travis-ci.org/crossoverJie/JCSprout.svg?branch=master)](https://travis-ci.org/crossoverJie/jeeplatform) [![Join the chat at https://gitter.im/jeeplatform/community](https://badges.gitter.im/jeeplatform/community.svg)](https://gitter.im/jeeplatform/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-## 一、项目简介 ##
+## 一、项目简介 
 
 JeePlatform项目是一款以Spring Framework为核心框架，集ORM框架Mybatis，Web层框架SpringMVC和多种开源组件框架而成的一款通用基础平台，代码已经捐赠给开源中国社区：https://www.oschina.net/p/jeeplatform
 
-## 二、系统设计 ##
-### 系统管理(模块名称jeeplatform-admin) ###
+## 二、系统设计 
+### 系统管理(模块名称jeeplatform-admin) 
 管理系统登录页面，采用Shiro登录验证
 ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统登录页面.png)
@@ -145,8 +145,8 @@ public class RedisAspect {
 
 ![这里写图片描述](http://img.blog.csdn.net/20171214104303308?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDQyNzM5MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-## 三、业务方案 ##
-### 系统管理通用功能 ####
+## 三、业务方案 
+### 系统管理通用功能 
 - [x] 用户管理: 系统用户	
 - [x] 角色管理: 按照企业系统职能进行角色分配，每个角色具有不同的系统操作权限	OK
 - [x] 权限管理: 权限管理细分到系统按钮权限，菜单权限，管理员可以对权限进行细分控制
@@ -155,16 +155,16 @@ public class RedisAspect {
 - [ ] 报表统计：数据报表、用户分析
 - [ ] 系统监控：数据监控、系统日志(用户登录记录)
 - [ ] 通用接口：SMS(短信)、系统邮件、Excel表导出导入操作...
-### OA系统通用功能(待开发) ###
+### OA系统通用功能(待开发) 
 - [ ] 考勤管理：请假流程
 - [ ] 人事管理：机构管理、部门管理、员工管理
 
-### CMS系统通用功能(待开发) ###
+### CMS系统通用功能(待开发) 
 - [ ] 信息管理：文章管理、文章审核
 ...
 
-## 四、技术方案 ##
-### 后台技术 ###
+## 四、技术方案
+### 后台技术 
 * 工作流引擎：Activiti5
 * ORM框架：Mybatis/Hibernate JPA
 * Web框架：SpringMVC
@@ -180,7 +180,7 @@ public class RedisAspect {
 * 缓存处理：Redis、EhCache
 * Excel表处理：POI
 
-### 前端技术 ###
+### 前端技术 
 * 文件上传：JQuery uploadify
 * 树形结构：EasyUI Tree
 * 日期插件：JQuery Date
@@ -189,17 +189,17 @@ public class RedisAspect {
 * 富文本编辑器：Baidu UEDitor
 * 前端框架：Twitter Bootstrap、ExtJS
 
-### 服务器 ####
+### 服务器 
 * 负载均衡：Nginx
 * 分布式：alibaba Dubbo
 * 中间件：RocketMQ
 
-### 项目测试 ###
+### 项目测试 
 * DeBug：Junit、FindBugs、EclEmma
 * 程序质量：Jdepend4eclipse
 * 压力测试：JMeter
 
-### 工具软件 ###
+### 工具软件 
 * 服务器：SecureCRT
 * Java：IntelliJ IDEA/Eclipse
 * 远程控制：TeamViewer
@@ -208,9 +208,9 @@ public class RedisAspect {
 * UML建模：ArgoUML
 * Eclipse测试插件：EclEmma
 * 程序质量检查插件：Jdepend4eclipse(Eclipse平台)
-## 五、常见问题 ##
+## 五、常见问题 
 运行jeeplatform打开页面404，如果是用idea的，就可以edit configurations->configuration->edit working directory设置为：$MODULE_DIR$
-## 六、项目技术博客介绍 ##
+## 六、项目技术博客介绍 
 为了帮助学习者更好地理解代码，下面给出自己写的一些博客链接
 
 ### Java框架
