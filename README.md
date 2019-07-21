@@ -225,6 +225,9 @@ public class RedisAspect {
 * [SpringBoot profles配置多环境](https://smilenicky.blog.csdn.net/article/details/89792248)
 * [SpringBoot集成Swagger2](https://smilenicky.blog.csdn.net/article/details/90706219)
 
+### RPC框架
+* [Dubbo服务注册与发现](https://blog.csdn.net/u014427391/article/details/90182031)
+
 ### Redis知识
 * [Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
 * [Redis学习笔记之位图](https://blog.csdn.net/u014427391/article/details/87923407)
