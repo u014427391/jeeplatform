@@ -1,12 +1,11 @@
 [![Build Status](https://travis-ci.org/crossoverJie/JCSprout.svg?branch=master)](https://travis-ci.org/crossoverJie/jeeplatform) [![Join the chat at https://gitter.im/jeeplatform/community](https://badges.gitter.im/jeeplatform/community.svg)](https://gitter.im/jeeplatform/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## 项目简介 ##
-一款企业信息化开发基础平台，拟集成OA(办公自动化)、SCM(供应链系统)、ERP(企业资源管理系统)、CMS(内容管理系统)、CRM(客户关系管理系统)等企业系统的通用业务功能
+## 一、项目简介 
 
 JeePlatform项目是一款以Spring Framework为核心框架，集ORM框架Mybatis，Web层框架SpringMVC和多种开源组件框架而成的一款通用基础平台，代码已经捐赠给开源中国社区：https://www.oschina.net/p/jeeplatform
 
-## 系统设计 ##
-### 系统管理(模块名称jeeplatform-admin) ###
+## 二、系统设计 
+### 系统管理(模块名称jeeplatform-admin) 
 管理系统登录页面，采用Shiro登录验证
 ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统登录页面.png)
@@ -35,7 +34,7 @@ ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 
 ### CMS管理系统(待开发)
 
-## 系统升级
+## 三、关键技术
 ### 单点登录基础(模块名称jeeplatform-sso)(开发中)
 > 项目采用CAS登录登录实现，单点登录集群搭建可以参考博客：
 > http://blog.csdn.net/u014427391/article/details/78653482
@@ -145,8 +144,8 @@ public class RedisAspect {
 
 ![这里写图片描述](http://img.blog.csdn.net/20171214104303308?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDQyNzM5MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-## 业务方案 ##
-### 系统管理通用功能 ####
+## 三、业务方案 
+### 系统管理通用功能 
 - [x] 用户管理: 系统用户	
 - [x] 角色管理: 按照企业系统职能进行角色分配，每个角色具有不同的系统操作权限	OK
 - [x] 权限管理: 权限管理细分到系统按钮权限，菜单权限，管理员可以对权限进行细分控制
@@ -155,16 +154,16 @@ public class RedisAspect {
 - [ ] 报表统计：数据报表、用户分析
 - [ ] 系统监控：数据监控、系统日志(用户登录记录)
 - [ ] 通用接口：SMS(短信)、系统邮件、Excel表导出导入操作...
-### OA系统通用功能(待开发) ###
+### OA系统通用功能(待开发) 
 - [ ] 考勤管理：请假流程
 - [ ] 人事管理：机构管理、部门管理、员工管理
 
-### CMS系统通用功能(待开发) ###
+### CMS系统通用功能(待开发) 
 - [ ] 信息管理：文章管理、文章审核
 ...
 
-## 技术方案 ##
-### 后台技术 ###
+## 四、技术方案
+### 后台技术 
 * 工作流引擎：Activiti5
 * ORM框架：Mybatis/Hibernate JPA
 * Web框架：SpringMVC
@@ -180,7 +179,7 @@ public class RedisAspect {
 * 缓存处理：Redis、EhCache
 * Excel表处理：POI
 
-### 前端技术 ###
+### 前端技术 
 * 文件上传：JQuery uploadify
 * 树形结构：EasyUI Tree
 * 日期插件：JQuery Date
@@ -189,17 +188,17 @@ public class RedisAspect {
 * 富文本编辑器：Baidu UEDitor
 * 前端框架：Twitter Bootstrap、ExtJS
 
-### 服务器 ####
+### 服务器 
 * 负载均衡：Nginx
 * 分布式：alibaba Dubbo
 * 中间件：RocketMQ
 
-### 项目测试 ###
+### 项目测试 
 * DeBug：Junit、FindBugs、EclEmma
 * 程序质量：Jdepend4eclipse
 * 压力测试：JMeter
 
-### 工具软件 ###
+### 工具软件 
 * 服务器：SecureCRT
 * Java：IntelliJ IDEA/Eclipse
 * 远程控制：TeamViewer
@@ -208,28 +207,32 @@ public class RedisAspect {
 * UML建模：ArgoUML
 * Eclipse测试插件：EclEmma
 * 程序质量检查插件：Jdepend4eclipse(Eclipse平台)
-## 常见问题 ##
+## 五、常见问题 
 运行jeeplatform打开页面404，如果是用idea的，就可以edit configurations->configuration->edit working directory设置为：$MODULE_DIR$
-## 项目技术博客介绍 ##
+## 六、项目技术博客介绍 
 为了帮助学习者更好地理解代码，下面给出自己写的一些博客链接
 
 ### Java框架
-* [基于RBAC模型的权限系统设计(Github开源项目)](http://blog.csdn.net/u014427391/article/details/78889378)
-* [Spring Data Jpa+SpringMVC+Jquery.pagination.js实现分页](http://blog.csdn.net/u014427391/article/details/77434664)
+* [基于RBAC模型的权限系统设计](http://blog.csdn.net/u014427391/article/details/78889378)
+* [Spring Data Jpa实现分页](http://blog.csdn.net/u014427391/article/details/77434664)
 * [SpringMVC+ZTree实现树形菜单权限配置](https://blog.csdn.net/u014427391/article/details/78889378)
-* [Github开源项目(企业信息化基础平台)](https://blog.csdn.net/u014427391/article/details/78867439)
-* [基于权限安全框架Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
+* [企业信息化基础平台项目介绍](https://blog.csdn.net/u014427391/article/details/78867439)
+* [基于Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
 
-SpringBoot
+### SpringBoot
 * [SpringBoot热部署配置](https://smilenicky.blog.csdn.net/article/details/89765909)
 * [SpringBoot集成Redis实现缓存处理](http://blog.csdn.net/u014427391/article/details/78799623)
 * [SpringBoot profles配置多环境](https://smilenicky.blog.csdn.net/article/details/89792248)
 * [SpringBoot集成Swagger2](https://smilenicky.blog.csdn.net/article/details/90706219)
 
+### RPC框架
+* [Dubbo服务注册与发现](https://smilenicky.blog.csdn.net/article/details/96754952)
+
 ### Redis知识
 * [Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
 * [Redis学习笔记之位图](https://blog.csdn.net/u014427391/article/details/87923407)
 * [Redis学习笔记之延时队列](https://blog.csdn.net/u014427391/article/details/87905450)
+* [Redis HyperLogLog用法简介](https://smilenicky.blog.csdn.net/article/details/95992173)
 * [Redis学习笔记之分布式锁](https://blog.csdn.net/u014427391/article/details/84934045)
 
 ### Oracle知识
@@ -242,6 +245,9 @@ SpringBoot
 
 ### 单点登录
 * [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
+
+### Docker笔记
+[Docker简介和安装教程](https://smilenicky.blog.csdn.net/article/details/97613891)
 
 
 ### SQL调优知识
