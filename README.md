@@ -241,6 +241,8 @@ public class RedisAspect {
 * [Oracle笔记之修改表字段类型](https://blog.csdn.net/u014427391/article/details/83046006)
 * [Oracle merge合并更新函数](https://blog.csdn.net/u014427391/article/details/87898729)
 
+### MySQL知识
+* [MySQL逻辑架构简介](https://smilenicky.blog.csdn.net/article/details/100170265)
 
 ### 单点登录
 * [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
