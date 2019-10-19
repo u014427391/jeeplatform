@@ -152,7 +152,8 @@ public class RedisAspect {
 - [x] 菜单管理：系统可以配置系统菜单，并分配不同的权限	OK
 - [ ] 报表统计：数据报表、用户分析
 - [ ] 系统监控：数据监控、系统日志(用户登录记录)
-- [ ] 通用接口：SMS(短信)、系统邮件、Excel表导出导入操作...
+- [x] 在线文档：SwaggerUI API在线文档管理
+- [x] 通用接口：系统邮件发送功能、Excel报表功能
 ### OA系统通用功能(待开发) 
 - [ ] 考勤管理：请假流程
 - [ ] 人事管理：机构管理、部门管理、员工管理
@@ -164,18 +165,18 @@ public class RedisAspect {
 ## 四、技术方案
 ### 后台技术 
 * 工作流引擎：Activiti5
-* ORM框架：Mybatis/Hibernate JPA
+* ORM框架：Mybatis
 * Web框架：SpringMVC
 * 核心框架：Spring Framework4.0
 * 任务调度：Spring Task
-* 权限安全：Apache Shiro/Spring Security
-* 全文搜索引擎：Lucene/Solr
-* 页面静态化处理：Freemark/Velocity
+* 权限安全：Apache Shiro
+* 全文搜索引擎：Lucene
+* 模板引擎：JSP/Themeleaf
 * 服务器页面包含技术：SSI
 * 网页即时通讯：long polling/websocket
 * 连接池：Druid（阿里开源）
 * 日志处理：SLF4J
-* 缓存处理：Redis、EhCache
+* 缓存处理：Redis
 * Excel表处理：POI
 
 ### 前端技术 
