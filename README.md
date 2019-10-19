@@ -251,12 +251,14 @@ public class RedisAspect {
 * [Docker简介和安装教程](https://smilenicky.blog.csdn.net/article/details/97613891)
 
 ### SQL调优知识
+
 Oracle
 * [Oracle优化器基础知识](https://blog.csdn.net/u014427391/article/details/88650696)
 * [Oracle性能调优之虚拟索引用法简介](https://smilenicky.blog.csdn.net/article/details/89761234)
 * [Oracle性能调优之物化视图用法简介](https://smilenicky.blog.csdn.net/article/details/89762680)
 * [Orace执行计划学习笔记](https://smilenicky.blog.csdn.net/article/details/89604262)
-* [Oracle共享池分析SQL资源使用情况](https://blog.csdn.net/u014427391/article/details/86562755)
+* [Oracle共享池分析SQL资源使用情况](https://blog.csdn.net/u014427391/article/details/86562755
+
 MySQL
 * [MySQL调优之Explain](https://smilenicky.blog.csdn.net/article/details/100853310)
 * [MySQL调优之索引](https://smilenicky.blog.csdn.net/article/details/100846922)
