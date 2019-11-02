@@ -151,8 +151,9 @@ public class RedisAspect {
 - [ ] 在线管理：管理在线用户，可以强制下线
 - [x] 菜单管理：系统可以配置系统菜单，并分配不同的权限	OK
 - [ ] 报表统计：数据报表、用户分析
-- [ ] 系统监控：数据监控、系统日志(用户登录记录)
-- [ ] 通用接口：SMS(短信)、系统邮件、Excel表导出导入操作...
+- [x] 系统监控：数据库等方面监控(采用Druid提供的)
+- [x] 在线文档：SwaggerUI API在线文档管理
+- [x] 通用接口：系统邮件发送功能、Excel报表功能
 ### OA系统通用功能(待开发) 
 - [ ] 考勤管理：请假流程
 - [ ] 人事管理：机构管理、部门管理、员工管理
@@ -164,18 +165,18 @@ public class RedisAspect {
 ## 四、技术方案
 ### 后台技术 
 * 工作流引擎：Activiti5
-* ORM框架：Mybatis/Hibernate JPA
+* ORM框架：Mybatis
 * Web框架：SpringMVC
 * 核心框架：Spring Framework4.0
 * 任务调度：Spring Task
-* 权限安全：Apache Shiro/Spring Security
-* 全文搜索引擎：Lucene/Solr
-* 页面静态化处理：Freemark/Velocity
+* 权限安全：Apache Shiro
+* 全文搜索引擎：Lucene
+* 模板引擎：JSP/Themeleaf
 * 服务器页面包含技术：SSI
 * 网页即时通讯：long polling/websocket
 * 连接池：Druid（阿里开源）
 * 日志处理：SLF4J
-* 缓存处理：Redis、EhCache
+* 缓存处理：Redis
 * Excel表处理：POI
 
 ### 前端技术 
@@ -250,16 +251,17 @@ public class RedisAspect {
 ### Docker笔记
 * [Docker简介和安装教程](https://smilenicky.blog.csdn.net/article/details/97613891)
 
-
 ### SQL调优知识
+
 Oracle
 * [Oracle优化器基础知识](https://blog.csdn.net/u014427391/article/details/88650696)
 * [Oracle性能调优之虚拟索引用法简介](https://smilenicky.blog.csdn.net/article/details/89761234)
 * [Oracle性能调优之物化视图用法简介](https://smilenicky.blog.csdn.net/article/details/89762680)
 * [Orace执行计划学习笔记](https://smilenicky.blog.csdn.net/article/details/89604262)
 * [Oracle共享池分析SQL资源使用情况](https://blog.csdn.net/u014427391/article/details/86562755)
+
 MySQL
-* [MySQL调优之Explain(https://smilenicky.blog.csdn.net/article/details/100853310)
+* [MySQL调优之Explain](https://smilenicky.blog.csdn.net/article/details/100853310)
 * [MySQL调优之索引](https://smilenicky.blog.csdn.net/article/details/100846922)
 
 
