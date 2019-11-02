@@ -34,7 +34,7 @@
 		<spring-boot.version>1.5.7.RELEASE</spring-boot.version>
 		<druid.version>1.1.2</druid.version>
 		<github.pagehelper.version>4.2.1</github.pagehelper.version>
-		<fastjson.version>1.2.7</fastjson.version>
+		<fastjson.version>1.2.25</fastjson.version>
 		<lombok.version>1.16.10</lombok.version>
 	</properties>
 
