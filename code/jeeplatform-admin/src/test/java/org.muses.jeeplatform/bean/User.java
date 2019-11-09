@@ -20,7 +20,7 @@ import java.util.Map;
  * </pre>
  */
 @Component
-@PropertySource("classpath:user.properties")
+@PropertySource(value = "classpath:user.properties",encoding = "utf-8")
 @ConfigurationProperties(prefix = "user")
 public class User {
 
