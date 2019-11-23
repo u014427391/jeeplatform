@@ -68,23 +68,3 @@ spring:
         maxIdle : 10
         maxWaitMillis : 100000
 
-
-## 测试ConfigurationProperties
-#user:
-#  userName: root
-#  isAdmin: true
-#  regTime: 2019/11/01
-#  isOnline: 1
-#  maps: {k1 : v1,k2: v2}
-#  lists:
-#   - list1
-#   - list2
-#  address:
-#    tel: 15899988899
-#    name: 上海市
-
-
-
-
-
-

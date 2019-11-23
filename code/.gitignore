@@ -19,6 +19,7 @@ mvnw.*
 *.ipr
 *.iml
 *.iws
+.mvn
 
 # temp ignore
 *.log
