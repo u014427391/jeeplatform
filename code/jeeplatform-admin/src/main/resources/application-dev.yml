@@ -1,5 +1,7 @@
 server:
   port: 8081
+  error:
+    path: /error
 
 spring:
 
