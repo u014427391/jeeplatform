@@ -143,13 +143,13 @@ public class RedisAspect {
 
 ![这里写图片描述](http://img.blog.csdn.net/20171214104303308?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDQyNzM5MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-## 三、业务方案 
+## 四、业务方案 
 ### 系统管理通用功能 
 - [x] 用户管理: 系统用户	
-- [x] 角色管理: 按照企业系统职能进行角色分配，每个角色具有不同的系统操作权限	OK
-- [x] 权限管理: 权限管理细分到系统按钮权限，菜单权限，管理员可以对权限进行细分控制
+- [x] 角色管理: 按照企业系统职能进行角色分配，每个角色具有不同的系统操作权限	
+- [x] 权限管理: 权限管理细分到系统菜单权限
 - [ ] 在线管理：管理在线用户，可以强制下线
-- [x] 菜单管理：系统可以配置系统菜单，并分配不同的权限	OK
+- [x] 菜单管理：系统可以配置系统菜单，并分配不同的权限	
 - [ ] 报表统计：数据报表、用户分析
 - [x] 系统监控：数据库等方面监控(采用Druid提供的)
 - [x] 在线文档：SwaggerUI API在线文档管理
@@ -162,20 +162,20 @@ public class RedisAspect {
 - [ ] 信息管理：文章管理、文章审核
 ...
 
-## 四、技术方案
+## 五、技术方案
 ### 后台技术 
-* 工作流引擎：Activiti5
+* 工作流引擎：Activiti5(待定)
 * ORM框架：Mybatis
 * Web框架：SpringMVC
 * 核心框架：Spring Framework4.0
-* 任务调度：Spring Task
+* 任务调度：Spring Task(待定)
 * 权限安全：Apache Shiro
 * 全文搜索引擎：Lucene
-* 模板引擎：JSP/Themeleaf
-* 服务器页面包含技术：SSI
-* 网页即时通讯：long polling/websocket
+* 模板引擎：JSP(还没使用Thymeleaf，前端需要重构)
+* 服务器页面包含技术：SSI(待定)
+* 网页即时通讯：websocket
 * 连接池：Druid（阿里开源）
-* 日志处理：SLF4J
+* 日志处理：SLF4J(日志门面框架)、logback
 * 缓存处理：Redis
 * Excel表处理：POI
 
@@ -191,25 +191,37 @@ public class RedisAspect {
 ### 服务器 
 * 负载均衡：Nginx
 * 分布式：alibaba Dubbo
-* 中间件：RocketMQ
+* 中间件：RocketMQ(待定)
 
 ### 项目测试 
 * DeBug：Junit、FindBugs、EclEmma
 * 程序质量：Jdepend4eclipse
-* 压力测试：JMeter
+* 压力测试：JMeter(待定)
 
 ### 工具软件 
 * 服务器：SecureCRT
-* Java：IntelliJ IDEA/Eclipse
+* Java：IntelliJ IDEA
 * 远程控制：TeamViewer
-* 版本控制：Git
+* 版本控制：Git、smartgit
 * Jar管理：Maven
 * UML建模：ArgoUML
 * Eclipse测试插件：EclEmma
 * 程序质量检查插件：Jdepend4eclipse(Eclipse平台)
-## 五、常见问题 
+## 六、常见问题
 运行jeeplatform打开页面404，如果是用idea的，就可以edit configurations->configuration->edit working directory设置为：$MODULE_DIR$
-## 六、项目技术博客介绍 
+
+## 七、版本说明
+* master版本
+主干版本，代码经过测试，可以正常运行，这个版本还没集成全部CAS单点代码，因为CAS单点服务端代码基本调试成功，而客户端对接出现bug，所以并没有merge代码
+* dev版本
+dev版本代码和master分支基本一致
+* 1.0.0版本
+进行CAS单点登录实验的版本，CAS集成有遇到问题，还没合并代码到dev和master
+
+* 1.0.1版本
+进行Dubbo微服务实验的版本，代码还没合并到dev和master
+
+## 八、项目技术博客介绍 
 为了帮助学习者更好地理解代码，下面给出自己写的一些博客链接
 
 ### Java框架
@@ -220,6 +232,7 @@ public class RedisAspect {
 * [基于Shiro的登录验证功能实现](http://blog.csdn.net/u014427391/article/details/78307766)
 
 ### SpringBoot
+我的Springboot系列博客可以参考我的专栏：[SpringBoot系列博客](https://blog.csdn.net/u014427391/category_9195353.html)
 * [SpringBoot热部署配置](https://smilenicky.blog.csdn.net/article/details/89765909)
 * [SpringBoot集成Redis实现缓存处理](http://blog.csdn.net/u014427391/article/details/78799623)
 * [SpringBoot profles配置多环境](https://smilenicky.blog.csdn.net/article/details/89792248)
@@ -247,22 +260,25 @@ public class RedisAspect {
 
 ### 单点登录
 * [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
+* [CAS单点登录系列之原理简单介绍](https://blog.csdn.net/u014427391/article/details/82083995)
+* [CAS单点登录系列之服务端部署](https://blog.csdn.net/u014427391/article/details/91345307)
+* [CAS单点登录系列之支持数据库认证](https://blog.csdn.net/u014427391/article/details/91345240)
 
 ### Docker笔记
 * [Docker简介和安装教程](https://smilenicky.blog.csdn.net/article/details/97613891)
 
 ### SQL调优知识
 
-Oracle
-* [Oracle优化器基础知识](https://blog.csdn.net/u014427391/article/details/88650696)
-* [Oracle性能调优之虚拟索引用法简介](https://smilenicky.blog.csdn.net/article/details/89761234)
-* [Oracle性能调优之物化视图用法简介](https://smilenicky.blog.csdn.net/article/details/89762680)
-* [Orace执行计划学习笔记](https://smilenicky.blog.csdn.net/article/details/89604262)
-* [Oracle共享池分析SQL资源使用情况](https://blog.csdn.net/u014427391/article/details/86562755)
+* Oracle
+ * [Oracle优化器基础知识](https://blog.csdn.net/u014427391/article/details/88650696)
+ * [Oracle性能调优之虚拟索引用法简介](https://smilenicky.blog.csdn.net/article/details/89761234)
+ * [Oracle性能调优之物化视图用法简介](https://smilenicky.blog.csdn.net/article/details/89762680)
+ * [Orace执行计划学习笔记](https://smilenicky.blog.csdn.net/article/details/89604262)
+ * [Oracle共享池分析SQL资源使用情况](https://blog.csdn.net/u014427391/article/details/86562755)
 
-MySQL
-* [MySQL调优之Explain](https://smilenicky.blog.csdn.net/article/details/100853310)
-* [MySQL调优之索引](https://smilenicky.blog.csdn.net/article/details/100846922)
+* MySQL
+ * [MySQL调优之Explain](https://smilenicky.blog.csdn.net/article/details/100853310)
+ * [MySQL调优之索引](https://smilenicky.blog.csdn.net/article/details/100846922)
 
 
 
