@@ -1,0 +1,50 @@
+spring:
+  datasource:
+
+    # 主数据源 
+    shop:
+      url: jdbc:mysql://127.0.0.1:3306/jeeplatform?autoReconnect=true&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      username: root
+      password: root
+
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    # 连接池设置
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      # Oracle请使用select 1 from dual
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall,slf4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+  jpa:
+    database: mysql
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+
+# 端口
+server:
+  port: 8022
+
+
+#debug: true

@@ -30,8 +30,8 @@
         </dependency>
         <dependency>
             <groupId>org.muses.jeeplatform</groupId>
-            <artifactId>jeeplatform-core</artifactId>
-            <version>${jeeplatform-core.version}</version>
+            <artifactId>jeeplatform-provider-api</artifactId>
+            <version>${jeeplatform-provider-api.version}</version>
         </dependency>
 
         <!-- swagger-->

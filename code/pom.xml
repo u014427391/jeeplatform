@@ -18,11 +18,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
 		<!-- 模块版本 -->
-		<jeeplatform-core.version>1.0</jeeplatform-core.version>
+		<jeeplatform-provider-api.version>1.0</jeeplatform-provider-api.version>
 		<jeeplatform-admin.version>1.0</jeeplatform-admin.version>
 		<jeeplatform-common.version>1.0</jeeplatform-common.version>
 		<jeeplatform-sso.version>1.0</jeeplatform-sso.version>
-
+        <jeeplatform-provider.version>1.0</jeeplatform-provider.version>
 		<!-- 外部依赖 -->
 		<log4j.version>1.2.17</log4j.version>
 		<mysql.version>5.1.27</mysql.version>
@@ -127,10 +127,11 @@
 	</build>
 	
 	<modules>
-		<module>jeeplatform-core</module>
+		<module>jeeplatform-provider-api</module>
 		<module>jeeplatform-admin</module>
 		<module>jeeplatform-common</module>
 		<module>jeeplatform-sso</module>
+        <module>jeeplatform-provider</module>
 	</modules>
 
 	<dependencies>
