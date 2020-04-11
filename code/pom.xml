@@ -132,6 +132,7 @@
 		<module>jeeplatform-common</module>
 		<module>jeeplatform-sso</module>
         <module>jeeplatform-provider</module>
+		<module>jeeplatform-oa</module>
 	</modules>
 
 	<dependencies>
