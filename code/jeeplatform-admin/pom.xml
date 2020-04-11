@@ -68,11 +68,11 @@
             <artifactId>shiro-ehcache</artifactId>
             <version>${shiro.encache.version}</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-cas</artifactId>
             <version>${shiro.cas.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- Apache POI -->
         <dependency>
@@ -96,10 +96,17 @@
         </dependency>
 
         <!-- cas -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.jasig.cas.client</groupId>
             <artifactId>cas-client-core</artifactId>
             <version>${cas.version}</version>
+        </dependency>-->
+
+        <!-- CAS依赖包 -->
+        <dependency>
+            <groupId>net.unicon.cas</groupId>
+            <artifactId>cas-client-autoconfig-support</artifactId>
+            <version>1.5.0-GA</version>
         </dependency>
 
     </dependencies>

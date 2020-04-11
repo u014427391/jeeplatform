@@ -61,7 +61,7 @@
             <version>${cas.version}</version>
         </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${log4j2.version}</version>
@@ -75,7 +75,7 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-web</artifactId>
             <version>${log4j2.version}</version>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>com.lmax</groupId>
@@ -122,6 +122,12 @@
             <scope>test</scope>
         </dependency>-->
         <!--pac4j test end-->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.0</version>
+        </dependency>
 
     </dependencies>
 
