@@ -15,53 +15,79 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <cas.version>4.2.7</cas.version>
+        <cas.version>5.2.6</cas.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <pac4j-cas.version>2.0.0-RC1</pac4j-cas.version>
         <log4j2.version>2.8.2</log4j2.version>
         <disruptor.version>3.3.6</disruptor.version>
         <cas.integration.redis.version>1.1.1-RELEASE</cas.integration.redis.version>
+        <mysql.driver.version>5.1.46</mysql.driver.version>
+
+        <springboot.version>1.5.7.RELEASE</springboot.version>
+        <!-- app.server could be -jetty, -undertow, -tomcat, or blank if you plan to provide appserver -->
+        <app.server>-tomcat</app.server>
+
+        <mainClassName>org.springframework.boot.loader.WarLauncher</mainClassName>
+        <isExecutable>false</isExecutable>
+        <manifestFileToUse>${project.build.directory}/war/work/org.apereo.cas/cas-server-webapp${app.server}/META-INF/MANIFEST.MF</manifestFileToUse>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.jasig.cas</groupId>
+            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-webapp</artifactId>
             <version>${cas.version}</version>
             <type>war</type>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.jasig.cas</groupId>
+            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core</artifactId>
             <version>${cas.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.jasig.cas</groupId>
+        <!--<dependency>
+            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-webapp-actions</artifactId>
             <version>${cas.version}</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
-            <groupId>org.jasig.cas</groupId>
+            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-rest-services</artifactId>
             <version>${cas.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.jasig.cas</groupId>
+            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-jdbc</artifactId>
             <version>${cas.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.jasig.cas</groupId>
-            <artifactId>cas-server-core-logout</artifactId>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc-drivers</artifactId>
             <version>${cas.version}</version>
         </dependency>
 
+       <!-- <dependency>
+            <groupId>org.jasig.cas</groupId>
+            <artifactId>cas-server-core-logout</artifactId>
+            <version>${cas.version}</version>
+        </dependency>-->
+
+
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.driver.version}</version>
+        </dependency>
+
+        <!--<dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${log4j2.version}</version>
@@ -75,9 +101,9 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-web</artifactId>
             <version>${log4j2.version}</version>
-        </dependency>
+        </dependency>-->
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
             <version>${disruptor.version}</version>
@@ -87,10 +113,10 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- 保存Ticket到redis-->
-        <dependency>
+        <!--<dependency>
             <groupId>com.github.izerui</groupId>
             <artifactId>cas-server-integration-redis</artifactId>
             <version>${cas.integration.redis.version}</version>
@@ -100,7 +126,7 @@
             <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!--pac4j test start-->
         <!--<dependency>
@@ -129,27 +155,59 @@
             <version>4.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
-        <finalName>cas</finalName>
         <plugins>
+            <plugin>
+                <groupId>com.rimerosolutions.maven.plugins</groupId>
+                <artifactId>wrapper-maven-plugin</artifactId>
+                <version>0.0.4</version>
+                <configuration>
+                   <!-- <verifyDownload>true</verifyDownload>
+                    <checksumAlgorithm>MD5</checksumAlgorithm>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${springboot.version}</version>
+                <configuration>
+                    <mainClass>${mainClassName}</mainClass>
+                    <addResources>true</addResources>
+                    <executable>${isExecutable}</executable>
+                    <layout>WAR</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
                     <warName>cas</warName>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <recompressZippedFiles>false</recompressZippedFiles>
+                    <archive>
+                        <compress>false</compress>
+                        <manifestFile>${manifestFileToUse}</manifestFile>
+                    </archive>
                     <overlays>
                         <overlay>
-                            <groupId>org.jasig.cas</groupId>
-                            <artifactId>cas-server-webapp</artifactId>
-                            <excludes>
-                                <exclude>WEB-INF/cas.properties</exclude>
-                                <exclude>WEB-INF/classes/log4j2.xml</exclude>
-                                <exclude>WEB-INF/classes/message*.properties</exclude>
-                                <exclude>WEB-INF/classes/services</exclude>
-                            </excludes>
+                            <groupId>org.apereo.cas</groupId>
+                            <artifactId>cas-server-webapp${app.server}</artifactId>
                         </overlay>
                     </overlays>
                 </configuration>
@@ -157,13 +215,116 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
+                <version>3.3</version>
             </plugin>
         </plugins>
+        <finalName>cas</finalName>
     </build>
+
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>default</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-webapp${app.server}</artifactId>
+                    <version>${cas.version}</version>
+                    <type>war</type>
+                    <scope>runtime</scope>
+                </dependency>
+                <!--
+                ...Additional dependencies may be placed here...
+                -->
+            </dependencies>
+        </profile>
+
+        <profile>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <id>exec</id>
+            <properties>
+                <mainClassName>org.apereo.cas.web.CasWebApplication</mainClassName>
+                <isExecutable>true</isExecutable>
+                <manifestFileToUse></manifestFileToUse>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.soebes.maven.plugins</groupId>
+                        <artifactId>echo-maven-plugin</artifactId>
+                        <version>0.3.0</version>
+                        <executions>
+                            <execution>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>echo</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <echos>
+                                <echo>Executable profile to make the generated CAS web application executable.</echo>
+                            </echos>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <id>bootiful</id>
+            <properties>
+                <app.server>-tomcat</app.server>
+                <isExecutable>false</isExecutable>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apereo.cas</groupId>
+                    <artifactId>cas-server-webapp${app.server}</artifactId>
+                    <version>${cas.version}</version>
+                    <type>war</type>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <id>pgp</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.s4u.plugins</groupId>
+                        <artifactId>pgpverify-maven-plugin</artifactId>
+                        <version>1.1.0</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <pgpKeyServer>hkp://pool.sks-keyservers.net</pgpKeyServer>
+                            <pgpKeysCachePath>${settings.localRepository}/pgpkeys-cache</pgpKeysCachePath>
+                            <scope>test</scope>
+                            <verifyPomFiles>true</verifyPomFiles>
+                            <failNoSignature>false</failNoSignature>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
