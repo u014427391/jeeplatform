@@ -7,9 +7,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>jeeplatform-sso</artifactId>
-    <name>jeeplatform-sso</name>
-    <version>${jeeplatform-sso.version}</version>
+    <artifactId>jeeplatform-sso-cas</artifactId>
+    <name>jeeplatform-sso-cas</name>
+    <version>${jeeplatform-sso-cas.version}</version>
     <packaging>war</packaging>
 
 

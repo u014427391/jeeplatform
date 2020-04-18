@@ -130,7 +130,7 @@
 		<module>jeeplatform-provider-api</module>
 		<module>jeeplatform-admin</module>
 		<module>jeeplatform-common</module>
-		<module>jeeplatform-sso</module>
+		<module>jeeplatform-sso-cas</module>
         <module>jeeplatform-provider</module>
 		<module>jeeplatform-oa</module>
 	</modules>
