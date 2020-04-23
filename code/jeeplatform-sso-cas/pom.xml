@@ -94,10 +94,10 @@
                             <groupId>org.apereo.cas</groupId>
                             <artifactId>cas-server-webapp${app.server}</artifactId>
                             <!--<version>${cas.version}</version>-->
-                             <!--<excludes>
+                             <excludes>
                                 <exclude>WEB-INF/classes/services/*</exclude>
                                 <exclude>WEB-INF/classes/application/*</exclude>
-                            </excludes>-->
+                            </excludes>
                         </overlay>
                     </overlays>
                 </configuration>
@@ -109,6 +109,13 @@
             </plugin>
         </plugins>
         <finalName>cas</finalName>
+        <resources>
+            <resource>
+                <!-- 防止keystore被maven错误解析 -->
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 
     <dependencies>
