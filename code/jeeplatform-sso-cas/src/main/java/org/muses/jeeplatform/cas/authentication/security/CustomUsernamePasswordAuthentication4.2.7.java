@@ -19,7 +19,7 @@
 // *    修改后版本:     修改人：  修改日期: 2019年05月19日  修改内容:
 // * </pre>
 // */
-//public class CostomUsernamePasswordAuthentication extends AbstractUsernamePasswordAuthenticationHandler {
+//public class CustomUsernamePasswordAuthentication4.2.7 extends AbstractUsernamePasswordAuthenticationHandler {
 //
 //
 //    @Override

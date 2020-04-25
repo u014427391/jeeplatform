@@ -1,13 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.muses.jeeplatform</groupId>
-        <artifactId>jeeplatform</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
 
-    <artifactId>jeeplatform-sso-cas</artifactId>
+    <groupId>org.apereo.cas</groupId>
+    <artifactId>cas-overlay</artifactId>
     <name>jeeplatform-sso-cas</name>
     <version>${jeeplatform-sso-cas.version}</version>
     <packaging>war</packaging>
@@ -18,7 +14,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <cas.version>5.2.6</cas.version>
+        <cas.version>5.3.1</cas.version>
         <app.server>-tomcat</app.server>
 
         <mainClassName>org.springframework.boot.loader.WarLauncher</mainClassName>
@@ -29,18 +25,22 @@
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <springboot.version>1.5.7.RELEASE</springboot.version>
+        <springboot.version>1.5.14.RELEASE</springboot.version>
     </properties>
 
-    <!--中央仓库-->
     <repositories>
+        <!--添加国内镜像源地址-->
         <repository>
-            <id>public</id>
-            <name>aliyun nexus</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <id>maven-ali</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public//</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
         </repository>
     </repositories>
     <pluginRepositories>
@@ -59,6 +59,15 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>com.rimerosolutions.maven.plugins</groupId>
+                <artifactId>wrapper-maven-plugin</artifactId>
+                <version>0.0.4</version>
+                <configuration>
+                   <!-- <verifyDownload>true</verifyDownload>
+                    <checksumAlgorithm>MD5</checksumAlgorithm>-->
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -93,7 +102,7 @@
                         <overlay>
                             <groupId>org.apereo.cas</groupId>
                             <artifactId>cas-server-webapp${app.server}</artifactId>
-                            <!--<version>${cas.version}</version>-->
+                            <version>${cas.version}</version>
                              <excludes>
                                 <exclude>WEB-INF/classes/services/*</exclude>
                                 <exclude>WEB-INF/classes/application/*</exclude>
@@ -120,25 +129,55 @@
 
     <dependencies>
         <!-- 和maven-war-plugin里配置的overlays配合使用 -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-webapp${app.server}</artifactId>
             <version>${cas.version}</version>
             <type>war</type>
             <scope>runtime</scope>
+        </dependency>-->
+
+        <!--新增支持jdbc验证-->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc</artifactId>
+            <version>${cas.version}</version>
         </dependency>
-        <!-- mysql -->
+
+        <!--若不想找驱动可以直接写下面的依赖即可，其中包括HSQLDB、Oracle、MYSQL、PostgreSQL、MariaDB、Microsoft SQL Server-->
+        <!--<dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc-drivers</artifactId>
+            <version>${cas.version}</version>
+        </dependency>-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.44</version>
+            <version>5.1.27</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
-            <groupId>io.codis.jodis</groupId>
-            <artifactId>jodis</artifactId>
-            <version>0.5.0</version>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-generic</artifactId>
+            <version>${cas.version}</version>
         </dependency>
+
+
+        <!-- Shiro Authentication -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-shiro-authentication</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
+        <!-- Rest Authentication -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-rest-authentication</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
     </dependencies>
 
 
@@ -156,8 +195,12 @@
                     <type>war</type>
                     <scope>runtime</scope>
                 </dependency>
+                <!--
+                ...Additional dependencies may be placed here...
+                -->
             </dependencies>
         </profile>
+
     </profiles>
 
 
