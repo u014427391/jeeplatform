@@ -1,5 +1,6 @@
-package org.muses.jeeplatform.cache;
+package org.muses.jeeplatform.cache.redis;
 
+import org.muses.jeeplatform.cache.SerializeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;

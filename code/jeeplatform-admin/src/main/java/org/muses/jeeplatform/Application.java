@@ -1,7 +1,7 @@
 package org.muses.jeeplatform;
 
 
-import org.muses.jeeplatform.cache.RedisClient;
+import org.muses.jeeplatform.cache.redis.RedisClient;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
