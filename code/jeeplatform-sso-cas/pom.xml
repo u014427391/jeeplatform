@@ -157,12 +157,25 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Custom Authentication -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-authentication-api</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
+        <!-- Custom Configuration -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-configuration-api</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-generic</artifactId>
             <version>${cas.version}</version>
         </dependency>
-
 
         <!-- Shiro Authentication -->
         <dependency>
@@ -176,6 +189,12 @@
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-rest-authentication</artifactId>
             <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.10</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
