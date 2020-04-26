@@ -11,6 +11,18 @@
 	<version>${jeeplatform-provider.version}</version>
 	<packaging>jar</packaging>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.muses.jeeplatform</groupId>
+			<artifactId>jeeplatform-provider-api</artifactId>
+			<version>${jeeplatform-provider-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.muses.jeeplatform</groupId>
+			<artifactId>jeeplatform-common</artifactId>
+			<version>${jeeplatform-common.version}</version>
+		</dependency>
+	</dependencies>
 
 
 </project>

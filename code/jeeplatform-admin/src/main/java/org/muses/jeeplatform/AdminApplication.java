@@ -1,7 +1,7 @@
 package org.muses.jeeplatform;
 
 
-import org.muses.jeeplatform.cache.redis.RedisClient;
+import org.muses.jeeplatform.common.cache.redis.RedisClient;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -27,13 +27,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //@EnableCaching
 @EnableAsync
 @Controller
-public class Application {
+public class AdminApplication {
 
     @Autowired
     RedisClient redisClient;
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(AdminApplication.class, args);
     }
 
     @RequestMapping("/set")

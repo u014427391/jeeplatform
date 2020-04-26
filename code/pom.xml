@@ -137,13 +137,6 @@
 
 	<dependencies>
 
-		<!-- fatsjson -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>${fastjson.version}</version>
-		</dependency>
-
 		<!-- devtools -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -162,6 +155,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>${spring-boot.version}</version>
 		</dependency>
 
 		<!-- druid -->
@@ -189,6 +188,14 @@
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
 		</dependency>
+
+		<!-- fatsjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+
 
 	</dependencies>
 
