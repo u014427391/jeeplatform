@@ -1,7 +1,6 @@
 package org.muses.jeeplatform.web.controller;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.commons.lang.StringUtils;
 import org.muses.jeeplatform.core.CommonConsts;
 import org.muses.jeeplatform.core.entity.admin.Menu;
 import org.muses.jeeplatform.core.entity.admin.Permission;
@@ -14,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
