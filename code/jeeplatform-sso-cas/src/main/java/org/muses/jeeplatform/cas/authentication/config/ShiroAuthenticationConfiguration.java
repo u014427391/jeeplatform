@@ -33,7 +33,7 @@ import java.util.Map;
  *    修改后版本:     修改人：  修改日期: 2020/04/26 16:35  修改内容:
  * </pre>
  */
-//@Configuration("ShiroAuthenticationConfiguration")
+@Configuration("ShiroAuthenticationConfiguration")
 @EnableConfigurationProperties(CasConfigurationProperties.class)
 public class ShiroAuthenticationConfiguration implements AuthenticationEventExecutionPlanConfigurer  {
     @Autowired
@@ -56,7 +56,7 @@ public class ShiroAuthenticationConfiguration implements AuthenticationEventExec
     }
 
 
-    @Bean
+    //@Bean
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -80,9 +80,9 @@ public class ShiroAuthenticationConfiguration implements AuthenticationEventExec
     }
 
     @Bean
-    public ShiroAuthorizingRealm myShiroRealm(){
+    public ShiroAuthorizingRealm shiroAuthorizingRealm(){
         ShiroAuthorizingRealm myShiroRealm = new ShiroAuthorizingRealm();
-        myShiroRealm.setCachingEnabled(false);
+        //myShiroRealm.setCachingEnabled(false);
         //启用身份验证缓存，即缓存AuthenticationInfo信息，默认false
         myShiroRealm.setAuthenticationCachingEnabled(false);
         //启用授权缓存，即缓存AuthorizationInfo信息，默认false
@@ -94,7 +94,7 @@ public class ShiroAuthenticationConfiguration implements AuthenticationEventExec
     @Bean
     public SecurityManager securityManager(){
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
-        securityManager.setRealm(myShiroRealm());
+        securityManager.setRealm(shiroAuthorizingRealm());
         return securityManager;
     }
 

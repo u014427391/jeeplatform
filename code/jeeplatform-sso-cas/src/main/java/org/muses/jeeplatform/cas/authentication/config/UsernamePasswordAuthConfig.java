@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
-@Configuration("UsernamePasswordAuthConfig")
+//@Configuration("UsernamePasswordAuthConfig")
 @EnableConfigurationProperties(CasConfigurationProperties.class)
 public class UsernamePasswordAuthConfig implements AuthenticationEventExecutionPlanConfigurer {
 
