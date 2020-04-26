@@ -3,7 +3,6 @@ package org.muses.jeeplatform.cas.authentication.handler;
 
 import org.apereo.cas.authentication.*;
 import org.apereo.cas.authentication.handler.support.AbstractPreAndPostProcessingAuthenticationHandler;
-import org.apereo.cas.authentication.handler.support.AbstractUsernamePasswordAuthenticationHandler;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.services.ServicesManager;
 import org.muses.jeeplatform.cas.authentication.model.User;
@@ -17,10 +16,10 @@ import javax.security.auth.login.FailedLoginException;
 import java.security.GeneralSecurityException;
 import java.util.*;
 
-public class CustomUsernamePasswordAuthentication extends AbstractPreAndPostProcessingAuthenticationHandler {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CustomUsernamePasswordAuthentication.class);
+public class UsernamePasswordAuthentication extends AbstractPreAndPostProcessingAuthenticationHandler {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UsernamePasswordAuthentication.class);
 
-    public CustomUsernamePasswordAuthentication(String name, ServicesManager servicesManager, PrincipalFactory principalFactory, Integer order) {
+    public UsernamePasswordAuthentication(String name, ServicesManager servicesManager, PrincipalFactory principalFactory, Integer order) {
         super(name, servicesManager, principalFactory, order);
     }
 

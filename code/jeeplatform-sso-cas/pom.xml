@@ -184,12 +184,20 @@
             <version>${cas.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+
         <!-- Rest Authentication -->
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-rest-authentication</artifactId>
             <version>${cas.version}</version>
         </dependency>
+
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
