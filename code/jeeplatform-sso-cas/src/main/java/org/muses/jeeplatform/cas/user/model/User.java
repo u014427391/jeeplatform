@@ -1,4 +1,4 @@
-package org.muses.jeeplatform.cas.authentication.model;
+package org.muses.jeeplatform.cas.user.model;
 
 import lombok.Data;
 

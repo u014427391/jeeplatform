@@ -5,7 +5,7 @@ import org.apereo.cas.authentication.*;
 import org.apereo.cas.authentication.handler.support.AbstractPreAndPostProcessingAuthenticationHandler;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.services.ServicesManager;
-import org.muses.jeeplatform.cas.authentication.model.User;
+import org.muses.jeeplatform.cas.user.model.User;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,10 +16,10 @@ import javax.security.auth.login.FailedLoginException;
 import java.security.GeneralSecurityException;
 import java.util.*;
 
-public class UsernamePasswordAuthentication extends AbstractPreAndPostProcessingAuthenticationHandler {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UsernamePasswordAuthentication.class);
+public class UsernamePasswordAuthenticationHandler extends AbstractPreAndPostProcessingAuthenticationHandler {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UsernamePasswordAuthenticationHandler.class);
 
-    public UsernamePasswordAuthentication(String name, ServicesManager servicesManager, PrincipalFactory principalFactory, Integer order) {
+    public UsernamePasswordAuthenticationHandler(String name, ServicesManager servicesManager, PrincipalFactory principalFactory, Integer order) {
         super(name, servicesManager, principalFactory, order);
     }
 
