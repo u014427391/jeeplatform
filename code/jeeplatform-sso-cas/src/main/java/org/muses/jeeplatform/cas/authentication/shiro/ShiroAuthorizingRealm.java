@@ -11,7 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
  * <pre>
@@ -29,8 +31,8 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
     Logger LOG = LoggerFactory.getLogger(ShiroAuthorizingRealm.class);
 
     /**注解引入业务类**/
-    @Autowired
-    UserService userService;
+    //@Autowired
+    //UserService userService;
 
     /**
      * 登录信息和用户验证信息验证(non-Javadoc)
@@ -44,7 +46,22 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 
         LOG.info("Shiro doGetAuthenticationInfo>> username:{},password:{}",username,password);
 
-        User user = userService.findByUsername(username);
+        //User user = userService.findByUsername(username);
+        // JDBC模板依赖于连接池来获得数据的连接，所以必须先要构造连接池
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://192.168.0.152:33306/jeeplatform");
+        dataSource.setUsername("root");
+        dataSource.setPassword("minstone");
+
+        // 创建JDBC模板
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.setDataSource(dataSource);
+
+        String sql = "SELECT * FROM sys_user WHERE username = ?";
+
+        User user = (User) jdbcTemplate.queryForObject(sql, new Object[]{username}, new BeanPropertyRowMapper(User.class));
+
 
         /**检测是否有此用户 **/
         if(user == null){

@@ -15,6 +15,7 @@ import org.muses.jeeplatform.cas.authentication.handler.UsernamePasswordAuthenti
 import org.muses.jeeplatform.cas.authentication.shiro.ShiroAuthorizingRealm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,19 +43,6 @@ public class ShiroAuthenticationConfiguration implements AuthenticationEventExec
     @Autowired
     @Qualifier("servicesManager")
     private ServicesManager servicesManager;
-
-
-    @Bean
-    public AuthenticationHandler myAuthenticationHandler() {
-        return new ShiroAuthenticationHandler(ShiroAuthenticationHandler.class.getName(),
-                servicesManager, new DefaultPrincipalFactory(), 1);
-    }
-
-    @Override
-    public void configureAuthenticationExecutionPlan(AuthenticationEventExecutionPlan plan) {
-        plan.registerAuthenticationHandler(myAuthenticationHandler());
-    }
-
 
     //@Bean
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
@@ -96,6 +84,29 @@ public class ShiroAuthenticationConfiguration implements AuthenticationEventExec
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
         securityManager.setRealm(shiroAuthorizingRealm());
         return securityManager;
+    }
+
+    /**
+     * Spring静态注入
+     * @return
+     */
+    @Bean
+    public MethodInvokingFactoryBean getMethodInvokingFactoryBean(){
+        MethodInvokingFactoryBean factoryBean = new MethodInvokingFactoryBean();
+        factoryBean.setStaticMethod("org.apache.shiro.SecurityUtils.setSecurityManager");
+        factoryBean.setArguments(new Object[]{securityManager()});
+        return factoryBean;
+    }
+
+    @Bean
+    public AuthenticationHandler myAuthenticationHandler() {
+        return new ShiroAuthenticationHandler(ShiroAuthenticationHandler.class.getName(),
+                servicesManager, new DefaultPrincipalFactory(), 1);
+    }
+
+    @Override
+    public void configureAuthenticationExecutionPlan(AuthenticationEventExecutionPlan plan) {
+        plan.registerAuthenticationHandler(myAuthenticationHandler());
     }
 
 
