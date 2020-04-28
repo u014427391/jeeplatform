@@ -16,4 +16,12 @@
     <build>
         <finalName>jeeplatform-common</finalName>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+    </dependencies>
 </project>

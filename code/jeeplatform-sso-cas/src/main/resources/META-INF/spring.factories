@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.muses.jeeplatform.cas.authentication.config.ShiroAuthenticationConfiguration
