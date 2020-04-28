@@ -69,11 +69,12 @@ spring:
         maxTotal : 100
         maxIdle : 10
         maxWaitMillis : 100000
-cas:
-  server-login-url: http://127.0.0.1:8080/cas/login
-  server-url-prefix: http://127.0.0.1:8080/cas
-  client-host-url: http://127.0.0.1:8081
-  validation-type: cas
+#cas:
+#  server-login-url: http://127.0.0.1:8080/cas/login
+#  server-url-prefix: http://127.0.0.1:8080/cas
+#  client-host-url: http://127.0.0.1:8081
+#  validation-type: cas
+#  authentication-url-patterns: /auth
 #  use-session: true
 
 
