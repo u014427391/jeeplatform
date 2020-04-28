@@ -53,6 +53,18 @@
             <version>${spring-boot.version}</version>
         </dependency>
 
+        <!-- druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+
         <!-- swagger-->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -120,6 +132,12 @@
             <artifactId>cas-client-autoconfig-support</artifactId>
             <version>1.5.0-GA</version>
         </dependency>
+        <!--<dependency>
+            <groupId>org.jasig.cas.client</groupId>
+            <artifactId>cas-client-support-springboot</artifactId>
+            <version>3.6.1</version>
+        </dependency>-->
+
 
     </dependencies>
 

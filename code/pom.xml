@@ -18,11 +18,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
 		<!-- 模块版本 -->
-		<jeeplatform-provider-api.version>1.0</jeeplatform-provider-api.version>
-		<jeeplatform-admin.version>1.0</jeeplatform-admin.version>
-		<jeeplatform-common.version>1.0</jeeplatform-common.version>
-		<jeeplatform-sso.version>1.0</jeeplatform-sso.version>
-        <jeeplatform-provider.version>1.0</jeeplatform-provider.version>
+		<jeeplatform-provider-api.version>1.1.0</jeeplatform-provider-api.version>
+		<jeeplatform-admin.version>1.1.0</jeeplatform-admin.version>
+		<jeeplatform-common.version>1.1.0</jeeplatform-common.version>
+		<jeeplatform-sso.version>1.1.0</jeeplatform-sso.version>
+        <jeeplatform-provider.version>1.1.0</jeeplatform-provider.version>
+		<jeeplatform-oa.version>1.1.0</jeeplatform-oa.version>
 		<!-- 外部依赖 -->
 		<log4j.version>1.2.17</log4j.version>
 		<mysql.version>5.1.27</mysql.version>
@@ -157,17 +158,7 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- druid -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>${druid.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid-spring-boot-starter</artifactId>
-			<version>${druid.version}</version>
-		</dependency>
+
 
 		<!-- mysql -->
 		<dependency>

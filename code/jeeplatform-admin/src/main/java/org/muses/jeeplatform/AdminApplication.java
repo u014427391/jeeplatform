@@ -1,6 +1,8 @@
 package org.muses.jeeplatform;
 
 
+import net.unicon.cas.client.configuration.EnableCasClient;
+import org.jasig.cas.client.validation.Assertion;
 import org.muses.jeeplatform.cache.redis.RedisClient;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,13 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * @author caiyuyu
@@ -52,5 +60,28 @@ public class AdminApplication {
 //        c.setIgnoreUnresolvablePlaceholders(true);
 //        return c;
 //    }
+
+    @GetMapping("/auth")
+    public void auth(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+        Assertion assertion = (Assertion) session.getAttribute("_const_cas_assertion_");
+        response.setHeader("Content-type", "application/json;charset=UTF-8");
+        response.setCharacterEncoding("utf-8");
+        response.setStatus(200);
+        if (assertion != null) {
+            String redirectUrl= request.getParameter("redirectUrl");
+            try {
+                response.setHeader("Content-type", "text/html;charset=UTF-8");
+                response.sendRedirect(redirectUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                response.getWriter().print("401");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }

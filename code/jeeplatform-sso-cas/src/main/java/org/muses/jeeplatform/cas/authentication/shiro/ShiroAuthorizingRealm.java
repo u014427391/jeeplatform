@@ -1,10 +1,13 @@
 package org.muses.jeeplatform.cas.authentication.shiro;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.muses.jeeplatform.cas.user.model.User;
 import org.muses.jeeplatform.cas.user.service.UserService;
 import org.slf4j.Logger;
@@ -61,7 +64,12 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
         String sql = "SELECT * FROM sys_user WHERE username = ?";
 
         User user = (User) jdbcTemplate.queryForObject(sql, new Object[]{username}, new BeanPropertyRowMapper(User.class));
-
+        Subject subject = getCurrentExecutingSubject();
+        //获取Shiro管理的Session
+        Session session = getShiroSession(subject);
+        //Shiro添加会话
+        session.setAttribute("username", username);
+        session.setAttribute(ShiroConsts.SESSION_USER, user);
 
         /**检测是否有此用户 **/
         if(user == null){
@@ -107,6 +115,14 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
     @Override
     public void clearCache(PrincipalCollection principals) {
         super.clearCache(principals);
+    }
+
+    protected Subject getCurrentExecutingSubject(){
+        return SecurityUtils.getSubject();
+    }
+
+    protected Session getShiroSession(Subject subject){
+        return subject.getSession();
     }
 
 }
