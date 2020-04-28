@@ -10,7 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>jeeplatform-oa</artifactId>
+    <name>jeeplatform-oa</name>
     <packaging>jar</packaging>
+    <version>${jeeplatform-oa.version}</version>
+
+    <build>
+        <finalName>jeeplatform-oa</finalName>
+    </build>
 
     <dependencies>
         <!-- Spring boot -->
@@ -18,6 +24,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring-boot.version}</version>
+        </dependency>
+        <!-- Themeleaf -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <!-- CAS依赖包 -->
+        <dependency>
+            <groupId>net.unicon.cas</groupId>
+            <artifactId>cas-client-autoconfig-support</artifactId>
+            <version>1.5.0-GA</version>
         </dependency>
     </dependencies>
 
