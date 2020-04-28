@@ -34,7 +34,7 @@ ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 ### CMS管理系统(待开发)
 
 ## 三、关键技术
-### 单点登录基础(模块名称jeeplatform-sso)(开发中)
+### 单点登录基础(模块名称jeeplatform-sso-cas)(开发中)
 > 项目采用CAS登录登录实现，单点登录集群搭建可以参考博客：
 > http://blog.csdn.net/u014427391/article/details/78653482
 > 项目单点登录：使用nginx作为负载均衡，使用redis存储tomcat session，来实现集群中tomcat session的共享，使用redis作为cas ticket的仓库，来实现集群中cas ticket的一致性。
@@ -212,14 +212,14 @@ public class RedisAspect {
 
 ## 七、版本说明
 * master版本
-主干版本，代码经过测试，可以正常运行，这个版本还没集成全部CAS单点代码，因为CAS单点服务端代码基本调试成功，而客户端对接出现bug，所以并没有merge代码
+主干版本，代码经过测试，可以正常运行，这个版本还没集成全部CAS单点代码，因为CAS单点服务端代码基本调试成功，而客户端还没实现跨越，所以并没有merge代码
 * dev版本
 dev版本代码和master分支基本一致
 * 1.0.0版本
-进行CAS单点登录实验的版本，CAS集成有遇到问题，还没合并代码到dev和master
+基础版，基本实现简单的权限管理，功能还需改善，权限控制还需要进行细粒度控制
 
-* 1.0.1版本
-进行Dubbo微服务实验的版本，代码还没合并到dev和master
+* 1.1.0版本
+进行CAS单点登录对接实验的版本，admin工程暂时还没对接，oa工程有对接
 
 ## 八、项目技术博客介绍 
 为了帮助学习者更好地理解代码，下面给出自己写的一些博客链接
