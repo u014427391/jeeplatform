@@ -4,7 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * <pre>
- *
+ *   自定义PasswordEncoder
  * </pre>
  *
  * <pre>
@@ -22,7 +22,7 @@ public class MD5PasswordEncoder implements PasswordEncoder {
 
     @Override
     public boolean matches(CharSequence charSequence, String s) {
-        String encodeStr = charSequence.toString() + "";
+        String encodeStr = charSequence.toString() + "aa";
         if (encodeStr.equals(s)) {
             return true;
         }

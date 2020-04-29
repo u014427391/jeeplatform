@@ -21,7 +21,7 @@
 		<jeeplatform-provider-api.version>1.1.0</jeeplatform-provider-api.version>
 		<jeeplatform-admin.version>1.1.0</jeeplatform-admin.version>
 		<jeeplatform-common.version>1.1.0</jeeplatform-common.version>
-		<jeeplatform-sso.version>1.1.0</jeeplatform-sso.version>
+		<jeeplatform-sso-cas.version>1.1.0</jeeplatform-sso-cas.version>
         <jeeplatform-provider.version>1.1.0</jeeplatform-provider.version>
 		<jeeplatform-oa.version>1.1.0</jeeplatform-oa.version>
 		<!-- 外部依赖 -->
@@ -157,8 +157,6 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-
-
 
 		<!-- mysql -->
 		<dependency>
