@@ -37,7 +37,7 @@ ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 ### 单点登录基础(模块名称jeeplatform-sso-cas)(开发中)
 > 项目采用CAS登录登录实现，单点登录集群搭建可以参考博客：
 > http://blog.csdn.net/u014427391/article/details/78653482
-> 项目单点登录：使用nginx作为负载均衡，使用redis存储tomcat session，来实现集群中tomcat session的共享，使用redis作为cas ticket的仓库，来实现集群中cas ticket的一致性。
+> 项目单点登录：使用nginx作为负载均衡，使用redis存储tomcat session，来实现集群中tomcat session的共享，使用redis作为cas ticket的仓库，来实现集群中cas ticket的一致性。OA已经对接CAS，admin工程暂时不对接CAS
 
 单点登录集群如图
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/单点登录集群.png)
