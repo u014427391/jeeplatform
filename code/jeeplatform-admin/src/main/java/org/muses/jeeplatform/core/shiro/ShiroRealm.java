@@ -20,6 +20,7 @@ import org.muses.jeeplatform.service.UserService;
  * @author Nicky
  * @date 2017年3月12日
  */
+//登录机制代码搬到单点登录工程实现
 public class ShiroRealm extends AuthorizingRealm {
 
 	/**注解引入业务类**/

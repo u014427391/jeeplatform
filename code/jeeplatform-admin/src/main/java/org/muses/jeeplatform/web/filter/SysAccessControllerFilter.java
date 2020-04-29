@@ -22,6 +22,13 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+/**
+ * TODO 功能还没实现
+ * @Author mazq
+ * @Date 2020/04/26 17:17
+ * @Param
+ * @return
+ */
 public class SysAccessControllerFilter extends AccessControlFilter{
 
     private String url;//被提出后，重定向的url

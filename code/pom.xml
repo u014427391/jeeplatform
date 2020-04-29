@@ -18,11 +18,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
 		<!-- 模块版本 -->
-		<jeeplatform-core.version>1.0</jeeplatform-core.version>
-		<jeeplatform-admin.version>1.0</jeeplatform-admin.version>
-		<jeeplatform-common.version>1.0</jeeplatform-common.version>
-		<jeeplatform-sso.version>1.0</jeeplatform-sso.version>
-
+		<jeeplatform-provider-api.version>1.1.0</jeeplatform-provider-api.version>
+		<jeeplatform-admin.version>1.1.0</jeeplatform-admin.version>
+		<jeeplatform-common.version>1.1.0</jeeplatform-common.version>
+		<jeeplatform-sso-cas.version>1.1.0</jeeplatform-sso-cas.version>
+        <jeeplatform-provider.version>1.1.0</jeeplatform-provider.version>
+		<jeeplatform-oa.version>1.1.0</jeeplatform-oa.version>
 		<!-- 外部依赖 -->
 		<log4j.version>1.2.17</log4j.version>
 		<mysql.version>5.1.27</mysql.version>
@@ -127,84 +128,34 @@
 	</build>
 	
 	<modules>
-		<module>jeeplatform-core</module>
+		<module>jeeplatform-provider-api</module>
 		<module>jeeplatform-admin</module>
 		<module>jeeplatform-common</module>
-		<module>jeeplatform-sso</module>
+		<module>jeeplatform-sso-cas</module>
+        <module>jeeplatform-provider</module>
+		<module>jeeplatform-oa</module>
 	</modules>
 
 	<dependencies>
-		<!-- Spring boot -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>${spring-boot.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-			<version>${spring-boot.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-			<version>${spring-boot.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>${mybatis-spring-boot.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<!-- 热部署-->
+
+		<!-- devtools -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
+
 		<!-- junit -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
+
 		<!-- configuration -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
-		</dependency>
-		<!-- druid -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>${druid.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid-spring-boot-starter</artifactId>
-			<version>${druid.version}</version>
-		</dependency>
-
-		<!-- mybatis -->
-		<dependency>
-			<groupId>tk.mybatis</groupId>
-			<artifactId>mapper</artifactId>
-			<version>${tk.mybatis.mapper.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.persistence</groupId>
-					<artifactId>persistence-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper</artifactId>
-			<version>${github.pagehelper.version}</version>
 		</dependency>
 
 		<!-- mysql -->
@@ -214,12 +165,12 @@
 			<version>${mysql-connector.version}</version>
 		</dependency>
 
-		<!-- log4j -->
-		<!--<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>-->
+		<!-- lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
 
 		<!-- fatsjson -->
 		<dependency>
@@ -228,12 +179,6 @@
 			<version>${fastjson.version}</version>
 		</dependency>
 
-		<!-- lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>${lombok.version}</version>
-		</dependency>
 
 	</dependencies>
 

@@ -10,7 +10,7 @@ import org.muses.jeeplatform.core.CommonConsts;
 import org.muses.jeeplatform.core.email.JavaEmailSender;
 import org.muses.jeeplatform.core.entity.admin.Role;
 import org.muses.jeeplatform.core.entity.admin.User;
-import org.muses.jeeplatform.core.entity.admin.dto.RoleVO;
+import org.muses.jeeplatform.core.dto.admin.RoleVO;
 import org.muses.jeeplatform.core.excel.ExcelViewWrite;
 import org.muses.jeeplatform.service.RolePageService;
 import org.muses.jeeplatform.service.RoleService;
