@@ -41,6 +41,7 @@ ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 
 
 图来自官网，这里简单介绍一下，从图可以看出，CAS支持多种方式的认证，一种是LDAP的、比较常见的数据库Database的JDBC，还有Active Directory等等；支持的协议有Custom Protocol 、 CAS 、 OAuth 、 OpenID 、 RESTful API 、 SAML1.1 、 SAML2.0 等
+
 ![这里写图片描述](https://img-blog.csdn.net/20180902172712501?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQ0MjczOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 CAS单点登录原理，图来自官网
