@@ -34,10 +34,17 @@ ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 ### CMS管理系统(待开发)
 
 ## 三、关键技术
-### 单点登录基础(模块名称jeeplatform-sso-cas)(开发中)
-> 项目采用CAS登录登录实现，单点登录集群搭建可以参考博客：
+### 单点登录基础(模块名称jeeplatform-sso-cas)(功能修整中)
+> 项目采用CAS实现单点登录，单点登录集群搭建可以参考博客：
 > http://blog.csdn.net/u014427391/article/details/78653482
 > 项目单点登录：使用nginx作为负载均衡，使用redis存储tomcat session，来实现集群中tomcat session的共享，使用redis作为cas ticket的仓库，来实现集群中cas ticket的一致性。OA已经对接CAS，admin工程暂时不对接CAS
+
+
+图来自官网，这里简单介绍一下，从图可以看出，CAS支持多种方式的认证，一种是LDAP的、比较常见的数据库Database的JDBC，还有Active Directory等等；支持的协议有Custom Protocol 、 CAS 、 OAuth 、 OpenID 、 RESTful API 、 SAML1.1 、 SAML2.0 等
+![这里写图片描述](https://img-blog.csdn.net/20180902172712501?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQ0MjczOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+CAS单点登录原理，图来自官网
+![这里写图片描述](https://img-blog.csdn.net/20180826231806797?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQ0MjczOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 单点登录集群方案如图
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/单点登录集群.png)
