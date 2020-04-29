@@ -256,10 +256,10 @@ dev版本代码和master分支基本一致
 * [Redis学习笔记之分布式锁](https://blog.csdn.net/u014427391/article/details/84934045)
 
 ### Oracle知识
-* [Oracle知识整理笔录](https://blog.csdn.net/u014427391/article/details/82317376)
 * [Oracle笔记之锁表和解锁](https://blog.csdn.net/u014427391/article/details/83046148)
 * [select in超过1000条报错解决方法](https://blog.csdn.net/u014427391/article/details/87922878)
 * [Oracle笔记之修改表字段类型](https://blog.csdn.net/u014427391/article/details/83046006)
+* [Oracle知识整理笔录](https://blog.csdn.net/u014427391/article/details/82317376)
 * [Oracle merge合并更新函数](https://blog.csdn.net/u014427391/article/details/87898729)
 
 ### MySQL知识
@@ -268,8 +268,10 @@ dev版本代码和master分支基本一致
 ### 单点登录
 * [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
 * [CAS单点登录系列之原理简单介绍](https://blog.csdn.net/u014427391/article/details/82083995)
-* [CAS单点登录系列之服务端部署](https://blog.csdn.net/u014427391/article/details/91345307)
-* [CAS单点登录系列之支持数据库认证](https://blog.csdn.net/u014427391/article/details/91345240)
+* [CAS系列之使用cas overlay搭建服务端（一）](https://blog.csdn.net/u014427391/article/details/105818468)
+* [CAS 5.3.1系列之支持JDBC认证登录（二）](https://blog.csdn.net/u014427391/article/details/105603895)
+* [CAS 5.3.1系列之自定义JDBC认证策略（三）](https://blog.csdn.net/u014427391/article/details/105820486)
+* [CAS 5.3.1系列之自定义Shiro认证策略（四）](https://blog.csdn.net/u014427391/article/details/105820586)
 
 ### Docker笔记
 * [Docker简介和安装教程](https://smilenicky.blog.csdn.net/article/details/97613891)
