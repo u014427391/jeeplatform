@@ -1,3 +1,28 @@
 server:
   port:
     8888
+# JWT 配置
+jwt:
+  # 存放Token的Header Key
+  header: Authorization
+  # 密匙key
+  secret: mySecret
+  # 过期时间   单位秒 7天后过期  604800
+  expiration: 3600
+  # 自定义token 前缀字符
+  tokenHead: Bearer-
+  # 超时时间   单位秒
+  access_token: 3600
+  # 刷新token时间   单位秒
+  refresh_token: 3600
+  route:
+    authentication:
+      path: login/entry
+      refresh: oauth/refresh
+      register: login/account
+
+
+# 不需要拦截的url地址
+#mySecurity:
+#  exclude:
+#    antMatchers: /oauth/**,/login,/home
