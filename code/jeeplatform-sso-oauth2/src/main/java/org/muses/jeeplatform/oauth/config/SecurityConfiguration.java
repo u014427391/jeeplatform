@@ -52,14 +52,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
-    @Autowired
-    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.inMemoryAuthentication()
-                //.withUser("casuser")
-                //.password(bCryptPasswordEncoder().encode("Mellon"));
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(bCryptPasswordEncoder());
-        auth.parentAuthenticationManager(authenticationManagerBean());
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {    //auth.inMemoryAuthentication()
+        auth.inMemoryAuthentication()
+                .withUser("nicky")
+                .password("123")
+                .roles("admin");
+//        auth.userDetailsService(userDetailsService)
+//                .passwordEncoder(bCryptPasswordEncoder());
+//        auth.parentAuthenticationManager(authenticationManagerBean());
     }
 
     @Override
@@ -72,15 +73,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable() //关闭跨域保护
+        http//.requestMatchers()
+                //.antMatchers("")
+                //.antMatchers("")
+                //.and()
                 .authorizeRequests()
                 .anyRequest().authenticated() //所有请求都需要通过认证
                 .and()
                 .httpBasic() //Basic登录
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll();
+                //.formLogin()
+                //.loginPage("/login.html")
+                //.loginProcessingUrl("/login")
+                //.permitAll()
+                //.and()
+                .csrf().disable(); //关闭跨域保护;
         //http.addFilterBefore(simpleCORSFilter, SecurityContextPersistenceFilter.class);
     }
 
