@@ -35,7 +35,7 @@ import javax.annotation.Resource;
  * </pre>
  */
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 @Order(1)
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 //@EnableAutoConfiguration(exclude = {
@@ -56,6 +56,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
+//    @Autowired
+//    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//        .withUser("casuser")
+//        .password("Mellon");
+////        auth.userDetailsService(userDetailsService)
+////                .passwordEncoder(bCryptPasswordEncoder());
+//        auth.parentAuthenticationManager(authenticationManagerBean());
+//    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {    //auth.inMemoryAuthentication()
         auth.inMemoryAuthentication()
@@ -70,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //解决静态资源被拦截的问题
-        //web.ignoring().antMatchers("/static/login.html");
+        web.ignoring().antMatchers("/login.html");
         //web.ignoring().antMatchers("/i18n/**");
         web.ignoring().antMatchers("/asserts/**");
         web.ignoring().antMatchers("/favicon.ico");
@@ -80,7 +90,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.requestMatchers()
-                .antMatchers("/index")
+                //.antMatchers("/index")
                 .antMatchers("/login")
                 .antMatchers("/oauth/authorize")
                 .and()
@@ -90,18 +100,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.httpBasic() //Basic登录
                 //.and()
                 .formLogin()
-                .loginPage("/login")
-                //.loginProcessingUrl("/login")
+                .loginPage("/login.html")
+                .loginProcessingUrl("/login")
                 .permitAll()
                 .and()
                 .csrf().disable(); //关闭跨域保护;
-        http.addFilterBefore(simpleCORSFilter, SecurityContextPersistenceFilter.class);
+        //http.addFilterBefore(simpleCORSFilter, SecurityContextPersistenceFilter.class);
     }
 
 
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new MessageDigestPasswordEncoder("MD5");
+        return new BCryptPasswordEncoder();
     }
 }

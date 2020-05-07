@@ -18,12 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
-    @GetMapping(value = {"/login"})
-    public ModelAndView toLogin(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
-        return modelAndView;
-    }
+//    @GetMapping(value = {"/login"})
+//    public ModelAndView toLogin(){
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("login");
+//        return modelAndView;
+//    }
 
     @GetMapping(value = {"/index"})
     public ModelAndView toIndex() {

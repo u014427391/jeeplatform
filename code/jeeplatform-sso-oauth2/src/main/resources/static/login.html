@@ -7,22 +7,22 @@
 		<meta name="author" content="" />
 		<title>Signin Template for Bootstrap</title>
 		<!-- Bootstrap core CSS -->
-		<link href="../static/asserts/css/bootstrap.min.css" th:href="@{asserts/css/bootstrap.min.css}" rel="stylesheet" />
+		<link href="asserts/css/bootstrap.min.css" th:href="@{asserts/css/bootstrap.min.css}" rel="stylesheet" />
 		<!-- Custom styles for this template -->
-		<link href="../static/asserts/css/signin.css" th:href="@{asserts/css/signin.css}" rel="stylesheet"/>
+		<link href="asserts/css/signin.css" th:href="@{asserts/css/signin.css}" rel="stylesheet"/>
 	</head>
 
 	<body class="text-center">
-		<form class="form-signin" action="/index">
-			<img class="mb-4" th:src="@{asserts/img/bootstrap-solid.svg}" alt="" width="72" height="72" />
-			<h1 class="h3 mb-3 font-weight-normal" th:text="#{messages.tip}">Please sign in</h1>
+		<form class="form-signin" action="/login" method="post">
+			<!--<img class="mb-4" th:src="@{static/asserts/img/bootstrap-solid.svg}" alt="" width="72" height="72" />-->
+			<h1 class="h3 mb-3 font-weight-normal" th:text="#{messages.tip}">Oauth2.0 Login</h1>
 			<label class="sr-only" th:text="#{messages.username}">Username</label>
-			<input type="text" class="form-control" th:placeholder="#{messages.username}" required="" autofocus="" />
+			<input type="text" class="form-control" th:placeholder="#{messages.username}" required="" autofocus="" value="nicky" />
 			<label class="sr-only" th:text="#{messages.password} ">Password</label>
-			<input type="password" class="form-control" th:placeholder="#{messages.password}" required="" />
+			<input type="password" class="form-control" th:placeholder="#{messages.password}" required="" value="123" />
 			<div class="checkbox mb-3">
 				<label>
-          <input type="checkbox" value="remember-me"  /> [[#{messages.rememberMe}]]
+          <input type="checkbox" value="remember-me"  /> remember me
         </label>
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{messages.loginBtnName}">Sign in</button>
