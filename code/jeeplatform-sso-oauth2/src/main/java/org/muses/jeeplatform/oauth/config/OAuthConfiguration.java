@@ -69,7 +69,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
                 .withClient(CLIENT_ID) //标记客户端id
                 .secret(bCryptPasswordEncoder().encode(SECRET_CHAR_SEQUENCE))//客户端安全码
                 .autoApprove(true) //为true 则不会被重定向到授权的页面，也不需要手动给请求授权,直接自动授权成功返回code
-                .redirectUris("http://127.0.0.1:8082/oa", "http://127.0.0.1:8082/oa") //重定向uri
+                .redirectUris("http://127.0.0.1:8082/oa", "http://127.0.0.1:8084/cms") //重定向uri
                 .scopes(SCOPE_READ , SCOPE_WRITE , TRUST , USER) //允许授权范围
                 .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS) //token 时间秒
                 .refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS)//刷新token 时间 秒
