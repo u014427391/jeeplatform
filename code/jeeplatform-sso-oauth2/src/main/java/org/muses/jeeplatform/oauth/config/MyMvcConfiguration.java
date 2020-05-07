@@ -28,7 +28,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 //@ComponentScan(basePackages = { "com.example.springboot.web" })
 //@Order(0)
 @EnableConfigurationProperties({ WebMvcProperties.class})
-public class MyMvcConfig implements WebMvcConfigurer{
+public class MyMvcConfiguration implements WebMvcConfigurer{
 
     //装载WebMvcProperties 属性
     @Autowired
