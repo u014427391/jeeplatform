@@ -1,6 +1,25 @@
 server:
   port:
     8888
+spring:
+  #添加Thymeleaf配置，除了cache在项目没上线前建议关了，其它配置都可以不用配的，本博客只是列举一下有这些配置
+  thymeleaf:
+    # cache默认开启的，这里可以关了，项目上线之前，项目上线后可以开启
+    cache: false
+    # 这个prefix可以注释，因为默认就是templates的，您可以改成其它的自定义路径
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    # 指定一下编码为utf8
+    encoding: UTF-8
+    # context-type为text/html，也可以不指定，因为boot可以自动识别
+    servlet:
+      content-type: text/html
+  messages:
+    basename: i18n.messages
+#    cache-duration:
+    encoding: UTF-8
+
 # JWT 配置
 jwt:
   # 存放Token的Header Key

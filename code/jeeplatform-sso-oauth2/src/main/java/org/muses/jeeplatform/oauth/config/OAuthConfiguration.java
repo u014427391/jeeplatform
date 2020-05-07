@@ -111,7 +111,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
                 if(AUTHORIZATION_CODE.equals(grantType) || GRANT_TYPE_PASSWORD.equals(grantType)) {
                     String userName = authentication.getUserAuthentication().getName();
                     // 自定义一些token 信息 会在获取token返回结果中展示出来
-                    Map<String, Object> additionalInformation = new HashMap<>();
+                    Map<String, Object> additionalInformation = new HashMap<String, Object>();
                     additionalInformation.put("user_name", userName);
                     additionalInformation = Collections.unmodifiableMap(additionalInformation);
                     ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
