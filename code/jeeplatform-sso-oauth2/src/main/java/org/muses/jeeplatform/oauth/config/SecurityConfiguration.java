@@ -70,7 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {    //auth.inMemoryAuthentication()
         auth.inMemoryAuthentication()
                 .withUser("nicky")
-                .password(passwordEncoder().encode("123"))
+                .password("{noop}123")
                 .roles("admin");
 //        auth.userDetailsService(userDetailsService)
 //                .passwordEncoder(bCryptPasswordEncoder());
@@ -80,10 +80,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //解决静态资源被拦截的问题
-        web.ignoring().antMatchers("/login.html");
+        //web.ignoring().antMatchers("/login.html");
         //web.ignoring().antMatchers("/i18n/**");
         web.ignoring().antMatchers("/asserts/**");
-        web.ignoring().antMatchers("/favicon.ico");
+        //web.ignoring().antMatchers("/favicon.ico");
 
     }
 
@@ -96,12 +96,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated() //所有请求都需要通过认证
-                .and()
-                //.httpBasic() //Basic登录
                 //.and()
+                //.httpBasic() //Basic登录
+                .and()
                 .formLogin()
-                .loginPage("/login.html")
-                .loginProcessingUrl("/login")
+                .loginPage("/login")
+                //.loginProcessingUrl("/login")
                 .permitAll()
                 .and()
                 .csrf().disable(); //关闭跨域保护;
@@ -111,7 +111,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder bcryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    public static void main(String[] args) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        //加密"123"
+        String encode = bCryptPasswordEncoder.encode("123");
+        System.out.println(encode);
+        //结果：$2a$10$CpuVEbTuUkOUJWFz.4kMSeRGJHDefn7tFKLsBVnMo8ZxZrCMeuYwG
     }
 }

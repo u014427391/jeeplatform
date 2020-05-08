@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.util.CollectionUtils;
@@ -42,19 +43,20 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @EnableAuthorizationServer//开启授权服务
 public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
-    @Autowired
-    PasswordEncoder passwordEncoder;
+//    @Autowired
+//    PasswordEncoder passwordEncoder;
     @Autowired
     private AuthenticationManager authenticationManager;   //认证方式
     @Resource(name = "userService")
     private UserDetailsService userDetailsService;
 
     private static final String CLIENT_ID = "jeeplatform";
-    private static final String SECRET_CHAR_SEQUENCE = "secret";
+    private static final String SECRET_CHAR_SEQUENCE = "{noop}secret";
     private static final String SCOPE_READ = "read";
     private static final String SCOPE_WRITE = "write";
     private static final String TRUST = "trust";
     private static final String USER ="user";
+    private static final String ALL = "all";
     private static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1*60*60;
     private static final int FREFRESH_TOKEN_VALIDITY_SECONDS = 6*60*60;
     private static final String GRANT_TYPE_PASSWORD = "password";   // 密码模式授权模式
@@ -67,24 +69,27 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory() // 使用内存存储
                 .withClient(CLIENT_ID) //标记客户端id
-                .secret(bCryptPasswordEncoder().encode(SECRET_CHAR_SEQUENCE))//客户端安全码
+                .secret(SECRET_CHAR_SEQUENCE)//客户端安全码
                 .autoApprove(true) //为true 则不会被重定向到授权的页面，也不需要手动给请求授权,直接自动授权成功返回code
-                .redirectUris("http://127.0.0.1:8082/oa/login", "http://127.0.0.1:8084/cms/login") //重定向uri
-                .scopes(SCOPE_READ , SCOPE_WRITE , TRUST , USER) //允许授权范围
+                //.redirectUris("http://127.0.0.1:8082/oa/login", "http://127.0.0.1:8084/cms/login") //重定向uri
+                .scopes(ALL) //允许授权范围 SCOPE_READ , SCOPE_WRITE , TRUST , USER
                 .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS) //token 时间秒
                 .refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS)//刷新token 时间 秒
                 .authorizedGrantTypes(GRANT_TYPE_PASSWORD , AUTHORIZATION_CODE , REFRESH_TOKEN , IMPLICIT);//允许授权类型
     }
 
-//    @Override
-//    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-//        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager)
-//                .accessTokenConverter(accessTokenConverter())
-//                .userDetailsService(userDetailsService) //必须注入userDetailsService否则根据refresh_token无法加载用户信息
-//                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST,HttpMethod.OPTIONS)  //支持GET  POST  请求获取token
-//                .reuseRefreshTokens(true) //开启刷新token
-//                .tokenServices(tokenServices());
-//    }
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        //endpoints.tokenStore(jwtTokenStore()).authenticationManager(authenticationManager)
+                //.accessTokenConverter(accessTokenConverter())
+                //.userDetailsService(userDetailsService) //必须注入userDetailsService否则根据refresh_token无法加载用户信息
+                //.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST,HttpMethod.OPTIONS)  //支持GET  POST  请求获取token
+                //.reuseRefreshTokens(true); //开启刷新token
+                //.tokenServices(tokenServices());
+
+        // 使用最基本的InMemoryTokenStore生成token
+        endpoints.authenticationManager(authenticationManager).tokenStore(memoryTokenStore());
+    }
 
     /**
      * 认证服务器的安全配置
@@ -96,9 +101,9 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
                 //.realm(RESOURCE_ID)
-                .tokenKeyAccess("permitAll()");
-                //.checkTokenAccess("isAuthenticated()") //isAuthenticated():排除anonymous   isFullyAuthenticated():排除anonymous以及remember-me
-                //.allowFormAuthenticationForClients(); //允许表单认证  这段代码在授权码模式下会导致无法根据code　获取token　
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()"); //isAuthenticated():排除anonymous  isFullyAuthenticated():排除anonymous以及remember-me
+                //.allowFormAuthenticationForClients(); //允许表单认证  这段代码在授权码模式下会导致无法根据code获取token　
     }
 
     @Bean
@@ -124,17 +129,23 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
         return converter;
     }
 
+//    @Bean
+//    public TokenStore jwtTokenStore() {
+//        //基于jwt实现令牌（Access Token）
+//        return new JwtTokenStore(accessTokenConverter());
+//    }
+
     @Bean
-    public TokenStore tokenStore() {
-        //基于jwt实现令牌（Access Token）
-        return new JwtTokenStore(accessTokenConverter());
+    public TokenStore memoryTokenStore() {
+        // 最基本的InMemoryTokenStore生成token
+        return new InMemoryTokenStore();
     }
 
     @Bean
     public DefaultTokenServices tokenServices() {
         final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenEnhancer(accessTokenConverter());
-        defaultTokenServices.setTokenStore(tokenStore());
+        defaultTokenServices.setTokenStore(memoryTokenStore());
         defaultTokenServices.setSupportRefreshToken(true);
         defaultTokenServices.setAccessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30)); // 30天
         return defaultTokenServices;
