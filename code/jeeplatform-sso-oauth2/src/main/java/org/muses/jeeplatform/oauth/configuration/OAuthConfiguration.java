@@ -40,8 +40,7 @@ import java.util.concurrent.TimeUnit;
 //开启授权服务
 @EnableAuthorizationServer
 public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
-//    @Autowired
-//    PasswordEncoder passwordEncoder;
+
     @Autowired
     private AuthenticationManager authenticationManager;
     @Resource(name = "userService")
@@ -54,8 +53,8 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     private static final String TRUST = "trust";
     private static final String USER ="user";
     private static final String ALL = "all";
-    private static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1*60*60;
-    private static final int FREFRESH_TOKEN_VALIDITY_SECONDS = 6*60*60;
+    private static final int ACCESS_TOKEN_VALIDITY_SECONDS = 2*60;
+    private static final int FREFRESH_TOKEN_VALIDITY_SECONDS = 2*60;
     // 密码模式授权模式
     private static final String GRANT_TYPE_PASSWORD = "password";
     //授权码模式
@@ -78,7 +77,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
                 .secret(SECRET_CHAR_SEQUENCE)
                 //为true 直接自动授权成功返回code
                 .autoApprove(true)
-                .redirectUris("http://127.0.0.1:8084/cms/hello") //重定向uri
+                .redirectUris("http://127.0.0.1:8084/cms/index") //重定向uri
                 //允许授权范围
                 .scopes(ALL)
                 //token 时间秒

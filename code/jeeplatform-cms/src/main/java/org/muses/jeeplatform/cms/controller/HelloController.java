@@ -1,5 +1,6 @@
 package org.muses.jeeplatform.cms.controller;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,5 +25,10 @@ public class HelloController {
     public String hello() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName() + Arrays.toString(authentication.getAuthorities().toArray());
+    }
+
+    @GetMapping("/index")
+    public String index() {
+        return "index";
     }
 }
