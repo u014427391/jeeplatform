@@ -1,13 +1,11 @@
-package org.muses.jeeplatform.oauth.config;
+package org.muses.jeeplatform.oauth.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -20,8 +18,6 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.Collections;
@@ -41,16 +37,17 @@ import java.util.concurrent.TimeUnit;
  * </pre>
  */
 @Configuration
-@EnableAuthorizationServer//开启授权服务
+//开启授权服务
+@EnableAuthorizationServer
 public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 //    @Autowired
 //    PasswordEncoder passwordEncoder;
     @Autowired
-    private AuthenticationManager authenticationManager;   //认证方式
+    private AuthenticationManager authenticationManager;
     @Resource(name = "userService")
     private UserDetailsService userDetailsService;
 
-    private static final String CLIENT_ID = "jeeplatform";
+    private static final String CLIENT_ID = "cms";
     private static final String SECRET_CHAR_SEQUENCE = "{noop}secret";
     private static final String SCOPE_READ = "read";
     private static final String SCOPE_WRITE = "write";
@@ -59,23 +56,37 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     private static final String ALL = "all";
     private static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1*60*60;
     private static final int FREFRESH_TOKEN_VALIDITY_SECONDS = 6*60*60;
-    private static final String GRANT_TYPE_PASSWORD = "password";   // 密码模式授权模式
-    private static final String AUTHORIZATION_CODE = "authorization_code"; //授权码模式  授权码模式使用到了回调地址
-    private static final String REFRESH_TOKEN = "refresh_token";  //refresh token模式
-    private static final String IMPLICIT = "implicit"; //简化授权模式
-    private static final String RESOURCE_ID = "resource_id";    //指定哪些资源是需要授权验证的
+    // 密码模式授权模式
+    private static final String GRANT_TYPE_PASSWORD = "password";
+    //授权码模式
+    private static final String AUTHORIZATION_CODE = "authorization_code";
+    //refresh token模式
+    private static final String REFRESH_TOKEN = "refresh_token";
+    //简化授权模式
+    private static final String IMPLICIT = "implicit";
+    //指定哪些资源是需要授权验证的
+    private static final String RESOURCE_ID = "resource_id";
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory() // 使用内存存储
-                .withClient(CLIENT_ID) //标记客户端id
-                .secret(SECRET_CHAR_SEQUENCE)//客户端安全码
-                .autoApprove(true) //为true 则不会被重定向到授权的页面，也不需要手动给请求授权,直接自动授权成功返回code
-                //.redirectUris("http://127.0.0.1:8082/oa/login", "http://127.0.0.1:8084/cms/login") //重定向uri
-                .scopes(ALL) //允许授权范围 SCOPE_READ , SCOPE_WRITE , TRUST , USER
-                .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS) //token 时间秒
-                .refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS)//刷新token 时间 秒
-                .authorizedGrantTypes(GRANT_TYPE_PASSWORD , AUTHORIZATION_CODE , REFRESH_TOKEN , IMPLICIT);//允许授权类型
+        clients
+                // 使用内存存储
+                .inMemory()
+                //标记客户端id
+                .withClient(CLIENT_ID)
+                //客户端安全码
+                .secret(SECRET_CHAR_SEQUENCE)
+                //为true 直接自动授权成功返回code
+                .autoApprove(true)
+                .redirectUris("http://127.0.0.1:8084/cms/hello") //重定向uri
+                //允许授权范围
+                .scopes(ALL)
+                //token 时间秒
+                .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS)
+                //刷新token 时间 秒
+                .refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS)
+                //允许授权类型
+                .authorizedGrantTypes(GRANT_TYPE_PASSWORD , AUTHORIZATION_CODE , REFRESH_TOKEN , IMPLICIT);
     }
 
     @Override
@@ -101,9 +112,12 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
                 //.realm(RESOURCE_ID)
+                // 开启/oauth/token_key验证端口无权限访问
                 .tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()"); //isAuthenticated():排除anonymous  isFullyAuthenticated():排除anonymous以及remember-me
-                //.allowFormAuthenticationForClients(); //允许表单认证  这段代码在授权码模式下会导致无法根据code获取token　
+                //  开启/oauth/check_token验证端口认证权限访问
+                .checkTokenAccess("isAuthenticated()");
+                //允许表单认证 在授权码模式下会导致无法根据code获取token　
+                //.allowFormAuthenticationForClients();
     }
 
     @Bean

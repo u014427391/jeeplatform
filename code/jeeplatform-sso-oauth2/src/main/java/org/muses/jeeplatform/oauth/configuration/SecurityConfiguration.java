@@ -1,24 +1,19 @@
-package org.muses.jeeplatform.oauth.config;
+package org.muses.jeeplatform.oauth.configuration;
 
 
 import org.muses.jeeplatform.oauth.filter.SimpleCORSFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 
 
 import javax.annotation.Resource;
@@ -81,7 +76,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         //解决静态资源被拦截的问题
         //web.ignoring().antMatchers("/login.html");
-        //web.ignoring().antMatchers("/i18n/**");
         web.ignoring().antMatchers("/asserts/**");
         //web.ignoring().antMatchers("/favicon.ico");
 
@@ -89,22 +83,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.requestMatchers()
-                //.antMatchers("/index")
-                .antMatchers("/login")
-                .antMatchers("/oauth/authorize")
-                .and()
-                .authorizeRequests()
-                .anyRequest().authenticated() //所有请求都需要通过认证
-                //.and()
-                //.httpBasic() //Basic登录
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                //.loginProcessingUrl("/login")
-                .permitAll()
-                .and()
-                .csrf().disable(); //关闭跨域保护;
+        http   // 配置登录页并允许访问
+                .formLogin().permitAll()
+                // 配置Basic登录
+                //.and().httpBasic()
+                // 配置登出页面
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/")
+                // 其余所有请求全部需要鉴权认证
+                .and().authorizeRequests().anyRequest().authenticated()
+                .and().csrf().disable(); // 关闭跨域保护;
         //http.addFilterBefore(simpleCORSFilter, SecurityContextPersistenceFilter.class);
     }
 
