@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <span th:text="${'Welcome to our <b>fantastic</b> grocery store!'}"></span><br/>
+    <span th:utext="${'Welcome to our <b>fantastic</b> grocery store!'}"></span>
+</div>
+
+
+<span>
+    The message is [[${msg}]]
+</span>
+<br/>
+<span>
+    The message is [(${msg})]
+</span>
+</body>
+</html>
