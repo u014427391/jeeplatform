@@ -76,7 +76,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http   // 配置登录页并允许访问
-                .formLogin().permitAll()
+                .formLogin().loginPage("/login").permitAll()
                 // 配置Basic登录
                 //.and().httpBasic()
                 // 配置登出页面

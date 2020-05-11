@@ -13,13 +13,13 @@
 	</head>
 
 	<body class="text-center">
-		<form class="form-signin" action="/login" method="post">
-			<!--<img class="mb-4" th:src="@{static/asserts/img/bootstrap-solid.svg}" alt="" width="72" height="72" />-->
+		<form class="form-signin" th:action="@{/login}" method="post">
+			<img class="mb-4" th:src="@{asserts/img/bootstrap-solid.svg}" alt="" width="72" height="72" />
 			<h1 class="h3 mb-3 font-weight-normal" th:text="#{messages.tip}">Oauth2.0 Login</h1>
 			<label class="sr-only" th:text="#{messages.username}">Username</label>
-			<input type="text" class="form-control" th:placeholder="#{messages.username}" required="" autofocus="" value="nicky" />
+			<input type="text" class="form-control" name="username" th:placeholder="#{messages.username}" required="" autofocus="" value="nicky" />
 			<label class="sr-only" th:text="#{messages.password} ">Password</label>
-			<input type="password" class="form-control" th:placeholder="#{messages.password}" required="" value="123" />
+			<input type="password" class="form-control" name="password" th:placeholder="#{messages.password}" required="" value="123" />
 			<div class="checkbox mb-3">
 				<label>
           <input type="checkbox" value="remember-me"  /> remember me
