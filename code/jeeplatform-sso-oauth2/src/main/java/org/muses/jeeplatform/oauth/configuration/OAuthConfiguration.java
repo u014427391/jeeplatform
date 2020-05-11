@@ -77,7 +77,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
                 .secret(SECRET_CHAR_SEQUENCE)
                 //为true 直接自动授权成功返回code
                 .autoApprove(true)
-                .redirectUris("http://127.0.0.1:8084/cms/index") //重定向uri
+                .redirectUris("http://127.0.0.1:8084/cms/login") //重定向uri
                 //允许授权范围
                 .scopes(ALL)
                 //token 时间秒
@@ -111,12 +111,12 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
                 //.realm(RESOURCE_ID)
-                // 开启/oauth/token_key验证端口无权限访问
-                .tokenKeyAccess("permitAll()")
+                // 开启/oauth/token_key验证端口认证权限访问
+                .tokenKeyAccess("isAuthenticated()")
                 //  开启/oauth/check_token验证端口认证权限访问
-                .checkTokenAccess("isAuthenticated()");
+                .checkTokenAccess("isAuthenticated()")
                 //允许表单认证 在授权码模式下会导致无法根据code获取token　
-                //.allowFormAuthenticationForClients();
+                .allowFormAuthenticationForClients();
     }
 
     @Bean
