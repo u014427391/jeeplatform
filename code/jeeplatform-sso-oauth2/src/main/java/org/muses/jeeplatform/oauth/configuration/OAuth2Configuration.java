@@ -106,8 +106,8 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
                 //.userDetailsService(userDetailsService)
                 //支持获取token方式
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST,HttpMethod.PUT,HttpMethod.DELETE,HttpMethod.OPTIONS)
-                //开启刷新token
-                .reuseRefreshTokens(true)
+                //刷新token
+                .reuseRefreshTokens(false)
                 .tokenServices(tokenServices());
         // 使用内存保存生成的token
         //endpoints.authenticationManager(authenticationManager).tokenStore(memoryTokenStore());
@@ -172,7 +172,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
         final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenEnhancer(accessTokenConverter());
         defaultTokenServices.setTokenStore(jwtTokenStore());
-        defaultTokenServices.setSupportRefreshToken(true);
+        defaultTokenServices.setSupportRefreshToken(false);
         //(int) TimeUnit.DAYS.toSeconds(30) 30天
         defaultTokenServices.setAccessTokenValiditySeconds(1);
         return defaultTokenServices;
