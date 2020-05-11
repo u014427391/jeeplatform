@@ -17,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 
 
 import javax.annotation.Resource;
@@ -76,7 +77,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http   // 配置登录页并允许访问
-                .formLogin().permitAll()
+                .formLogin().loginPage("/login").permitAll()
                 // 配置Basic登录
                 //.and().httpBasic()
                 // 配置登出页面
@@ -86,7 +87,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 // 关闭跨域保护;
                 .and().csrf().disable();
-        //http.addFilterBefore(simpleCORSFilter, SecurityContextPersistenceFilter.class);
+        http.addFilterBefore(simpleCORSFilter, SecurityContextPersistenceFilter.class);
     }
 
 

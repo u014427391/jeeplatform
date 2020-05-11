@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,13 +15,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * <pre>
- *
+ *  OAuth2.0配置
  * </pre>
  *
  * <pre>
@@ -43,7 +43,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 //开启授权服务
 @EnableAuthorizationServer
-public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
+public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -94,20 +94,23 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
                 .refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS)
                 //允许授权类型
                 .authorizedGrantTypes(GRANT_TYPE_PASSWORD , AUTHORIZATION_CODE , REFRESH_TOKEN , IMPLICIT);*/
+        // 数据库保存配置信息到oauth_client_details表，schema参考sql/oauth_client_details
         clients.jdbc(dataSource);
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        //endpoints.tokenStore(jwtTokenStore()).authenticationManager(authenticationManager)
-                //.accessTokenConverter(accessTokenConverter())
-                //.userDetailsService(userDetailsService) //必须注入userDetailsService否则根据refresh_token无法加载用户信息
-                //.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST,HttpMethod.OPTIONS)  //支持GET  POST  请求获取token
-                //.reuseRefreshTokens(true); //开启刷新token
-                //.tokenServices(tokenServices());
-
-        // 使用最基本的InMemoryTokenStore生成token
-        endpoints.authenticationManager(authenticationManager).tokenStore(memoryTokenStore());
+        endpoints.tokenStore(jwtTokenStore()).authenticationManager(authenticationManager)
+                .accessTokenConverter(accessTokenConverter())
+                //必须注入userDetailsService否则根据refresh_token无法加载用户信息
+                //.userDetailsService(userDetailsService)
+                //支持获取token方式
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST,HttpMethod.PUT,HttpMethod.DELETE,HttpMethod.OPTIONS)
+                //开启刷新token
+                .reuseRefreshTokens(true)
+                .tokenServices(tokenServices());
+        // 使用内存保存生成的token
+        //endpoints.authenticationManager(authenticationManager).tokenStore(memoryTokenStore());
     }
 
     /**
@@ -147,29 +150,31 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
                 return token;
             }
         };
+        // 设置签署key
         converter.setSigningKey("bcrypt");
         return converter;
     }
 
-//    @Bean
-//    public TokenStore jwtTokenStore() {
-//        //基于jwt实现令牌（Access Token）
-//        return new JwtTokenStore(accessTokenConverter());
-//    }
-
     @Bean
-    public TokenStore memoryTokenStore() {
-        // 最基本的InMemoryTokenStore生成token
-        return new InMemoryTokenStore();
+    public TokenStore jwtTokenStore() {
+        //基于jwt实现令牌（Access Token）保存
+        return new JwtTokenStore(accessTokenConverter());
     }
+
+//    @Bean
+//    public TokenStore memoryTokenStore() {
+//        // 最基本的InMemoryTokenStore生成token
+//        return new InMemoryTokenStore();
+//    }
 
     @Bean
     public DefaultTokenServices tokenServices() {
         final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenEnhancer(accessTokenConverter());
-        defaultTokenServices.setTokenStore(memoryTokenStore());
+        defaultTokenServices.setTokenStore(jwtTokenStore());
         defaultTokenServices.setSupportRefreshToken(true);
-        defaultTokenServices.setAccessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30)); // 30天
+        //(int) TimeUnit.DAYS.toSeconds(30) 30天
+        defaultTokenServices.setAccessTokenValiditySeconds(1);
         return defaultTokenServices;
     }
 
