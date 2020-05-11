@@ -22,14 +22,6 @@ import java.util.Arrays;
  */
 @RestController
 public class HelloController {
-    @GetMapping("/hello")
-    public String hello() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        authentication.getCredentials();
-        OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails)authentication.getDetails();
-        String token = details.getTokenValue();
-        return authentication.getName() + Arrays.toString(authentication.getAuthorities().toArray())+",token:"+token;
-    }
 
     @GetMapping("/getCurrentUser")
     public Object getCurrentUser(Authentication authentication) {
