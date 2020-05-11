@@ -87,7 +87,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 // 关闭跨域保护;
                 .and().csrf().disable();
-        //http.addFilterBefore(simpleCORSFilter, SecurityContextPersistenceFilter.class);
+        http.addFilterBefore(simpleCORSFilter, SecurityContextPersistenceFilter.class);
     }
 
 
