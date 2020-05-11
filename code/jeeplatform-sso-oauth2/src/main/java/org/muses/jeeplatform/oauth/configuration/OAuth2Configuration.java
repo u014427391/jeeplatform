@@ -100,17 +100,17 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(jwtTokenStore()).authenticationManager(authenticationManager)
-                .accessTokenConverter(accessTokenConverter())
+        //endpoints.tokenStore(jwtTokenStore()).authenticationManager(authenticationManager)
+                //.accessTokenConverter(accessTokenConverter())
                 //必须注入userDetailsService否则根据refresh_token无法加载用户信息
                 //.userDetailsService(userDetailsService)
                 //支持获取token方式
-                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST,HttpMethod.PUT,HttpMethod.DELETE,HttpMethod.OPTIONS)
+                //.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST,HttpMethod.PUT,HttpMethod.DELETE,HttpMethod.OPTIONS)
                 //刷新token
-                .reuseRefreshTokens(false)
-                .tokenServices(tokenServices());
+                //.reuseRefreshTokens(false)
+                //.tokenServices(tokenServices());
         // 使用内存保存生成的token
-        //endpoints.authenticationManager(authenticationManager).tokenStore(memoryTokenStore());
+        endpoints.authenticationManager(authenticationManager).tokenStore(memoryTokenStore());
     }
 
     /**
@@ -155,26 +155,25 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
         return converter;
     }
 
-    @Bean
-    public TokenStore jwtTokenStore() {
-        //基于jwt实现令牌（Access Token）保存
-        return new JwtTokenStore(accessTokenConverter());
-    }
-
 //    @Bean
-//    public TokenStore memoryTokenStore() {
-//        // 最基本的InMemoryTokenStore生成token
-//        return new InMemoryTokenStore();
+//    public TokenStore jwtTokenStore() {
+//        //基于jwt实现令牌（Access Token）保存
+//        return new JwtTokenStore(accessTokenConverter());
 //    }
+
+    @Bean
+    public TokenStore memoryTokenStore() {
+        // 最基本的InMemoryTokenStore生成token
+        return new InMemoryTokenStore();
+    }
 
     @Bean
     public DefaultTokenServices tokenServices() {
         final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenEnhancer(accessTokenConverter());
-        defaultTokenServices.setTokenStore(jwtTokenStore());
+        defaultTokenServices.setTokenStore(memoryTokenStore());
         defaultTokenServices.setSupportRefreshToken(false);
-        //(int) TimeUnit.DAYS.toSeconds(30) 30天
-        defaultTokenServices.setAccessTokenValiditySeconds(1);
+        defaultTokenServices.setAccessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30));
         return defaultTokenServices;
     }
 
