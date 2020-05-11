@@ -55,7 +55,7 @@ ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200511144921931.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQ0MjczOTE=,size_16,color_FFFFFF,t_70)
 
 ### SpringBoot集成Redis缓存处理(Spring AOP实现)
-先从Redis里获取缓存,查询不到，就查询MySQL数据库，然后再保存到Redis缓存里，下次查询时直接调用Redis缓存
+先从Redis里获取缓存,查询不到，就查询MySQL数据库，然后再保存到Redis缓存里，下次查询时直接调用Redis缓存，详情参考博客：[链接](https://blog.csdn.net/u014427391/article/details/78799623)
 
 ![这里写图片描述](http://img.blog.csdn.net/20171214104250995?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxNDQyNzM5MQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
