@@ -5,7 +5,7 @@ JeePlatform项目是一款以Spring Framework为核心框架，集ORM框架Mybat
 
 ## 二、系统设计 
 ### 系统管理(模块名称jeeplatform-admin) 
-管理系统登录页面，采用Shiro登录验证
+管理系统登录页面
 ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统登录页面.png)
 
@@ -30,8 +30,9 @@ ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/发送邮件.png)
 
 ### OA管理系统(待开发)
-
+接入CAS Server实现单点登录
 ### CMS管理系统(待开发)
+暂时接入Oauth2.0实现的单点登录系统
 
 ## 三、关键技术
 ### 单点登录基础(模块名称jeeplatform-sso-cas)(功能修整中)
@@ -49,6 +50,8 @@ CAS单点登录原理，图来自官网
 
 单点登录集群方案如图
 ![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/单点登录集群.png)
+
+
 
 ### SpringBoot集成Redis缓存处理(Spring AOP实现)
 先从Redis里获取缓存,查询不到，就查询MySQL数据库，然后再保存到Redis缓存里，下次查询时直接调用Redis缓存
@@ -153,6 +156,7 @@ public class RedisAspect {
 
 ## 四、业务方案 
 ### 系统管理通用功能 
+- [] 单点登录: OAuth2.0+JWT单点登录/CAS单点登录
 - [x] 用户管理: 系统用户	
 - [x] 角色管理: 按照企业系统职能进行角色分配，每个角色具有不同的系统操作权限	
 - [x] 权限管理: 权限管理细分到系统菜单权限
@@ -163,10 +167,12 @@ public class RedisAspect {
 - [x] 在线文档：SwaggerUI API在线文档管理
 - [x] 通用接口：系统邮件发送功能、Excel报表功能
 ### OA系统通用功能(待开发) 
+- [x] 单点登录: CAS单点登录
 - [ ] 考勤管理：请假流程
 - [ ] 人事管理：机构管理、部门管理、员工管理
 
 ### CMS系统通用功能(待开发) 
+- [x] 单点登录: OAuth2.0+JWT单点登录
 - [ ] 信息管理：文章管理、文章审核
 ...
 
@@ -194,11 +200,11 @@ public class RedisAspect {
 * 弹窗框架：zDialog
 * Cookie保存：JQuery Cookie
 * 富文本编辑器：Baidu UEDitor
-* 前端框架：Twitter Bootstrap、ExtJS
+* 前端框架：Twitter Bootstrap
 
 ### 服务器 
 * 负载均衡：Nginx
-* 分布式：alibaba Dubbo
+* 分布式：alibaba Dubbo(待定)
 * 中间件：RocketMQ(待定)
 
 ### 项目测试 
@@ -227,7 +233,7 @@ dev版本代码和master分支基本一致
 基础版，基本实现简单的权限管理，功能还需改善，权限控制还需要进行细粒度控制
 
 * 1.1.0版本
-进行CAS单点登录对接实验的版本，admin工程暂时还没对接，oa工程有对接
+进行单点登录对接实验的版本，拟采用两种方案，CAS实现的单点登录和OAuth2.0+JWT单点登录，admin工程暂时还没对接，oa工程对接CAS，cms工程对接OAuth2.0
 
 ## 八、项目技术博客介绍 
 为了帮助学习者更好地理解代码，下面给出自己写的一些博客链接
@@ -249,23 +255,6 @@ dev版本代码和master分支基本一致
 ### RPC框架
 * [Dubbo服务注册与发现](https://smilenicky.blog.csdn.net/article/details/96754952)
 
-### Redis知识
-* [Redis学习笔记之基本数据结构](https://blog.csdn.net/u014427391/article/details/82860694)
-* [Redis学习笔记之位图](https://blog.csdn.net/u014427391/article/details/87923407)
-* [Redis学习笔记之延时队列](https://blog.csdn.net/u014427391/article/details/87905450)
-* [Redis HyperLogLog用法简介](https://smilenicky.blog.csdn.net/article/details/95992173)
-* [Redis学习笔记之分布式锁](https://blog.csdn.net/u014427391/article/details/84934045)
-
-### Oracle知识
-* [Oracle笔记之锁表和解锁](https://blog.csdn.net/u014427391/article/details/83046148)
-* [select in超过1000条报错解决方法](https://blog.csdn.net/u014427391/article/details/87922878)
-* [Oracle笔记之修改表字段类型](https://blog.csdn.net/u014427391/article/details/83046006)
-* [Oracle知识整理笔录](https://blog.csdn.net/u014427391/article/details/82317376)
-* [Oracle merge合并更新函数](https://blog.csdn.net/u014427391/article/details/87898729)
-
-### MySQL知识
-* [MySQL逻辑架构简介](https://smilenicky.blog.csdn.net/article/details/100170265)
-
 ### 单点登录
 * [ 单点登录集群安装教程](http://blog.csdn.net/u014427391/article/details/78653482)
 * [CAS单点登录系列之原理简单介绍](https://blog.csdn.net/u014427391/article/details/82083995)
@@ -277,18 +266,6 @@ dev版本代码和master分支基本一致
 ### Docker笔记
 * [Docker简介和安装教程](https://smilenicky.blog.csdn.net/article/details/97613891)
 
-### SQL调优知识
-
-* Oracle
- * [Oracle优化器基础知识](https://blog.csdn.net/u014427391/article/details/88650696)
- * [Oracle性能调优之虚拟索引用法简介](https://smilenicky.blog.csdn.net/article/details/89761234)
- * [Oracle性能调优之物化视图用法简介](https://smilenicky.blog.csdn.net/article/details/89762680)
- * [Orace执行计划学习笔记](https://smilenicky.blog.csdn.net/article/details/89604262)
- * [Oracle共享池分析SQL资源使用情况](https://blog.csdn.net/u014427391/article/details/86562755)
-
-* MySQL
- * [MySQL调优之Explain](https://smilenicky.blog.csdn.net/article/details/100853310)
- * [MySQL调优之索引](https://smilenicky.blog.csdn.net/article/details/100846922)
 
 
 
