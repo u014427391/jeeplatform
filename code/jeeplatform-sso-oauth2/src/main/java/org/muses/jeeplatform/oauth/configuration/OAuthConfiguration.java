@@ -1,6 +1,7 @@
 package org.muses.jeeplatform.oauth.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,13 +14,16 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.annotation.Resource;
+import javax.sql.DataSource;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,6 +50,10 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     @Resource(name = "userService")
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    @Qualifier("dataSource")
+    private DataSource dataSource;
+
     private static final String CLIENT_ID = "cms";
     private static final String SECRET_CHAR_SEQUENCE = "{noop}secret";
     private static final String SCOPE_READ = "read";
@@ -68,7 +76,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients
+        /*clients
                 // 使用内存存储
                 .inMemory()
                 //标记客户端id
@@ -77,7 +85,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
                 .secret(SECRET_CHAR_SEQUENCE)
                 //为true 直接自动授权成功返回code
                 .autoApprove(true)
-                .redirectUris("http://127.0.0.1:8084/cms/index") //重定向uri
+                .redirectUris("http://127.0.0.1:8084/cms/login") //重定向uri
                 //允许授权范围
                 .scopes(ALL)
                 //token 时间秒
@@ -85,7 +93,8 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
                 //刷新token 时间 秒
                 .refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS)
                 //允许授权类型
-                .authorizedGrantTypes(GRANT_TYPE_PASSWORD , AUTHORIZATION_CODE , REFRESH_TOKEN , IMPLICIT);
+                .authorizedGrantTypes(GRANT_TYPE_PASSWORD , AUTHORIZATION_CODE , REFRESH_TOKEN , IMPLICIT);*/
+        clients.jdbc(dataSource);
     }
 
     @Override
@@ -111,12 +120,12 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
                 //.realm(RESOURCE_ID)
-                // 开启/oauth/token_key验证端口无权限访问
-                .tokenKeyAccess("permitAll()")
+                // 开启/oauth/token_key验证端口认证权限访问
+                .tokenKeyAccess("isAuthenticated()")
                 //  开启/oauth/check_token验证端口认证权限访问
-                .checkTokenAccess("isAuthenticated()");
+                .checkTokenAccess("isAuthenticated()")
                 //允许表单认证 在授权码模式下会导致无法根据code获取token　
-                //.allowFormAuthenticationForClients();
+                .allowFormAuthenticationForClients();
     }
 
     @Bean
@@ -163,6 +172,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
         defaultTokenServices.setAccessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30)); // 30天
         return defaultTokenServices;
     }
+
 
 
     @Bean

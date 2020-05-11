@@ -35,9 +35,9 @@ import javax.annotation.Resource;
 @Configuration
 @EnableWebSecurity
 @Order(1)
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-@EnableAutoConfiguration(exclude = {
-        org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class })
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableAutoConfiguration(exclude = {
+//        org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class })
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private SimpleCORSFilter simpleCORSFilter;
@@ -81,8 +81,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.and().httpBasic()
                 // 配置登出页面
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/")
+                .and().authorizeRequests().antMatchers("/oauth/**", "/login/**", "/logout/**").permitAll()
                 // 其余所有请求全部需要鉴权认证
-                .and().authorizeRequests().anyRequest().authenticated()
+                .anyRequest().authenticated()
                 // 关闭跨域保护;
                 .and().csrf().disable();
         //http.addFilterBefore(simpleCORSFilter, SecurityContextPersistenceFilter.class);
