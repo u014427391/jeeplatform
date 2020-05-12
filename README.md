@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/crossoverJie/JCSprout.svg?branch=master)](https://travis-ci.org/crossoverJie/jeeplatform) [![Join the chat at https://gitter.im/jeeplatform/community](https://badges.gitter.im/jeeplatform/community.svg)](https://gitter.im/jeeplatform/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## 一、项目简介 
-JeePlatform项目是一款以Spring Framework为核心框架，集ORM框架Mybatis，Web层框架SpringMVC和多种开源组件框架而成的一款通用基础平台，代码已经捐赠给开源中国社区：https://www.oschina.net/p/jeeplatform
+JeePlatform项目是一款以SpringBoot为核心框架，集ORM框架Mybatis，Web层框架SpringMVC和多种开源组件框架而成的一款通用基础平台，单点登录拟采用CAS或者OAuth2.0实现，代码已经捐赠给开源中国社区：https://www.oschina.net/p/jeeplatform
 
 ## 二、系统设计 
 ### 系统管理(模块名称jeeplatform-admin) 
