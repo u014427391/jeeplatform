@@ -1,7 +1,7 @@
 package org.muses.jeeplatform.oauth.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.muses.jeeplatform.oauth.entity.User;
+import org.muses.jeeplatform.core.entity.admin.User;
 import org.muses.jeeplatform.oauth.entity.dto.UserDto;
 import org.muses.jeeplatform.oauth.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
