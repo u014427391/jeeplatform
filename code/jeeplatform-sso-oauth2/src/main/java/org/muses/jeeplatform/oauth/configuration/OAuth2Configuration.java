@@ -18,7 +18,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
@@ -103,12 +102,12 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
         endpoints.tokenStore(jwtTokenStore()).authenticationManager(authenticationManager)
                 .accessTokenConverter(accessTokenConverter())
                 //必须注入userDetailsService否则根据refresh_token无法加载用户信息
-                //.userDetailsService(userDetailsService)
+                .userDetailsService(userDetailsService)
                 //支持获取token方式
-                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST,HttpMethod.PUT,HttpMethod.DELETE,HttpMethod.OPTIONS);
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST,HttpMethod.PUT,HttpMethod.DELETE,HttpMethod.OPTIONS)
                 //刷新token
-                //.reuseRefreshTokens(false)
-                //endpoints .tokenServices(tokenServices());
+                .reuseRefreshTokens(true);
+                //endpoints.tokenServices(createDefaultTokenServices());
         // 使用内存保存生成的token
         //endpoints.authenticationManager(authenticationManager).tokenStore(memoryTokenStore());
     }
@@ -137,11 +136,11 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
             @Override
             public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
                 String grantType = authentication.getOAuth2Request().getGrantType();
-                //只有如下两种模式才能获取到当前用户信息
+                //授权码和密码模式才自定义token信息
                 if(AUTHORIZATION_CODE.equals(grantType) || GRANT_TYPE_PASSWORD.equals(grantType)) {
                     String userName = authentication.getUserAuthentication().getName();
-                    // 自定义一些token 信息 会在获取token返回结果中展示出来
-                    Map<String, Object> additionalInformation = new HashMap<String, Object>();
+                    // 自定义一些token 信息
+                    Map<String, Object> additionalInformation = new HashMap<String, Object>(16);
                     additionalInformation.put("user_name", userName);
                     additionalInformation = Collections.unmodifiableMap(additionalInformation);
                     ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
@@ -168,11 +167,11 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
 //    }
 
     @Bean
-    public DefaultTokenServices tokenServices() {
+    public DefaultTokenServices createDefaultTokenServices() {
         final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenEnhancer(accessTokenConverter());
         defaultTokenServices.setTokenStore(jwtTokenStore());
-        defaultTokenServices.setSupportRefreshToken(false);
+        defaultTokenServices.setSupportRefreshToken(true);
         defaultTokenServices.setAccessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(30));
         return defaultTokenServices;
     }
