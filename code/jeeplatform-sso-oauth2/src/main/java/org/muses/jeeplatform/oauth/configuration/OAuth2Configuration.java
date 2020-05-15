@@ -18,7 +18,6 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
@@ -105,10 +104,10 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
                 //必须注入userDetailsService否则根据refresh_token无法加载用户信息
                 .userDetailsService(userDetailsService)
                 //支持获取token方式
-                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST,HttpMethod.PUT,HttpMethod.DELETE,HttpMethod.OPTIONS);
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST,HttpMethod.PUT,HttpMethod.DELETE,HttpMethod.OPTIONS)
                 //刷新token
-                //.reuseRefreshTokens(true)
-                //endpoints .tokenServices(tokenServices());
+                .reuseRefreshTokens(true);
+                //endpoints.tokenServices(createDefaultTokenServices());
         // 使用内存保存生成的token
         //endpoints.authenticationManager(authenticationManager).tokenStore(memoryTokenStore());
     }
@@ -168,7 +167,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
 //    }
 
     @Bean
-    public DefaultTokenServices tokenServices() {
+    public DefaultTokenServices createDefaultTokenServices() {
         final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenEnhancer(accessTokenConverter());
         defaultTokenServices.setTokenStore(jwtTokenStore());
