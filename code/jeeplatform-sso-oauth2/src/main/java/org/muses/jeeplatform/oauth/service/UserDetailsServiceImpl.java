@@ -1,18 +1,16 @@
 package org.muses.jeeplatform.oauth.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.muses.jeeplatform.core.entity.admin.User;
-import org.muses.jeeplatform.oauth.entity.dto.UserDto;
-import org.muses.jeeplatform.oauth.repository.UserRepository;
-import org.springframework.beans.BeanUtils;
+import org.muses.jeeplatform.oauth.entity.User;
+import org.muses.jeeplatform.oauth.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,22 +29,20 @@ import java.util.List;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    UserMapper userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(user,userDto);
-        if(userDto == null){
+        if(user == null){
             log.info("登录用户[{}]没注册!",username);
             throw new UsernameNotFoundException("登录用户["+username + "]没注册!");
         }
-        return new org.springframework.security.core.userdetails.User(userDto.getUsername(), userDto.getPassword(), getAuthority());
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
     }
 
     private List getAuthority() {
-        //return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        return Arrays.asList(Collections.emptyList());
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+//        return Arrays.asList(Collections.emptyList());
     }
 }
