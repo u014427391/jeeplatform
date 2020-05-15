@@ -1,4 +1,4 @@
-package org.muses.jeeplatform.oauth.dto;
+package org.muses.jeeplatform.oauth.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  * <pre>
- *
+ *    用户信息DTO类
  * </pre>
  *
  * <pre>

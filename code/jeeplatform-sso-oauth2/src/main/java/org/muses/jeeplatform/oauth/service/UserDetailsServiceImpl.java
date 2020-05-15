@@ -1,8 +1,11 @@
 package org.muses.jeeplatform.oauth.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.muses.jeeplatform.oauth.dto.UserDto;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.muses.jeeplatform.oauth.entity.User;
+import org.muses.jeeplatform.oauth.entity.dto.UserDto;
+import org.muses.jeeplatform.oauth.repository.UserRepository;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,18 +30,23 @@ import java.util.List;
 @Service("userService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    @Autowired
+    UserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDto user = new UserDto();
-//        if(user == null){
-//            log.info("登录用户[{}]没注册!",username);
-//            throw new UsernameNotFoundException("登录用户["+username + "]没注册!");
-//        }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
+        User user = userRepository.findByUsername(username);
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(user,userDto);
+        if(userDto == null){
+            log.info("登录用户[{}]没注册!",username);
+            throw new UsernameNotFoundException("登录用户["+username + "]没注册!");
+        }
+        return new org.springframework.security.core.userdetails.User(userDto.getUsername(), userDto.getPassword(), getAuthority());
     }
 
     private List getAuthority() {
-        //return Arrays.asList(new SimpleGrantedAuthority("admin"));
+        //return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return Arrays.asList(Collections.emptyList());
     }
 }

@@ -1,6 +1,7 @@
 package org.muses.jeeplatform.oauth.configuration;
 
 
+import org.muses.jeeplatform.oauth.component.CustomPasswordEncoder;
 import org.muses.jeeplatform.oauth.filter.SimpleCORSFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -57,13 +58,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {    //auth.inMemoryAuthentication()
-        auth.inMemoryAuthentication()
-                .withUser("nicky")
-                .password("{noop}123")
-                .roles("admin");
-//        auth.userDetailsService(userDetailsService)
-//                .passwordEncoder(bCryptPasswordEncoder());
-//        auth.parentAuthenticationManager(authenticationManagerBean());
+//        auth.inMemoryAuthentication()
+//                .withUser("nicky")
+//                .password("{noop}123")
+//                .roles("admin");
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(new CustomPasswordEncoder());
+        auth.parentAuthenticationManager(authenticationManagerBean());
+
     }
 
     @Override
