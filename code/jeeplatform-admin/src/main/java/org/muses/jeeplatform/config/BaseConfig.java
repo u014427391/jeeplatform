@@ -16,9 +16,9 @@ public class BaseConfig {
     public static final String DATA_SOURCE_PROPERTIES = "spring.datasource.shop";
 
     /**
-     * mapper 所在包
+     * repository 所在包
      */
-    public static final String REPOSITORY_PACKAGES = "org.muses.jeeplatform.core.dao.mapper.admin";
+    public static final String REPOSITORY_PACKAGES = "org.muses.jeeplatform.core.dao.repository.admin";
 
     /**
      * mapper 所在包

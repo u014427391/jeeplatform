@@ -3,9 +3,9 @@ server:
     8888
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/jeeplatform?autoReconnect=true&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false
+    url: jdbc:mysql://192.168.0.152:33306/jeeplatform?autoReconnect=true&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false
     username: root
-    password: root
+    password: minstone
     driver-class-name: com.mysql.jdbc.Driver
   #添加Thymeleaf配置，除了cache在项目没上线前建议关了，其它配置都可以不用配的，本博客只是列举一下有这些配置
   thymeleaf:
