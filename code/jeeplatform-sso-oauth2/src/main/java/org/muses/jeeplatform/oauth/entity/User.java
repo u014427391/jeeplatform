@@ -1,4 +1,4 @@
-package org.muses.jeeplatform.core.entity.admin;
+package org.muses.jeeplatform.oauth.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
