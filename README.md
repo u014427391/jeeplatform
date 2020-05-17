@@ -30,27 +30,27 @@ JeePlatform项目是一款以SpringBoot为核心框架，集ORM框架Mybatis，W
 ### 系统管理(模块名称jeeplatform-admin) 
 管理系统登录页面
 ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
-![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统登录页面.png)
+![Image text](https://gitee.com/362330721/jeeplatform/raw/master/screenshot/管理系统登录页面.png)
 
 管理系统主页前端，可以适配移动端页面
-![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/适配移动端.png)
+![Image text](https://gitee.com/362330721/jeeplatform/raw/master/screenshot/适配移动端.png)
 
 管理系统主页采用开源前端模板，具有换肤功能
-![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/系统主页墨绿主题.png)
+![Image text](https://gitee.com/362330721/jeeplatform/raw/master/screenshot/系统主页墨绿主题.png)
 
-![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/系统主页清新主题.png)
+![Image text](https://gitee.com/362330721/jeeplatform/raw/master/screenshot/系统主页清新主题.png)
 
 管理系统主页，获取用户具有的权限，显示菜单
-![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/管理系统主页.png)
+![Image text](https://gitee.com/362330721/jeeplatform/raw/master/screenshot/管理系统主页.png)
 
 角色进行授权，只有超级管理员才具有权限
-![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/角色授权.png)
+![Image text](https://gitee.com/362330721/jeeplatform/raw/master/screenshot/角色授权.png)
 
 角色进行配置，可以学习一下RBAC(基于角色的权限控制)
-![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/角色配置.png)
+![Image text](https://gitee.com/362330721/jeeplatform/raw/master/screenshot/角色配置.png)
 
 使用JavaEmail插件实现邮件发送，记得需要开启SSl验证
-![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/发送邮件.png)
+![Image text](https://gitee.com/362330721/jeeplatform/raw/master/screenshot/发送邮件.png)
 
 ### OA管理系统(待开发)
 接入CAS Server实现单点登录
@@ -66,16 +66,16 @@ ps:登录链接一般为：http://127.0.0.1:8080/jeeplatform/login
 
 图来自官网，这里简单介绍一下，从图可以看出，CAS支持多种方式的认证，一种是LDAP的、比较常见的数据库Database的JDBC，还有Active Directory等等；支持的协议有Custom Protocol 、 CAS 、 OAuth 、 OpenID 、 RESTful API 、 SAML1.1 、 SAML2.0 等
 
-![这里写图片描述](https://img-blog.csdn.net/20180902172712501?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQ0MjczOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](https://images.gitee.com/uploads/images/2020/0517/212349_a195821a_355133.png)
 
-![这里写图片描述](https://img-blog.csdn.net/20180826231806797?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQ0MjczOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](https://images.gitee.com/uploads/images/2020/0517/212349_384ef37d_355133.png)
 
 单点登录集群方案如图
-![Image text](https://github.com/u014427391/jeeplatform/raw/master/screenshot/单点登录集群.png)
+![Image text](https://gitee.com/362330721/jeeplatform/raw/master/screenshot/单点登录集群.png)
 
 ### OAuth2.0单点登录基础(模块名称jeeplatform-sso-oauth2)(功能修整中)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200511144921931.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTQ0MjczOTE=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://images.gitee.com/uploads/images/2020/0517/212350_327aefca_355133.png)
 
 ### SpringBoot集成Redis缓存处理(Spring AOP实现)
 先从Redis里获取缓存,查询不到，就查询MySQL数据库，然后再保存到Redis缓存里，下次查询时直接调用Redis缓存，详情参考博客：[链接](https://blog.csdn.net/u014427391/article/details/78799623)
