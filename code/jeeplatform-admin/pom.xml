@@ -17,7 +17,7 @@
         <shiro.spring.version>1.2.4</shiro.spring.version>
         <shiro.encache.version>1.2.4</shiro.encache.version>
         <lucene.version>4.7.2</lucene.version>
-        <poi.version>3.7</poi.version>
+        <poi.version>3.17</poi.version>
         <cas.version>3.2.0</cas.version>
         <shiro.cas.version>1.2.4</shiro.cas.version>
     </properties>
