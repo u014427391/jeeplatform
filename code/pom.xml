@@ -31,7 +31,7 @@
 		<cxf.version>2.7.18</cxf.version>
 		<tk.mybatis.mapper.version>3.3.8</tk.mybatis.mapper.version>
 		<mybatis-spring-boot.version>1.1.1</mybatis-spring-boot.version>
-		<mysql-connector.version>5.1.39</mysql-connector.version>
+		<mysql-connector.version>8.0.28</mysql-connector.version>
 		<spring-boot.version>1.5.7.RELEASE</spring-boot.version>
 		<druid.version>1.1.2</druid.version>
 		<github.pagehelper.version>4.2.1</github.pagehelper.version>
