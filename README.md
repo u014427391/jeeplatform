@@ -179,6 +179,24 @@ dev版本代码和master分支基本一致
 ### Docker笔记
 * [Docker简介和安装教程](https://smilenicky.blog.csdn.net/article/details/97613891)
 
+##九、使用说明
+1.后端配置：
+项目使用了 MySQL 和 Jedis 数据库。您需要在 application-dev.yml，application-prod.yml，application-test.yml 文件中配置数据库连接信息。
+MySQL 配置：
+数据库连接URL：jdbc:mysql://localhost:3306/jeeplatform?autoReconnect=true&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false
+用户名：root
+密码：your_password
+Jedis配置：
+jedis.pool.host: localhost,
+jedis.pool.port: 6379
+2.登录网站
+服务器端口号：8081，启动成功后访问http://127.0.0.1:8081/jeeplatform/login，用户名和密码在数据库的用户信息表中。
+3.后端框架：
+后端框架是 Spring Boot 框架。
+4.导入 SQL 文件：
+项目需要导入 jeeplatform.sql，schema.sql 文件到数据库中。您可以使用数据库管理工具或命令行工具执行该 SQL 文件。
+5.启动项目：
+项目的启动方式是直接运行 Application.java 文件。确保您的开发环境配置正确，项目的依赖项已经安装。
 
 
 
